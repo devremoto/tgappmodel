@@ -1,0 +1,61 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+
+
+var manager = TemplateFileManager.Create(this);
+
+
+CreateDirectory("..\\..\\..\\Data\\EF\\Mappings\\_generated");	
+
+foreach(var classModel in classSet.Classes){#>
+<#
+		manager.StartNewFile("EF\\Mappings\\_generated\\"+classModel.Name+ "Map.cs","Data",""); 
+#>
+using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace Data.EF.Mappings
+{
+    public class <#=classModel.Name#>Map: IEntityTypeConfiguration<<#=classModel.Name#>>
+    {
+        public void Configure(EntityTypeBuilder<<#=classModel.Name#>> builder)
+        {
+<#if(classModel.Keys.Count()>1){#>
+<#
+var keys = classModel.Keys.Select(x=> $"x.{x.Name}" ).ToList();
+var strKey = string.Join(", ", keys );
+#>
+			builder.HasKey(x => new { <#=strKey #> });
+<#}else{#>
+<#if(!classModel.IsSubClass && classModel.Fields.Any(x=>x.Name=="Id")) {#>
+
+			builder.HasKey(x => x.Id);
+<#}#>
+<#}#>
+<# foreach(var field in classModel.Fields){#>
+<# if(!field.IsClass){#>
+<#if(!field.IsNotMapped) {#>
+<#if(field.DataType.Contains("Guid") && field.IsKey){#>
+            builder.Property(t => t.<#= field.Name #>).HasColumnName("<#= classSet.ToUnderscore(field.Name).ToUpper() #>").ValueGeneratedOnAdd();
+<#}else{#>
+            builder.Property(t => t.<#= field.Name #>).HasColumnName("<#= classSet.ToUnderscore(field.Name).ToUpper() #>");
+<#}#>
+<#}else{#>
+			builder.Ignore(i => i.<#= field.Name #>);
+<#}}}#>
+			builder.ToTable("TB_<#=classSet.ToUnderscore(classModel.Name).ToUpper() #>");   
+        }
+    }
+}
+
+<#
+manager.EndBlock(); 
+}
+manager.Process(false);
+#>

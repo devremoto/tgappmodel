@@ -1,0 +1,28 @@
+.education-slider .lead {
+  margin-bottom: 50px;
+  font-family: Raleway, sans-serif;
+  font-size: 36px;
+  color: #fff; }
+  .education-slider .lead span {
+    padding: 3px 10px;
+    line-height: 1.3;
+    background-color: rgba(52, 52, 52, 0.8); }
+
+.categorized-posts .see-all-posts {
+  line-height: 1;
+  position: relative;
+  top: 26px; }
+
+.icon-info.well {
+  background-color: #FBFBFB;
+  border-color: #f3f3f3; }
+  .icon-info.well:hover, .icon-info.well:focus {
+    border-color: gainsboro; }
+.icon-info span, .icon-info strong {
+  display: block; }
+.icon-info a,
+.icon-info a:hover,
+.icon-info a:focus {
+  color: inherit; }
+
+/*# sourceMappingURL=special-education.css.map */

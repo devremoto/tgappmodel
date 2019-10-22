@@ -1,0 +1,88 @@
+<nav id="sidebar-nav" class="sidebar-nav">
+  <div id="sidebar-wrapper" class="sidebar-wrapper" data-background="default">
+    <!--<component>sidebar-nav</component>-->
+    <ul class="side-nav-top nav">
+      <li class="sidebar-nav-logo">
+        <!--<component>sidebar-nav-logo</component>-->
+        <img src="/assets/admin/img/swapomoney_logo_p.png" alt="Dee Admin">
+        <span class="logo-text">
+          <b>Admin</b>
+        </span>
+      </li>
+      <li class="sidebar-nav-profile">
+        <!--<component>sidebar-nav-profile</component>-->
+        <div class="profile-left">
+          <img src="/assets/admin/img/user.jpg" alt="Peter Boussa">
+        </div>
+        <div class="profile-right">
+          <span class="name">
+            Admin<i id="user-profile-settings-toggler" class="fa fa-caret-down l-pad-5"></i>
+          </span>
+          <span class="info">
+            Project Manager
+          </span>
+        </div>
+      </li>
+      <!-- Profile settings -->
+      <li class="side-nav-profile-settings" style="display: none;">
+        <ul class="inline-list">
+          <li>
+            <a id="right-notifier-toggler-3" class="btn btn-white-hover mb-5" data-placement="top" data-toggle="tooltip"
+              data-original-title="Notifications">
+              <i class="fa fa-bell-o"></i>
+            </a>
+          </li>
+          <li>
+            <a class="btn btn-white-hover mb-5" data-placement="top" data-toggle="tooltip" data-original-title="Profile"
+              href="profile.html">
+              <i class="fa fa-user"></i>
+            </a>
+          </li>
+          <li>
+            <a class="btn btn-white-hover mb-5" data-placement="top" data-toggle="tooltip" data-original-title="Inbox"
+              href="inbox.html">
+              <i class="fa fa-inbox"></i>
+            </a>
+          </li>
+          <li>
+            <a class="btn btn-white-hover mb-5" data-placement="top" data-toggle="tooltip"
+              data-original-title="Desktop">
+              <i class="fa fa-desktop"></i>
+            </a>
+          </li>
+          <li>
+            <a class="btn btn-white-hover mb-5" data-placement="top" data-toggle="tooltip"
+              data-original-title="Support">
+              <i class="fa fa-support"></i>
+            </a>
+          </li>
+          <li>
+            <a class="btn btn-white-hover mb-5" data-placement="top" data-toggle="tooltip" data-original-title="Log out"
+              href="login.html">
+              <i class="fa fa-sign-out l-pad-5"></i>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!-- / Profile settings -->
+    </ul>
+    <ul id="side-nav" class="side-nav nav" [appInRole]="['operator']">
+      <li class="active">
+        <a href=''>
+          <i class="fa fa-desktop"></i>
+          <span class="name">Dashboard</span>
+        </a>
+      </li>
+      <li class="@@activate-ui-elements">
+        <a href="#">
+          <i class="fa fa-cogs"></i>
+          <span class="name">Admin</span>
+          <span class="fa expand"></span>
+        </a>
+        <ul class="nav nav-second-level collapse">
+          <app-menu-generated></app-menu-generated>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>

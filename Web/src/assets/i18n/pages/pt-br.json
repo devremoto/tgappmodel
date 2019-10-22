@@ -1,0 +1,112 @@
+{
+  "HOME": {
+    "BANNER": {
+      "EASY_CUSTOMIZE": "Customizável",
+      "ULTRA_RESPONSIVE": "Design Responsivo",
+      "SLIDER": "Premium Slider Revolution",
+      "CLEAN_DESIGN": "Clean",
+      "VALUE": "Agrega Valor",
+      "MORE_INFO": "Saiba mais",
+      "WELLCOME": {
+        "TITLE": "BEM VINDO À <strong>TUGON</strong>",
+        "TEXT": "Uma consultoria moderna e capacitada nas mais recentes tecnologias de desenvolvimento"
+      },
+      "TIME_OPTIMIZATION": {
+        "TITLE": "OTIMIZAÇÃO DO <em>TEMPO</em>",
+        "TEXT": "Com o apoio de nossa equipe de desenvolvimento, agilizamos a construção dos seus aplicativos web e mobile"
+      },
+      "PUBLIC_INTERACTION": {
+        "TITLE": "INTERAÇÃO COM O PÚBLICO"
+      },
+      "MEDIA": {
+        "TEXT": "Utilize diversas medias<br />Para dar maior visibilidade à sua empresa"
+      }
+    },
+    "INFO": {
+      "RESPONSIVE_DESIGN": {
+        "TITLE": "DESIGN RESPONSIVO",
+        "TEXT": "Desenvolvemos aplicações web totalmente adaptáveis ao dipositivo seja ele desktop, table ou celular"
+      },
+      "CLOUD_READY": {
+        "TITLE": "PRONTO PARA A NUVEM",
+        "TEXT": "Gerenciamento de integração contínua com a plataforma Azure da Microsoft"
+      },
+      "CUSTOMIZATION": {
+        "TITLE": "CUSTOMIZAÇÃO",
+        "TEXT": "Aplicativos construidos de mode que possa ser escalável e customizado, conforme a necessidade da empresa"
+      }
+    }
+  },
+  "MENU": {
+    "HOME": "HOME",
+    "ABOUT_US": "QUEM SOMOS",
+    "CONTACT": "CONTATO"
+  },
+  "CONTACT": {
+    "TITLE": "Contato",
+    "SUBTITLE": "Entre em contato",
+    "DESCRIPTION": "Para obter mais informações sobre: <br />Treinamentos online, presencial, incompany",
+    "FORM": {
+      "NAME": "Nome",
+      "ADDRESS": "Endereço",
+      "PHONE": "Telefone",
+      "EMAIL": "E-mail",
+      "SUBJECT": "Assunto",
+      "MESSAGE": "Mensagem",
+      "SEND": "Enviar",
+      "SENDING": "Enviando",
+      "VALIDATE": {
+        "EMAIL": {
+          "REQUIRED": "Preencha Email",
+          "PATTERN": "Email is invalid"
+        },
+        "NAME": {
+          "REQUIRED": "Preencha o campo nome "
+        },
+        "SUBJECT": {
+          "REQUIRED": "Preencha o campo assunto "
+        },
+        "PHONENUMBER": {
+          "REQUIRED": "Preencha o campo telefone "
+        },
+        "MESSAGE": {
+          "REQUIRED": "Preencha o campo mensagem "
+        }
+      }
+    }
+  },
+  "FOOTER": {
+    "SOCIAL_NETWORK": {
+      "TITLE": "Follow us"
+    },
+    "NEWSLETTER": {
+      "TITLE": "NEWSLETTER",
+      "SUB_TITLE": "Receba informações e novidades",
+      "SUBSCRIBE": "INSCREVA-SE",
+      "SUBSCRIBE_LOADING": "INSCREVENDO",
+      "PLACEHOLDER": "seu e-mail aqui"
+    },
+    "CONTACT": {
+      "TITLE": "Posso ajudar?",
+      "SUB_TITLE": "Entre em contato conosco",
+      "FORM": {
+        "FIELDS": {
+          "NAME": "Nome (Requerido)",
+          "EMAIL": "Email (Requerido)",
+          "SUBJECT": "Assunto",
+          "MESSAGE": "Mensagem"
+        },
+        "LABELS": {
+          "NAME": "Nome",
+          "EMAIL": "Email",
+          "SUBJECT": "Assunto",
+          "MESSAGE": "Mensagem"
+        },
+        "BUTTONS": {
+          "SENDING": "Enviando",
+          "SEND": "Enviar"
+        }
+      }
+    }
+  }
+}

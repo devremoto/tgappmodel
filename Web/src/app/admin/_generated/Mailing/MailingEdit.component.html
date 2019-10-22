@@ -1,0 +1,15 @@
+﻿
+					<div class="row">
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'MAILING.FORM.LABEL.EMAIL' | translate }}</label>
+							<input type="email" class="form-control" [(ngModel)]="mailing.email" name="mailing.email" autofocus />
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>
+								<input type="checkbox" [(ngModel)]="mailing.active" name="activeId" autofocus />
+								{{'MAILING.FORM.LABEL.ACTIVE' | translate }}
+							</label>
+						</div>
+					</div>

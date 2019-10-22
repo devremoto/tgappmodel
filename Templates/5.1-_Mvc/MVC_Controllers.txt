@@ -1,0 +1,1716 @@
+﻿
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class AboutController : BaseController<Guid,AboutViewModel>
+    {
+        public AboutController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class AboutController : BaseController<Guid, AboutViewModel>
+    {
+        public AboutController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class AddressController : BaseController<Guid,AddressViewModel>
+    {
+        public AddressController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class AddressController : BaseController<Guid, AddressViewModel>
+    {
+        public AddressController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class BusinessHourController : BaseController<Guid,BusinessHourViewModel>
+    {
+        public BusinessHourController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class BusinessHourController : BaseController<Guid, BusinessHourViewModel>
+    {
+        public BusinessHourController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class CategoryController : BaseController<Guid,CategoryViewModel>
+    {
+        public CategoryController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class CategoryController : BaseController<Guid, CategoryViewModel>
+    {
+        public CategoryController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class CompanyController : BaseController<Guid,CompanyViewModel>
+    {
+        public CompanyController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class CompanyController : BaseController<Guid, CompanyViewModel>
+    {
+        public CompanyController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class ContactController : BaseController<Guid,ContactViewModel>
+    {
+        public ContactController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class ContactController : BaseController<Guid, ContactViewModel>
+    {
+        public ContactController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class CoveredAreaController : BaseController<Guid,CoveredAreaViewModel>
+    {
+        public CoveredAreaController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class CoveredAreaController : BaseController<Guid, CoveredAreaViewModel>
+    {
+        public CoveredAreaController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class CrustController : BaseController<Guid,CrustViewModel>
+    {
+        public CrustController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class CrustController : BaseController<Guid, CrustViewModel>
+    {
+        public CrustController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class EmployeePizzaStoreController : BaseController<Guid,EmployeePizzaStoreViewModel>
+    {
+        public EmployeePizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class EmployeePizzaStoreController : BaseController<Guid, EmployeePizzaStoreViewModel>
+    {
+        public EmployeePizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class FavoriteStoreController : BaseController<Guid,FavoriteStoreViewModel>
+    {
+        public FavoriteStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class FavoriteStoreController : BaseController<Guid, FavoriteStoreViewModel>
+    {
+        public FavoriteStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class FormatController : BaseController<Guid,FormatViewModel>
+    {
+        public FormatController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class FormatController : BaseController<Guid, FormatViewModel>
+    {
+        public FormatController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class ImageController : BaseController<Guid,ImageViewModel>
+    {
+        public ImageController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class ImageController : BaseController<Guid, ImageViewModel>
+    {
+        public ImageController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class IngredientController : BaseController<Guid,IngredientViewModel>
+    {
+        public IngredientController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class IngredientController : BaseController<Guid, IngredientViewModel>
+    {
+        public IngredientController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class ItemController : BaseController<Guid,ItemViewModel>
+    {
+        public ItemController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class ItemController : BaseController<Guid, ItemViewModel>
+    {
+        public ItemController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class ItemProductController : BaseController<Guid,ItemProductViewModel>
+    {
+        public ItemProductController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class ItemProductController : BaseController<Guid, ItemProductViewModel>
+    {
+        public ItemProductController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class LanguageController : BaseController<Guid,LanguageViewModel>
+    {
+        public LanguageController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class LanguageController : BaseController<Guid, LanguageViewModel>
+    {
+        public LanguageController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class MailingController : BaseController<Guid,MailingViewModel>
+    {
+        public MailingController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class MailingController : BaseController<Guid, MailingViewModel>
+    {
+        public MailingController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class OrderController : BaseController<Guid,OrderViewModel>
+    {
+        public OrderController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class OrderController : BaseController<Guid, OrderViewModel>
+    {
+        public OrderController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class OrderItemController : BaseController<Guid,OrderItemViewModel>
+    {
+        public OrderItemController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class OrderItemController : BaseController<Guid, OrderItemViewModel>
+    {
+        public OrderItemController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class OwnerPizzaStoreController : BaseController<Guid,OwnerPizzaStoreViewModel>
+    {
+        public OwnerPizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class OwnerPizzaStoreController : BaseController<Guid, OwnerPizzaStoreViewModel>
+    {
+        public OwnerPizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PaymentMethodController : BaseController<Guid,PaymentMethodViewModel>
+    {
+        public PaymentMethodController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PaymentMethodController : BaseController<Guid, PaymentMethodViewModel>
+    {
+        public PaymentMethodController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PersonController : BaseController<Guid,PersonViewModel>
+    {
+        public PersonController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PersonController : BaseController<Guid, PersonViewModel>
+    {
+        public PersonController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PhoneController : BaseController<Guid,PhoneViewModel>
+    {
+        public PhoneController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PhoneController : BaseController<Guid, PhoneViewModel>
+    {
+        public PhoneController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PhonePersonController : BaseController<Guid,PhonePersonViewModel>
+    {
+        public PhonePersonController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PhonePersonController : BaseController<Guid, PhonePersonViewModel>
+    {
+        public PhonePersonController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PhonePizzaStoreController : BaseController<Guid,PhonePizzaStoreViewModel>
+    {
+        public PhonePizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PhonePizzaStoreController : BaseController<Guid, PhonePizzaStoreViewModel>
+    {
+        public PhonePizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PizzaController : BaseController<Guid,PizzaViewModel>
+    {
+        public PizzaController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PizzaController : BaseController<Guid, PizzaViewModel>
+    {
+        public PizzaController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PizzaDoughController : BaseController<Guid,PizzaDoughViewModel>
+    {
+        public PizzaDoughController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PizzaDoughController : BaseController<Guid, PizzaDoughViewModel>
+    {
+        public PizzaDoughController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PizzaFormatController : BaseController<int,PizzaFormatViewModel>
+    {
+        public PizzaFormatController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PizzaFormatController : BaseController<int, PizzaFormatViewModel>
+    {
+        public PizzaFormatController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PizzaFormatPizzaController : BaseController<Guid,PizzaFormatPizzaViewModel>
+    {
+        public PizzaFormatPizzaController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PizzaFormatPizzaController : BaseController<Guid, PizzaFormatPizzaViewModel>
+    {
+        public PizzaFormatPizzaController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PizzaStoreController : BaseController<Guid,PizzaStoreViewModel>
+    {
+        public PizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PizzaStoreController : BaseController<Guid, PizzaStoreViewModel>
+    {
+        public PizzaStoreController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PizzaStorePaymentMethodController : BaseController<Guid,PizzaStorePaymentMethodViewModel>
+    {
+        public PizzaStorePaymentMethodController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PizzaStorePaymentMethodController : BaseController<Guid, PizzaStorePaymentMethodViewModel>
+    {
+        public PizzaStorePaymentMethodController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class PizzaStoreSettingsController : BaseController<Guid,PizzaStoreSettingsViewModel>
+    {
+        public PizzaStoreSettingsController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class PizzaStoreSettingsController : BaseController<Guid, PizzaStoreSettingsViewModel>
+    {
+        public PizzaStoreSettingsController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class ProductController : BaseController<Guid,ProductViewModel>
+    {
+        public ProductController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class ProductController : BaseController<Guid, ProductViewModel>
+    {
+        public ProductController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class SettingsController : BaseController<Guid,SettingsViewModel>
+    {
+        public SettingsController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class SettingsController : BaseController<Guid, SettingsViewModel>
+    {
+        public SettingsController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class SocialNetworkController : BaseController<Guid,SocialNetworkViewModel>
+    {
+        public SocialNetworkController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class SocialNetworkController : BaseController<Guid, SocialNetworkViewModel>
+    {
+        public SocialNetworkController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class SupplierController : BaseController<Guid,SupplierViewModel>
+    {
+        public SupplierController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class SupplierController : BaseController<Guid, SupplierViewModel>
+    {
+        public SupplierController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class ToppingController : BaseController<Guid,ToppingViewModel>
+    {
+        public ToppingController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class ToppingController : BaseController<Guid, ToppingViewModel>
+    {
+        public ToppingController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class UploadFileController : BaseController<string,UploadFileViewModel>
+    {
+        public UploadFileController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class UploadFileController : BaseController<string, UploadFileViewModel>
+    {
+        public UploadFileController(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/about">
+				<i class="fa fa-table"></i> ABOUT
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/address">
+				<i class="fa fa-table"></i> ADDRESS
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/businessHour">
+				<i class="fa fa-table"></i> BUSINESS HOUR
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/category">
+				<i class="fa fa-table"></i> CATEGORY
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/company">
+				<i class="fa fa-table"></i> COMPANY
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/contact">
+				<i class="fa fa-table"></i> CONTACT
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/coveredArea">
+				<i class="fa fa-table"></i> COVERED AREA
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/crust">
+				<i class="fa fa-table"></i> CRUST
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/employeePizzaStore">
+				<i class="fa fa-table"></i> EMPLOYEE PIZZA STORE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/favoriteStore">
+				<i class="fa fa-table"></i> FAVORITE STORE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/format">
+				<i class="fa fa-table"></i> FORMAT
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/image">
+				<i class="fa fa-table"></i> IMAGE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/ingredient">
+				<i class="fa fa-table"></i> INGREDIENT
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/item">
+				<i class="fa fa-table"></i> ITEM
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/itemProduct">
+				<i class="fa fa-table"></i> ITEM PRODUCT
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/language">
+				<i class="fa fa-table"></i> LANGUAGE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/mailing">
+				<i class="fa fa-table"></i> MAILING
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/order">
+				<i class="fa fa-table"></i> ORDER
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/orderItem">
+				<i class="fa fa-table"></i> ORDER ITEM
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/ownerPizzaStore">
+				<i class="fa fa-table"></i> OWNER PIZZA STORE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/paymentMethod">
+				<i class="fa fa-table"></i> PAYMENT METHOD
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/person">
+				<i class="fa fa-table"></i> PERSON
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/phone">
+				<i class="fa fa-table"></i> PHONE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/phonePerson">
+				<i class="fa fa-table"></i> PHONE PERSON
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/phonePizzaStore">
+				<i class="fa fa-table"></i> PHONE PIZZA STORE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/pizza">
+				<i class="fa fa-table"></i> PIZZA
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/pizzaDough">
+				<i class="fa fa-table"></i> PIZZA DOUGH
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/pizzaFormat">
+				<i class="fa fa-table"></i> PIZZA FORMAT
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/pizzaFormatPizza">
+				<i class="fa fa-table"></i> PIZZA FORMAT PIZZA
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/pizzaStore">
+				<i class="fa fa-table"></i> PIZZA STORE
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/pizzaStorePaymentMethod">
+				<i class="fa fa-table"></i> PIZZA STORE PAYMENT METHOD
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/pizzaStoreSettings">
+				<i class="fa fa-table"></i> PIZZA STORE SETTINGS
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/product">
+				<i class="fa fa-table"></i> PRODUCT
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/settings">
+				<i class="fa fa-table"></i> SETTINGS
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/socialNetwork">
+				<i class="fa fa-table"></i> SOCIAL NETWORK
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/supplier">
+				<i class="fa fa-table"></i> SUPPLIER
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/topping">
+				<i class="fa fa-table"></i> TOPPING
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/uploadFile">
+				<i class="fa fa-table"></i> UPLOAD FILE
+			</a>
+		</li>
+@*
+<Router>
+	  <Route exact path='/admin/about' component={About}/>
+	  <Route exact path='/admin/address' component={Address}/>
+	  <Route exact path='/admin/businessHour' component={BusinessHour}/>
+	  <Route exact path='/admin/category' component={Category}/>
+	  <Route exact path='/admin/company' component={Company}/>
+	  <Route exact path='/admin/contact' component={Contact}/>
+	  <Route exact path='/admin/coveredArea' component={CoveredArea}/>
+	  <Route exact path='/admin/crust' component={Crust}/>
+	  <Route exact path='/admin/employeePizzaStore' component={EmployeePizzaStore}/>
+	  <Route exact path='/admin/favoriteStore' component={FavoriteStore}/>
+	  <Route exact path='/admin/format' component={Format}/>
+	  <Route exact path='/admin/image' component={Image}/>
+	  <Route exact path='/admin/ingredient' component={Ingredient}/>
+	  <Route exact path='/admin/item' component={Item}/>
+	  <Route exact path='/admin/itemProduct' component={ItemProduct}/>
+	  <Route exact path='/admin/language' component={Language}/>
+	  <Route exact path='/admin/mailing' component={Mailing}/>
+	  <Route exact path='/admin/order' component={Order}/>
+	  <Route exact path='/admin/orderItem' component={OrderItem}/>
+	  <Route exact path='/admin/ownerPizzaStore' component={OwnerPizzaStore}/>
+	  <Route exact path='/admin/paymentMethod' component={PaymentMethod}/>
+	  <Route exact path='/admin/person' component={Person}/>
+	  <Route exact path='/admin/phone' component={Phone}/>
+	  <Route exact path='/admin/phonePerson' component={PhonePerson}/>
+	  <Route exact path='/admin/phonePizzaStore' component={PhonePizzaStore}/>
+	  <Route exact path='/admin/pizza' component={Pizza}/>
+	  <Route exact path='/admin/pizzaDough' component={PizzaDough}/>
+	  <Route exact path='/admin/pizzaFormat' component={PizzaFormat}/>
+	  <Route exact path='/admin/pizzaFormatPizza' component={PizzaFormatPizza}/>
+	  <Route exact path='/admin/pizzaStore' component={PizzaStore}/>
+	  <Route exact path='/admin/pizzaStorePaymentMethod' component={PizzaStorePaymentMethod}/>
+	  <Route exact path='/admin/pizzaStoreSettings' component={PizzaStoreSettings}/>
+	  <Route exact path='/admin/product' component={Product}/>
+	  <Route exact path='/admin/settings' component={Settings}/>
+	  <Route exact path='/admin/socialNetwork' component={SocialNetwork}/>
+	  <Route exact path='/admin/supplier' component={Supplier}/>
+	  <Route exact path='/admin/topping' component={Topping}/>
+	  <Route exact path='/admin/uploadFile' component={UploadFile}/>
+</Router>
+*@

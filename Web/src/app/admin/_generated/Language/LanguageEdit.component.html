@@ -1,0 +1,40 @@
+﻿
+					<div class="row">
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'LANGUAGE.FORM.LABEL.CODE' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="language.code" name="language.code" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'LANGUAGE.FORM.LABEL.NAME' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="language.name" name="language.name" autofocus />
+						</div>
+						
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'LANGUAGE.FORM.LABEL.IMAGE' | translate }}</label>
+							<app-upload [(model)]="language.image" [path]="language.image" [width]="160" [height]="120" id="image" [name]="'image'" [label]="('APP.UPLOAD.BUTTON' | translate)" cssIcon="fa fa-upload"></app-upload>
+
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>
+								<input type="checkbox" [(ngModel)]="language.active" name="activeId" autofocus />
+								{{'LANGUAGE.FORM.LABEL.ACTIVE' | translate }}
+							</label>
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>
+								<input type="checkbox" [(ngModel)]="language.default" name="defaultId" autofocus />
+								{{'LANGUAGE.FORM.LABEL.DEFAULT' | translate }}
+							</label>
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>
+								<input type="checkbox" [(ngModel)]="language.loaded" name="loadedId" autofocus />
+								{{'LANGUAGE.FORM.LABEL.LOADED' | translate }}
+							</label>
+						</div>
+					</div>

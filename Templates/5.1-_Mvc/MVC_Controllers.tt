@@ -1,0 +1,91 @@
+﻿<#@ template language="C#" hostSpecific="true" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+	manager.CanOverrideExistingFile = true;
+	//manager.IsAutoIndentEnabled = true;
+	CreateDirectory("..\\..\\..\\WebMvc\\Controllers\\_generated\\");	
+	CreateDirectory("..\\..\\..\\WebMvc\\Areas\\Admin\\Controllers\\_generated\\");
+#><#
+foreach(var classModel in classSet.Classes){#>
+<#
+		manager.StartNewFile("Controllers\\_generated\\"+classModel.Name+ "Controller.cs","webMvc","",null);
+#>
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Controllers
+{
+    public partial class <#= classModel.Name #>Controller : BaseController<<#= classModel.Keys[0].DataType #>,<#= classModel.Name #>ViewModel>
+    {
+        public <#= classModel.Name #>Controller(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+<#
+manager.EndBlock();
+#>
+<#
+		manager.StartNewFile("Areas\\Admin\\Controllers\\_generated\\"+classModel.Name+ "Controller.cs","webMvc","",null);
+#>
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using webMvc.Controllers;
+using webMvc.Models;
+using webMvc.Services;
+using webMvc.ViewModels;
+
+namespace webMvc.Areas.Admin.Controllers
+{
+	[Area("admin")]
+    public partial class <#= classModel.Name #>Controller : BaseController<<#= classModel.Keys[0].DataType #>, <#= classModel.Name #>ViewModel>
+    {
+        public <#= classModel.Name #>Controller(IOptions<AppSettings> settings,IIdentityService identityService)
+            :base(settings,identityService)
+        {
+
+        }
+
+	}
+}
+<#
+manager.EndBlock();
+#><#
+}#>
+<#
+manager.StartNewFile("Areas/Admin/Views/Shared/_menu.cshtml","webMvc","");#>
+
+<#foreach(var classModel in classSet.Classes){#>
+		<li class="nav-item">
+			<a class="nav-link"  style="cursor:pointer" href="~/admin/<#=classSet.ToCamelCase(classModel.Name)#>">
+				<i class="fa fa-table"></i> <#=classSet.ToSpacedName(classModel.Name).ToUpper()#>
+			</a>
+		</li>
+<#}#>
+@*
+<Router>
+<#foreach(var classModel in classSet.Classes){#>
+	  <Route exact path='/admin/<#=classSet.ToCamelCase(classModel.Name)#>' component={<#=classModel.Name#>}/>
+<#}#>
+</Router>
+*@
+<#
+manager.EndBlock();
+#>
+<#
+manager.Process();
+#>

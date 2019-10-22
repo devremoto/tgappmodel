@@ -1,0 +1,97 @@
+<ng-template #p triggers="mouseenter:mouseleave" [appInRole]="['admin']" >
+  <div class="form-group row">
+    <div class="form-group col-12">
+      <input [(ngModel)]="rootItem.newPropName" class="form-control " [id]="rootItem.newPropName" >
+    </div>
+    <div class="form-group col-12">
+      <a class="btn btn-sm btn-success float-right"
+        ngbTooltip="{{ 'TRANSLATOR.BUTTONS.ADD_OBJECT' |  translate }} {{rootItem.path}}"
+        (click)="addObject($event,rootItem,true,pop)"><i class="fa fa-plus"></i>
+        {{ 'TRANSLATOR.BUTTONS.ADD_OBJECT' |  translate }}</a>
+    </div>
+  </div>
+</ng-template>
+<div class="row" *ngIf="items.length">
+  <a class="btn btn-secondary float-right" (click)="addPropClick($event,pop)" [autoClose]="false" #pop="ngbPopover" [ngbPopover]="p" placement="left"
+    popoverTitle="{{ 'TRANSLATOR.BUTTONS.ADD_PROPERTY_TO' |  translate:{path:('TRANSLATOR.BUTTONS.ROOT' |  translate)} }}"
+    container="body">
+    <i class="fa fa-plus"></i>
+  </a>
+</div>
+<!--<button type="button" class="btn btn-sm btn-success float-right" ngbTooltip="adicionar objeto em {{rootItem.path}}" (click)="addObject($event,rootItem)"><i class="fa fa-plus"></i>  object</button>-->
+<ng-template #recursiveList let-items [appInRole]="['admin']">
+  <div *ngFor="let item of items;let index=index">
+    <div class="form-group row" *ngIf="!item.child">
+      <label class="col-form-label col-2">{{item.key}}</label>
+      <div class="col-3">
+        <input [name]="item.path" type=text class="form-control form-control-sm" [(ngModel)]=item.defaultValue
+          *ngIf="!item.child" />
+      </div>
+      <div class="col-4">
+        <input [name]="item.path" type=text class="form-control form-control-sm" [(ngModel)]=item.value
+          (ngModelChange)="updateModel(item)" *ngIf="!item.child" />
+      </div>
+      <div class="col-3">
+        <a class="cur-pointer color-success" ngbTooltip="{{ 'TRANSLATOR.BUTTONS.TRANSLATE' |  translate }}"
+          (click)="translate(item)"><i class="fa fa-language text-success"></i></a>
+        <a class="cur-pointer color-danger" ngbTooltip="{{ 'TRANSLATOR.BUTTONS.REMOVE' |  translate }}"
+          (click)="remove(item)"><i class="fa fa-remove text-danger "></i></a>
+        <a class="cur-pointer color-primary" ngbTooltip="{{ 'TRANSLATOR.BUTTONS.COPY_CLIPBOARD' |  translate }}"
+          (click)="copy(item)"><i class="fa fa-copy text-primary "></i></a>
+        <a class="cur-pointer color-warning" ngbTooltip="{{ 'TRANSLATOR.BUTTONS.COPY_CLIPBOARD_JS' |  translate }}"
+          (click)="copyJs(item)"><i class="fa fa-file-code-o text-warning cur-pointer"></i></a>
+      </div>
+    </div>
+    <div *ngIf="item.child">
+      <ng-template #popContent triggers="mouseout" >
+        <div class="form-group row">
+          <div class="form-group col-12">
+            <input [(ngModel)]="item.newPropName"  [id]="item.key+'_pop'" class="form-control text-uppercase" autofocus autocomplete="off" />
+          </div>
+          <div class="form-group col-12">
+            <button type="button" class="btn btn-sm btn-primary"
+              ngbTooltip="{{ 'TRANSLATOR.BUTTONS.ADD_FIELD' |  translate }} {{item.path}}"
+              (click)="addField($event,item)"><i class="fa fa-plus"></i>
+              {{ 'TRANSLATOR.BUTTONS.ADD_FIELD' |  translate }}</button>
+            <button type="button" class="btn btn-sm btn-success float-right"
+              ngbTooltip="{{ 'TRANSLATOR.BUTTONS.ADD_OBJECT' |  translate }} {{item.path}}"
+              (click)="addObject($event,item,false)"><i class="fa fa-plus"></i>
+              {{ 'TRANSLATOR.BUTTONS.ADD_OBJECT' |  translate }}</button>
+          </div>
+        </div>
+      </ng-template>
+      <ngb-accordion>
+        <ngb-panel id="{{item.path}}">
+
+          <ng-template ngbPanelHeader class="my-card-header">
+            <span class="col-8" title="{{item.path}}">
+              <button ngbPanelToggle class="btn btn-link">
+                <b>{{item.key}}</b><span *ngIf="item.path!==item.key">
+                  -
+                  {{item.path}}
+                </span>
+              </button>
+
+            </span>
+            <span class="col-4" title="{{item.path}}">
+              <a class="btn btn-sm btn-danger float-right" (click)="remove(item,$event)"><i class="fa fa-remove"></i></a>
+              <a class="btn btn-sm btn-primary float-right" (click)="addPropClick($event,pop,item)" [autoClose]="false" #pop="ngbPopover" [ngbPopover]="popContent"
+                 placement="left" popoverTitle="{{ 'TRANSLATOR.BUTTONS.ADD_PROPERTY_TO' |  translate:{path:(item.path)} }}"
+                 container="body">
+                <i class="fa fa-plus"></i>
+              </a>
+              </span>
+
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.child }"></ng-container>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </div>
+</ng-template>
+<form class="form-horizontal" [appInRole]="['admin']">
+  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: items }"></ng-container>
+</form>
+<toaster-container></toaster-container>

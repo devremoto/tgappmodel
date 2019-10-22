@@ -1,0 +1,82 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+CreateDirectory("..\\..\\..\\Application\\ViewModels\\");
+
+foreach(var classModel in classSet.Classes){#>
+<#
+var camelCaseName = classSet.ToCamelCase(classModel.Name);
+manager.StartNewFile("ViewModels\\"+classModel.Name+ "ViewModel.cs","Application","",null);
+#>
+using Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Application.ViewModels
+{
+    public partial class <#=classModel.Name#>ViewModel
+    {
+<# foreach(var field in classModel.Fields){#>
+<#if(!field.IsClass && !field.IsEnum){#>
+<#if(field.IsKey){#>
+		[Key]
+<#}#>
+		public <#=field.DataType#> <#=field.Name#>{ get; set; }
+<#}#>
+<#if(field.IsClass){#>
+<#if(field.IsCollection){#>
+		public List<<#=field.DataType#>> <#=field.Name#>{ get; set; }
+<#}else{#>
+		public <#=field.DataType#> <#=field.Name#>{ get; set; }
+<#}}}#>
+    }
+}
+<#
+manager.EndBlock();
+}
+#>
+<#
+manager.StartNewFile("IoCGenerated.cs","CrossCutting.IoC","",null);
+#>
+using Application.Interfaces;
+using Application.Services;
+using Data.Repositories;
+using Domain.Interfaces;
+using Domain.Services;
+using Domain.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace CrossCutting.IoC
+{
+    public static class IoCGenerated
+    {
+        public static void AddAppServices(this IServiceCollection services)
+        {
+<#foreach(var classModel in classSet.Classes){#>
+			services.AddTransient<I<#=classModel.Name#>AppService, <#=classModel.Name#>AppService>();
+			services.AddTransient<I<#=classModel.Name#>Repository, <#=classModel.Name#>Repository>();
+			services.AddTransient<I<#=classModel.Name#>Service, <#=classModel.Name#>Service>();
+
+<#}#>
+        }
+    }
+}
+<#
+manager.EndBlock();
+#>
+<#
+
+manager.Process(false);
+#>
+
+
+

@@ -1,0 +1,49 @@
+﻿<div class="animated fadeIn">                   
+                
+            <div class="block-area">
+				<div class="card">
+				<div class="card-header">
+				{{'LANGUAGE.TITLE' | translate }}
+				<div class="card-actions">
+				<a style="cursor:pointer" class="btn-setting" (click)="openEdit()" placement='left' ngbTooltip="{{'LANGUAGE.GRID.BUTTON.NEW' | translate }}" ><i class="fa fa-file"></i></a>
+				</div>
+				</div>
+				<div class="card-body collapse show" style='min-height:422px' id="collapseExample">
+				
+				
+				<table class="table table-responsive-sm table-hover">
+                    <tr>
+                        <th style="width:90%">
+                            {{'LANGUAGE.GRID.COLUMN.NAME' | translate }}
+                        </th>   
+						<th style="width:10%">{{'LANGUAGE.GRID.COLUMN.ACTIONS' | translate }}</th>                      
+                    </tr>
+                    <tr *ngFor="let language of languageList; let index=index">
+                        <td>
+                            {{language.name}}
+                        </td>
+                        <td>
+                            <div class="panel-ctrls">
+                                <a class="button-icon" style="color:green;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'LANGUAGE.GRID.BUTTON.EDIT' | translate }}" (click)="openEdit(language, true)">
+                                    <i class="fa fa-pencil"></i>
+                                </a>&nbsp;
+                                <a class="button-icon" style="color:red;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'LANGUAGE.GRID.BUTTON.REMOVE' | translate }}" (click)="remove(language,index)">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>&nbsp;
+								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'LANGUAGE.GRID.BUTTON.DUPLICATE' | translate }}" (click)="duplicate(language,index)">
+                                    <i class="fa fa-copy"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                </table>
+				<ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size" [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged($event)" [rotate]="true"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
+
+				</div>
+				</div>
+</div>
+</div>
+
+<toaster-container *ngIf="screen=='Language'"></toaster-container>

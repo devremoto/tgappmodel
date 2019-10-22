@@ -1,0 +1,360 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="app.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="ClassModel.ttinclude" />
+    <None Include="main.ttinclude" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1-_EntityFrameworkCore\1.2-Context.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>1.2-Context.tt</DependentUpon>
+    </Content>
+    <Content Include="1-_EntityFrameworkCore\Map.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>1.1-Map.tt</DependentUpon>
+    </Content>
+    <Content Include="2-_Repository\2.1-RepositoryInterfaces.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>2.1-RepositoryInterfaces.tt</DependentUpon>
+    </Content>
+    <Content Include="2-_Repository\2.2-Repository.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>2.2-Repository.tt</DependentUpon>
+    </Content>
+    <Content Include="3-_Service\3.1-ServiceInterfaces.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>3.1-ServiceInterfaces.tt</DependentUpon>
+    </Content>
+    <Content Include="3-_Service\3.2-Service.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>3.2-Service.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.1-AppInterfaces.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>4.1-AppInterfaces.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.2-App.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>4.2-App.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.3-AppAutoMapper.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>4.3-AppAutoMapper.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.4.1-AppViewModel .txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>4.4.1-AppViewModel .tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.4.2-AppCustomViewModel.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>4.4.2-AppCustomViewModel.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.4.2-AppCustomViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>4.4.2-AppCustomViewModel.txt</LastGenOutput>
+    </Content>
+    <Content Include="4-_Application\4.6-CustomApp.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>4.6-CustomApp.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.5-CustomAppInterface.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>4.5-CustomAppInterface.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.5-CustomAppInterface.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>4.5-CustomAppInterface.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\Angular_Directives_combo.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Angular_Directives_combo.tt</DependentUpon>
+    </Content>
+    <Content Include="6-_Angular\AngularModule.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AngularModule.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\AngularModule.txt">
+      <DependentUpon>AngularModule.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Content>
+    <Content Include="6-_Angular\CRUD_VIEWS_edit.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRUD_VIEWS_edit.tt</DependentUpon>
+    </Content>
+    <Content Include="6-_Angular\CRUD_VIEWS_Modal.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRUD_VIEWS_Modal.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\CRUD_VIEWS_Modal.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRUD_VIEWS_Modal.tt</DependentUpon>
+    </Content>
+    <Content Include="6-_Angular\CustomServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CustomServices.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\Angular_Directives_combo.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Angular_Directives_combo.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\CustomServices.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomServices.tt</DependentUpon>
+    </Content>
+    <Content Include="6-_Angular\Translations.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Translations.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\CRUD_VIEWS_edit.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRUD_VIEWS_edit.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\CRUD_VIEWS_Index.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRUD_VIEWS_Index.txt</LastGenOutput>
+    </Content>
+    <Content Include="6-_Angular\CRUD_VIEWS_Index.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRUD_VIEWS_Index.tt</DependentUpon>
+    </Content>
+    <Content Include="6-_Angular\Translations.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Translations.tt</DependentUpon>
+    </Content>
+    <Content Include="4-_Application\4.6-CustomApp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>4.6-CustomApp.txt</LastGenOutput>
+      <Parameters>
+        &lt;%3fxml version="1.0" encoding="utf-16"%3f&gt;
+        &lt;ArrayOfParameterStorage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;
+      </Parameters>
+    </Content>
+    <Content Include="4-_Application\4.3-AppAutoMapper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>4.3-AppAutoMapper.txt</LastGenOutput>
+    </Content>
+    <Content Include="4-_Application\4.4.1-AppViewModel .tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>4.4.1-AppViewModel .txt</LastGenOutput>
+    </Content>
+    <Content Include="4-_Application\4.2-App.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>4.2-App.txt</LastGenOutput>
+    </Content>
+    <Content Include="4-_Application\4.1-AppInterfaces.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>4.1-AppInterfaces.txt</LastGenOutput>
+    </Content>
+    <Content Include="2-_Repository\2.2-Repository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>2.2-Repository.txt</LastGenOutput>
+    </Content>
+    <Content Include="2-_Repository\2.1-RepositoryInterfaces.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>2.1-RepositoryInterfaces.txt</LastGenOutput>
+    </Content>
+    <Content Include="3-_Service\3.2-Service.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>3.2-Service.txt</LastGenOutput>
+    </Content>
+    <Content Include="3-_Service\3.1-ServiceInterfaces.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>3.1-ServiceInterfaces.txt</LastGenOutput>
+    </Content>
+    <Content Include="1-_EntityFrameworkCore\1.1-Map.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>1.1-Map.txt</LastGenOutput>
+    </Content>
+    <Content Include="1-_EntityFrameworkCore\1.2-Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>1.2-Context.txt</LastGenOutput>
+    </Content>
+    <Content Include="5-_Webapi\custom_Controllers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>custom_Controllers.txt</LastGenOutput>
+    </Content>
+    <Content Include="5-_Webapi\custom_Controllers.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>custom_Controllers.tt</DependentUpon>
+    </Content>
+    <Content Include="5-_Webapi\generated_Controllers.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>generated_Controllers.txt</LastGenOutput>
+    </Content>
+    <Content Include="5-_Webapi\generated_Controllers.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>generated_Controllers.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EnvDTE" Version="8.0.2" />
+    <PackageReference Include="EnvDTE80" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="16.3.29318.209" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="System.Linq" Version="4.3.0" />
+    <PackageReference Include="System.Runtime" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="1-_EntityFrameworkCore\1.1-Map.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>1.1-Map.tt</DependentUpon>
+    </None>
+    <None Update="1-_EntityFrameworkCore\1.2-Context.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>1.2-Context.tt</DependentUpon>
+    </None>
+    <None Update="2-_Repository\2.1-RepositoryInterfaces.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>2.1-RepositoryInterfaces.tt</DependentUpon>
+    </None>
+    <None Update="2-_Repository\2.2-Repository.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>2.2-Repository.tt</DependentUpon>
+    </None>
+    <None Update="3-_Service\3.1-ServiceInterfaces.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>3.1-ServiceInterfaces.tt</DependentUpon>
+    </None>
+    <None Update="3-_Service\3.2-Service.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>3.2-Service.tt</DependentUpon>
+    </None>
+    <None Update="4-_Application\4.1-AppInterfaces.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>4.1-AppInterfaces.tt</DependentUpon>
+    </None>
+    <None Update="4-_Application\4.2-App.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>4.2-App.tt</DependentUpon>
+    </None>
+    <None Update="4-_Application\4.3-AppAutoMapper.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>4.3-AppAutoMapper.tt</DependentUpon>
+    </None>
+    <None Update="4-_Application\4.4.1-AppViewModel .txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>4.4.1-AppViewModel .tt</DependentUpon>
+    </None>
+    <None Update="4-_Application\4.4.2-AppCustomViewModel.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>4.4.2-AppCustomViewModel.tt</DependentUpon>
+    </None>
+    <None Update="4-_Application\4.5-CustomAppInterface.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>4.5-CustomAppInterface.tt</DependentUpon>
+    </None>
+    <None Update="4-_Application\4.6-CustomApp.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>4.6-CustomApp.tt</DependentUpon>
+    </None>
+    <None Update="5-_Webapi\custom_Controllers.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>custom_Controllers.tt</DependentUpon>
+    </None>
+    <None Update="5-_Webapi\generated_Controllers.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>generated_Controllers.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\AngularModule.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AngularModule.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\Angular_Directives_combo.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Angular_Directives_combo.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\CRUD_VIEWS_edit.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRUD_VIEWS_edit.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\CRUD_VIEWS_Index.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRUD_VIEWS_Index.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\CRUD_VIEWS_Modal.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CRUD_VIEWS_Modal.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\CustomServices.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CustomServices.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\Translations.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Translations.tt</DependentUpon>
+    </None>
+    <None Update="7-_Misc\Html.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Html.txt</LastGenOutput>
+    </None>
+    <None Update="7-_Misc\Html.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Html.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+</Project>

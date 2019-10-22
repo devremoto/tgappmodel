@@ -1,0 +1,13 @@
+<div class="btn-group" ngbDropdown>
+  <button class="btn" [ngClass]="[cssClass]" type="button" ngbDropdownToggle>
+    <img [src]="language.image" style="height:24px" />
+  </button>
+  <ul class="dropdown-menu" ngbDropdownMenu>
+    <li role="separator" class="dropdown-item" *ngFor="let language of languages" (click)="changeLanguage(language)">
+      <a><img [src]="language?.image" [title]="language?.code" style="height:24px" /> {{language?.code}}</a>
+    </li>
+    <li role="separator" class="dropdown-item" [routerLink]="['/admin/language-editor']">
+      <a><i class="fa fa-cogs"></i> {{"HOME.HEADER.BREAD_CRUMB.SETTINGS"|translate}}</a>
+    </li>
+  </ul>
+</div>

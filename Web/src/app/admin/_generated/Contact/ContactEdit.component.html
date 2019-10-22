@@ -1,0 +1,28 @@
+﻿
+					<div class="row">
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'CONTACT.FORM.LABEL.NAME' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="contact.name" name="contact.name" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'CONTACT.FORM.LABEL.PHONE_NUMBER' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="contact.phoneNumber" name="contact.phoneNumber" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'CONTACT.FORM.LABEL.EMAIL' | translate }}</label>
+							<input type="email" class="form-control" [(ngModel)]="contact.email" name="contact.email" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'CONTACT.FORM.LABEL.SUBJECT' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="contact.subject" name="contact.subject" autofocus />
+						</div>
+						
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'CONTACT.FORM.LABEL.MESSAGE' | translate }}</label>
+							<textarea class="form-control" rows=5 [(ngModel)]="contact.message" name="contact.message" autofocus></textarea>
+						</div>
+					</div>

@@ -1,0 +1,20 @@
+﻿{
+  "LOGIN": {
+    "TITLE": "Login",
+    "SUB_TITLE": "Entre com os dados de acesso",
+    "SIGN_UP": {
+      "TITLE": "Registro",
+      "DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+    },
+    "BUTTONS": {
+      "LOGIN": "Login",
+      "SIGN_UP": "Cadastro",
+      "REGISTER": "Cadastre-se agora",
+      "FORGOT_PASSWORD": "Esqueceu a senha?"
+    },
+    "FIELDS": {
+      "USERNAME": "Login",
+      "PASSWORD": "Senha"
+    }
+  }
+}

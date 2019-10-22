@@ -1,0 +1,109 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+if(classSet.Classes.Count()>0)
+foreach(var classModel in classSet.Classes){#>
+<#
+
+	var camelCaseName = classSet.ToCamelCase(classModel.Name);
+	var service = classSet.ToCamelCase(classModel.Name)+"Service";
+	var controller = classSet.ToCamelCase(classModel.Name)+"Controller";
+	var spacedName = classSet.ToSpacedName(classModel.Name);
+	var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
+	var parents = classModel.Fields.Where(x=>x.IsParent);
+	var classChild = classModel.Fields.Where(x=>x.IsCollection);
+
+	//manager.IsAutoIndentEnabled=true;
+	manager.CanOverrideExistingFile = true;
+
+	CreateDirectory("..\\..\\..\\WebMvc\\Areas\\Admin\\Views\\_generated\\"+classModel.Name+"\\");	
+	
+	manager.StartNewFile("Areas/Admin/Views/_generated/"+classModel.Name+"/Edit.cshtml","webMvc","");
+#>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model <#=classModel.Name#>ViewModel
+					<div class="row">
+					
+<# 
+if(classModel.Fields.Count()>0)
+foreach(var field in classModel.Fields.OrderByDescending(x=>x.DataType)){#>
+<# if((field.Name != "Id" && (!field.Name.EndsWith("Id") && !field.IsKey) ) && !field.IsCollection) {#>			
+<#switch(field.HtmlType ){
+	case "checkbox":
+#>
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="<#=field.Name#>" />
+								@Localizer["<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>"]
+							</label>
+							<span asp-validation-for="<#=field.Name#>" class="text-danger"></span>
+						</div>
+<#
+	break;
+	case "select":
+#>
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>"]<#if(field.IsParent){#> <i class="fa fa-file-o"></i><#}#></label>
+							<app-combo-<#=classSet.ToDash(field.DataType)#> value-field="id" class="form-control" [(model)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>Id" ></app-combo-<#=classSet.ToDash(field.DataType)#> >
+							<span asp-validation-for="<#=field.Name#>" class="text-danger"></span>
+						</div>
+<#
+	break;
+	case "file":
+#>
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>"]</label>
+							<input type="file" class="form-control"  name="<#=classSet.ToCamelCase(field.Name)#>" id="<#=classSet.ToCamelCase(field.Name)#>" />
+							<input type="hidden" asp-for="<#=field.Name#>" />
+							<span asp-validation-for="<#=field.Name#>" class="text-danger"></span>
+						</div>
+<#
+	break;
+	case "textarea":
+#>
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>"]</label>
+							<textarea class="form-control" rows=5 asp-for="<#=field.Name#>"></textarea>
+							<span asp-validation-for="<#=field.Name#>" class="text-danger"></span>
+						</div>
+<#
+	break;
+	case "password":
+#>
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>"]</label>
+							<input type="password" class="form-control" asp-for="<#=field.Name#>" />
+							<span asp-validation-for="<#=field.Name#>" class="text-danger"></span>
+						</div>
+<#
+	break;
+	default:
+#>
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>"]</label>
+							<input type="<#=field.HtmlType #>" class="form-control" asp-for="<#=field.Name#>" autofocus />
+							<span asp-validation-for="<#=field.Name#>" class="text-danger"></span>
+						</div>
+<#
+	break;
+}}else{#>
+						<input type="hidden" asp-for="<#=field.Name#>" />
+<#}}#>
+
+					</div>
+
+
+<#
+manager.EndBlock();
+
+}
+ manager.Process(false); #>
+

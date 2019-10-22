@@ -1,0 +1,332 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+var projectName = "web";
+if(classSet.Classes!=null && classSet.Classes.Count()>0)
+foreach(var classModel in classSet.Classes){
+
+	var camelCaseName = classSet.ToCamelCase(classModel.Name);
+	var service = classSet.ToCamelCase(classModel.Name)+"Service";
+	var controller = classSet.ToCamelCase(classModel.Name)+"Controller";
+	var spacedName = classSet.ToSpacedName(classModel.Name);
+	var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
+	var fieldParents = classModel.Fields.Where(x=>x.IsParent);
+	var fieldChildren = classModel.Fields.Where(x=>x.IsCollection);
+	var fileFields = classModel.FileFields();
+	manager.CanOverrideExistingFile=true;
+
+
+	var prop="nome";
+	if(classModel.Fields.Any(x=>x.Name =="Nome")){
+		prop = "nome";
+	}else if(classModel.Fields.Any(x=>x.Name =="UserName")){    
+		prop ="userName";	
+	}else if(classModel.Fields.Any(x=>x.Name =="Name")){    
+		prop ="name";
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Nome"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Nome")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Name"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Name")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name =="ClientName")){    
+		prop ="clientName";
+	}else if(classModel.Fields.Any(x=>x.Name =="DisplayName")){    
+		prop ="displayName";
+	}else if(classModel.Fields.Any(x=>x.Name =="Description")){    
+		prop ="description";
+	}else if(classModel.Fields.Any(x=>x.DataType =="string")){
+		prop = classModel.Fields.Where(x=>x.DataType=="string").FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Description"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Description")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.DataType =="string" && !x.IsKey)){
+		prop = classModel.Fields.Where(x=>x.DataType=="string" && !x.IsKey).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else{
+		prop="id";
+	}
+			CreateDirectory($"..\\..\\..\\{webAppFullPath}admin\\_generated\\"+classModel.Name+"\\");	
+			manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Index.component.html",webProject,"");
+#>
+<div class="animated fadeIn">                   
+                
+            <div class="block-area">
+				<div class="card">
+				<div class="card-header">
+				{{'<#=underscoreName#>.TITLE' | translate }}
+				<div class="card-actions">
+				<a style="cursor:pointer" class="btn-setting" (click)="openEdit()" placement='left' ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.NEW' | translate }}" ><i class="fa fa-file"></i></a>
+				</div>
+				</div>
+				<div class="card-body collapse show" style='min-height:422px' id="collapseExample">
+				
+				
+				<table class="table table-responsive-sm table-hover">
+                    <tr>
+<# if(classModel.Fields!=null && classModel.Fields.Count()>0)
+foreach(var field in classModel.Fields){#>
+<# if(!field.IsClass  && field.Name.ToLower() == prop.ToLower()) {#>
+                        <th style="width:90%">
+                            {{'<#=underscoreName#>.GRID.COLUMN.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
+                        </th>   
+<#}}#>
+						<th style="width:10%">{{'<#=underscoreName#>.GRID.COLUMN.ACTIONS' | translate }}</th>                      
+                    </tr>
+                    <tr *ngFor="let <#=classSet.ToCamelCase(classModel.Name)#> of <#=classSet.ToCamelCase(classModel.Name)#>List; let index=index">
+<# 
+if(classModel.Fields!=null && classModel.Fields.Count()>0)
+foreach(var field in classModel.Fields){#>
+<# if(!field.IsClass && field.Name.ToLower() == prop.ToLower()) {#>
+                        <td>
+<#if(field.DataType.ToString().ToLower().Contains("bool") ){#>
+							<i *ngIf="<#=classSet.ToCamelCase(classModel.Name)#>.<#=classSet.ToCamelCase(field.Name)#>" class="fa fa-check"></i>
+							<i *ngIf="!<#=classSet.ToCamelCase(classModel.Name)#>.<#=classSet.ToCamelCase(field.Name)#>" class="fa fa-ban"></i>
+<#}else if(field.Name.ToLower()=="password" || field.Name.ToLower()=="pass" || field.Name.ToLower()=="senha"){#>
+                            *****
+<#}else{#>
+                            {{<#=classSet.ToCamelCase(classModel.Name)#>.<#=classSet.ToCamelCase(field.Name)#>}}
+<#}#>
+                        </td>
+<#}}#>
+                        <td>
+                            <div class="panel-ctrls">
+                                <a class="button-icon" style="color:green;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.EDIT' | translate }}" (click)="openEdit(<#=classSet.ToCamelCase(classModel.Name)#>, true)">
+                                    <i class="fa fa-pencil"></i>
+                                </a>&nbsp;
+                                <a class="button-icon" style="color:red;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.REMOVE' | translate }}" (click)="remove(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>&nbsp;
+								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.DUPLICATE' | translate }}" (click)="duplicate(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
+                                    <i class="fa fa-copy"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                </table>
+				<ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size" [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged($event)" [rotate]="true"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
+
+				</div>
+				</div>
+</div>
+</div>
+
+<toaster-container *ngIf="screen=='<#=classModel.Name#>'"></toaster-container>
+<#
+manager.EndBlock();
+#>
+<#
+///////////////////////////////////////////////////////
+//Index
+///////////////////////////////////////////////////////
+manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Index.component.ts",webProject,"");
+
+#>
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { PagingModel } from '../../../models/PagingModel';
+import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { ToasterService } from 'angular2-toaster';
+import { DialogService } from '../../../components/dialog/dialog.service';
+import { <#=classModel.Name#>ModalComponent } from './<#=classModel.Name#>Modal.component';
+import { <#=classModel.Name#>Service } from '../../../services/generated/<#=classModel.Name#>Service';
+import { <#=classModel.Name#> } from '../../../models/<#=classModel.Name#>';
+
+@Component({
+  selector: 'app-list-<#=classSet.ToDash(classModel.Name)#>',
+  templateUrl: './<#=classModel.Name#>Index.component.html',
+})
+export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges {
+    private _edit = false;
+    paging: PagingModel<<#=classModel.Name#>>;
+    screen = '<#=classModel.Name#>';
+    appErrorMessage: any;
+    <#=camelCaseName#>: <#=classModel.Name#>;
+    <#=camelCaseName#>List: <#=classModel.Name#>[];
+<# foreach(var field in  fieldChildren){#>
+	//<#=classSet.ToCamelCase(field.DataType)#>: <#=field.DataType#>;
+<#}#>
+    @Input() autoLoad = true;
+<# foreach(var field in fieldParents){#>
+    @Input() <#=classSet.ToCamelCase(field.Name)#>Id: any;
+<#}#>
+    private modalRef: NgbModalRef;
+
+    constructor(
+      private _service: <#=classModel.Name#>Service,
+      public translate: TranslateService,
+      private _modalService: NgbModal,
+      private _toasterService: ToasterService,
+      private _dialogService: DialogService) {
+        this.paging = _service.page;
+        this.paging.orderBy = '<#=classModel.Keys.Count() > 0 ? classModel.Keys[0].Name : "" #>';
+        this.<#=camelCaseName#> = new <#=classModel.Name#>();
+    }
+
+    ngOnInit() {
+      this.load();
+      this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+<# foreach(var fieldParent in fieldParents){#>
+      if (changes['<#=classSet.ToCamelCase(fieldParent.Name)#>Id']) {
+        this.getBy<#=fieldParent.Name#>IdPage(this.<#=classSet.ToCamelCase(fieldParent.Name)#>Id);
+      }
+<#}#>
+    }
+
+    hideModal() {
+      this.modalRef.close();
+    }
+
+    private openModal() {
+      const options = <NgbModalOptions>{ size: 'lg', backdrop: 'static', windowClass: 'modal-primary'};
+      this.modalRef  = this._modalService.open(<#=classModel.Name#>ModalComponent, options);
+      this.modalRef.componentInstance.name = '<#=camelCaseName#>Modal';
+      this.modalRef.componentInstance.edit = this._edit;
+      this.modalRef.componentInstance.entity = this.<#=camelCaseName#>;
+    }
+
+    pageChanged() {
+      this.autoLoad = true;
+      this.load();
+    }
+
+    load() {
+      if (!this.autoLoad) {
+        return;
+      }
+
+<# 
+if(fieldParents.Count()>0){
+var i=0;
+foreach(var fieldParent in fieldParents){
+	if(i==0){
+#>
+		  if(this.<#=classSet.ToCamelCase(fieldParent.Name)#>Id){
+<#}else{#>
+		  } else if (this.<#=classSet.ToCamelCase(fieldParent.Name)#>Id){
+<#}#>
+			  this.getBy<#=fieldParent.Name#>IdPage(this.<#=classSet.ToCamelCase(fieldParent.Name)#>Id);
+<#
+	i++;
+}
+#>
+		  } else {
+			  this.getAll();
+		  }
+<#}else{#>
+      this.getAll();
+<#}#>
+    }
+
+    public duplicate(entity: <#=classModel.Name#>) {
+      const objToDup = Object.assign({}, entity);
+<# 
+foreach(var key in classModel.Keys){ 
+//var type = Type.GetType("System."+key.DataType);
+//var inst = GetDefault(type);
+//var defaultValue = inst.ToString();
+#>
+      delete objToDup.<#=classSet.ToCamelCase(key.Name)#>;
+<#}#>
+      this.openEdit(objToDup, true);
+    }
+
+    public getAll() {
+      this._service.getPage(this.paging).subscribe(
+      result => {
+        this.paging.totalCount = result.totalCount;
+        this.<#=camelCaseName#>List = result.list;
+      },
+      error => {
+        this.appErrorMessage = error;
+      });
+    }
+
+<# foreach(var fieldParent in fieldParents){#>
+    public getBy<#=fieldParent.Name#>Id(id) {
+      this._service.getBy<#=fieldParent.Name#>Id(id).subscribe(
+      result => {
+        this.<#=camelCaseName#>List = result;
+      },
+      error => {
+        this.appErrorMessage = error;
+      });
+    }
+
+  public getBy<#=fieldParent.Name#>IdPage(id) {
+      this._service.getBy<#=fieldParent.Name#>IdPage(id, this.paging).subscribe(
+      result => {
+        this.<#=camelCaseName#>List = result.list;
+        this.paging.totalCount = result.totalCount;
+      },
+      error => {
+        this.appErrorMessage = error;
+      });
+    }<#}#>
+
+  public openEdit(entity?: <#=classModel.Name#>, edit: boolean = false) {
+    this._edit = edit;
+    this.<#=camelCaseName#> = entity || new <#=classModel.Name#>();
+<#if(fieldParents.Count()>0){#>
+		if (entity) {
+<# 
+if(classModel.Fields.Count()>0)
+foreach(var field in classModel.Fields.Where(x=>x.DataType.Contains("DateTime"))){#>
+			this.<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = new Date(entity.<#=classSet.ToCamelCase(field.Name)#>);
+<#}#>
+		} else {
+<# foreach(var parent in  fieldParents){#>
+			this.<#=camelCaseName#>.<#=classSet.ToCamelCase(parent.Name)#>Id = this.<#=classSet.ToCamelCase(parent.Name)#>Id;
+<#}#>
+		}
+<#}#>
+    this.openModal();
+  }
+
+  public async remove(<#=camelCaseName#>: <#=classModel.Name#>, index: number) {
+    const msg = this.translate.instant('<#=underscoreName#>.GRID.CONFIRM_DELETE');
+    this._dialogService.confirm(msg, () => {
+        this._service.remove(<#=camelCaseName#>)
+        .subscribe(
+            () => {
+              this.<#=camelCaseName#>List.splice(index, 1);
+              this.paging.totalCount--;
+              if (this.paging.totalCount <= this.paging.size) {
+                this.paging.number--;
+              }
+              this.getAll();
+              const successMsg = this.translate.instant('<#=underscoreName#>.GRID.REMOVE.SUCCESS');
+              this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
+            },
+            error => {
+              const errorMsg = this.translate.instant('<#=underscoreName#>.GRID.REMOVE.ERROR');
+              this._toasterService.pop('error', this.translate.instant('APP.TOASTER.TITLE.ERROR'), errorMsg);
+              this.appErrorMessage = error;
+            });
+        }, 'warning');
+    }
+}
+<#
+manager.EndBlock();
+#>
+<#
+}
+manager.Process(false);
+#>

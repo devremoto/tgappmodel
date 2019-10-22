@@ -1,0 +1,168 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+var projectName = "web";
+if(classSet.Classes!=null && classSet.Classes.Count()>0)
+foreach(var classModel in classSet.Classes){
+
+	var camelCaseName = classSet.ToCamelCase(classModel.Name);
+	var service = classSet.ToCamelCase(classModel.Name)+"Service";
+	var controller = classSet.ToCamelCase(classModel.Name)+"Controller";
+	var spacedName = classSet.ToSpacedName(classModel.Name);
+	var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
+	var fieldParents = classModel.Fields.Where(x=>x.IsParent);
+	var fieldChildren = classModel.Fields.Where(x=>x.IsCollection);
+	var fileFields = classModel.FileFields();
+	manager.CanOverrideExistingFile=true;
+
+
+	var prop="nome";
+	if(classModel.Fields.Any(x=>x.Name =="Nome")){
+		prop = "nome";
+	}else if(classModel.Fields.Any(x=>x.Name =="UserName")){    
+		prop ="userName";	
+	}else if(classModel.Fields.Any(x=>x.Name =="Name")){    
+		prop ="name";
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Nome"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Nome")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Name"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Name")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name =="ClientName")){    
+		prop ="clientName";
+	}else if(classModel.Fields.Any(x=>x.Name =="DisplayName")){    
+		prop ="displayName";
+	}else if(classModel.Fields.Any(x=>x.Name =="Description")){    
+		prop ="description";
+	}else if(classModel.Fields.Any(x=>x.DataType =="string")){
+		prop = classModel.Fields.Where(x=>x.DataType=="string").FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Description"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Description")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.DataType =="string" && !x.IsKey)){
+		prop = classModel.Fields.Where(x=>x.DataType=="string" && !x.IsKey).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else{
+		prop="id";
+	}
+
+	manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Modal.component.html",webProject,"");
+#>
+
+<!--modal edit -->
+
+<# if(fieldChildren.Count()>0){#>
+				<div class="modal-header">
+				<h4 class="modal-title">{{'<#=underscoreName#>.TITLE' | translate }}</h4>
+					<button type="button" class="close" (click)="hideModal()">×</button>
+					
+				</div>
+				<div class="modal-body">
+						<ngb-tabset>
+							<ngb-tab>
+								<ng-template ngbTabTitle>{{'<#=underscoreName#>.TITLE' | translate }}</ng-template>
+								<ng-template ngbTabContent>
+								<app-form-<#=classSet.ToDash(classModel.Name)#> [edit]="edit" [(<#=camelCaseName#>)]="entity" ></app-form-<#=classSet.ToDash(classModel.Name)#>>
+								</ng-template>
+							</ngb-tab>
+<#foreach(var field in fieldChildren){#>
+							<ngb-tab *ngIf="entity.id">
+								<ng-template ngbTabTitle>{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</ng-template>
+								<ng-template #<#=classSet.ToCamelCase(field.DataType)#>List ngbTabContent>
+								<app-list-<#=classSet.ToDash(field.DataType)#> #<#=classSet.ToCamelCase(field.DataType)#>ChildList [autoLoad]="true" [<#= field.IsBaseProperty ? classSet.ToCamelCase($"{classModel.BaseClassName}Id") : classSet.ToCamelCase(field.Parent?.Fks?.Where(x=>x.Parent.Name==classModel.Name).Select(x=>x.Name)?.FirstOrDefault()??"a")#>]="entity.id" ></app-list-<#=classSet.ToDash(field.DataType)#>>								
+								</ng-template>
+							</ngb-tab>
+<#}#>
+						</ngb-tabset>
+						</div>
+						<div class="modal-footer">
+							<button type="button" (click)="hideModal()" class="btn btn-default">{{'<#=underscoreName#>.FORM.BUTTON.CANCEL' | translate }}</button>
+							<button type="button" (click)="save(entity)" appEnter class="btn btn-primary">{{'<#=underscoreName#>.FORM.BUTTON.SAVE' | translate }}</button>
+							
+						</div>
+<#}else{#>
+	<div class="modal-header">
+		<h4 class="modal-title">{{'<#=underscoreName#>.TITLE' | translate }}</h4>
+		<button type="button" class="close" (click)="hideModal()">×</button>		
+	</div>
+	<div class="modal-body">
+		<app-form-<#=classSet.ToDash(classModel.Name)#> [edit]="edit" [(<#=camelCaseName#>)]="entity" ></app-form-<#=classSet.ToDash(classModel.Name)#>>
+	</div>
+	<div class="modal-footer">		
+		<button type="button" (click)="hideModal()" class="btn btn-default">{{'<#=underscoreName#>.FORM.BUTTON.CANCEL' | translate }}</button>
+		<button type="button" (click)="save(entity)" appEnter class="btn btn-primary">{{'<#=underscoreName#>.FORM.BUTTON.SAVE' | translate }}</button>
+	</div>
+
+<#}#>
+<#
+manager.EndBlock();
+#>
+<#
+///////////////////////////////////////////////////////
+//Index
+///////////////////////////////////////////////////////
+manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Modal.component.ts",webProject,"");
+
+#>
+import { Component, Input } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ToasterService } from 'angular2-toaster';
+import { <#=classModel.Name#>Service } from '../../../services/generated/<#=classModel.Name#>Service';
+import { <#=classModel.Name#> } from '../../../models/<#=classModel.Name#>';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+declare var $: any;
+
+@Component({
+  selector: 'app-modal-<#=classSet.ToDash(classModel.Name)#>',
+  templateUrl: './<#=classModel.Name#>Modal.component.html'
+})
+export class <#=classModel.Name#>ModalComponent {
+
+  @Input() edit: boolean;
+  @Input() entity: <#=classModel.Name#>;
+
+  constructor(
+      private _translate: TranslateService,
+      private _toasterService: ToasterService,
+      private _service: <#=classModel.Name#>Service,
+      private _activeModal: NgbActiveModal
+    ) {
+        this._service.on('<#=classModel.Name#>-save').subscribe(data => {
+          this.hideModal();
+        });
+    }
+
+  save(<#=camelCaseName#>: <#=classModel.Name#>) {
+    this._service.save(<#=camelCaseName#>, this.edit, $('input[type=file]')).subscribe(
+      () => {
+        const successMsg = this._translate.instant('<#=underscoreName#>.FORM.SAVE.SUCCESS');
+        this._toasterService.pop('success', this._translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
+      },
+      () => {
+        const errorMsg = this._translate.instant('<#=underscoreName#>.FORM.SAVE.ERROR');
+        this._toasterService.pop('error', this._translate.instant('APP.TOASTER.TITLE.ERROR'), errorMsg);
+      });
+  }
+
+  hideModal() {
+    this._activeModal.dismiss('Cross click');
+  }
+}
+
+<#
+manager.EndBlock();
+#>
+<#
+}
+manager.Process(false);
+#>

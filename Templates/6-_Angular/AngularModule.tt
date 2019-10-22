@@ -1,0 +1,331 @@
+﻿<#@ template language="C#" hostSpecific="true"  debug="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+//System.Diagnostics.Debugger.Launch();
+var manager = TemplateFileManager.Create(this);
+
+
+CreateDirectory($"..\\..\\..\\{webAppFullPath}services\\generated\\");
+foreach(var classModel in classSet.Classes){
+
+		var camelCaseName = classSet.ToCamelCase(classModel.Name);
+		var service = camelCaseName + "Service";
+		var controller = camelCaseName + "Controller";
+		var spacedName = classSet.ToSpacedName(classModel.Name);
+		var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
+		var parents = (classModel.Fields!=null)?classModel.Fields.Where(x=>x.IsParent):null;
+		var classChild = (classModel.Fields!=null)?classModel.Fields.Where(x=>x.IsCollection):null;
+		manager.IsAutoIndentEnabled=true;
+		
+#>
+<#	
+///////////////////////////////////////////////////////
+//Service
+///////////////////////////////////////////////////////
+			
+		manager.StartNewFile($"{webAppPath}/services/generated/{classModel.Name}Service.ts",webProject,"");
+
+#>
+import { Injectable } from '@angular/core';
+import { BaseService, HttpService } from '../services';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+<# foreach(var parent in parents){#>
+//import { <#= parent.DataType #> } from '../../models/<#=parent.DataType#>';
+//import { <#= parent.DataType #>Service } from './<#= parent.DataType #>Service';
+<#}#>
+import { <#=classModel.Name#> } from '../../models/<#=classModel.Name#>';
+import { PagingModel } from '../../models/PagingModel';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class <#=classModel.Name#>Service extends BaseService<<#=classModel.Name#>> {
+
+    constructor(protected _http: HttpService) {
+        super(_http);
+            this._controller = '<#=classModel.Name#>';
+    }
+
+    getOne(entity: <#= classModel.Name #>): Observable<<#= classModel.Name #>> {
+        return this._http.get(`<#=classModel.Name#>/getOne/<#= string.Join("/",classModel.Keys.Select(x=> $"${{entity.{x.JsName}}}").ToList()) #>`)
+        .map<any, <#= classModel.Name #>>((response) => response);
+    }
+
+    remove(entity: <#= classModel.Name #>): Observable<<#= classModel.Name #>> {
+        return this.removeById(`<#= string.Join("/",classModel.Keys.Select(x=> $"${{entity.{x.JsName}}}").ToList()) #>`)
+        .map<any, <#= classModel.Name #>>((response) => response);
+    }
+
+<# foreach(var parent in parents){#>
+    getBy<#= parent.Name #>Id(id): Observable<<#= classModel.Name #>[]> {
+        return this._http.get(`<#=classModel.Name#>/getBy<#= parent.Name #>Id}/${id}`)
+				.map<any, <#= classModel.Name #>[]>((response) => response);
+    }
+
+    getBy<#= parent.Name #>IdPage(id, page): Observable<PagingModel<<#= classModel.Name #>>> {
+		
+        return this._http.get(`<#=classModel.Name#>/getBy<#= parent.Name #>Id/${id}/${page.number}/${page.size}/${page.orderBy}/${page.orderDirection}`)
+            .map<any,any>((response) => {
+                var result = response;
+                return <PagingModel<<#= classModel.Name #>>> {
+                    totalCount: result.item2,
+                    list: result.item1
+                }
+            })
+    }
+<#}#>}
+<#
+manager.EndBlock();
+#>
+
+<#
+///////////////////////////////////////////////////////
+//Models
+///////////////////////////////////////////////////////
+CreateDirectory($"..\\..\\..\\{webAppFullPath}models");
+manager.StartNewFile($"{webAppPath}models/"+classModel.Name+".ts",webProject,"");
+#>
+<# foreach(var field in classSet.DistinctBy(classModel.Fields,p => p.DataType)){#>
+<#if(field.IsClass && field.DataType!=classModel.Name) {#>
+import { <#=field.DataType#> } from './<#=field.DataType#>';
+<#}}#>
+export class <#=classModel.Name#> {
+<# foreach(var field in classModel.Fields){#>
+<#if(field.IsClass){#>
+<#if(field.IsCollection){#>
+  <#=classSet.ToCamelCase(field.Name)#>: Array<<#=field.DataType#>>;
+<#}else{#>
+  <#=classSet.ToCamelCase(field.Name)#>: <#=field.DataType#>;
+<#}}else{#>
+  <#=classSet.ToCamelCase(field.Name)#><#=(field.DataType.ToLower().Contains("string"))?": string":""#>;
+<#}}#>
+
+  constructor() {
+<# foreach(var field in classModel.Fields){#>
+<#if(field.IsClass){#>
+<#if(field.IsCollection){#>
+		if(this.<#=classSet.ToCamelCase(field.Name)#> == null)
+			this.<#=classSet.ToCamelCase(field.Name)#> = new Array<<#=field.DataType#>>();
+<#}else{#>
+		//if(this.<#=classSet.ToCamelCase(field.Name)#> == null)
+			//this.<#=classSet.ToCamelCase(field.Name)#> = new <#=field.DataType#>();
+<#}}}#>
+  }
+}
+<#
+manager.EndBlock();
+#>
+
+<#}#>
+<#
+CreateDirectory($"..\\..\\..\\{webAppFullPath}admin\\");	
+manager.StartNewFile($"{webAppPath}admin/generated.ts",webProject,"");
+#>
+// models imports/////////////////////////////////
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { AuthCanActivateGuard } from '../auth/auth-can-activate.guard';
+import { AdminLayoutModule } from './_layout/admin-layout.module';
+import { SharedModule } from '../shared/shared.module';
+import { CombosModule } from '../combos/combos.module';
+import { LibModule } from '../shared/libModule.module';
+import { LanguageCustomService } from '../services/custom/Language';
+
+<#
+foreach(var classModel in classSet.Classes){
+#>
+import { <#=classModel.Name#>EditComponent } from './_generated/<#=classModel.Name#>/<#=classModel.Name#>Edit.component';
+import { <#=classModel.Name#>IndexComponent } from './_generated/<#=classModel.Name#>/<#=classModel.Name#>Index.component';
+import { <#=classModel.Name#>ModalComponent } from './_generated/<#=classModel.Name#>/<#=classModel.Name#>Modal.component';
+<#}#>
+
+@NgModule({
+  declarations: [
+<#
+foreach(var classModel in classSet.Classes){#>
+    <#=classModel.Name#>EditComponent,
+    <#=classModel.Name#>IndexComponent,
+    <#=classModel.Name#>ModalComponent,
+<#}#>
+  ],
+  imports: [
+    SharedModule,
+    LibModule,
+    CombosModule,
+    AdminLayoutModule,
+    RouterModule.forChild([
+<#
+foreach(var classModel in classSet.Classes){
+var camelCaseName = classSet.ToCamelCase(classModel.Name);
+var spacedName = classSet.ToSpacedName(classModel.Name);
+var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
+
+#>
+      {
+        path: '<#=camelCaseName#>',
+        data: {title: '<#=underscoreName#>.TITLE'},
+        component: <#=classModel.Name#>IndexComponent,
+        canActivate: [AuthCanActivateGuard]
+      },
+      {
+        path: '<#=camelCaseName#>/:id?',
+        data: {title: '<#=underscoreName#>.TITLE'},
+        component: <#=classModel.Name#>EditComponent,
+        canActivate: [AuthCanActivateGuard]
+      },
+<#}#>
+    ])
+    ],
+    exports: [
+      AdminLayoutModule,
+      SharedModule,
+<#
+foreach(var classModel in classSet.Classes){#>
+      <#=classModel.Name#>EditComponent,
+      <#=classModel.Name#>IndexComponent,
+      <#=classModel.Name#>ModalComponent,
+<#}#>
+    ],
+    entryComponents: [
+<#
+foreach(var classModel in classSet.Classes){#>
+        <#=classModel.Name#>ModalComponent,
+<#}#>
+  ]
+})
+export class GeneratedAdminModule {
+    constructor(private _languageService: LanguageCustomService) {
+    }
+
+    translate(key: string) {
+        return this._languageService.translate.instant(key);
+    }
+}
+<#
+manager.EndBlock();
+#>
+<#
+
+//manager.StartNewFile($"{webAppPath}admin/admin.ts",webProject,"");
+#>
+<#
+foreach(var classModel in classSet.Classes){#>
+export { <#=classModel.Name#>Edit } from './<#=classModel.Name#>/Edit';
+export { <#=classModel.Name#>Index } from './<#=classModel.Name#>/Index';
+<#}#>
+<#
+foreach(var classModel in classSet.Classes){#>
+export { <#=classModel.Name#>Service } from './<#=classModel.Name#>Service';
+<#}#>
+
+<#
+manager.StartNewFile($"{webAppPath}services/generated/servicesGeneratedModule.ts",webProject,"");
+#>
+// models imports/////////////////////////////////
+import { NgModule } from '@angular/core';
+
+<#
+foreach(var classModel in classSet.Classes){
+#>
+import { <#=classModel.Name#>Service } from './<#=classModel.Name#>Service';
+<#}#>
+
+@NgModule({
+  // provides
+  providers: [
+<#
+foreach(var classModel in classSet.Classes){#>
+    <#=classModel.Name#>Service,
+<#}#>  ]
+})
+export class ServiceGeneratedModule {
+
+}
+<#
+manager.EndBlock();
+#>
+
+
+
+<!-- menu items -->
+<#
+CreateDirectory($"..\\..\\..\\{webAppFullPath}admin\\_layout\\navmenu");
+manager.StartNewFile($"{webAppPath}admin/_layout/navmenu/navmenuGenerated.html",webProject,"");#>
+
+<#foreach(var classModel in classSet.Classes){#>
+	<li class="nav-item">
+		<a class="nav-link" routerLinkActive="active" [routerLink]="['/admin/<#=classSet.ToCamelCase(classModel.Name)#>']">
+			<i class="fa fa-table"></i> {{'<#=classSet.ToUnderscore(classModel.Name).ToUpper()#>.MENU' | translate }}
+		</a>
+	</li>
+
+<#}#>
+
+<#
+manager.EndBlock();
+#>
+<#
+manager.Process(false);
+#>
+<!-- menu items -->
+
+<#
+foreach(var classModel in classSet.Classes){#>
+export { <#=classModel.Name#>Service } from './<#=classModel.Name#>Service';
+<#}#>
+
+// admin routes
+<#
+foreach(var classModel in classSet.Classes){
+var camelCaseName = classSet.ToCamelCase(classModel.Name);
+#>
+{ path: 'admin/<#=camelCaseName#>/:id?', component: <#=classModel.Name#>Edit, canActivate: [CanActivateViaAuthGuard]},
+<#}#>
+
+//admin imports
+import {
+<#
+foreach(var classModel in classSet.Classes){
+var camelCaseName = classSet.ToCamelCase(classModel.Name);
+#>
+			<#=classModel.Name#>Index,
+			<#=classModel.Name#>Edit,
+<#}#>
+} from '.pages/admin'
+
+
+
+
+//
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
+
+<#
+foreach(var classModel in classSet.Classes){
+#>
+import { <#=classModel.Name#> } from './<#=classModel.Name#>';
+<#}#>
+@NgModule({
+    declarations: [
+
+    ],  
+    exports: [
+
+    ],  
+    
+})
+export class ModelsModule {
+
+}
+
+/////////////////////////////////////////////////////

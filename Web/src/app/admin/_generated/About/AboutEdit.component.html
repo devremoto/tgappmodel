@@ -1,0 +1,19 @@
+﻿
+					<div class="row">
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'ABOUT.FORM.LABEL.TITLE' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="about.title" name="about.title" autofocus />
+						</div>
+						
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'ABOUT.FORM.LABEL.IMAGE' | translate }}</label>
+							<app-upload [(model)]="about.image" [path]="about.image" [width]="160" [height]="120" id="image" [name]="'image'" [label]="('APP.UPLOAD.BUTTON' | translate)" cssIcon="fa fa-upload"></app-upload>
+
+						</div>
+						
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'ABOUT.FORM.LABEL.DESCRIPTION' | translate }}</label>
+							<textarea class="form-control" rows=5 [(ngModel)]="about.description" name="about.description" autofocus></textarea>
+						</div>
+					</div>

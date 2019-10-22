@@ -1,0 +1,719 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class AboutViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Title { get; set; }
+		public string Image { get; set; }
+		public string Description { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class AddressViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Street { get; set; }
+		public int Number { get; set; }
+		public string Complement { get; set; }
+		public string ZipCode { get; set; }
+		public string District { get; set; }
+		public string City { get; set; }
+		public string State { get; set; }
+		public string AddressDescriptionName { get; set; }
+		public Guid? PizzaStoreId { get; set; }
+		public Guid? PersonId { get; set; }
+		public PersonViewModel Person { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public Double Latitude { get; set; }
+		public Double Longitude { get; set; }
+		public Double? Distance { get; set; }
+		public Double? DistanceFilter { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class BusinessHourViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public bool IsClosed { get; set; }
+		public DateTime? OpenHour { get; set; }
+		public DateTime? CloseHour { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class CategoryViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public List<ProductViewModel> Products { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class CompanyViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string CNPJ { get; set; }
+		public string Reference { get; set; }
+		public string Logo { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class ContactViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string PhoneNumber { get; set; }
+		public string Email { get; set; }
+		public string Subject { get; set; }
+		public string Message { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class CoveredAreaViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public int PizzaStoreId { get; set; }
+		public string Description { get; set; }
+		public Double Distance { get; set; }
+		public string Coords { get; set; }
+		public bool UseCoords { get; set; }
+		public Double DeliveryTax { get; set; }
+		public int DeliveryTimeMin { get; set; }
+		public int DeliveryTimeMax { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class CrustViewModel
+    {
+		public List<OrderItemViewModel> OrderItems { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public Double Price { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public bool Active { get; set; }
+		public string Reference { get; set; }
+		public Guid? CategoryId { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public bool IsDefault { get; set; }
+		public CategoryViewModel Category { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public List<ImageViewModel> Images { get; set; }
+		public List<ItemProductViewModel> ItemProducts { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class EmployeePizzaStoreViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Matricula { get; set; }
+		public string Position { get; set; }
+		public Double Salary { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public Guid PersonId { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public PersonViewModel Employee { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class FavoriteStoreViewModel
+    {
+		[Key]
+		public Guid PersonId { get; set; }
+		[Key]
+		public Guid PizzaStoreId { get; set; }
+		public PersonViewModel Person { get; set; }
+		public PizzaStoreViewModel Company { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class FormatViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Nome { get; set; }
+		public int QtdPedacos { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class ImageViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public Guid IdProduct { get; set; }
+		public string Name { get; set; }
+		public string InternalName { get; set; }
+		public bool Default { get; set; }
+		public bool Visible { get; set; }
+		public ProductViewModel Product { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class IngredientViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public List<SupplierViewModel> Suppliers { get; set; }
+		public List<PizzaViewModel> Pizzas { get; set; }
+		public List<ToppingViewModel> Toppings { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class ItemViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public Decimal Quantity { get; set; }
+		public Double TotalPrice { get; set; }
+		public List<OrderItemViewModel> Items { get; set; }
+		public List<ItemProductViewModel> ItemProducts { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class ItemProductViewModel
+    {
+		[Key]
+		public Guid ItemId { get; set; }
+		[Key]
+		public Guid ProductId { get; set; }
+		public Double Quantity { get; set; }
+		public Double Price { get; set; }
+		public ItemViewModel Item { get; set; }
+		public ProductViewModel Product { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class LanguageViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Code { get; set; }
+		public string Name { get; set; }
+		public string Image { get; set; }
+		public bool Active { get; set; }
+		public bool Default { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class MailingViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Email { get; set; }
+		public bool Active { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class OrderViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public DateTime Date { get; set; }
+		public Double Price { get; set; }
+		public Guid PaymentMethodId { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public Guid CostumerId { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public PaymentMethodViewModel PaymentMethod { get; set; }
+		public PersonViewModel Costumer { get; set; }
+		public List<OrderItemViewModel> Items { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class OrderItemViewModel
+    {
+		[Key]
+		public Guid OrderId { get; set; }
+		[Key]
+		public Guid ItemId { get; set; }
+		public OrderViewModel Order { get; set; }
+		public ItemViewModel Item { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class OwnerPizzaStoreViewModel
+    {
+		[Key]
+		public Guid PizzaStoreId { get; set; }
+		[Key]
+		public Guid PersonId { get; set; }
+		public PersonViewModel Owner { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public Decimal Quotas { get; set; }
+		public Double Prolabore { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PaymentMethodViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string Image { get; set; }
+		public List<OrderViewModel> Orders { get; set; }
+		public List<PizzaStorePaymentMethodViewModel> PizzaStores { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PersonViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public DateTime? BirthDate { get; set; }
+		public string Name { get; set; }
+		public string CPF { get; set; }
+		public string Image { get; set; }
+		public List<AddressViewModel> Addresses { get; set; }
+		public List<PhonePersonViewModel> Phones { get; set; }
+		public List<OwnerPizzaStoreViewModel> PizzaStores { get; set; }
+		public List<EmployeePizzaStoreViewModel> EmployeePizzaStores { get; set; }
+		public List<FavoriteStoreViewModel> Favorites { get; set; }
+		public List<OrderViewModel> Orders { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PhoneViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public int DDD { get; set; }
+		public Int64 Number { get; set; }
+		public int Tipo { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PhonePersonViewModel
+    {
+		public Guid PersonId { get; set; }
+		public PersonViewModel Person { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public int DDD { get; set; }
+		public Int64 Number { get; set; }
+		public int Tipo { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PhonePizzaStoreViewModel
+    {
+		public Guid PizzaStoreId { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public int DDD { get; set; }
+		public Int64 Number { get; set; }
+		public int Tipo { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PizzaViewModel
+    {
+		public List<IngredientViewModel> Ingredients { get; set; }
+		public List<PizzaFormatPizzaViewModel> Formats { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public Double Price { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public bool Active { get; set; }
+		public string Reference { get; set; }
+		public Guid? CategoryId { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public bool IsDefault { get; set; }
+		public CategoryViewModel Category { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public List<ImageViewModel> Images { get; set; }
+		public List<ItemProductViewModel> ItemProducts { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PizzaDoughViewModel
+    {
+		public string Obs { get; set; }
+		public List<OrderItemViewModel> OrderItems { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public Double Price { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public bool Active { get; set; }
+		public string Reference { get; set; }
+		public Guid? CategoryId { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public bool IsDefault { get; set; }
+		public CategoryViewModel Category { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public List<ImageViewModel> Images { get; set; }
+		public List<ItemProductViewModel> ItemProducts { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PizzaFormatViewModel
+    {
+		[Key]
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public int Size { get; set; }
+		public int MaxFlavors { get; set; }
+		public int Slices { get; set; }
+		public bool IsDefault { get; set; }
+		public List<PizzaFormatPizzaViewModel> Pizzas { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PizzaFormatPizzaViewModel
+    {
+		[Key]
+		public Guid PizzaId { get; set; }
+		[Key]
+		public Guid FormatId { get; set; }
+		public Double Price { get; set; }
+		public PizzaViewModel Pizza { get; set; }
+		public PizzaFormatViewModel Format { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PizzaStoreViewModel
+    {
+		public string About { get; set; }
+		public string UrlFacebook { get; set; }
+		public string UrlTwitter { get; set; }
+		public string UrlSite { get; set; }
+		public string UrlName { get; set; }
+		public bool IsFavorite { get; set; }
+		public List<BusinessHourViewModel> BusinessHour { get; set; }
+		public List<PhonePizzaStoreViewModel> Phones { get; set; }
+		public PizzaStoreSettingsViewModel Settings { get; set; }
+		public List<AddressViewModel> Addresses { get; set; }
+		public List<EmployeePizzaStoreViewModel> Employees { get; set; }
+		public List<OwnerPizzaStoreViewModel> Owners { get; set; }
+		public List<ProductViewModel> Products { get; set; }
+		public List<PizzaFormatViewModel> Formats { get; set; }
+		public List<FavoriteStoreViewModel> Favorites { get; set; }
+		public List<CoveredAreaViewModel> CoveredAreas { get; set; }
+		public List<PizzaStorePaymentMethodViewModel> PaymentMethods { get; set; }
+		public List<OrderViewModel> Orders { get; set; }
+		public DateTime? RegisterDate { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string CNPJ { get; set; }
+		public string Reference { get; set; }
+		public string Logo { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PizzaStorePaymentMethodViewModel
+    {
+		[Key]
+		public Guid PizzaStoreId { get; set; }
+		[Key]
+		public Guid PaymentMethodId { get; set; }
+		public PaymentMethodViewModel PaymentMethod { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class PizzaStoreSettingsViewModel
+    {
+		public Guid PizzaStoreId { get; set; }
+		public Double MinOrderPrice { get; set; }
+		public bool AcceptOrderOffLine { get; set; }
+		public bool AcceptReservation { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public bool IsNew { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class ProductViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public Double Price { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public bool Active { get; set; }
+		public string Reference { get; set; }
+		public Guid? CategoryId { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public bool IsDefault { get; set; }
+		public CategoryViewModel Category { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public List<ImageViewModel> Images { get; set; }
+		public List<ItemProductViewModel> ItemProducts { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class SettingsViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Key { get; set; }
+		public string Value { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class SocialNetworkViewModel
+    {
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string CssIcon { get; set; }
+		public string Url { get; set; }
+		public bool Active { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class SupplierViewModel
+    {
+		public List<IngredientViewModel> Ingredients { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public string Name { get; set; }
+		public string CNPJ { get; set; }
+		public string Reference { get; set; }
+		public string Logo { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class ToppingViewModel
+    {
+		public Guid? IngredientId { get; set; }
+		public List<OrderItemViewModel> OrderItems { get; set; }
+		public Guid Ingredient { get; set; }
+		[Key]
+		public Guid Id { get; set; }
+		public Double Price { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public bool Active { get; set; }
+		public string Reference { get; set; }
+		public Guid? CategoryId { get; set; }
+		public Guid PizzaStoreId { get; set; }
+		public bool IsDefault { get; set; }
+		public CategoryViewModel Category { get; set; }
+		public PizzaStoreViewModel PizzaStore { get; set; }
+		public List<ImageViewModel> Images { get; set; }
+		public List<ItemProductViewModel> ItemProducts { get; set; }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace webMvc.ViewModels
+{
+    public partial class UploadFileViewModel
+    {
+		[Key]
+		public string Id { get; set; }
+		public string Name { get; set; }
+		public string InputFileField { get; set; }
+		public Int64 Size { get; set; }
+		public string Type { get; set; }
+		public string FileName { get; set; }
+		public string Controller { get; set; }
+		public string Extension { get; set; }
+    }
+}

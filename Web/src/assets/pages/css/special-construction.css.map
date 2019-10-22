@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAKA,QAAS;EACR,gBAAgB,EAAE,WAAW;;AAG9B,6BAA8B;EAC7B,aAAa,EAAE,IAAI",
+"sources": ["../../sass/special-construction.scss"],
+"names": [],
+"file": "special-construction.css"
+}

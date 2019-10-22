@@ -1,0 +1,210 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+var projectName = "webMvc";
+if(classSet.Classes!=null && classSet.Classes.Count()>0)
+foreach(var classModel in classSet.Classes){
+
+	var camelCaseName = classSet.ToCamelCase(classModel.Name);
+	var service = classSet.ToCamelCase(classModel.Name)+"Service";
+	var controller = classSet.ToCamelCase(classModel.Name)+"Controller";
+	var spacedName = classSet.ToSpacedName(classModel.Name);
+	var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
+	var fieldParents = classModel.Fields.Where(x=>x.IsParent);
+	var fieldChildren = classModel.Fields.Where(x=>x.IsCollection);
+	var fileFields = classModel.FileFields();
+	manager.CanOverrideExistingFile=true;
+
+
+	var prop="nome";
+	if(classModel.Fields.Any(x=>x.Name =="Nome")){
+		prop = "nome";
+	}else if(classModel.Fields.Any(x=>x.Name =="UserName")){    
+		prop ="userName";	
+	}else if(classModel.Fields.Any(x=>x.Name =="Name")){    
+		prop ="name";
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Nome"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Nome")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Name"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Name")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name =="ClientName")){    
+		prop ="clientName";
+	}else if(classModel.Fields.Any(x=>x.Name =="DisplayName")){    
+		prop ="displayName";
+	}else if(classModel.Fields.Any(x=>x.Name =="Description")){    
+		prop ="description";
+	}else if(classModel.Fields.Any(x=>x.DataType =="string")){
+		prop = classModel.Fields.Where(x=>x.DataType=="string").FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.Name.Contains("Description"))){
+		prop = classModel.Fields.Where(x=>x.Name.Contains("Description")).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else if(classModel.Fields.Any(x=>x.DataType =="string" && !x.IsKey)){
+		prop = classModel.Fields.Where(x=>x.DataType=="string" && !x.IsKey).FirstOrDefault().Name;
+		prop = classSet.ToCamelCase(prop);
+	}else{
+		prop="id";
+	}
+
+	CreateDirectory("..\\..\\..\\"+projectName+"\\Areas\\Admin\\Views\\_generated\\"+classModel.Name+"\\");
+			manager.StartNewFile("Areas/Admin/Views/_generated/"+classModel.Name+"/Index.cshtml",projectName,"");#>
+@model PagingViewModel<<#=classModel.Name#>ViewModel>
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+<div class="animated fadeIn">                   
+                
+            <div class="block-area">
+				<div class="card">
+				<div class="card-header">
+				@Localizer["<#=underscoreName#>.TITLE"]
+				<div class="card-actions">
+				<a style="cursor:pointer" class="btn-setting" onclick="openEdit('<#=camelCaseName#>')"><i class="fa fa-file"></i></a>
+				</div>
+				</div>
+				<div class="card-body collapse show" id="collapseExample">
+				
+				
+				<table class="table table-responsive-sm table-hover">
+                    <tr>
+<# if(classModel.Fields!=null && classModel.Fields.Count()>0)
+foreach(var field in classModel.Fields){#>
+<# if(!field.IsClass  && field.Name.ToLower() == prop.ToLower()) {#>
+                        <th style="width:90%">
+                            @Localizer["<#=underscoreName#>.GRID.COLUMN.<#= classSet.ToUnderscore(field.Name).ToUpper() #>"]
+                        </th>   
+<#}}#>
+						<th style="width:10%">@Localizer["<#=underscoreName#>.GRID.COLUMN.ACTIONS"]</th>                      
+                    </tr>
+					@foreach (var <#=classSet.ToCamelCase(classModel.Name)#> in Model.List)
+					{
+                    <tr>
+<# 
+if(classModel.Fields!=null && classModel.Fields.Count()>0)
+foreach(var field in classModel.Fields){#>
+<# if(!field.IsClass && field.Name.ToLower() == prop.ToLower()) {#>
+                        <td>
+<#if(field.DataType.ToString().ToLower().Contains("bool") ){#>
+							<i *ngIf="<#=classSet.ToCamelCase(classModel.Name)#>.<#=classSet.ToCamelCase(field.Name)#>" class="fa fa-check"></i>
+							<i *ngIf="!<#=classSet.ToCamelCase(classModel.Name)#>.<#=classSet.ToCamelCase(field.Name)#>" class="fa fa-ban"></i>
+<#}else if(field.Name.ToLower()=="password" || field.Name.ToLower()=="pass" || field.Name.ToLower()=="senha"){#>
+                            *****
+<#}else{#>
+                            @<#=classSet.ToCamelCase(classModel.Name)#>.<#=field.Name#>
+<#}#>
+                        </td>
+<#}}#>
+                        <td>
+                            <div class="panel-ctrls">
+                                <a class="button-icon" style="color:green;cursor:pointer"  onclick="openEdit('<#=camelCaseName#>','@<#=classSet.ToCamelCase(classModel.Name)#>.<#=classModel.Keys[0].Name#>')">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="button-icon" style="color:red;cursor:pointer" onclick="remove('<#=camelCaseName#>','@<#=classSet.ToCamelCase(classModel.Name)#>.<#=classModel.Keys[0].Name#>',0)">
+                                    <i class="fa fa-trash-o danger"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+					}
+
+
+                </table>
+				<ngb-pagination *ngIf="paging.totalCount > paging.size" [pageSize]="paging.size" [boundaryLinks]="true" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged($event)" [rotate]="false"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
+
+				</div>
+				</div>
+</div>
+</div>
+
+<toaster-container></toaster-container>
+
+<!--modal edit -->
+                <div class="modal fade" id="<#=camelCaseName#>Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-success" role="document">
+                        <div class="modal-content">
+						<form id="<#=camelCaseName#>Form" name="<#=classModel.Name#>Form">
+                            <div class="modal-header">
+                                <h4 class="modal-title">@Localizer["<#=underscoreName#>.TITLE"]</h4>
+                                <button type="button" style="cursor:pointer" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="<#=camelCaseName#>FormData" >								
+									@Html.Partial("~/Areas/Admin/Views/_generated/<#=classModel.Name#>/Edit.cshtml", new <#=classModel.Name#>ViewModel())
+                            </div>
+                            <div class="modal-footer">                                
+                                <button type="button" class="btn btn-success" onclick="save('<#=camelCaseName#>')">@Localizer["<#=underscoreName#>.FORM.BUTTON.SAVE"]</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">@Localizer["<#=underscoreName#>.FORM.BUTTON.CANCEL"]</button>
+                            </div>
+							</form>
+                        </div>						
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+				@*
+<ng-template #<#=camelCaseName#>Modal let-c="close" let-d="dismiss">
+<#
+
+#>
+<# if(fieldChildren.Count()>0){#>
+				<div class="modal-header">
+				<h4 class="modal-title">@Localizer["<#=underscoreName#>.TITLE"]</h4>
+					<button type="button" class="close" (click)="hideModal()">×</button>
+					
+				</div>
+				<div class="modal-body">
+						<ngb-tabset>
+							<ngb-tab>
+								<ng-template ngbTabTitle><#=classModel.Name#></ng-template>
+								<ng-template ngbTabContent>
+								<app-form-<#=classSet.ToDash(classModel.Name)#> [modal]="<#=camelCaseName#>Modal" [(<#=camelCaseName#>)]="<#=camelCaseName#>" [obj]="this" (saveEvent)="save(<#=camelCaseName#>,this)" ></app-form-<#=classSet.ToDash(classModel.Name)#>>
+								</ng-template>
+							</ngb-tab>
+<#foreach(var field in fieldChildren){#>
+							<ngb-tab>
+								<ng-template ngbTabTitle><#=classSet.ToSpacedName(field.Name)#></ng-template>
+								<ng-template #<#=classSet.ToCamelCase(field.DataType)#>List ngbTabContent>
+								<app-list-<#=classSet.ToDash(field.DataType)#> #<#=classSet.ToCamelCase(field.DataType)#>ChildList [autoLoad]="false" [<#=classSet.ToCamelCase(classModel.Name)#>Id]="<#=classSet.ToCamelCase(classModel.Name)#>.id" ></app-list-<#=classSet.ToDash(field.DataType)#>>								
+								</ng-template>
+							</ngb-tab>
+<#}#>
+						</ngb-tabset>
+						</div>
+						<div class="modal-footer">
+							<button type="button" (click)="save(<#=camelCaseName#>)" class="btn btn-success">@Localizer["<#=underscoreName#>.FORM.BUTTON.SAVE"]</button>
+							<button type="button" (click)="hideModal()" class="btn btn-default">@Localizer["<#=underscoreName#>.FORM.BUTTON.CANCEL"]</button>
+						</div>
+<#}else{#>
+	<div class="modal-header">
+		<h4 class="modal-title">@Localizer["<#=underscoreName#>.TITLE"]</h4>
+		<button type="button" class="close" (click)="hideModal()">×</button>		
+	</div>
+	<div class="modal-body">
+		<app-form-<#=classSet.ToDash(classModel.Name)#> [modal]="<#=camelCaseName#>Modal" [(<#=camelCaseName#>)]="<#=camelCaseName#>" [obj]="this" (saveEvent)="save(<#=camelCaseName#>,this)" ></app-form-<#=classSet.ToDash(classModel.Name)#>>
+	</div>
+	<div class="modal-footer">
+		<button type="button" (click)="save(<#=camelCaseName#>)" class="btn btn-success">@Localizer["<#=underscoreName#>.FORM.BUTTON.SAVE"]</button>
+		<button type="button" (click)="hideModal()" class="btn btn-default">@Localizer["<#=underscoreName#>.FORM.BUTTON.CANCEL"]</button>
+	</div>
+
+<#}#>
+</ng-template>*@
+@section scripts{
+	
+}
+<#
+manager.EndBlock();
+#>
+<#
+}
+manager.Process(false);
+#>

@@ -1,0 +1,151 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="netstandard" #>
+<#@ assembly name="System.IO" #>
+<#@ assembly name="$(ProjectDir)..\Infra\bin\Debug\netstandard2.0\CrossCutting.Services.dll" #>
+<#@ assembly name="System.Net.Http" #>
+<#@ assembly name="System.Runtime.Caching" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Runtime.Caching" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#@ import namespace="CrossCutting.Services.Services"#>
+<#@ import namespace="CrossCutting.Services.Configuration"#>
+<#@ include file="../main.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+CreateDirectory($"..\\..\\..\\{webAppFullPath}..\\assets\\i18n\\admin\\");
+var defaultLang = "en-us";
+var languages = new string[]{"pt-br","es-es", defaultLang, "fr-fr", "zh-hant","de-de"};
+
+foreach(var lang in languages){
+manager.StartNewFile($"{webAppPath}..\\assets\\i18n\\admin\\{lang}.json",webProject,"",null); 
+var text = new {
+  actions=translate("Actions",defaultLang,lang),
+  edit=translate("Edit",defaultLang,lang),
+  remove=translate("Delete",defaultLang,lang),
+  duplicate=translate("Duplicate",defaultLang,lang),
+  add=translate("ADD",defaultLang,lang),
+  confirmDelete=translate("Do you really want remove this item?",defaultLang,lang),
+  removeSuccess=translate("removed",defaultLang,lang),
+  removeError=translate("Error while removing",defaultLang,lang),
+  duplicateSuccess=translate("duplicated",defaultLang,lang),
+  duplicateError=translate("Error while duplicating",defaultLang,lang),
+  save= translate("Save",defaultLang,lang),
+  cancel =translate("Cancel",defaultLang,lang),
+  saveSuccess = translate(": saved successfully",defaultLang,lang),
+  saveError= translate("Error while saving",defaultLang,lang),
+  dialogConfirmation=translate("Confirmation",defaultLang,lang),
+  dialogOk=translate("Ok",defaultLang,lang),
+  dialogCancel=translate("Cancel",defaultLang,lang),
+  toasterSuccess=translate("Success",defaultLang,lang),
+  toasterError=translate("Error",defaultLang,lang),
+  uploadSelectFile=translate("Select a file",defaultLang,lang)
+ };
+#>
+{
+<#
+foreach(var classModel in classSet.Classes){
+
+var spacedName = translate(classSet.ToSpacedName(classModel.Name),defaultLang,lang).ToUpper();
+var spacedNameCapitalized = translate(classSet.ToSpacedName(classModel.Name),defaultLang,lang);
+var classUnderscore = classSet.ToUnderscore(classModel.Name).ToUpper();
+#>
+	"<#=classUnderscore#>":{
+		"TITLE" : "<#=spacedName#>",
+		"MENU" : "<#=spacedNameCapitalized#>",
+		"GRID" : {
+			"COLUMN" : {		
+<# foreach(var field in classModel.Fields){
+	    if(!field.IsClass) {
+			var fieldSpaced = translate(classSet.ToSpacedName(field.Name),defaultLang,lang).ToUpper();
+			var fieldUnderscore = classSet.ToUnderscore(field.Name).ToUpper();
+#>
+				"<#=fieldUnderscore#>":"<#=fieldSpaced#>",
+<#}#>
+<#}#>
+				"ACTIONS":"<#= text.actions #>"
+			},
+			"BUTTON": {
+				"EDIT":"<#= text.edit #>",
+				"REMOVE":"<#= text.remove #>",
+				"DUPLICATE":"<#= text.duplicate #>",
+				"NEW": "<#= text.add #> <#=spacedName#>"
+			},
+			"CONFIRM_DELETE":"<#= text.confirmDelete #>",
+			"REMOVE": {
+				"SUCCESS":"<#= $"{spacedNameCapitalized} {text.removeSuccess}"#>",
+				"ERROR":"<#= text.removeError #>"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"<#= text.duplicateSuccess #>",
+				"ERROR":"<#= text.duplicateError #>"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+<# foreach(var field in classModel.Fields){
+	   if(field.Name!="Id"){
+		var fieldSpaced = translate(classSet.ToSpacedName(field.Name),defaultLang,lang).ToUpper();
+	   var fieldUnderscore = classSet.ToUnderscore(field.Name).ToUpper();
+#>
+				"<#=fieldUnderscore#>":"<#=fieldSpaced#>",
+<#}}#>
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"<#= text.save#>",
+				"CANCEL":"<#= text.cancel#>"
+			},
+			"SAVE": {
+				"SUCCESS":"<#= $"{spacedNameCapitalized} {text.saveSuccess}"#>",
+				"ERROR":"<#= text.saveError#>"
+			}
+		}
+	},
+<#}#>
+  "APP":{
+	"NAME":"",
+	"DIALOG":{
+		"CONFIRM":{
+			"TITLE":"<#= text.dialogConfirmation#>"
+		},		
+		"OK":"<#= text.dialogOk #>",
+		"CANCEL":"<#= text.dialogCancel#>"
+	},
+	"TOASTER":{
+		"TITLE":{
+			"SUCCESS":"<#= text.toasterSuccess #>",
+			"ERROR":"<#= text.toasterError#>"
+		}
+	},
+	"UPLOAD":{
+		"BUTTON":"<#= text.uploadSelectFile #>"
+	}
+  }
+}
+<# 
+manager.EndBlock();
+#>
+<#}#>
+<#
+manager.Process(false);
+#><#+ 
+
+BingTranslateService service = new BingTranslateService(GetConfig());
+public string translate(string text,string from, string to){
+  return service.Translate(text,from,to);
+}
+
+public static BingTranslateConfiguration GetConfig(){
+  BingTranslateConfiguration config = new BingTranslateConfiguration();
+  config.Key="d579608a2f8942d48f82f992e3c8e821";
+  return config;
+}
+
+	
+#>

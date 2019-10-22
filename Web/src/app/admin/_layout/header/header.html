@@ -1,0 +1,59 @@
+﻿<header class="app-header navbar">
+  <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
+  <a class="navbar-brand logo-url" routerLink="/admin"></a>
+  <ul class="nav navbar-nav d-md-down-none">
+    <li class="nav-item">
+      <a class="nav-link navbar-toggler" href="#" appSidebarToggler>&#9776;</a>
+    </li>
+    <li class="nav-item px-3">
+      <a class="nav-link" [routerLink]="['dashboard']">{{"HOME.HEADER.MENU.DASHBOARD"|translate}}</a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item d-md-down-none">
+
+      <!-- <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button> -->
+
+      <app-language-selector></app-language-selector>
+    </li>
+    <li class="nav-item d-md-down-none">
+      <a class="nav-link" href="#">
+        <i class="icon-bell"></i>
+        <span class="badge badge-pill badge-danger">5</span>
+      </a>
+    </li>
+    <li class="nav-item d-md-down-none">
+      <a class="nav-link" href="#">
+        <i class="icon-list"></i>
+      </a>
+    </li>
+    <li class="nav-item d-md-down-none">
+      <a class="nav-link" href="#">
+        <i class="icon-location-pin"></i>
+      </a>
+    </li>
+    <li class="nav-item dropdown" ngbDropdown>
+      <a class="nav-link dropdown-toggle" style="cursor:pointer" ngbDropdownToggle>
+        <img *ngIf="userData?.picture" [src]="userData?.picture" class="img-avatar" [alt]="userData?.name">
+        <span class="d-md-down-none">{{userData?.name}}</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown" ngbDropdownMenu>
+        <div class="dropdown-header text-center">
+          <strong>Settings</strong>
+        </div>
+        <a class="dropdown-item" [routerLink]="['profile']">
+          <i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" [routerLink]="['user-settings']">
+          <i class="fa fa-wrench"></i> Settings</a>
+        <div class="divider"></div>
+        <a class="dropdown-item" href="#">
+          <i class="fa fa-shield"></i> Lock account</a>
+        <a class="dropdown-item" style="cursor:pointer" (click)="logout()">
+          <i class="fa fa-lock"></i> Logout</a>
+      </div>
+    </li>
+    <li class="nav-item d-md-down-none">
+      <a class="nav-link navbar-toggler" href="#" appAsideMenuToggler>&#9776;</a>
+    </li>
+  </ul>
+</header>

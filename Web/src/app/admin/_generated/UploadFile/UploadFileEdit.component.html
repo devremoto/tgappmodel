@@ -1,0 +1,40 @@
+﻿
+					<div class="row">
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'UPLOAD_FILE.FORM.LABEL.NAME' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="uploadFile.name" name="uploadFile.name" autofocus />
+						</div>
+						
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'UPLOAD_FILE.FORM.LABEL.INPUT_FILE_FIELD' | translate }}</label>
+							<app-upload [(model)]="uploadFile.inputFileField" [path]="uploadFile.inputFileField" [width]="160" [height]="120" id="inputFileField" [name]="'inputFileField'" [label]="('APP.UPLOAD.BUTTON' | translate)" cssIcon="fa fa-upload"></app-upload>
+
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'UPLOAD_FILE.FORM.LABEL.TYPE' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="uploadFile.type" name="uploadFile.type" autofocus />
+						</div>
+						
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'UPLOAD_FILE.FORM.LABEL.FILE_NAME' | translate }}</label>
+							<app-upload [(model)]="uploadFile.fileName" [path]="uploadFile.fileName" [width]="160" [height]="120" id="fileName" [name]="'fileName'" [label]="('APP.UPLOAD.BUTTON' | translate)" cssIcon="fa fa-upload"></app-upload>
+
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'UPLOAD_FILE.FORM.LABEL.CONTROLLER' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="uploadFile.controller" name="uploadFile.controller" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'UPLOAD_FILE.FORM.LABEL.EXTENSION' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="uploadFile.extension" name="uploadFile.extension" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'UPLOAD_FILE.FORM.LABEL.SIZE' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="uploadFile.size" name="uploadFile.size" autofocus />
+						</div>
+					</div>

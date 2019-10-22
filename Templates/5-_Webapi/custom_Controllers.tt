@@ -1,0 +1,58 @@
+﻿<#@ template language="C#" hostSpecific="true" debug="True" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+manager.CanOverrideExistingFile=false;
+
+
+var projectName = "Api";
+var path="Controllers";
+CreateDirectory("..\\..\\..\\"+projectName+"\\"+path+"\\");
+
+foreach(var classModel in classSet.Classes){#>
+<#	
+		manager.StartNewFile(path+"\\"+classModel.Name+ "Controller.cs",projectName,"");
+		var camelCaseName = classSet.ToCamelCase(classModel.Name);
+		var controller = classModel.Name+"Controller";
+		var spacedName = classSet.ToSpacedName(classModel.Name);
+	  var parents = classModel.Fields.Where(x=>x.IsParent);
+#>
+using Api.Models;
+using Application.Interfaces;
+using Application.ViewModels;
+using AutoMapper;
+using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using System;
+
+namespace Api.Controllers
+{
+	[Authorize]
+  [Route("api/[controller]")]
+  public partial class <#= classModel.Name #>Controller :  BaseController<<#=classModel.Keys[0].DataType#>, I<#= classModel.Name #>AppService, <#= classModel.Name #>, <#= classModel.Name #>ViewModel>
+  {
+    public <#= classModel.Name #>Controller(I<#= classModel.Name #>AppService service<# foreach(var parent in parents.Select(x=>x.DataType).Distinct()){#>, I<#=parent#>AppService  <#=classSet.ToCamelCase(parent)#>AppService<#}#>, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper)
+    : base(hostingEnvironment, configuration, service, mapper)
+    {
+    _service = service;
+<# foreach(var parent in parents.Select(x=>x.DataType).Distinct()){#>
+      _<#=classSet.ToCamelCase(parent)#>AppService = <#=classSet.ToCamelCase(parent)#>AppService;
+<#}#>
+    }
+  }
+}
+
+<#
+manager.EndBlock();
+
+}
+manager.Process(false);
+#>

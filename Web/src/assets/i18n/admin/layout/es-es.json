@@ -1,0 +1,58 @@
+{
+  "HOME": {
+    "SIDE_BAR": {
+      "DASHBOARD": "Panel",
+      "NEW": "Novo",
+      "MENU": {
+        "TITLE": "Adminstracion",
+        "SECTIONS": {
+          "ADMIN": {
+            "TITLE": "Admin",
+            "CONTACT": "Conctato"
+          },
+          "DATABASE": {
+            "TITLE": "Banco de dados"
+          }
+        }
+      }
+    },
+    "HEADER": {
+      "MENU": {
+        "DASHBOARD": "Panel de control"
+      },
+      "BREAD_CRUMB": {
+        "DASHBOARD": "Painel de control",
+        "SETTINGS": "Configuraciones"
+      }
+    }
+  },
+  "TRANSLATOR": {
+    "TITLE": "Editor de idiomas",
+    "HEADER": {
+      "PRINT": "Imprimir",
+      "SAVE": "Salvar",
+      "DOWNLOAD": "Download"
+    },
+    "TOASTER": {
+      "SAVE": "Salvar",
+      "ADD_ERROR": "Clave {{key}} setada para {{path}}",
+      "ADD_SUCCESS": "Clave {{key}} setada com sucesso para {{path}}",
+      "TITLE_ERROR": "Erro",
+      "TITLE_SUCCESS": "Exito",
+      "EMPTY_PROPERTY": "Ingrese un valor para la propriedad"
+    },
+    "MENU": {
+      "TITLE": "Arquivo"
+    },
+    "BUTTONS": {
+      "TRANSLATE": "Traducir",
+      "REMOVE": "Borrar",
+      "COPY_CLIPBOARD": "Copiar al clipboard",
+      "COPY_CLIPBOARD_JS": "Copiar javascript al cpliboard",
+      "ADD_FIELD": "Anãdir campo",
+      "ADD_OBJECT": "Anãdir objecto",
+      "ADD_PROPERTY_TO": "Anãdir propriedad al {{path}}",
+      "ROOT": "Raiz"
+    }
+  }
+}

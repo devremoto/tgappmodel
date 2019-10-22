@@ -1,0 +1,317 @@
+/* Skin: blue */
+/* general */
+a {
+  color: #376BAF; }
+  a:hover, a:focus {
+    color: #2d5890; }
+
+.nav-topbar.topbar-accent {
+  background-color: #376BAF; }
+  .nav-topbar.topbar-accent .social-icons > li > a {
+    background-color: #3d77c2;
+    color: white; }
+    .nav-topbar.topbar-accent .social-icons > li > a:hover, .nav-topbar.topbar-accent .social-icons > li > a:focus {
+      background-color: #3c74bf; }
+  .nav-topbar.topbar-accent .search-form input, .nav-topbar.topbar-accent .search-form .btn {
+    background-color: #3d77c2; }
+  .nav-topbar.topbar-accent .search-form input {
+    color: #ecf2f9; }
+  .nav-topbar.topbar-accent .search-form .btn {
+    color: #78a0d4; }
+  .nav-topbar.topbar-accent .nav > li > a.as-button span {
+    background-color: #254775;
+    border-color: #1f3c61; }
+  .nav-topbar.topbar-accent .nav > li > a.as-button:hover span, .nav-topbar.topbar-accent .nav > li > a.as-button:focus span {
+    background-color: #214069; }
+
+/* navs */
+.nav-pills.sidebar-nav li.has-submenu.active li.active > a {
+  color: #376BAF; }
+.nav-pills.sidebar-nav ul.submenu li a:hover, .nav-pills.sidebar-nav ul.submenu li a:focus {
+  color: #376BAF; }
+
+/* navbar */
+.navbar-default .navbar-nav > li > a:hover {
+  color: #376BAF; }
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: #376BAF; }
+.navbar-default .navbar-nav .active > a, .navbar-default .navbar-nav .active > a:hover, .navbar-default .navbar-nav .active > a:focus {
+  color: #376BAF;
+  background-color: transparent; }
+.navbar-default .nav-onepage > li > a:hover, .navbar-default .nav-onepage > li > a:focus, .navbar-default .nav-onepage > li > a:active {
+  color: #376BAF; }
+
+.main-navbar-nav li > .dropdown-menu {
+  border-top-color: #376BAF; }
+  .main-navbar-nav li > .dropdown-menu > li > a:hover, .main-navbar-nav li > .dropdown-menu > li > a:focus {
+    color: #376BAF; }
+.main-navbar-nav .dropdown-mega .dropdown-menu li a:hover, .main-navbar-nav .dropdown-mega .dropdown-menu li a:focus {
+  color: #376BAF; }
+.main-navbar-nav .dropdown-mega .dropdown-menu li.active a, .main-navbar-nav .dropdown-mega .dropdown-menu li.active a:hover, .main-navbar-nav .dropdown-mega .dropdown-menu li.active a:focus {
+  color: #376BAF; }
+
+.secondary-navbar-nav .as-icon .cart-count {
+  background-color: #376BAF; }
+
+/* icon info */
+.icon-info-right .title:after {
+  background-color: #376BAF; }
+
+.icon-info-border i {
+  background-color: #376BAF; }
+
+/* buttons */
+.btn-primary {
+  color: #FFF;
+  background-color: #376BAF;
+  border-color: #315f9c; }
+  .btn-primary:focus, .btn-primary.focus {
+    color: #FFF;
+    background-color: #315f9c;
+    border-color: #274c7d; }
+  .btn-primary:hover {
+    color: #FFF;
+    background-color: #3364a3;
+    border-color: #274c7d; }
+  .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+    color: #FFF;
+    background-color: #3364a3;
+    border-color: #22436d; }
+    .btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus, .open > .btn-primary.dropdown-toggle:hover, .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle.focus {
+      color: #FFF;
+      background-color: #2e5a94;
+      border-color: #1f3c61; }
+  .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+    background-image: none; }
+  .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus {
+    background-color: #376BAF;
+    border-color: #315f9c; }
+  .btn-primary .badge {
+    color: #376BAF;
+    background-color: #FFF; }
+
+.btn-link {
+  color: #376BAF; }
+  .btn-link:hover, .btn-link:focus {
+    text-decoration: none;
+    color: #2d5890; }
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #a5a5a5;
+  color: #888; }
+  .btn-outline.btn-primary {
+    border-color: #376BAF; }
+
+.navbar-light-font .btn-outline {
+  border-color: #fff; }
+  .navbar-light-font .btn-outline.btn-primary:hover, .navbar-light-font .btn-outline.btn-primary:focus {
+    background-color: #376BAF;
+    border-color: #315f9c;
+    color: #fff; }
+
+/* elements */
+.count-info .number:after {
+  background-color: #376BAF; }
+
+.count-info-onerow i {
+  color: #376BAF;
+  border-color: #376BAF; }
+
+.team-member .member-info {
+  border-top-color: #376BAF; }
+
+.team-member-sidebyside .team-name {
+  background-color: #376BAF; }
+
+.testimonial-big .content:after {
+  background-color: #376BAF; }
+
+.carousel-portfolio-simple .owl-controls .owl-buttons div {
+  background-color: #376BAF; }
+
+.pricing-table.pricing-recommended .top, .pricing-table.pricing-recommended .top:after, .pricing-table.pricing-recommended .top:before {
+  background-color: #376BAF; }
+
+.pricing-table2.pricing-recommended .popular {
+  background-color: #376BAF; }
+
+.cta-solid-brand-bg {
+  background-color: #376BAF; }
+  .cta-solid-brand-bg .btn {
+    background-color: #284f80;
+    border-color: #214069; }
+    .cta-solid-brand-bg .btn:hover, .cta-solid-brand-bg .btn:focus {
+      background-color: #264a79; }
+
+.cta-clean {
+  border-color: #376BAF; }
+
+.breadcrumb > li.active {
+  color: #376BAF; }
+.breadcrumb a:hover, .breadcrumb a:focus {
+  text-decoration: none;
+  color: #376BAF; }
+.breadcrumb.link-accent a {
+  color: #376BAF; }
+  .breadcrumb.link-accent a:hover, .breadcrumb.link-accent a:focus {
+    color: #2d5890; }
+
+/* tabs */
+.custom-tabs-circle ul > li.active > a {
+  border-color: #376BAF;
+  background-color: #376BAF; }
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: #376BAF; }
+
+.custom-tabs-line.tabs-line-top .active a {
+  border-top-color: #376BAF; }
+.custom-tabs-line.tabs-line-bottom .active a {
+  border-bottom-color: #376BAF; }
+.custom-tabs-line ul.nav-pills a:hover, .custom-tabs-line ul.nav-pills a:focus {
+  background-color: #376BAF; }
+
+.custom-tabs-circle ul > li .active > a {
+  border-color: #376BAF;
+  background-color: #376BAF; }
+
+.pagination > li > a,
+.pagination > li > span {
+  color: #376BAF; }
+.pagination > li > a:hover, .pagination > li > span:hover,
+.pagination > li > a:focus, .pagination > li > span:focus {
+  background-color: #497fc6;
+  border-color: #376BAF;
+  color: #fff; }
+.pagination > .active > a:hover, .pagination > .active > span:hover,
+.pagination > .active > a:focus, .pagination > .active > span:focus {
+  background-color: #497fc6;
+  border-color: #376BAF;
+  color: #fff; }
+.pagination > .active > a, .pagination > .active > span {
+  background-color: #376BAF;
+  border-color: #315f9c; }
+.pagination.borderless > li.active > a,
+.pagination.borderless > li.active > span {
+  background-color: #376BAF; }
+  .pagination.borderless > li.active > a:hover, .pagination.borderless > li.active > a:focus,
+  .pagination.borderless > li.active > span:hover,
+  .pagination.borderless > li.active > span:focus {
+    background-color: #376BAF; }
+
+.pager li > a {
+  border-color: #376BAF; }
+  .pager li > a:hover, .pager li > a:focus {
+    background-color: #376BAF;
+    border-color: #3364a3; }
+
+.panel-group-faq.top-faq .panel-heading .number {
+  background-color: #376BAF; }
+
+.panel-group-faq .panel-title {
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.6; }
+  .panel-group-faq .panel-title a {
+    color: inherit; }
+    .panel-group-faq .panel-title a:hover {
+      color: #376BAF; }
+    .panel-group-faq .panel-title a:focus {
+      color: inherit; }
+
+.portfolio-item-filters li a:hover, .portfolio-item-filters li a:focus {
+  color: #376BAF; }
+.portfolio-item-filters li a.active {
+  color: #376BAF; }
+
+.entry-post .entry-title a:hover, .entry-post .entry-title a:focus,
+.related-post-list a:hover,
+.related-post-list a:focus,
+.post-entry-sidebar .post-title a:hover,
+.post-entry-sidebar .post-title a:focus {
+  color: #376BAF; }
+
+.category-list li a:hover, .category-list li a:focus {
+  color: #376BAF; }
+
+.tag-list li a:hover, .tag-list li a:focus {
+  background-color: #376BAF; }
+
+.datepicker td.active:active, .datepicker td.active.active {
+  background-color: #376BAF;
+  border-color: #376BAF; }
+.datepicker td.active:hover:active, .datepicker td.active:hover.active {
+  background-color: #376BAF;
+  border-color: #376BAF; }
+
+.progress-bar {
+  background-color: #376BAF; }
+
+.thumbnail-hover .thumbnail-icon {
+  background-color: #376BAF; }
+
+.thumbnail-custom .btn {
+  background-color: rgba(55, 107, 175, 0.5);
+  border-color: #315f9c; }
+  .thumbnail-custom .btn:hover, .thumbnail-custom .btn:focus {
+    background-color: #376BAF; }
+
+/* typography */
+.text-primary {
+  color: #376BAF; }
+
+.bg-primary {
+  background-color: #376BAF; }
+
+.border-primary,
+.heading-border-bottom-short.border-primary:after {
+  border-color: #376BAF; }
+
+.heading-border-icon:before {
+  color: #376BAF; }
+
+.bold-separator {
+  border-top-color: #376BAF; }
+
+.content-lead p:after {
+  border-color: #376BAF; }
+
+/* misc */
+.panel-primary {
+  border-color: #376BAF; }
+  .panel-primary > .panel-heading {
+    background-color: #376BAF;
+    border-color: #376BAF; }
+
+.toast-info {
+  background-color: #376BAF; }
+
+.label-primary {
+  background-color: #376BAF; }
+
+/* footer */
+.footer-heading:after {
+  background-color: #376BAF; }
+
+/*********************************
+ *
+ *	SHOP TEMPLATES
+ *
+ *********************************/
+.product-attribute-link-list li.active {
+  color: #376BAF; }
+
+.radio-icon input[type="radio"]:checked + span {
+  background-color: #376BAF; }
+
+.product-size-list > li.active > a {
+  background-color: #376BAF;
+  border-color: #376BAF; }
+
+.fuelux .checkout-wizard ul.steps > li.active .step-number {
+  background-color: #376BAF; }
+.fuelux .checkout-wizard ul.steps > li.complete .step-number, .fuelux .checkout-wizard ul.steps > li.complete:after {
+  background-color: #376BAF; }
+
+/*# sourceMappingURL=blue.css.map */

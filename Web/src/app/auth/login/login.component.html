@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/angular2-toaster@5.0.0/toaster.css" />
+
+<!-- Icons -->
+<link href="/assets/admin/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/admin/css/simple-line-icons.css" rel="stylesheet">
+<!-- Main styles for this application -->
+<link href="/assets/admin/css/style.css" rel="stylesheet">
+
+
+<!--
+	<link href="vendors/@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+	<link href="vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+	<link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+	<link href="css/style.css" rel="stylesheet">
+  <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet"> -->
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-md-8">
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+              <div class=" row">
+                <div class="col-6"><img class="logo" [src]="config.logoUrl" /></div>
+                <div class="col-6 text-right">
+                  <h1>{{"LOGIN.TITLE"|translate}}</h1>
+                  <p class="text-muted">{{"LOGIN.SUB_TITLE"|translate}}</p>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-user"></i>
+                  </span>
+                </div>
+                <input class="form-control" type="text" placeholder="{{'LOGIN.FIELDS.USERNAME'|translate}}"
+                  [(ngModel)]="loginModel.username">
+              </div>
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-lock"></i>
+                  </span>
+                </div>
+                <input class="form-control" type="password" placeholder="{{'LOGIN.FIELDS.PASSWORD'|translate}}"
+                  [(ngModel)]="loginModel.password">
+              </div>
+              <div class=" row">
+                <div class="col-6">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button class="btn btn-primary" type="button"
+                      (click)="authService.login(loginModel)">{{"LOGIN.BUTTONS.LOGIN"|translate}}</button>
+                    <app-language-selector cssClass="btn-primary"></app-language-selector>
+                  </div>
+
+                </div>
+                <div class="col-6 text-right">
+                  <button class="btn btn-link px-0" type="button">{{"LOGIN.BUTTONS.FORGOT_PASSWORD"|translate}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+             <div class="card-body text-center">
+              <div>
+                <h2>{{"LOGIN.SIGN_UP.TITLE"|translate}}</h2>
+                <p>{{"LOGIN.SIGN_UP.DESCRIPTION"|translate}}</p>
+                <button class="btn btn-primary active mt-3"
+                  type="button">{{"LOGIN.BUTTONS.REGISTER"|translate}}</button>
+
+              </div>
+            </div>
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

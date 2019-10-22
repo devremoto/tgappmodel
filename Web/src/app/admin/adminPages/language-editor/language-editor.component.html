@@ -1,0 +1,45 @@
+<div class="card" [appInRole]="['admin']">
+  <div class="card-header">
+    {{ 'TRANSLATOR.TITLE' | translate }}
+    <a class="btn btn-sm btn-info float-right" onclick="javascript:window.print();" href="#"><i class="fa fa-print"></i>
+      {{'TRANSLATOR.HEADER.PRINT' | translate}}</a>
+    <a class="btn btn-sm btn-info float-right" (click)="save(file,fileDefault)"><i class="fa fa-save"></i>
+      {{'TRANSLATOR.HEADER.SAVE' | translate}}</a>
+    <a class="btn btn-sm btn-info float-right" (click)="download(file)"><i class="fa fa-download"></i>
+      {{'TRANSLATOR.HEADER.DOWNLOAD' | translate}}</a>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="card">
+          <div class="card-header">
+            {{ 'TRANSLATOR.MENU.TITLE' |  translate }}
+          </div>
+          <div class="card-body" id="assets">
+            <div (click)="getAssets(upFolder)" style="cursor:pointer">
+              <i class="fa fa-level-up up text-primary"></i> ..
+            </div>
+            <div *ngFor="let folder of folders" (click)="getAssets(folder)" style="cursor:pointer">
+              <i class="fa fa-folder-o text-warning"></i> {{folder?.path}}
+            </div>
+            <div *ngFor="let file of files" (click)="load(file)" style="cursor:pointer">
+              <i class="fa fa-file-o text-success"></i> {{file.path}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10" *ngIf="(folder.folder && folder.folder!=='/') || folder.path || file.path">
+        <div class="card">
+          <div class="card-header">
+            <b>Editor</b> {{folder.folder}}{{folder.path}}/{{file.path}}
+          </div>
+          <div class="card-body">
+            <app-language-editor-form [items]="tree" [jObject]="json" [jObjectDefault]="jsonDefault">
+            </app-language-editor-form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<toaster-container></toaster-container>

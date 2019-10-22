@@ -1,0 +1,29 @@
+<table style="width:100%">
+    <tr>
+        <td valign="top" width="33%">
+            <span class="btn btn-primary btn-file" (click)="click()" style="cursor:pointer">
+                <span><i *ngIf="cssIcon" [class]="cssIcon">&nbsp;</i>&nbsp;{{label}}</span>
+                <input type="hidden" [ngModel]=model (ngModelChange)="updateData()" />
+                <input #input type="file" (change)="updateData()" style="cursor:pointer" ng2FileSelect
+                    [uploader]="uploader" class="form-control" [id]="id" [name]="name" />
+            </span>
+        </td>
+
+        <td *ngIf="file.name && !file.isDoc" width="33%">
+            <video #video width="{{width}}" height="{{height}}" controls id="video{{file.name}}" *ngIf="file.isVideo">
+                <source [src]="src" [type]="item.file.type"> Your browser does not support the video tag.
+            </video>
+            <img #image [src]="src" *ngIf="file.isImage" alt="{{file.fileName}}" />
+        </td>
+
+        <td *ngIf="file.name && !file.isDoc" width="33%">
+            {{file.fileName}}
+            <br /> {{file.formattedSize}}
+        </td>
+        <td *ngIf="file.name && file.isDoc" width="64%">
+            <a class="" [href]="src" #doc>
+                <i class="fa fa-file-archive-o"></i> {{file.fileName}}
+            </a> - {{file.formattedSize}}
+        </td>
+    </tr>
+</table>

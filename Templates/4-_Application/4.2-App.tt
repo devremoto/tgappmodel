@@ -1,0 +1,61 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+CreateDirectory("..\\..\\..\\Application\\Services\\_generated\\");	
+foreach(var classModel in classSet.Classes){#>
+<#
+var camelCaseName = classSet.ToCamelCase(classModel.Name);
+manager.StartNewFile("Services\\_generated\\"+classModel.Name+ "AppService.cs","Application","",null);
+#>
+using System;
+using Application.Interfaces;
+using Application.ViewModels;
+using Domain.Entities;
+using Domain.Interfaces;
+using Domain.Services.Interfaces;
+
+namespace Application.Services
+{
+    public partial class <#=classModel.Name#>AppService : BaseAppService<<#=classModel.Name#>>, I<#=classModel.Name#>AppService
+    {
+		I<#=classModel.Name#>Service _service;
+        public <#=classModel.Name#>AppService(I<#=classModel.Name#>Service service, IUnitOfWork uow)
+		: base(service, uow)
+        {
+			_uow = uow;
+            _service = service;
+        }
+
+		public <#=classModel.Name#> Save(<#=classModel.Name#> model, bool edit = false)
+        {
+			var result = new <#=classModel.Name#>();
+
+<# 
+var list = new List<string>();
+foreach(var key in classModel.Keys){
+	list.Add($"model.{key.Name} == default({key.DataType})");
+}
+#>
+			if (!edit || <#= string.Join("||",list)#>)
+				result = _service.Add(model);
+			else
+				result = _service.Update(model);			
+			_uow.Commit();
+			//SaveJson();
+            return result;
+        }
+	}        
+}<#
+manager.EndBlock();
+}
+
+manager.Process(false);
+#>

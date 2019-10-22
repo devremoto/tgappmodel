@@ -1,0 +1,112 @@
+{
+  "HOME": {
+    "BANNER": {
+      "EASY_CUSTOMIZE": "Personalizable",
+      "ULTRA_RESPONSIVE": "Design Responsivo",
+      "SLIDER": "Premium Slider Revolution",
+      "CLEAN_DESIGN": "Clean",
+      "VALUE": "Agrega Valor",
+      "MORE_INFO": "Sepa mas",
+      "WELLCOME": {
+        "TITLE": "BIENVENIDO A <strong>TUGON</strong>",
+        "TEXT": "Una empresa de consultoria moderna e especializada nas mas modernas tecnologias de desarrollo de sistemas de inrfomación"
+      },
+      "TIME_OPTIMIZATION": {
+        "TITLE": "OTIMIZACIÓN DE EL<em>TIEMPO</em>",
+        "TEXT": "Com soporte de nuestra equipo de desarrollo, agilizamos la construción dos sus aplicaciones web y mobile"
+      },
+      "PUBLIC_INTERACTION": {
+        "TITLE": "INTERACIÓN CON EL PUBLICO ALVO"
+      },
+      "MEDIA": {
+        "TEXT": "Utilize diversas medias<br />Para dar maior visibilidad a su empresa"
+      }
+    },
+    "INFO": {
+      "RESPONSIVE_DESIGN": {
+        "TITLE": "DESIGN RESPONSIVO",
+        "TEXT": "Desarrollamos aplicaiones web totalmente adaptables ao dipositivo sea ele desktop o mobile"
+      },
+      "CLOUD_READY": {
+        "TITLE": "LISTO PARA LA NUBE",
+        "TEXT": "Gerenciamiento de integración contínua con la plataforma Azure de Microsoft"
+      },
+      "CUSTOMIZATION": {
+        "TITLE": "CUSTOMIZACIÓN",
+        "TEXT": "Aplicativos construidos de modo cutomizable e escalable, de acordo con las necesidades da empresa"
+      }
+    }
+  },
+  "MENU": {
+    "HOME": "HOME",
+    "ABOUT_US": "QUIEN SOMOS",
+    "CONTACT": "CONTACTO"
+  },
+  "CONTACT": {
+    "TITLE": "Contacto",
+    "SUBTITLE": "Entre en contacto",
+    "DESCRIPTION": "Para obtener más informaciones acerca de: <br />Enrenamientos online, presencial, incompany",
+    "FORM": {
+      "NAME": "Nombre",
+      "ADDRESS": "Direccíon",
+      "PHONE": "Teléfono",
+      "EMAIL": "Correo electrónico",
+      "SUBJECT": "Asunto",
+      "MESSAGE": "Mensaje",
+      "SEND": "Enviar",
+      "SENDING": "Enviando",
+      "VALIDATE": {
+        "EMAIL": {
+          "REQUIRED": "Llene el campo email",
+          "PATTERN": "El campo email está incorrecto"
+        },
+        "NAME": {
+          "REQUIRED": "Llene el campo nombre "
+        },
+        "SUBJECT": {
+          "REQUIRED": "Llene el campo assunto "
+        },
+        "PHONENUMBER": {
+          "REQUIRED": "Llene el campo teléfono "
+        },
+        "MESSAGE": {
+          "REQUIRED": "Llene el campo mensaje "
+        }
+      }
+    }
+  },
+  "FOOTER": {
+    "SOCIAL_NETWORK": {
+      "TITLE": "Síguenos"
+    },
+    "NEWSLETTER": {
+      "TITLE": "NEWSLETTER",
+      "SUB_TITLE": "Reciba informaciones y novidades",
+      "SUBSCRIBE": "SUSCRIBETE",
+      "SUBSCRIBE_LOADING": "SUSCRIBIÉNDOSE",
+      "PLACEHOLDER": "su corréo aqui"
+    },
+    "CONTACT": {
+      "TITLE": "Posso ayudar?",
+      "SUB_TITLE": "Entre en contacto con nosotros",
+      "FORM": {
+        "FIELDS": {
+          "NAME": "Nombre (Requerido)",
+          "EMAIL": "Email (Requerido)",
+          "SUBJECT": "Asunto",
+          "MESSAGE": "Mensaje"
+        },
+        "LABELS": {
+          "NAME": "Nombre",
+          "EMAIL": "Email",
+          "SUBJECT": "Asunto",
+          "MESSAGE": "Mensaje"
+        },
+        "BUTTONS": {
+          "SENDING": "Enviando",
+          "SEND": "Enviar"
+        }
+      }
+    }
+  }
+}

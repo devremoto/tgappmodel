@@ -1,0 +1,72 @@
+<!-- CORE CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="/assets/pages/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/assets/pages/css/elegant-icons.css" rel="stylesheet" type="text/css">
+<!-- SLIDER REVOLUTION CSS -->
+<link href="/assets/pages/js/plugins/revolution/css/settings.css" rel="stylesheet" type="text/css">
+<link href="/assets/pages/js/plugins/revolution/css/layers.css" rel="stylesheet" type="text/css">
+<link href="/assets/pages/js/plugins/revolution/css/navigation.css" rel="stylesheet" type="text/css">
+<!-- THEME CSS -->
+<link href="/assets/pages/css/main.css" rel="stylesheet" type="text/css">
+<link href="/assets/pages/css/my-custom-styles.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/assets/pages/css/skins/gold.css" type="text/css">
+<!-- GOOGLE FONTS -->
+<link href='https://fonts.googleapis.com/css?family=Raleway:700,400,400italic,500' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300,300italic' rel='stylesheet'
+      type='text/css'>
+<!-- FAVICONS -->
+<link rel="shortcut icon" href="/assets/pages/ico/favicon.ico">
+
+<div id="wrapper">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+
+
+  <!-- END FOOTER -->
+  <div class="back-to-top">
+    <a href="#top"><i class="fa fa-chevron-up"></i></a>
+  </div>
+</div>
+<div id="contact-widget-bottom" class="panel panel-primary contact-widget">
+  <div class="panel-heading">
+    <h5 class="panel-title">{{'FOOTER.CONTACT.TITLE' | translate}}</h5>
+    <i class="fa fa-caret-down icon-down hide"></i>
+    <i class="fa fa-caret-up icon-up"></i>
+  </div>
+  <div class="panel-body">
+    <form method="post" id="contact-form" novalidate>
+      <p>
+        {{'FOOTER.CONTACT.SUB_TITLE' | translate}}
+      </p>
+      <div class="form-group">
+        <label for="contact-name"
+               class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.NAME' | translate}}</label>
+        <input type="text" class="form-control" id="contact-name" name="name" [(ngModel)]="contact.name"
+               placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.NAME' | translate}}" required>
+      </div>
+      <div class="form-group">
+        <label for="contact-email"
+               class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.EMAIL' | translate}}</label>
+        <input type="email" class="form-control" id="contact-email" name="email" [(ngModel)]="contact.email"
+               placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.EMAIL' | translate}}" required />
+      </div>
+      <div class="form-group">
+        <label for="contact-subject"
+               class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.SUBJECT' | translate}}</label>
+        <input type="text" class="form-control" id="contact-subject" name="subject" [(ngModel)]="contact.subject"
+               placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.SUBJECT' | translate}}" />
+      </div>
+      <div class="form-group">
+        <label for="contact-message"
+               class="control-label sr-only">*{{'FOOTER.CONTACT.FORM.LABELS.NAME' | translate}}</label>
+        <textarea class="form-control" id="contact-message" name="message" [(ngModel)]="contact.message" rows="5"
+                  cols="30" placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.MESSAGE' | translate}}" required></textarea>
+      </div>
+      <button id="submit-button" [disabled]="loading" (click)="sendEmail(contact)" class="btn btn-primary">
+        <i class="fa fa-spin fa-spinner" *ngIf="loading"></i>
+        <span>{{ (loading?'FOOTER.CONTACT.FORM.BUTTONS.SENDING' : 'FOOTER.CONTACT.FORM.BUTTONS.SEND') | translate}}</span>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,436 @@
+<#@ assembly name="System" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Linq" #>
+<#@ assembly name="System.Runtime.Caching" #>
+<#@ assembly name="$(ProjectDir)/Domain.dll" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq"#>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Linq.Expressions" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ import namespace="System.Runtime.Caching" #>
+<#@ import namespace="System.IO" #><#
+var webProject = "Web";
+var webFolder = "Web";
+var webAppPath = $"src\\app\\";
+var webAppFullPath = $"{webFolder}\\{webAppPath}" ;
+#>
+<#+
+
+public class ClassSet{
+	static ObjectCache cache = MemoryCache.Default;
+	//static string cacheKey = "_classSet";
+	//static CacheItemPolicy policy;
+	static ClassSet _instance;
+	public string templateDir;
+    public static ClassSet Instance
+    {
+        get
+        {	
+			try{
+				if(_instance == null){				
+					_instance = new ClassSet();
+				}
+
+				return _instance;
+			}catch(Exception e){
+				Debug.Print(e.Message);
+				Console.WriteLine(e.Message);
+			}
+
+			return null;
+        }
+    }
+    private ClassSet()
+    {
+		
+        //Classes = GetClasses();
+    }
+
+	public List<string> GetEntities()
+	{
+		return ClassList("../../Domain/Entities", ".cs");
+	}
+
+	public List<string> GetViewModels()
+	{
+		return ClassList("../../Domain/Services/_generated", "Service.cs");
+	}
+
+	private List<string> ClassList(string path, string sufix)
+	{
+	//var r =System.IO.Path.GetDirectoryName(Host.TemplateFile);
+		var dir = Path.Combine(templateDir,path );
+		return Directory.GetFiles(dir, "*.cs").Select(x =>
+			{
+				var info = new FileInfo(x);
+				return info.Name.Replace(sufix, "");
+			})
+			.ToList();
+	}
+
+	public List<ClassModel> GetClasses(){
+		return Load().Classes.OrderBy(u => u.Name).ToList();
+
+	}
+
+	public IEnumerable<TSource> DistinctBy<TSource, TKey>
+    (IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+	{
+		HashSet<TKey> seenKeys = new HashSet<TKey>();
+		foreach (TSource element in source)
+		{
+			if (seenKeys.Add(keySelector(element)))
+			{
+				yield return element;
+			}
+		}
+	}
+
+	public List<ClassModel> Classes{get;set;}
+	public void AddClass(ClassModel classModel){
+		if(this.Classes==null)
+			Classes=new List<ClassModel>();
+
+
+		classModel.Keys = classModel.Fields.Where(x=>x.IsKey).ToList();
+        classModel.Fks = classModel.Fields.Where(x=>x.IsForeingKey).ToList();
+		Classes.Add(classModel);
+    }
+
+	public string ToCamelCase(String str)
+    {
+        return Char.ToLowerInvariant(str[0]) + str.Substring(1);
+    }
+
+	
+
+	public String ToUnderscore(String input)
+        {
+            string pattern = "([a-z])([A-Z]+)";
+            string replacement = "$1_$2";
+            Regex rgx = new Regex(pattern);
+            var result = rgx.Replace(input, replacement);
+            return result;
+        }
+
+			public String ToDash(String input)
+        {
+            string pattern = "([a-z])([A-Z]+)";
+            string replacement = "$1-$2";
+            Regex rgx = new Regex(pattern);
+            var result = rgx.Replace(input, replacement);
+            return result.ToLower();
+        }
+
+		public String ToSpacedName(String input)
+        {
+            string pattern = "([a-z])([A-Z]+)";
+            string replacement = "$1 $2";
+            Regex rgx = new Regex(pattern);
+            var result = rgx.Replace(input, replacement);
+            return result;
+        }
+
+
+	public ClassSet Load(bool? orderFields=null){
+		if(orderFields==null)
+			orderFields=false;
+		Classes=new List<ClassModel>();
+		try{
+		Assembly models = Assembly.GetAssembly(typeof(Domain.Entities.Contact));
+		var types = models.GetTypes(); 
+
+		 
+		types =types.Where(x=>x.FullName.Contains("Domain.Entities") ) .OrderBy(x=>x.Name).ToArray();       
+		GC.SuppressFinalize(models);
+		models = null;
+		var fileClasses = GetEntities();
+		foreach (Type type in types)
+		{
+			if((type.IsClass || type.IsInterface) && !type.IsAbstract && fileClasses.Contains(type.Name)){
+				var classModel = new ClassModel(){
+					Name=type.Name,
+					IsSubClass = type.BaseType.FullName.Contains("Domain.Entities"),
+                    BaseClassName = type.BaseType.Name
+				};
+				//BindingFlags.DeclaredOnly |
+				var props = type.GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static ).ToList();
+				if(props!=null && props.Count>0){
+					if(orderFields.Value)
+						props = props.OrderBy(x=>x.Name).ToList();
+
+					foreach(var prop in props){
+						var attrs=  prop.GetCustomAttributes(true);
+
+						var field = new Field(){
+							Name = prop.Name,
+							JsName = ToCamelCase(prop.Name),
+							DataType = (prop.PropertyType.Name.Contains("Null"))?string.Format("{0}?",Nullable.GetUnderlyingType(prop.PropertyType).ToString().Replace("System.","")):prop.PropertyType.Name,
+							SqlType = ConvertSql(prop.PropertyType.Name),
+							IsEnum = prop.PropertyType.IsEnum,
+							IsClass = (prop.PropertyType.Namespace.Contains("Domain") && !prop.PropertyType.IsEnum) || prop.PropertyType.Namespace.Contains("List") || prop.PropertyType.Namespace.Contains("Generic") || prop.PropertyType.Namespace.Contains("Collection"),
+							IsNotMapped = (attrs !=null && attrs.Select(x=>x.ToString()).Any(z=>z.Contains("NotMapped"))),
+							IsKey = (prop.Name == "Id" || (attrs !=null && attrs.Select(x=>x.ToString()).Any(z=>z.Contains("Key")))),
+                            IsBaseProperty = prop.DeclaringType != type
+						};						
+
+						if(prop.PropertyType.IsGenericType && (prop.PropertyType.GetGenericTypeDefinition() == typeof(List<>) || prop.PropertyType.GetGenericTypeDefinition() == typeof(ICollection<>)))
+						{
+							field.DataType = prop.PropertyType.GetGenericArguments()[0].ToString().Split('.')?.Last()?.Replace("]",""); 
+							if(field.DataType == "String"){
+								field.DataType = field.DataType.ToLower();
+								field.IsClass = false;
+							}
+							field.IsCollection = field.DataType != "string";
+						}
+                       if(field.Name.Contains("Id") && props.Any(x=>x.PropertyType.Name==field.Name.Replace("Id",""))){
+                             field.FkTable = props.Where(x=>x.PropertyType.Name==field.Name.Replace("Id","")).FirstOrDefault()?.PropertyType.Name;
+                             field.IsForeingKey = true;
+                       }
+						switch(field.DataType){
+              case "Guid":
+							case "String":
+								field.DataType = "string";
+							break;
+							case "Boolean":
+								field.DataType = "bool";
+							break;
+							case "Int32":
+								field.DataType = "int";
+							break;
+						}
+
+						if(field.IsClass && !prop.PropertyType.Namespace.Contains("Generic") && !prop.PropertyType.Namespace.Contains("Collection") && !prop.PropertyType.Namespace.Contains("List")){
+							field.IsParent = true;
+							field.Parent = classModel;
+						}
+
+						SetHtmlType(field);
+
+						classModel.AddField(field);
+					}
+				}
+				AddClass(classModel);
+            }
+		}
+
+        this.Classes.ForEach(x=>{
+
+            x.BaseClass = this.Classes.Where(t=>t.Name==x.BaseClassName).FirstOrDefault();
+
+            x.Fields.Where(z=>z.IsForeingKey).ToList().ForEach(y=>{
+                y.Parent = this.Classes.Where(t=>t.Name==y.FkTable).FirstOrDefault();
+            });
+            x.Fields.Where(z=>z.IsParent || z.IsCollection).ToList().ForEach(y=>{
+                y.Parent = this.Classes.Where(t=>t.Name==y.DataType).FirstOrDefault();
+            });
+        });    
+             
+		return this;
+		}catch{
+
+		}
+
+		return new ClassSet();
+    }
+
+	public string ConvertSql(string name){
+	var result=name;
+		switch(name.ToLower()){
+			case "string":
+			result = "nvarchar(max)";
+			break;
+			case "nullable`1":
+			result= "decimal(18,2)";
+			break;
+			case "int32":
+			result="INT";
+			break;
+		}
+		return result;
+	}
+
+	public void SetHtmlType(Field field){	
+		var dataType = field.DataType.ToLower().Trim();
+		var name = field.Name.ToLower().Trim();
+		field.HtmlType = "text";
+
+		if(field.IsParent){
+			field.HtmlType = "select";
+			return;
+		}
+
+		if(dataType.Contains("bool")){
+			field.HtmlType = "checkbox";
+			return;
+		}
+
+		if(
+			name.Contains("description") ||
+			name.Contains("content") ||
+			name.Contains("descricao") ||
+            name.Contains("message") ||
+            name.Contains("mensagem") ||
+			name.EndsWith("text") ||
+			name.StartsWith("text") 
+		){
+			field.HtmlType = "textarea";
+			return;
+		}
+			
+		if(
+			name.Contains("date") ||
+			dataType.Contains("date")
+		){
+			field.HtmlType = "date";
+			return;
+		}
+
+		if(
+			name.Contains("logo") ||
+			name.Contains("image") ||
+			name.Contains("photo") ||
+			name.Contains("picture") ||
+			name.Contains("file")
+		){
+			field.HtmlType = "file";
+			return;
+		}
+
+		if(
+			name.Contains("hour") ||
+			name.Contains("datetime") ||
+			name.StartsWith("date") ||
+			name.EndsWith("date")
+		){
+			field.HtmlType = "datetime";
+			return;
+		}
+
+		if(
+			name.StartsWith("url") ||
+			name.EndsWith("url")
+		){
+			field.HtmlType = "url";
+			return;
+		}
+
+		if(
+			name.StartsWith("email") ||
+			name.EndsWith("email")
+		){
+			field.HtmlType = "email";
+			return;
+		}
+
+	}
+	
+}
+
+public class ClassModel
+{
+	public ClassModel(){
+		Fields = new List<Field>();
+        Keys = new List<Field>();
+        Fks = new List<Field>();
+	}
+
+	public List<Field> FileFields(){
+		return Fields.Where(x=>x.HtmlType=="file").ToList();
+	}
+
+    public String Name { get; set; }
+    public ClassModel BaseClass { get; set; }
+    public String BaseClassName { get; set; }
+	public bool IsSubClass {get;set;}
+	public List<Field> Fields {get;set;}
+	public List<Field> Keys {get;set;}
+    public List<Field> Fks {get;set;}
+	public void AddField(Field field){
+		if(this.Fields==null)
+			Fields=new List<Field>();
+		Fields.Add(field);
+    }
+
+}
+
+public class Field
+{
+    public String Name { get; set; }	
+	public String JsName { get; set; }
+    public String DataType { get; set; }
+	public String SqlType { get; set; }
+	public String HtmlType { get; set; }
+	public bool IsClass { get; set; }
+	public bool IsEnum { get; set; }
+	public bool IsCollection { get; set; }
+	public bool IsParent { get; set; }
+	public ClassModel Parent { get; set; }
+	public bool IsNotMapped { get; set; }
+	public bool IsKey { get; set; }
+    public bool IsForeingKey { get; set; }
+    public bool IsBaseProperty { get; set; }
+    public string FkTable { get; set; }
+}
+#>
+<#+
+bool DoesFileExist(string filename)
+{            
+    return File.Exists(Path.Combine(GetCurrentDirectory(),filename));    
+}
+// Get current  folder directory
+string GetCurrentDirectory()
+{
+    return System.IO.Path.GetDirectoryName(Host.TemplateFile);
+}
+
+void CreateDirectory(string path){
+	if(!System.IO.Directory.Exists(path))
+		System.IO.Directory.CreateDirectory(GetCurrentDirectory()+path);	
+}
+
+List<ClassModel>_classes;
+
+List<ClassModel> Classes {
+	get{
+		if(_classes==null){
+			_classes = ClassSet.Instance.Classes;
+		}
+		return _classes;
+	}
+}
+
+List<ClassModel> GetClasses(){
+	if(_classes==null){
+		_classes = ClassSet.Instance.Classes;
+	}
+	return _classes;
+}
+
+ClassSet _classSet ;
+
+ClassSet classSet {
+	get {
+		if(_classSet==null){
+			    _classSet= ClassSet.Instance;
+				_classSet.templateDir = GetCurrentDirectory();
+				_classSet.GetClasses();
+		}		
+		
+		return _classSet;
+	}	
+}
+
+public object GetDefault(Type type)
+{
+   if(type.IsValueType)
+   {
+      return Activator.CreateInstance(type);
+   }
+   return null;
+}
+#>

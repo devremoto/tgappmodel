@@ -1,0 +1,76 @@
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <img [src]="logo" alt="Tugon" style="max-height:45px" class="logo-footer">
+        <br>
+        <br>
+        <p>{{'APP.SLOGAN' | translate}}</p>
+        <!--<p>No need to wait, <a href="#">send us a quote</a></p>-->
+        <br>
+        <address class="contact-info">
+          <!--<p><i class="icon icon_pin_alt ico-styled text-primary"></i> 1234 North Main Street New York, NY 22222</p>-->
+          <p><i class="icon icon_phone ico-styled text-primary"></i> +55 (11) 9 9353-6732</p>
+          <p><i class="icon icon_mail_alt ico-styled text-primary"></i> <a
+              href="contato@tugon.com.br">contato@tugon.com.br</a></p>
+        </address>
+      </div>
+      <div class="col-md-4" *ngIf="false">
+        <h4 class="footer-heading">LATEST NEWS</h4>
+        <ul class="list-unstyled latest-news-footer">
+          <li class="news-item">
+            <h5 class="title"><a href="#">Dynamically Pontificate Highly Efficient Vortals</a></h5>
+            <span>Oct 12, 2015</span>
+          </li>
+          <li class="news-item">
+            <h5 class="title"><a href="#">Globally pontificate cross-platform resources without turnkey e-commerce</a>
+            </h5>
+            <span>Oct 11, 2015</span>
+          </li>
+          <li class="news-item">
+            <h5 class="title"><a href="#">Credibly administrate one-to-one e-tailers for diverse value.</a></h5>
+            <span>Oct 10, 2015</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h4 class="footer-heading">{{'FOOTER.SOCIAL_NETWORK.TITLE' | translate}}</h4>
+        <ul class="list-inline social-icons social-icons-small">
+          <li *ngFor="let socialNetwork of socialNetworks" [title]="socialNetwork.name"><a [target]="'_blank'"
+              [href]="safeUrl(socialNetwork.url)" *ngIf="socialNetwork.active"><i
+                [ngClass]="socialNetwork.cssIcon"></i></a></li>
+          <!--[href]="safeUrl(socialNetwork.url)"-->
+
+        </ul>
+        <div class="margin-bottom-50"></div>
+        <h4 class="footer-heading">{{'FOOTER.NEWSLETTER.TITLE' | translate}}</h4>
+        <p>{{'FOOTER.NEWSLETTER.TITLE' | translate}}</p>
+        <div class="newsletter-forms" method="post" [formGroup]="mailingForm">
+          <div class="input-group input-group-lg">
+            <input type="email" class="form-control" formControlName="email" name="email"
+              placeholder="{{'FOOTER.NEWSLETTER.PLACEHOLDER' | translate}}">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" (click)="signUp()" [disabled]="loading"><i class="fa fa-spinner fa-spin"
+                  *ngIf="loading"></i><span>{{loading?('FOOTER.NEWSLETTER.SUBSCRIBE_LOADING'|translate):('FOOTER.NEWSLETTER.SUBSCRIBE'|translate)}}</span></button>
+            </span>
+          </div>
+          <div class="alert"></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright-text left">&copy;{{ year | date:'yyyy'}} {{'APP.COPYRIGHT' | translate}}</p>
+      <nav class="right">
+        <ul class="list-inline">
+          <li><a [routerLink]="['/']">{{'MENU.HOME' | translate}}</a></li>
+          <li><a routerLink="/quemsomos">{{'MENU.ABOUT_US' | translate}}</a></li>
+          <li><a routerLink="/contato">{{'MENU.CONTACT' | translate}}</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</footer>
+
+<toaster-container></toaster-container>

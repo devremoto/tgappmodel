@@ -1,0 +1,23 @@
+.dropdown-item {
+
+}
+
+.dropdown-menu {
+  width: 50px !important;
+  border-radius:0.25em;
+}
+
+
+.dropdown-item {
+  cursor: pointer;
+  position: relative;
+  border-bottom: 1px solid #c2cfd6;
+  display: block;
+  width: 100%;
+  clear: both;
+  font-weight: 400;
+  color: #151b1e;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+}

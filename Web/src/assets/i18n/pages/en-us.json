@@ -1,0 +1,114 @@
+{
+  "HOME": {
+    "BANNER": {
+      "EASY_CUSTOMIZE": "Easy to Customize",
+      "ULTRA_RESPONSIVE": "Ultra Responsive",
+      "SLIDER": "Premium Slider Revolution",
+      "CLEAN_DESIGN": "Clean and Slick Design",
+      "VALUE": "Theme Values",
+      "MORE_INFO": "More Info",
+      "WELLCOME": {
+        "TITLE": "WELLCOME TO <strong>TUGON</strong>",
+        "TEXT": "A modern consultancy company experienced on the most modern development tecnologies"
+      },
+      "TIME_OPTIMIZATION": {
+        "TITLE": "<em>TIME</em> SAVING",
+        "TEXT": "With all suport of our team, we develop desktop and mobile apps in a good time to market"
+      },
+      "PUBLIC_INTERACTION": {
+        "TITLE": "INTERACTION WITH TARGET COSTUMERS"
+      },
+      "MEDIA": {
+        "TEXT": "Use several medias<br />To give more visibility to your company"
+      }
+    },
+    "INFO": {
+      "RESPONSIVE_DESIGN": {
+        "TITLE": "RESPONSIVE DESIGN",
+        "TEXT": "We develop apps that fits well on any devices, desktop, tablet and mobile"
+      },
+      "CLOUD_READY": {
+        "TITLE": "CLOUD READY",
+        "TEXT": "Managment of all processs on CI/CD, using Microsoft Azure platform"
+      },
+      "CUSTOMIZATION": {
+        "TITLE": "CUSTOMIZATION",
+        "TEXT": "Apps built to be customizable and scalable acordind to your company's needs"
+      }
+    }
+  },
+  "MENU": {
+    "HOME": "HOME",
+    "ABOUT_US": "ABOUT US",
+    "CONTACT": "CONTACT"
+  },
+
+  "CONTACT": {
+    "TITLE": "Contact",
+    "SUBTITLE": "Get In touch",
+    "DESCRIPTION": "Get in touch to receive more information about tranning and consulting.",
+    "FORM": {
+      "NAME": "Name",
+      "ADDRESS": "Address",
+      "PHONE": "Phone",
+      "EMAIL": "E-mail",
+      "SUBJECT": "Subject",
+      "MESSAGE": "Message",
+      "SEND": "Send",
+      "SENDING": "Sending",
+      "VALIDATE": {
+        "EMAIL": {
+          "REQUIRED": "Email is required",
+          "PATTERN": "Email is invalid"
+        },
+        "NAME": {
+          "REQUIRED": "Name is required"
+        },
+        "SUBJECT": {
+          "REQUIRED": "Subject is required"
+        },
+        "PHONENUMBER": {
+          "REQUIRED": "Phone Number is required"
+        },
+        "MESSAGE": {
+          "REQUIRED": "Message is required"
+        }
+      }
+    }
+  },
+
+  "FOOTER": {
+    "SOCIAL_NETWORK": {
+      "TITLE": "Follow us"
+    },
+    "NEWSLETTER": {
+      "TITLE": "NEWSLETTER",
+      "SUB_TITLE": "Get news and updates",
+      "SUBSCRIBE": "SUBISCRIBE",
+      "SUBSCRIBE_LOADING": "SUBISCRIBING",
+      "PLACEHOLDER": "your e-mail here"
+    },
+    "CONTACT": {
+      "TITLE": "How can I help you?",
+      "SUB_TITLE": "Drop us a line",
+      "FORM": {
+        "FIELDS": {
+          "NAME": "Name (Required)",
+          "EMAIL": "Email (Required)",
+          "SUBJECT": "Subject",
+          "MESSAGE": "Message"
+        },
+        "LABELS": {
+          "NAME": "Name",
+          "EMAIL": "Email",
+          "SUBJECT": "Subject",
+          "MESSAGE": "Message"
+        },
+        "BUTTONS": {
+          "SENDING": "Sending",
+          "SEND": "Send"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,345 @@
+﻿{
+	"ABOUT":{
+		"TITLE" : "ACERCA DE",
+		"MENU" : "acerca de",
+		"GRID" : {
+			"COLUMN" : {		
+				"ID":"ID",
+				"TITLE":"TÍTULO",
+				"IMAGE":"IMAGEN",
+				"DESCRIPTION":"DESCRIPCIÓN",
+				"ACTIONS":"Acciones"
+			},
+			"BUTTON": {
+				"EDIT":"Editar",
+				"REMOVE":"Eliminar",
+				"DUPLICATE":"Duplicado",
+				"NEW": "Añadir ACERCA DE"
+			},
+			"CONFIRM_DELETE":"¿Realmente quieres eliminar este artículo?",
+			"REMOVE": {
+				"SUCCESS":"acerca de Quitado",
+				"ERROR":"Error al quitar"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"Duplicado",
+				"ERROR":"Error al duplicar"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+				"TITLE":"TÍTULO",
+				"IMAGE":"IMAGEN",
+				"DESCRIPTION":"DESCRIPCIÓN",
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"Salvar",
+				"CANCEL":"Cancelar"
+			},
+			"SAVE": {
+				"SUCCESS":"acerca de : guardado con éxito",
+				"ERROR":"Error al guardar"
+			}
+		}
+	},
+	"CONTACT":{
+		"TITLE" : "CONTACTO",
+		"MENU" : "Contacto",
+		"GRID" : {
+			"COLUMN" : {		
+				"ID":"ID",
+				"NAME":"NOMBRE",
+				"PHONE_NUMBER":"NÚMERO DE TELÉFONO",
+				"EMAIL":"CORREO ELECTRÓNICO",
+				"SUBJECT":"ASUNTO",
+				"MESSAGE":"MENSAJE",
+				"ACTIONS":"Acciones"
+			},
+			"BUTTON": {
+				"EDIT":"Editar",
+				"REMOVE":"Eliminar",
+				"DUPLICATE":"Duplicado",
+				"NEW": "Añadir CONTACTO"
+			},
+			"CONFIRM_DELETE":"¿Realmente quieres eliminar este artículo?",
+			"REMOVE": {
+				"SUCCESS":"Contacto Quitado",
+				"ERROR":"Error al quitar"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"Duplicado",
+				"ERROR":"Error al duplicar"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+				"NAME":"NOMBRE",
+				"PHONE_NUMBER":"NÚMERO DE TELÉFONO",
+				"EMAIL":"CORREO ELECTRÓNICO",
+				"SUBJECT":"ASUNTO",
+				"MESSAGE":"MENSAJE",
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"Salvar",
+				"CANCEL":"Cancelar"
+			},
+			"SAVE": {
+				"SUCCESS":"Contacto : guardado con éxito",
+				"ERROR":"Error al guardar"
+			}
+		}
+	},
+	"LANGUAGE":{
+		"TITLE" : "LENGUA",
+		"MENU" : "Lengua",
+		"GRID" : {
+			"COLUMN" : {		
+				"ID":"ID",
+				"CODE":"CÓDIGO",
+				"NAME":"NOMBRE",
+				"IMAGE":"IMAGEN",
+				"ACTIVE":"ACTIVO",
+				"DEFAULT":"PREDETERMINADO",
+				"LOADED":"CARGADO",
+				"ACTIONS":"Acciones"
+			},
+			"BUTTON": {
+				"EDIT":"Editar",
+				"REMOVE":"Eliminar",
+				"DUPLICATE":"Duplicado",
+				"NEW": "Añadir LENGUA"
+			},
+			"CONFIRM_DELETE":"¿Realmente quieres eliminar este artículo?",
+			"REMOVE": {
+				"SUCCESS":"Lengua Quitado",
+				"ERROR":"Error al quitar"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"Duplicado",
+				"ERROR":"Error al duplicar"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+				"CODE":"CÓDIGO",
+				"NAME":"NOMBRE",
+				"IMAGE":"IMAGEN",
+				"ACTIVE":"ACTIVO",
+				"DEFAULT":"PREDETERMINADO",
+				"LOADED":"CARGADO",
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"Salvar",
+				"CANCEL":"Cancelar"
+			},
+			"SAVE": {
+				"SUCCESS":"Lengua : guardado con éxito",
+				"ERROR":"Error al guardar"
+			}
+		}
+	},
+	"MAILING":{
+		"TITLE" : "CORREO",
+		"MENU" : "Correo",
+		"GRID" : {
+			"COLUMN" : {		
+				"ID":"ID",
+				"EMAIL":"CORREO ELECTRÓNICO",
+				"ACTIVE":"ACTIVO",
+				"ACTIONS":"Acciones"
+			},
+			"BUTTON": {
+				"EDIT":"Editar",
+				"REMOVE":"Eliminar",
+				"DUPLICATE":"Duplicado",
+				"NEW": "Añadir CORREO"
+			},
+			"CONFIRM_DELETE":"¿Realmente quieres eliminar este artículo?",
+			"REMOVE": {
+				"SUCCESS":"Correo Quitado",
+				"ERROR":"Error al quitar"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"Duplicado",
+				"ERROR":"Error al duplicar"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+				"EMAIL":"CORREO ELECTRÓNICO",
+				"ACTIVE":"ACTIVO",
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"Salvar",
+				"CANCEL":"Cancelar"
+			},
+			"SAVE": {
+				"SUCCESS":"Correo : guardado con éxito",
+				"ERROR":"Error al guardar"
+			}
+		}
+	},
+	"SETTINGS":{
+		"TITLE" : "CONFIGURACIÓN",
+		"MENU" : "Configuración",
+		"GRID" : {
+			"COLUMN" : {		
+				"ID":"ID",
+				"KEY":"CLAVE",
+				"VALUE":"VALOR",
+				"ACTIONS":"Acciones"
+			},
+			"BUTTON": {
+				"EDIT":"Editar",
+				"REMOVE":"Eliminar",
+				"DUPLICATE":"Duplicado",
+				"NEW": "Añadir CONFIGURACIÓN"
+			},
+			"CONFIRM_DELETE":"¿Realmente quieres eliminar este artículo?",
+			"REMOVE": {
+				"SUCCESS":"Configuración Quitado",
+				"ERROR":"Error al quitar"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"Duplicado",
+				"ERROR":"Error al duplicar"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+				"KEY":"CLAVE",
+				"VALUE":"VALOR",
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"Salvar",
+				"CANCEL":"Cancelar"
+			},
+			"SAVE": {
+				"SUCCESS":"Configuración : guardado con éxito",
+				"ERROR":"Error al guardar"
+			}
+		}
+	},
+	"SOCIAL_NETWORK":{
+		"TITLE" : "RED SOCIAL",
+		"MENU" : "Red Social",
+		"GRID" : {
+			"COLUMN" : {		
+				"ID":"ID",
+				"NAME":"NOMBRE",
+				"CSS_ICON":"ICONO CSS",
+				"URL":"URL",
+				"ACTIVE":"ACTIVO",
+				"ACTIONS":"Acciones"
+			},
+			"BUTTON": {
+				"EDIT":"Editar",
+				"REMOVE":"Eliminar",
+				"DUPLICATE":"Duplicado",
+				"NEW": "Añadir RED SOCIAL"
+			},
+			"CONFIRM_DELETE":"¿Realmente quieres eliminar este artículo?",
+			"REMOVE": {
+				"SUCCESS":"Red Social Quitado",
+				"ERROR":"Error al quitar"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"Duplicado",
+				"ERROR":"Error al duplicar"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+				"NAME":"NOMBRE",
+				"CSS_ICON":"ICONO CSS",
+				"URL":"URL",
+				"ACTIVE":"ACTIVO",
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"Salvar",
+				"CANCEL":"Cancelar"
+			},
+			"SAVE": {
+				"SUCCESS":"Red Social : guardado con éxito",
+				"ERROR":"Error al guardar"
+			}
+		}
+	},
+	"UPLOAD_FILE":{
+		"TITLE" : "CARGAR ARCHIVO",
+		"MENU" : "Cargar archivo",
+		"GRID" : {
+			"COLUMN" : {		
+				"ID":"ID",
+				"NAME":"NOMBRE",
+				"INPUT_FILE_FIELD":"CAMPO DE ARCHIVO DE ENTRADA",
+				"SIZE":"TAMAÑO",
+				"TYPE":"TIPO",
+				"FILE_NAME":"NOMBRE DE ARCHIVO",
+				"CONTROLLER":"CONTROLADOR",
+				"EXTENSION":"EXTENSIÓN",
+				"ACTIONS":"Acciones"
+			},
+			"BUTTON": {
+				"EDIT":"Editar",
+				"REMOVE":"Eliminar",
+				"DUPLICATE":"Duplicado",
+				"NEW": "Añadir CARGAR ARCHIVO"
+			},
+			"CONFIRM_DELETE":"¿Realmente quieres eliminar este artículo?",
+			"REMOVE": {
+				"SUCCESS":"Cargar archivo Quitado",
+				"ERROR":"Error al quitar"
+			},
+			"DUPLICATE": {
+				"SUCCESS":"Duplicado",
+				"ERROR":"Error al duplicar"
+			}
+		},
+		"FORM" : {
+			"LABEL" : {	
+				"NAME":"NOMBRE",
+				"INPUT_FILE_FIELD":"CAMPO DE ARCHIVO DE ENTRADA",
+				"SIZE":"TAMAÑO",
+				"TYPE":"TIPO",
+				"FILE_NAME":"NOMBRE DE ARCHIVO",
+				"CONTROLLER":"CONTROLADOR",
+				"EXTENSION":"EXTENSIÓN",
+				"ID":"ID"
+			},
+			"BUTTON": {
+				"SAVE":"Salvar",
+				"CANCEL":"Cancelar"
+			},
+			"SAVE": {
+				"SUCCESS":"Cargar archivo : guardado con éxito",
+				"ERROR":"Error al guardar"
+			}
+		}
+	},
+  "APP":{
+	"NAME":"",
+	"DIALOG":{
+		"CONFIRM":{
+			"TITLE":"Confirmación"
+		},		
+		"OK":"Vale",
+		"CANCEL":"Cancelar"
+	},
+	"TOASTER":{
+		"TITLE":{
+			"SUCCESS":"Éxito",
+			"ERROR":"Error"
+		}
+	},
+	"UPLOAD":{
+		"BUTTON":"Seleccione un archivo"
+	}
+  }
+}

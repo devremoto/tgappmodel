@@ -1,0 +1,25 @@
+﻿
+					<div class="row">
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'SOCIAL_NETWORK.FORM.LABEL.NAME' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="socialNetwork.name" name="socialNetwork.name" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'SOCIAL_NETWORK.FORM.LABEL.CSS_ICON' | translate }}</label>
+							<input type="text" class="form-control" [(ngModel)]="socialNetwork.cssIcon" name="socialNetwork.cssIcon" autofocus />
+						</div>
+						
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'SOCIAL_NETWORK.FORM.LABEL.URL' | translate }}</label>
+							<input type="url" class="form-control" [(ngModel)]="socialNetwork.url" name="socialNetwork.url" autofocus />
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>
+								<input type="checkbox" [(ngModel)]="socialNetwork.active" name="activeId" autofocus />
+								{{'SOCIAL_NETWORK.FORM.LABEL.ACTIVE' | translate }}
+							</label>
+						</div>
+					</div>

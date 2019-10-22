@@ -1,0 +1,147 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+CreateDirectory($"..\\..\\..\\{webAppFullPath}combos");
+#>
+<#foreach(var classModel in classSet.Classes){
+var camelCaseName = classSet.ToCamelCase(classModel.Name);
+
+	var prop="nome";
+if(classModel.Fields.Any(x=>x.Name =="Nome")){
+	prop = "nome";
+}else if(classModel.Fields.Any(x=>x.Name =="UserName")){    
+	prop ="userName";	
+}else if(classModel.Fields.Any(x=>x.Name =="Name")){    
+	prop ="name";
+}else if(classModel.Fields.Any(x=>x.Name.Contains("Nome"))){
+	prop = classModel.Fields.Where(x=>x.Name.Contains("Nome")).FirstOrDefault().Name;
+	prop = classSet.ToCamelCase(prop);
+}else if(classModel.Fields.Any(x=>x.Name.Contains("Name"))){
+	prop = classModel.Fields.Where(x=>x.Name.Contains("Name")).FirstOrDefault().Name;
+	prop = classSet.ToCamelCase(prop);
+}else if(classModel.Fields.Any(x=>x.Name =="ClientName")){    
+	prop ="clientName";
+}else if(classModel.Fields.Any(x=>x.Name =="DisplayName")){    
+	prop ="displayName";
+}else if(classModel.Fields.Any(x=>x.Name =="Description")){    
+	prop ="description";
+}else if(classModel.Fields.Any(x=>x.DataType =="string")){
+	prop = classModel.Fields.Where(x=>x.DataType=="string").FirstOrDefault().Name;
+	prop = classSet.ToCamelCase(prop);
+}else if(classModel.Fields.Any(x=>x.Name.Contains("Description"))){
+	prop = classModel.Fields.Where(x=>x.Name.Contains("Description")).FirstOrDefault().Name;
+	prop = classSet.ToCamelCase(prop);
+}else{
+	prop="id";
+}
+
+manager.StartNewFile($"{webAppPath}combos\\combo.{classSet.ToCamelCase(classModel.Name)}.ts",webProject,"");
+#>
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { <#=classModel.Name#>Service } from '../services/generated/<#=classModel.Name#>Service';
+import { <#=classModel.Name#> } from '../models/<#=classModel.Name#>';
+
+@Component({
+  selector: 'app-combo-<#=classSet.ToDash(classModel.Name)#>',
+  template: `
+    <select [ngModel]="model" (ngModelChange)="updateData($event)" name="<#=camelCaseName#>" class="{{cssClass}}" autofocus >
+      <option *ngFor="let <#=camelCaseName#> of <#=camelCaseName#>List" [value]="<#=camelCaseName#>.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>">{{<#=camelCaseName#>.<#=prop#>}}</option>
+    </select>`
+})
+export class Combo<#=classModel.Name#>Component implements OnInit {
+    appErrorMessage: any;
+    <#=camelCaseName#>: <#=classModel.Name#>;
+    <#=camelCaseName#>List: <#=classModel.Name#>[];
+
+    @Input() cssClass?: string;
+    @Input() model: any;
+    @Output() modelChange: any = new EventEmitter();
+
+    constructor(private _service: <#=classModel.Name#>Service) {
+        this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
+            this.reload(data);
+        });
+    }
+
+    updateData(event) {
+        this.model = event;
+        this.modelChange.emit(event);
+    }
+
+    ngOnInit() {
+        this.<#=camelCaseName#> = new <#=classModel.Name#>();
+        this.getAll();
+    }
+
+    public getAll(data?: <#=classModel.Name#>) {
+        this._service.getAll().subscribe(
+            result => {
+                this.<#=camelCaseName#>List = result;
+                    if (data) {
+                        this.updateData(data.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>);
+                    }
+            },
+            error => {
+                this.appErrorMessage = error;
+            }
+        );
+    }
+
+    public reload(data?: <#=classModel.Name#>) {
+        this.getAll(data);
+    }
+}
+<#}
+manager.EndBlock();
+#>
+<#
+manager.StartNewFile($"{webAppPath}combos\\combos.module.ts",webProject,"");
+
+
+#>
+
+import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
+import { ComboComponent } from './combo.component';
+
+<#foreach(var classModel in classSet.Classes){#>
+import { Combo<#=classModel.Name#>Component } from './combo.<#=classSet.ToCamelCase(classModel.Name)#>';
+<#}#>
+
+@NgModule({
+    declarations: [
+        ComboComponent,
+<#foreach(var classModel in classSet.Classes){#>
+        Combo<#=classModel.Name#>Component,
+<#}#>
+    ],
+    imports: [
+        SharedModule,
+    ],
+    exports: [
+        ComboComponent,
+<#foreach(var classModel in classSet.Classes){#>
+        Combo<#=classModel.Name#>Component,
+<#}#>
+    ]
+
+
+})
+export class CombosModule {
+
+}
+
+
+<#
+manager.EndBlock();
+manager.Process(false);
+#>

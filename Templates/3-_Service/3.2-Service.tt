@@ -1,0 +1,39 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+CreateDirectory("..\\..\\..\\Domain\\Services\\_generated");	
+
+foreach(var classModel in classSet.Classes){#>
+<#
+manager.StartNewFile("Services\\_generated\\"+classModel.Name+ "Service.cs","Domain","",null);
+#>
+using Domain.Entities;
+using Domain.Interfaces;
+using Domain.Services.Interfaces;
+
+namespace Domain.Services
+{
+    public partial class <#=classModel.Name#>Service : BaseService<<#=classModel.Name#>>, I<#=classModel.Name#>Service
+    {
+        I<#=classModel.Name#>Repository _repository;
+        public <#=classModel.Name#>Service(I<#=classModel.Name#>Repository repository)
+            : base(repository)
+        {
+            _repository = repository;
+        }
+
+    }
+}
+<#
+manager.EndBlock();
+}
+manager.Process(false);
+#>

@@ -1,0 +1,20 @@
+﻿{
+  "LOGIN": {
+    "TITLE": "Login",
+    "SUB_TITLE": "Sign In to your account",
+    "SIGN_UP": {
+      "TITLE": "Sign up",
+      "DESCRIPTION": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+    },
+    "BUTTONS": {
+      "LOGIN": "Login",
+      "SIGN_UP": "Sign Up",
+      "REGISTER": "Register now!",
+      "FORGOT_PASSWORD": "Forgot password?"
+    },
+    "FIELDS": {
+      "USERNAME": "Username",
+      "PASSWORD": "Password"
+    }
+  }
+}

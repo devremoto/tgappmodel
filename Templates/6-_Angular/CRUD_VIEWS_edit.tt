@@ -1,0 +1,189 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+if(classSet.Classes.Count()>0)
+foreach(var classModel in classSet.Classes){#>
+<#
+
+	var camelCaseName = classSet.ToCamelCase(classModel.Name);
+	var controller = classSet.ToCamelCase(classModel.Name)+"Controller";
+	var spacedName = classSet.ToSpacedName(classModel.Name);
+	var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
+	var fieldChildren = classSet.DistinctBy(classModel.Fields.Where(x=>x.IsCollection && x.DataType!=classModel.Name),p => p.DataType) ;
+	var columnsQtd=4;
+
+	manager.CanOverrideExistingFile = true;
+
+	CreateDirectory($"..\\..\\..\\{webAppFullPath}admin\\_generated\\"+classModel.Name+"\\");	
+	
+	manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Edit.component.html",webProject,"");
+
+	var cssColumn = 12/columnsQtd;
+#>
+
+					<div class="row">
+<# 
+if(classModel.Fields.Count()>0)
+foreach(var field in classModel.Fields.OrderByDescending(x=>x.DataType)){#>
+<# if(((field.Name != "Id" && !field.Name.EndsWith("Id")) || (field.Name.EndsWith("Id") && (!field.IsKey && !field.IsForeingKey)))  && !field.IsCollection) {#>						
+<#switch(field.HtmlType ){
+	case "checkbox":
+#>
+						<div class="form-group col-md-<#=cssColumn#>">
+							<label>
+								<input type="checkbox" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=classSet.ToCamelCase(field.Name)#>Id" autofocus />
+								{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
+							</label>
+						</div>
+<#
+	break;
+	case "select":
+#>
+						<div class="form-group col-md-<#=cssColumn#>">
+							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
+<#if(field.IsParent){#> 
+								<a style="cursor:pointer" (click)="open<#= field.DataType#>Modal()">
+									<i class="fa fa-file-o"></i>
+								</a><!-- <#= field.Parent!=null ? field.Parent.Name : "" #> -->
+<#}#>
+							</label>
+							<app-combo-<#=classSet.ToDash(field.DataType)#> value-field="id" cssClass="form-control" load-on-start="false" [(model)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>Id" name="<#=classSet.ToCamelCase(field.Name)#>Id"></app-combo-<#=classSet.ToDash(field.DataType)#> >
+						</div>
+<#
+	break;
+	case "file":
+#>
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+							<app-upload [(model)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" [path]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" [width]="160" [height]="120" id="<#=classSet.ToCamelCase(field.Name)#>" [name]="'<#=classSet.ToCamelCase(field.Name)#>'" [label]="('APP.UPLOAD.BUTTON' | translate)" cssIcon="fa fa-upload"></app-upload>
+
+						</div>
+<#
+	break;
+	case "textarea":
+#>
+						<div class=" form-group col-md-12">
+							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+							<textarea class="form-control" rows=5 [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus></textarea>
+						</div>
+<#
+	break;
+	case "password":
+#>
+						<div class="form-group col-md-<#=cssColumn#>">
+							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+							<input type="password" class="form-control" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+						</div>
+<#
+	break;
+	case "date":
+#>
+						<div class="form-group col-md-<#=cssColumn#>">
+							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+						</div>
+<#
+	break;
+	case "datetime":
+#>
+						<div class="form-group col-md-<#=cssColumn#>">
+							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd HH:mm'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+						</div>
+<#
+	break;
+	default:
+#>
+						<div class="form-group col-md-12">
+							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+							<input type="<#=field.HtmlType #>" class="form-control" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+						</div>
+<#
+	break;
+}}}#>
+					</div>
+<#
+manager.EndBlock();
+#>
+<#
+///////////////////////////////////////////////////////
+//Edit
+///////////////////////////////////////////////////////
+manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Edit.component.ts",webProject,"");
+#>
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { <#=classModel.Name#>Service } from '../../../services/generated/<#=classModel.Name#>Service';
+import { <#=classModel.Name#> } from '../../../models/<#=classModel.Name#>';
+<# foreach(var child in fieldChildren.Select(x=>x.DataType).Distinct()){#>
+import { <#=child #> } from '../../../models/<#=child #>';
+<#}#>
+<# foreach(var field in classModel.Fields.Where(x=>x.HtmlType=="select").Select(x=>x.DataType).Distinct()){#>
+import { <#=field #> } from '../../../models/<#=field #>';
+import { <#=field #>ModalComponent } from '../<#=field #>/<#=field #>Modal.component';
+<# } #>
+declare var $: any;
+
+@Component({
+  selector: 'app-form-<#=classSet.ToDash(classModel.Name)#>',
+  templateUrl: './<#=classModel.Name#>Edit.component.html'
+})
+export class <#=classModel.Name#>EditComponent implements OnInit {
+
+<# foreach(var field in  fieldChildren){#>
+	<#=classSet.ToCamelCase(field.DataType)#>: <#=field.DataType#>;
+<#}#>
+
+  constructor(
+    private _service: <#=classModel.Name#>Service,
+    public translate: TranslateService,
+    private _modalService: NgbModal
+  ) {
+<# foreach(var field in  fieldChildren){#>
+      this.<#=classSet.ToCamelCase(field.DataType)#> = new <#=field.DataType#>();
+<#}#>
+    }
+
+    @Output()
+    saveEvent?: EventEmitter<<#=classModel.Name#>> = new EventEmitter();
+
+    @Input()
+    <#=camelCaseName#>: <#=classModel.Name#>;
+
+    @Input()
+    edit: boolean;
+
+    ngOnInit() {
+      this.<#=camelCaseName#> = this.<#=camelCaseName#> || new <#=classModel.Name#>();
+    }
+
+    save(<#=camelCaseName#>: <#=classModel.Name#>) {
+      this._service.save(<#=camelCaseName#>, this.edit, $('input[type=file]'));
+    }
+
+    public closeEdit() {
+    }
+
+<# foreach(var field in classModel.Fields.Where(x=>x.HtmlType=="select").Select(x=>x.DataType).Distinct()){#>
+	open<#= field #>Modal() {
+    const modalRef  = this._modalService.open(<#=field#>ModalComponent, { size: 'lg', backdrop: 'static'  });
+    modalRef.componentInstance.name = '<#=classSet.ToCamelCase(field)#>Modal';
+    modalRef.componentInstance.edit = this.edit;
+    modalRef.componentInstance.entity = new <#=field #>();		
+	}
+<# } #>
+}
+<#
+manager.EndBlock();
+
+}
+ manager.Process(false); #>
+

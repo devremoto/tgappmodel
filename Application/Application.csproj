@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Interfaces\_generated\4.1-AppInterfaces.txt4" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CrossCutting\CrossCutting.csproj">
+			<Project>{1b5d1e59-fa0c-4b72-aa6c-dde76a92ef6c}</Project>
+			<Name>CrossCutting</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\Domain\Domain.csproj">
+			<Project>{220443cd-2c69-4e72-b453-bc1dc5114abc}</Project>
+			<Name>Domain</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\Infra\CrossCutting.Services.csproj">
+			<Project>{8546876d-2f89-40c8-bf4c-d53bd8613332}</Project>
+			<Name>CrossCutting.Services</Name>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="9.0.0" />
+	</ItemGroup>
+</Project>

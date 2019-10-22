@@ -1,0 +1,205 @@
+body {
+  font-size: 16px;
+  font-weight: 300; }
+
+/* Links */
+a {
+  color: #d97910;
+  text-decoration: none; }
+  a:hover, a:focus {
+    color: #EE8614;
+    text-decoration: none; }
+
+/* specific nav styles */
+.navbar-default .navbar-nav > li > a {
+  font-size: 14px; }
+  .navbar-default .navbar-nav > li > a.hover {
+    text-decoration: underline; }
+  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #fff; }
+
+.navbar-default .navbar-nav .active > a,
+.navbar-default .navbar-nav .active > a:hover,
+.navbar-default .navbar-nav .active > a:focus {
+  color: #fff;
+  text-decoration: underline; }
+
+.hero-fullscreen-bg {
+  background-image: url("../img/specials/restaurant/hero-unit-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center; }
+  .hero-fullscreen-bg .heading {
+    font-size: 72px;
+    margin-bottom: 0;
+    color: #fff; }
+  .hero-fullscreen-bg .lead {
+    font-family: "Dancing Script", cursive;
+    font-weight: 700;
+    font-size: 48px; }
+
+.btn-primary {
+  color: #fff;
+  background-color: #EE8614;
+  border-color: #d97910; }
+  .btn-primary:focus, .btn-primary.focus {
+    color: #fff;
+    background-color: #d97910;
+    border-color: #b3640d; }
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #e27e10;
+    border-color: #b3640d; }
+  .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #e27e10;
+    border-color: #a0590c; }
+    .btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus, .open > .btn-primary.dropdown-toggle:hover, .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle.focus {
+      color: #fff;
+      background-color: #cf740f;
+      border-color: #91510b; }
+  .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
+    background-image: none; }
+  .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus {
+    background-color: #EE8614;
+    border-color: #d97910; }
+  .btn-primary .badge {
+    color: #EE8614;
+    background-color: #fff; }
+
+/* section */
+section .subheading {
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-family: "Dancing Script", cursive;
+  font-size: 30px;
+  color: #858D90; }
+  section .subheading:after {
+    content: '';
+    display: block;
+    width: 70px;
+    margin-top: 15px;
+    border-top: 2px solid #EE8614; }
+section .lead {
+  line-height: 1.6; }
+@media screen and (max-width: 992px) {
+  section .img-section {
+    margin-bottom: 30px; } }
+
+.section-gray {
+  background-color: #f9f9f9; }
+
+.section-heading .heading {
+  font-family: "Dancing Script", cursive;
+  color: #EE8614; }
+.section-heading:after {
+  content: '';
+  display: block;
+  height: 14px;
+  margin-top: 20px;
+  background-image: url("../img/specials/restaurant/separator.png");
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.section-heading-center {
+  margin-bottom: 60px; }
+
+/* dishes menu */
+.menu-item {
+  margin-bottom: 50px; }
+
+.menu-info {
+  position: relative; }
+  .menu-info .menu-title {
+    font-family: "Dancing Script", cursive;
+    font-weight: 700;
+    font-size: 34px;
+    color: #EE8614; }
+  .menu-info .price {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: 700;
+    font-size: 24px; }
+
+@media screen and (max-width: 992px) {
+  .menu-item.menu-highlight {
+    margin-bottom: 50px; }
+
+  .menu-item:not(.menu-highlight) .menu-image {
+    float: left;
+    width: 50%; }
+  .menu-item:not(.menu-highlight) .menu-info {
+    float: right;
+    width: 45%; }
+    .menu-item:not(.menu-highlight) .menu-info .menu-title {
+      margin-top: 0; }
+    .menu-item:not(.menu-highlight) .menu-info .price {
+      position: relative; } }
+@media screen and (max-width: 480px) {
+  .menu-info .menu-title {
+    font-size: 20px; }
+  .menu-info .price {
+    font-size: 18px; } }
+ul.list-dishes > li {
+  position: relative;
+  min-height: 100px;
+  margin-bottom: 30px; }
+ul.list-dishes .title {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-family: "Dancing Script", cursive;
+  font-size: 22px;
+  color: #EE8614; }
+ul.list-dishes p {
+  font-size: 14px; }
+ul.list-dishes .price {
+  position: absolute;
+  right: 30px;
+  top: 0;
+  font-weight: 700;
+  font-size: 18px; }
+@media screen and (max-width: 480px) {
+  ul.list-dishes .price {
+    position: relative;
+    right: 0; } }
+
+.reservation-phone {
+  margin-top: 15px;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 2.2;
+  color: #8c8c8c; }
+  .reservation-phone:hover, .reservation-phone:focus {
+    color: #787878; }
+
+.form-reservation {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30px; }
+
+.reservation-or {
+  display: block;
+  padding: 8px 0;
+  width: 90px;
+  margin: 40px auto 50px auto;
+  border-top: 1px solid #EE8614;
+  border-bottom: 1px solid #EE8614;
+  font-size: 20px;
+  text-align: center; }
+
+.contact-info {
+  margin-top: 60px; }
+  .contact-info .heading {
+    display: block;
+    margin-bottom: 8px; }
+    .contact-info .heading i {
+      margin-right: 5px;
+      font-size: 18px;
+      position: relative; }
+  .contact-info span {
+    font-size: 13px; }
+
+.bold-separator {
+  border-color: #EE8614; }
+
+/*# sourceMappingURL=special-restaurant.css.map */

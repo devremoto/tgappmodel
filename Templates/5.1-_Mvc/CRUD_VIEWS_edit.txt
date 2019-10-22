@@ -1,0 +1,1593 @@
+﻿
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model AboutViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ABOUT.FORM.LABEL.TITLE"]</label>
+							<input type="text" class="form-control" asp-for="Title" autofocus />
+							<span asp-validation-for="Title" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ABOUT.FORM.LABEL.IMAGE"]</label>
+							<input type="file" class="form-control"  name="image" id="image" />
+							<input type="hidden" asp-for="Image" />
+							<span asp-validation-for="Image" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["ABOUT.FORM.LABEL.DESCRIPTION"]</label>
+							<textarea class="form-control" rows=5 asp-for="Description"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model AddressViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.STREET"]</label>
+							<input type="text" class="form-control" asp-for="Street" autofocus />
+							<span asp-validation-for="Street" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.COMPLEMENT"]</label>
+							<input type="text" class="form-control" asp-for="Complement" autofocus />
+							<span asp-validation-for="Complement" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.ZIP_CODE"]</label>
+							<input type="text" class="form-control" asp-for="ZipCode" autofocus />
+							<span asp-validation-for="ZipCode" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.DISTRICT"]</label>
+							<input type="text" class="form-control" asp-for="District" autofocus />
+							<span asp-validation-for="District" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.CITY"]</label>
+							<input type="text" class="form-control" asp-for="City" autofocus />
+							<span asp-validation-for="City" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.STATE"]</label>
+							<input type="text" class="form-control" asp-for="State" autofocus />
+							<span asp-validation-for="State" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.ADDRESS_DESCRIPTION_NAME"]</label>
+							<textarea class="form-control" rows=5 asp-for="AddressDescriptionName"></textarea>
+							<span asp-validation-for="AddressDescriptionName" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="address.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.PERSON"] <i class="fa fa-file-o"></i></label>
+							<app-combo-person value-field="id" class="form-control" [(model)]="address.personId" ></app-combo-person >
+							<span asp-validation-for="Person" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.NUMBER"]</label>
+							<input type="text" class="form-control" asp-for="Number" autofocus />
+							<span asp-validation-for="Number" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStoreId" />
+						<input type="hidden" asp-for="PersonId" />
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.DISTANCE"]</label>
+							<input type="text" class="form-control" asp-for="Distance" autofocus />
+							<span asp-validation-for="Distance" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.DISTANCE_FILTER"]</label>
+							<input type="text" class="form-control" asp-for="DistanceFilter" autofocus />
+							<span asp-validation-for="DistanceFilter" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.LATITUDE"]</label>
+							<input type="text" class="form-control" asp-for="Latitude" autofocus />
+							<span asp-validation-for="Latitude" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ADDRESS.FORM.LABEL.LONGITUDE"]</label>
+							<input type="text" class="form-control" asp-for="Longitude" autofocus />
+							<span asp-validation-for="Longitude" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model BusinessHourViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["BUSINESS_HOUR.FORM.LABEL.WEEK_DAY"]</label>
+							<input type="text" class="form-control" asp-for="WeekDay" autofocus />
+							<span asp-validation-for="WeekDay" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["BUSINESS_HOUR.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="businessHour.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["BUSINESS_HOUR.FORM.LABEL.OPEN_HOUR"]</label>
+							<input type="date" class="form-control" asp-for="OpenHour" autofocus />
+							<span asp-validation-for="OpenHour" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["BUSINESS_HOUR.FORM.LABEL.CLOSE_HOUR"]</label>
+							<input type="date" class="form-control" asp-for="CloseHour" autofocus />
+							<span asp-validation-for="CloseHour" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsClosed" />
+								@Localizer["BUSINESS_HOUR.FORM.LABEL.IS_CLOSED"]
+							</label>
+							<span asp-validation-for="IsClosed" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model CategoryViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CATEGORY.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Products" />
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model CompanyViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COMPANY.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COMPANY.FORM.LABEL.CNPJ"]</label>
+							<input type="text" class="form-control" asp-for="CNPJ" autofocus />
+							<span asp-validation-for="CNPJ" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COMPANY.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COMPANY.FORM.LABEL.LOGO"]</label>
+							<input type="file" class="form-control"  name="logo" id="logo" />
+							<input type="hidden" asp-for="Logo" />
+							<span asp-validation-for="Logo" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model ContactViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CONTACT.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CONTACT.FORM.LABEL.PHONE_NUMBER"]</label>
+							<input type="text" class="form-control" asp-for="PhoneNumber" autofocus />
+							<span asp-validation-for="PhoneNumber" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CONTACT.FORM.LABEL.EMAIL"]</label>
+							<input type="email" class="form-control" asp-for="Email" autofocus />
+							<span asp-validation-for="Email" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CONTACT.FORM.LABEL.SUBJECT"]</label>
+							<input type="text" class="form-control" asp-for="Subject" autofocus />
+							<span asp-validation-for="Subject" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CONTACT.FORM.LABEL.MESSAGE"]</label>
+							<input type="text" class="form-control" asp-for="Message" autofocus />
+							<span asp-validation-for="Message" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model CoveredAreaViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["COVERED_AREA.FORM.LABEL.DESCRIPTION"]</label>
+							<textarea class="form-control" rows=5 asp-for="Description"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COVERED_AREA.FORM.LABEL.COORDS"]</label>
+							<input type="text" class="form-control" asp-for="Coords" autofocus />
+							<span asp-validation-for="Coords" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COVERED_AREA.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="coveredArea.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COVERED_AREA.FORM.LABEL.DELIVERY_TIME_MIN"]</label>
+							<input type="text" class="form-control" asp-for="DeliveryTimeMin" autofocus />
+							<span asp-validation-for="DeliveryTimeMin" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COVERED_AREA.FORM.LABEL.DELIVERY_TIME_MAX"]</label>
+							<input type="text" class="form-control" asp-for="DeliveryTimeMax" autofocus />
+							<span asp-validation-for="DeliveryTimeMax" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COVERED_AREA.FORM.LABEL.DISTANCE"]</label>
+							<input type="text" class="form-control" asp-for="Distance" autofocus />
+							<span asp-validation-for="Distance" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["COVERED_AREA.FORM.LABEL.DELIVERY_TAX"]</label>
+							<input type="text" class="form-control" asp-for="DeliveryTax" autofocus />
+							<span asp-validation-for="DeliveryTax" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="UseCoords" />
+								@Localizer["COVERED_AREA.FORM.LABEL.USE_COORDS"]
+							</label>
+							<span asp-validation-for="UseCoords" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model CrustViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CRUST.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["CRUST.FORM.LABEL.DESCRIPTION"]</label>
+							<textarea class="form-control" rows=5 asp-for="Description"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CRUST.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CRUST.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="crust.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="OrderItems" />
+						<input type="hidden" asp-for="ItemProducts" />
+						<input type="hidden" asp-for="Images" />
+						<input type="hidden" asp-for="CategoryId" />
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CRUST.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["CRUST.FORM.LABEL.CATEGORY"] <i class="fa fa-file-o"></i></label>
+							<app-combo-category value-field="id" class="form-control" [(model)]="crust.categoryId" ></app-combo-category >
+							<span asp-validation-for="Category" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["CRUST.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsDefault" />
+								@Localizer["CRUST.FORM.LABEL.IS_DEFAULT"]
+							</label>
+							<span asp-validation-for="IsDefault" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model EmployeePizzaStoreViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["EMPLOYEE_PIZZA_STORE.FORM.LABEL.MATRICULA"]</label>
+							<input type="text" class="form-control" asp-for="Matricula" autofocus />
+							<span asp-validation-for="Matricula" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["EMPLOYEE_PIZZA_STORE.FORM.LABEL.POSITION"]</label>
+							<input type="text" class="form-control" asp-for="Position" autofocus />
+							<span asp-validation-for="Position" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["EMPLOYEE_PIZZA_STORE.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="employeePizzaStore.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["EMPLOYEE_PIZZA_STORE.FORM.LABEL.EMPLOYEE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-person value-field="id" class="form-control" [(model)]="employeePizzaStore.employeeId" ></app-combo-person >
+							<span asp-validation-for="Employee" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+						<input type="hidden" asp-for="PersonId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["EMPLOYEE_PIZZA_STORE.FORM.LABEL.SALARY"]</label>
+							<input type="text" class="form-control" asp-for="Salary" autofocus />
+							<span asp-validation-for="Salary" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model FavoriteStoreViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["FAVORITE_STORE.FORM.LABEL.COMPANY"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="favoriteStore.companyId" ></app-combo-pizza-store >
+							<span asp-validation-for="Company" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["FAVORITE_STORE.FORM.LABEL.PERSON"] <i class="fa fa-file-o"></i></label>
+							<app-combo-person value-field="id" class="form-control" [(model)]="favoriteStore.personId" ></app-combo-person >
+							<span asp-validation-for="Person" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PersonId" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model FormatViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["FORMAT.FORM.LABEL.NOME"]</label>
+							<input type="text" class="form-control" asp-for="Nome" autofocus />
+							<span asp-validation-for="Nome" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["FORMAT.FORM.LABEL.QTD_PEDACOS"]</label>
+							<input type="text" class="form-control" asp-for="QtdPedacos" autofocus />
+							<span asp-validation-for="QtdPedacos" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model ImageViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["IMAGE.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["IMAGE.FORM.LABEL.INTERNAL_NAME"]</label>
+							<input type="text" class="form-control" asp-for="InternalName" autofocus />
+							<span asp-validation-for="InternalName" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["IMAGE.FORM.LABEL.PRODUCT"] <i class="fa fa-file-o"></i></label>
+							<app-combo-product value-field="id" class="form-control" [(model)]="image.productId" ></app-combo-product >
+							<span asp-validation-for="Product" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["IMAGE.FORM.LABEL.ID_PRODUCT"]</label>
+							<input type="text" class="form-control" asp-for="IdProduct" autofocus />
+							<span asp-validation-for="IdProduct" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Default" />
+								@Localizer["IMAGE.FORM.LABEL.DEFAULT"]
+							</label>
+							<span asp-validation-for="Default" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Visible" />
+								@Localizer["IMAGE.FORM.LABEL.VISIBLE"]
+							</label>
+							<span asp-validation-for="Visible" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model IngredientViewModel
+					<div class="row">
+					
+						<input type="hidden" asp-for="Toppings" />
+						<input type="hidden" asp-for="Suppliers" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["INGREDIENT.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Pizzas" />
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model ItemViewModel
+					<div class="row">
+					
+						<input type="hidden" asp-for="Items" />
+						<input type="hidden" asp-for="ItemProducts" />
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ITEM.FORM.LABEL.TOTAL_PRICE"]</label>
+							<input type="text" class="form-control" asp-for="TotalPrice" autofocus />
+							<span asp-validation-for="TotalPrice" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ITEM.FORM.LABEL.QUANTITY"]</label>
+							<input type="text" class="form-control" asp-for="Quantity" autofocus />
+							<span asp-validation-for="Quantity" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model ItemProductViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ITEM_PRODUCT.FORM.LABEL.PRODUCT"] <i class="fa fa-file-o"></i></label>
+							<app-combo-product value-field="id" class="form-control" [(model)]="itemProduct.productId" ></app-combo-product >
+							<span asp-validation-for="Product" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ITEM_PRODUCT.FORM.LABEL.ITEM"] <i class="fa fa-file-o"></i></label>
+							<app-combo-item value-field="id" class="form-control" [(model)]="itemProduct.itemId" ></app-combo-item >
+							<span asp-validation-for="Item" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="ItemId" />
+						<input type="hidden" asp-for="ProductId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ITEM_PRODUCT.FORM.LABEL.QUANTITY"]</label>
+							<input type="text" class="form-control" asp-for="Quantity" autofocus />
+							<span asp-validation-for="Quantity" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ITEM_PRODUCT.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model LanguageViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["LANGUAGE.FORM.LABEL.CODE"]</label>
+							<input type="text" class="form-control" asp-for="Code" autofocus />
+							<span asp-validation-for="Code" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["LANGUAGE.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["LANGUAGE.FORM.LABEL.IMAGE"]</label>
+							<input type="file" class="form-control"  name="image" id="image" />
+							<input type="hidden" asp-for="Image" />
+							<span asp-validation-for="Image" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["LANGUAGE.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Default" />
+								@Localizer["LANGUAGE.FORM.LABEL.DEFAULT"]
+							</label>
+							<span asp-validation-for="Default" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model MailingViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["MAILING.FORM.LABEL.EMAIL"]</label>
+							<input type="email" class="form-control" asp-for="Email" autofocus />
+							<span asp-validation-for="Email" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["MAILING.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model OrderViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ORDER.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="order.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ORDER.FORM.LABEL.COSTUMER"] <i class="fa fa-file-o"></i></label>
+							<app-combo-person value-field="id" class="form-control" [(model)]="order.costumerId" ></app-combo-person >
+							<span asp-validation-for="Costumer" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ORDER.FORM.LABEL.PAYMENT_METHOD"] <i class="fa fa-file-o"></i></label>
+							<app-combo-payment-method value-field="id" class="form-control" [(model)]="order.paymentMethodId" ></app-combo-payment-method >
+							<span asp-validation-for="PaymentMethod" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Items" />
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PaymentMethodId" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+						<input type="hidden" asp-for="CostumerId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ORDER.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ORDER.FORM.LABEL.DATE"]</label>
+							<input type="date" class="form-control" asp-for="Date" autofocus />
+							<span asp-validation-for="Date" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model OrderItemViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ORDER_ITEM.FORM.LABEL.ORDER"] <i class="fa fa-file-o"></i></label>
+							<app-combo-order value-field="id" class="form-control" [(model)]="orderItem.orderId" ></app-combo-order >
+							<span asp-validation-for="Order" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["ORDER_ITEM.FORM.LABEL.ITEM"] <i class="fa fa-file-o"></i></label>
+							<app-combo-item value-field="id" class="form-control" [(model)]="orderItem.itemId" ></app-combo-item >
+							<span asp-validation-for="Item" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="OrderId" />
+						<input type="hidden" asp-for="ItemId" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model OwnerPizzaStoreViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["OWNER_PIZZA_STORE.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="ownerPizzaStore.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["OWNER_PIZZA_STORE.FORM.LABEL.OWNER"] <i class="fa fa-file-o"></i></label>
+							<app-combo-person value-field="id" class="form-control" [(model)]="ownerPizzaStore.ownerId" ></app-combo-person >
+							<span asp-validation-for="Owner" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStoreId" />
+						<input type="hidden" asp-for="PersonId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["OWNER_PIZZA_STORE.FORM.LABEL.PROLABORE"]</label>
+							<input type="text" class="form-control" asp-for="Prolabore" autofocus />
+							<span asp-validation-for="Prolabore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["OWNER_PIZZA_STORE.FORM.LABEL.QUOTAS"]</label>
+							<input type="text" class="form-control" asp-for="Quotas" autofocus />
+							<span asp-validation-for="Quotas" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PaymentMethodViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PAYMENT_METHOD.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PAYMENT_METHOD.FORM.LABEL.IMAGE"]</label>
+							<input type="file" class="form-control"  name="image" id="image" />
+							<input type="hidden" asp-for="Image" />
+							<span asp-validation-for="Image" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStores" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PAYMENT_METHOD.FORM.LABEL.PAYMENT_TYPE"]</label>
+							<input type="text" class="form-control" asp-for="PaymentType" autofocus />
+							<span asp-validation-for="PaymentType" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Orders" />
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PersonViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PERSON.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PERSON.FORM.LABEL.CPF"]</label>
+							<input type="text" class="form-control" asp-for="CPF" autofocus />
+							<span asp-validation-for="CPF" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PERSON.FORM.LABEL.IMAGE"]</label>
+							<input type="file" class="form-control"  name="image" id="image" />
+							<input type="hidden" asp-for="Image" />
+							<span asp-validation-for="Image" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Phones" />
+						<input type="hidden" asp-for="PizzaStores" />
+						<input type="hidden" asp-for="Orders" />
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PERSON.FORM.LABEL.GENDER"]</label>
+							<input type="text" class="form-control" asp-for="Gender" autofocus />
+							<span asp-validation-for="Gender" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Favorites" />
+						<input type="hidden" asp-for="EmployeePizzaStores" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PERSON.FORM.LABEL.BIRTH_DATE"]</label>
+							<input type="date" class="form-control" asp-for="BirthDate" autofocus />
+							<span asp-validation-for="BirthDate" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Addresses" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PhoneViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE.FORM.LABEL.NUMBER"]</label>
+							<input type="text" class="form-control" asp-for="Number" autofocus />
+							<span asp-validation-for="Number" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE.FORM.LABEL.DDD"]</label>
+							<input type="text" class="form-control" asp-for="DDD" autofocus />
+							<span asp-validation-for="DDD" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE.FORM.LABEL.TIPO"]</label>
+							<input type="text" class="form-control" asp-for="Tipo" autofocus />
+							<span asp-validation-for="Tipo" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PhonePersonViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PERSON.FORM.LABEL.PERSON"] <i class="fa fa-file-o"></i></label>
+							<app-combo-person value-field="id" class="form-control" [(model)]="phonePerson.personId" ></app-combo-person >
+							<span asp-validation-for="Person" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PERSON.FORM.LABEL.NUMBER"]</label>
+							<input type="text" class="form-control" asp-for="Number" autofocus />
+							<span asp-validation-for="Number" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PERSON.FORM.LABEL.DDD"]</label>
+							<input type="text" class="form-control" asp-for="DDD" autofocus />
+							<span asp-validation-for="DDD" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PERSON.FORM.LABEL.TIPO"]</label>
+							<input type="text" class="form-control" asp-for="Tipo" autofocus />
+							<span asp-validation-for="Tipo" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PersonId" />
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PhonePizzaStoreViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PIZZA_STORE.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="phonePizzaStore.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PIZZA_STORE.FORM.LABEL.NUMBER"]</label>
+							<input type="text" class="form-control" asp-for="Number" autofocus />
+							<span asp-validation-for="Number" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PIZZA_STORE.FORM.LABEL.DDD"]</label>
+							<input type="text" class="form-control" asp-for="DDD" autofocus />
+							<span asp-validation-for="DDD" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PHONE_PIZZA_STORE.FORM.LABEL.TIPO"]</label>
+							<input type="text" class="form-control" asp-for="Tipo" autofocus />
+							<span asp-validation-for="Tipo" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStoreId" />
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PizzaViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["PIZZA.FORM.LABEL.DESCRIPTION"]</label>
+							<textarea class="form-control" rows=5 asp-for="Description"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="pizza.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Formats" />
+						<input type="hidden" asp-for="ItemProducts" />
+						<input type="hidden" asp-for="Ingredients" />
+						<input type="hidden" asp-for="Images" />
+						<input type="hidden" asp-for="CategoryId" />
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA.FORM.LABEL.CATEGORY"] <i class="fa fa-file-o"></i></label>
+							<app-combo-category value-field="id" class="form-control" [(model)]="pizza.categoryId" ></app-combo-category >
+							<span asp-validation-for="Category" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["PIZZA.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsDefault" />
+								@Localizer["PIZZA.FORM.LABEL.IS_DEFAULT"]
+							</label>
+							<span asp-validation-for="IsDefault" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PizzaDoughViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_DOUGH.FORM.LABEL.OBS"]</label>
+							<input type="text" class="form-control" asp-for="Obs" autofocus />
+							<span asp-validation-for="Obs" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_DOUGH.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["PIZZA_DOUGH.FORM.LABEL.DESCRIPTION"]</label>
+							<textarea class="form-control" rows=5 asp-for="Description"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_DOUGH.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_DOUGH.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="pizzaDough.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="OrderItems" />
+						<input type="hidden" asp-for="ItemProducts" />
+						<input type="hidden" asp-for="Images" />
+						<input type="hidden" asp-for="CategoryId" />
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_DOUGH.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_DOUGH.FORM.LABEL.CATEGORY"] <i class="fa fa-file-o"></i></label>
+							<app-combo-category value-field="id" class="form-control" [(model)]="pizzaDough.categoryId" ></app-combo-category >
+							<span asp-validation-for="Category" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["PIZZA_DOUGH.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsDefault" />
+								@Localizer["PIZZA_DOUGH.FORM.LABEL.IS_DEFAULT"]
+							</label>
+							<span asp-validation-for="IsDefault" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PizzaFormatViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="pizzaFormat.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Pizzas" />
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT.FORM.LABEL.SIZE"]</label>
+							<input type="text" class="form-control" asp-for="Size" autofocus />
+							<span asp-validation-for="Size" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT.FORM.LABEL.MAX_FLAVORS"]</label>
+							<input type="text" class="form-control" asp-for="MaxFlavors" autofocus />
+							<span asp-validation-for="MaxFlavors" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT.FORM.LABEL.SLICES"]</label>
+							<input type="text" class="form-control" asp-for="Slices" autofocus />
+							<span asp-validation-for="Slices" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsDefault" />
+								@Localizer["PIZZA_FORMAT.FORM.LABEL.IS_DEFAULT"]
+							</label>
+							<span asp-validation-for="IsDefault" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PizzaFormatPizzaViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT_PIZZA.FORM.LABEL.FORMAT"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-format value-field="id" class="form-control" [(model)]="pizzaFormatPizza.formatId" ></app-combo-pizza-format >
+							<span asp-validation-for="Format" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT_PIZZA.FORM.LABEL.PIZZA"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza value-field="id" class="form-control" [(model)]="pizzaFormatPizza.pizzaId" ></app-combo-pizza >
+							<span asp-validation-for="Pizza" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaId" />
+						<input type="hidden" asp-for="FormatId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_FORMAT_PIZZA.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PizzaStoreViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.ABOUT"]</label>
+							<input type="text" class="form-control" asp-for="About" autofocus />
+							<span asp-validation-for="About" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.URL_FACEBOOK"]</label>
+							<input type="url" class="form-control" asp-for="UrlFacebook" autofocus />
+							<span asp-validation-for="UrlFacebook" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.URL_TWITTER"]</label>
+							<input type="url" class="form-control" asp-for="UrlTwitter" autofocus />
+							<span asp-validation-for="UrlTwitter" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.URL_SITE"]</label>
+							<input type="url" class="form-control" asp-for="UrlSite" autofocus />
+							<span asp-validation-for="UrlSite" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.URL_NAME"]</label>
+							<input type="url" class="form-control" asp-for="UrlName" autofocus />
+							<span asp-validation-for="UrlName" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.CNPJ"]</label>
+							<input type="text" class="form-control" asp-for="CNPJ" autofocus />
+							<span asp-validation-for="CNPJ" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.LOGO"]</label>
+							<input type="file" class="form-control"  name="logo" id="logo" />
+							<input type="hidden" asp-for="Logo" />
+							<span asp-validation-for="Logo" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Products" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.SETTINGS"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store-settings value-field="id" class="form-control" [(model)]="pizzaStore.settingsId" ></app-combo-pizza-store-settings >
+							<span asp-validation-for="Settings" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PaymentMethods" />
+						<input type="hidden" asp-for="Formats" />
+						<input type="hidden" asp-for="Phones" />
+						<input type="hidden" asp-for="Owners" />
+						<input type="hidden" asp-for="Orders" />
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="Favorites" />
+						<input type="hidden" asp-for="Employees" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE.FORM.LABEL.REGISTER_DATE"]</label>
+							<input type="date" class="form-control" asp-for="RegisterDate" autofocus />
+							<span asp-validation-for="RegisterDate" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="CoveredAreas" />
+						<input type="hidden" asp-for="BusinessHour" />
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsFavorite" />
+								@Localizer["PIZZA_STORE.FORM.LABEL.IS_FAVORITE"]
+							</label>
+							<span asp-validation-for="IsFavorite" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Addresses" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PizzaStorePaymentMethodViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE_PAYMENT_METHOD.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="pizzaStorePaymentMethod.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE_PAYMENT_METHOD.FORM.LABEL.PAYMENT_METHOD"] <i class="fa fa-file-o"></i></label>
+							<app-combo-payment-method value-field="id" class="form-control" [(model)]="pizzaStorePaymentMethod.paymentMethodId" ></app-combo-payment-method >
+							<span asp-validation-for="PaymentMethod" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStoreId" />
+						<input type="hidden" asp-for="PaymentMethodId" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model PizzaStoreSettingsViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE_SETTINGS.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="pizzaStoreSettings.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE_SETTINGS.FORM.LABEL.PRICE_TYPE"]</label>
+							<input type="text" class="form-control" asp-for="PriceType" autofocus />
+							<span asp-validation-for="PriceType" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="PizzaStoreId" />
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PIZZA_STORE_SETTINGS.FORM.LABEL.MIN_ORDER_PRICE"]</label>
+							<input type="text" class="form-control" asp-for="MinOrderPrice" autofocus />
+							<span asp-validation-for="MinOrderPrice" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="AcceptOrderOffLine" />
+								@Localizer["PIZZA_STORE_SETTINGS.FORM.LABEL.ACCEPT_ORDER_OFF_LINE"]
+							</label>
+							<span asp-validation-for="AcceptOrderOffLine" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="AcceptReservation" />
+								@Localizer["PIZZA_STORE_SETTINGS.FORM.LABEL.ACCEPT_RESERVATION"]
+							</label>
+							<span asp-validation-for="AcceptReservation" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsNew" />
+								@Localizer["PIZZA_STORE_SETTINGS.FORM.LABEL.IS_NEW"]
+							</label>
+							<span asp-validation-for="IsNew" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model ProductViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PRODUCT.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["PRODUCT.FORM.LABEL.DESCRIPTION"]</label>
+							<textarea class="form-control" rows=5 asp-for="Description"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PRODUCT.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PRODUCT.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="product.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="ItemProducts" />
+						<input type="hidden" asp-for="Images" />
+						<input type="hidden" asp-for="CategoryId" />
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PRODUCT.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["PRODUCT.FORM.LABEL.CATEGORY"] <i class="fa fa-file-o"></i></label>
+							<app-combo-category value-field="id" class="form-control" [(model)]="product.categoryId" ></app-combo-category >
+							<span asp-validation-for="Category" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["PRODUCT.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsDefault" />
+								@Localizer["PRODUCT.FORM.LABEL.IS_DEFAULT"]
+							</label>
+							<span asp-validation-for="IsDefault" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model SettingsViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SETTINGS.FORM.LABEL.KEY"]</label>
+							<input type="text" class="form-control" asp-for="Key" autofocus />
+							<span asp-validation-for="Key" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SETTINGS.FORM.LABEL.VALUE"]</label>
+							<input type="text" class="form-control" asp-for="Value" autofocus />
+							<span asp-validation-for="Value" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model SocialNetworkViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SOCIAL_NETWORK.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SOCIAL_NETWORK.FORM.LABEL.CSS_ICON"]</label>
+							<input type="text" class="form-control" asp-for="CssIcon" autofocus />
+							<span asp-validation-for="CssIcon" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SOCIAL_NETWORK.FORM.LABEL.URL"]</label>
+							<input type="url" class="form-control" asp-for="Url" autofocus />
+							<span asp-validation-for="Url" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["SOCIAL_NETWORK.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model SupplierViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SUPPLIER.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SUPPLIER.FORM.LABEL.CNPJ"]</label>
+							<input type="text" class="form-control" asp-for="CNPJ" autofocus />
+							<span asp-validation-for="CNPJ" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SUPPLIER.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["SUPPLIER.FORM.LABEL.LOGO"]</label>
+							<input type="file" class="form-control"  name="logo" id="logo" />
+							<input type="hidden" asp-for="Logo" />
+							<span asp-validation-for="Logo" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Ingredients" />
+						<input type="hidden" asp-for="Id" />
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model ToppingViewModel
+					<div class="row">
+					
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["TOPPING.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-12">
+							<label class="control-label">@Localizer["TOPPING.FORM.LABEL.DESCRIPTION"]</label>
+							<textarea class="form-control" rows=5 asp-for="Description"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["TOPPING.FORM.LABEL.REFERENCE"]</label>
+							<input type="text" class="form-control" asp-for="Reference" autofocus />
+							<span asp-validation-for="Reference" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["TOPPING.FORM.LABEL.PIZZA_STORE"] <i class="fa fa-file-o"></i></label>
+							<app-combo-pizza-store value-field="id" class="form-control" [(model)]="topping.pizzaStoreId" ></app-combo-pizza-store >
+							<span asp-validation-for="PizzaStore" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="OrderItems" />
+						<input type="hidden" asp-for="ItemProducts" />
+						<input type="hidden" asp-for="Images" />
+						<input type="hidden" asp-for="IngredientId" />
+						<input type="hidden" asp-for="CategoryId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["TOPPING.FORM.LABEL.INGREDIENT"]</label>
+							<input type="text" class="form-control" asp-for="Ingredient" autofocus />
+							<span asp-validation-for="Ingredient" class="text-danger"></span>
+						</div>
+						<input type="hidden" asp-for="Id" />
+						<input type="hidden" asp-for="PizzaStoreId" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["TOPPING.FORM.LABEL.PRICE"]</label>
+							<input type="text" class="form-control" asp-for="Price" autofocus />
+							<span asp-validation-for="Price" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["TOPPING.FORM.LABEL.CATEGORY"] <i class="fa fa-file-o"></i></label>
+							<app-combo-category value-field="id" class="form-control" [(model)]="topping.categoryId" ></app-combo-category >
+							<span asp-validation-for="Category" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="Active" />
+								@Localizer["TOPPING.FORM.LABEL.ACTIVE"]
+							</label>
+							<span asp-validation-for="Active" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label>
+								<input type="checkbox" asp-for="IsDefault" />
+								@Localizer["TOPPING.FORM.LABEL.IS_DEFAULT"]
+							</label>
+							<span asp-validation-for="IsDefault" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer 
+@model UploadFileViewModel
+					<div class="row">
+					
+						<input type="hidden" asp-for="Id" />
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["UPLOAD_FILE.FORM.LABEL.NAME"]</label>
+							<input type="text" class="form-control" asp-for="Name" autofocus />
+							<span asp-validation-for="Name" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["UPLOAD_FILE.FORM.LABEL.INPUT_FILE_FIELD"]</label>
+							<input type="file" class="form-control"  name="inputFileField" id="inputFileField" />
+							<input type="hidden" asp-for="InputFileField" />
+							<span asp-validation-for="InputFileField" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["UPLOAD_FILE.FORM.LABEL.TYPE"]</label>
+							<input type="text" class="form-control" asp-for="Type" autofocus />
+							<span asp-validation-for="Type" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["UPLOAD_FILE.FORM.LABEL.FILE_NAME"]</label>
+							<input type="file" class="form-control"  name="fileName" id="fileName" />
+							<input type="hidden" asp-for="FileName" />
+							<span asp-validation-for="FileName" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["UPLOAD_FILE.FORM.LABEL.CONTROLLER"]</label>
+							<input type="text" class="form-control" asp-for="Controller" autofocus />
+							<span asp-validation-for="Controller" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["UPLOAD_FILE.FORM.LABEL.EXTENSION"]</label>
+							<input type="text" class="form-control" asp-for="Extension" autofocus />
+							<span asp-validation-for="Extension" class="text-danger"></span>
+						</div>
+			
+						<div class=" form-group col-md-4">
+							<label class="control-label">@Localizer["UPLOAD_FILE.FORM.LABEL.SIZE"]</label>
+							<input type="text" class="form-control" asp-for="Size" autofocus />
+							<span asp-validation-for="Size" class="text-danger"></span>
+						</div>
+
+					</div>
+
+
