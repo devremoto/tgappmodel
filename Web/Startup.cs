@@ -39,7 +39,11 @@ namespace web
                 loggingBuilder.AddDebug();
             });
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            services.AddMvc();
+            services.AddControllers();
+
+            services.AddMvcCore(options =>
+            {
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,7 +105,10 @@ namespace web
                     }
                 }
             });
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

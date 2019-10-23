@@ -5,8 +5,6 @@
 	</PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{220443cd-2c69-4e72-b453-bc1dc5114abc}</Project>
-      <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

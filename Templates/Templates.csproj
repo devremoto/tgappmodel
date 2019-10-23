@@ -15,7 +15,6 @@
   <ItemGroup>
     <None Include="ClassModel.ttinclude" />
     <None Include="main.ttinclude" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="1-_EntityFrameworkCore\1.2-Context.txt">
