@@ -87,7 +87,7 @@ namespace Api
                     {
                         Implicit = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri($"{_settings.Authority}/connect/authorize?response_type=token id_token"),
+                            AuthorizationUrl = new Uri($"{_settings.Authority}/connect/authorize"),
                             TokenUrl = new Uri($"{_settings.Authority}/connect/token"),
 
                             Scopes = new Dictionary<string, string>
@@ -119,7 +119,10 @@ namespace Api
                             In = ParameterLocation.Header,
 
                         },
-                        new List<string>()
+                        new List<string>(){
+                            "token",
+                            "id_token"
+                        }
                     }
                 });
             });
