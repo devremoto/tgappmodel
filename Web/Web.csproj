@@ -9,17 +9,22 @@
     <PropertyGroup>
       <TargetFramework>netcoreapp3.0</TargetFramework>
       <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+      <StartupObject></StartupObject>
+      <ApplicationIcon>favicon.ico</ApplicationIcon>
     </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="dist\**" />
     <Compile Remove="node_modules\**" />
+    <Compile Remove="wwwroot\assets\**" />
     <EmbeddedResource Remove="src\**" />
     <EmbeddedResource Remove="dist\**" />
     <EmbeddedResource Remove="node_modules\**" />
+    <EmbeddedResource Remove="wwwroot\assets\**" />
     <None Remove="src\**" />
     <None Remove="dist\**" />
     <None Remove="node_modules\**" />
+    <None Remove="wwwroot\assets\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.2" />
@@ -48,11 +53,12 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="src\assets\i18n\pages\NewFolder\" />
-    <Folder Include="wwwroot\assets\i18n\pages\NewFolder\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="dist\**" />
     <Content Remove="node_modules\**" />
+    <Content Remove="wwwroot\assets\**" />
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
@@ -68,20 +74,5 @@
   <ItemGroup>
     <ProjectReference Include="..\CrossCutting\CrossCutting.csproj" />
   </ItemGroup>
-  <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
-    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <!--<Exec Command="npm install" />-->
-    <!--Exec Command="node node_modules/webpack/bin/webpack.js -config webpack.config.vendor.js -env.prod" /-->
-    <Exec Command="npm start" />
-
-    <!-- Include the newly-built files in the publish output -->
-    <ItemGroup>
-      <DistFiles Include="wwwroot\dist\**;wwwroot\css\**;wwwroot\js\**;" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-        <RelativePath>%(DistFiles.Identity)</RelativePath>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </ResolvedFileToPublish>
-    </ItemGroup>
-  </Target>
 
 </Project>

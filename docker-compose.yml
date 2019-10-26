@@ -1,42 +1,25 @@
-version: '3'
+version: '2.2'
 services:
   tg-app-model-front:
-    build:
-      dockerfile: Dockerfile
-      context: ./Web
-      args:
-        - Authority=${STS_SERVER}
-        - UseAuthority=${USE_SSL}
-        - RequireHttpsMetadata=${USE_SSL}
-        - ApiName=${API_NAME}
-        - ImgFolder=~/images
-        - HostServer=${HOST_SERVER}
-        - HostPort=${HOST_PORT}
-        - ApiUrl=${API_URL}
-        - ClientId=${CLIENT_ID}
-        - MapKey="your_google_map_key"
-    image: devremoto/tgappmodel/front
+    image: devremoto/tgappmodel-front
     container_name: tg-app-model-front
     ports:
       - ${HOST_PORT}:80
-    networks:
-      - tg-app-model-network
 
   tg-app-model-api:
-    build:
-      dockerfile: Api/Dockerfile
-      context: ./
-      args:
-        - port=${API_PORT}
-    image: devremoto/tgappmodel/api
+    image: devremoto/tgappmodel-api
+    container_name: tg-app-model-api
+    ports:
+      - ${API_PORT}:80
     environment:
       - AppModelConfiguration:Authority=${STS_SERVER}
+      - AppModelConfiguration:UseAuthority=${USE_AUTHORITY}
       - AppModelConfiguration:ClientId=${CLIENT_ID}
       - AppModelConfiguration:RequireHttpsMetadata=${USE_SSL}
       - AppModelConfiguration:CorsOrigins:0=${STS_SERVER}
       - AppModelConfiguration:CorsOrigins:1=${STS_ADMIN_SERVER}
       - AppModelConfiguration:CorsOrigins:2=http://localhost:${HOST_PORT}
-      - AppModelConfiguration:CorsOrigins:3=${HOST_SERVER}:${HOST_PORT}
+      - AppModelConfiguration:CorsOrigins:3=${HOST_URL}
       - AppModelConfiguration:ApiName=${API_NAME}
       - AppModelConfiguration:MapKey="your_google_map_key"
       - AppModelConfiguration:ImgFolder=~/images
@@ -48,12 +31,3 @@ services:
       - SmtpConfiguration:Server="your.mail.server"
       - SmtpConfiguration:User="user@mailserver.com"
       - BingTranslateConfiguration:Key="key"
-    container_name: tg-app-model-api
-    ports:
-      - ${API_PORT}:80
-    networks:
-      - tg-app-model-network
-
-networks:
-  tg-app-model-network:
-    driver: bridge

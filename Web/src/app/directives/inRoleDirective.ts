@@ -28,9 +28,9 @@ export class InRoleDirective implements OnInit {
     }
     const role = data.role || data.roles;
     if (typeof role === 'string') {
-      this.userRoles.push(this._accountService.userInfo().role);
+      this.userRoles.push(this._accountService.userInfo().role.toLowerCase());
     } else {
-      this.userRoles = role;
+      this.userRoles = role.map(x => x.toLowerCase());
     }
   }
 
@@ -44,7 +44,7 @@ export class InRoleDirective implements OnInit {
 
     if (this.userRoles) {
       this.roles.forEach((obj, index) => {
-        if (this.userRoles.indexOf(this.roles[index]) >= 0) {
+        if (this.userRoles.indexOf(this.roles[index].toLowerCase()) >= 0) {
           i++;
           return;
         }

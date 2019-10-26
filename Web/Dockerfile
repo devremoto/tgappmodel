@@ -1,11 +1,11 @@
 
-FROM node:alpine as builder
+FROM node:12-alpine as builder
 RUN apk update && apk add --no-cache make git
 
 WORKDIR /app
 ARG Authority=http://192.168.0.5:5000
 ARG UseAuthority=true
-ARG RequireHttpsMetadata=true
+ARG RequireHttpsMetadata=false
 ARG ApiName=api1
 ARG ImgFolder=~/images
 ARG HostServer=http://192.168.0.5

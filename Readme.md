@@ -203,7 +203,7 @@ The frontend and back and are protected by [IdentityServer4](https://github.com/
 
 > **Server** [http://localhost:5000 - Identity Server - Token Issuer ](http://localhost:5000 'Token Issuer') > **Admin** [http://localhost:9000 - Identity Server - Admin ](http://localhost:9000 'Identity Server - Admin')
 
-You can also download my customized version at github.com/devremoto/identity, that customized version already comes with the basic set up for this application.
+You can also download my customized version at [https://github.com/devremoto/identity](github.com/devremoto/identity), that customized version already comes with the basic set up for this application.
 
 ### Default credentials for admin
 
@@ -213,7 +213,7 @@ You can also download my customized version at github.com/devremoto/identity, th
 
 # Contact
 
-## Be in touch with [Tugon](http://www.tugon.com.br)
+## Get in touch with [Tugon](http://www.tugon.com.br)
 
 - **Mobile** [+55 11 9 9353-6732](https://Api.whatsapp.com/send?phone=5511993536732&text=I%20want%20to%20receive%20more%20information%20about%20TUGON%20app%20model)
 - **E-mail** adilson@almeidapedro.com.br

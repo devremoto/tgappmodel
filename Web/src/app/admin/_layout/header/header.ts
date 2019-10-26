@@ -23,9 +23,6 @@ export class HeaderAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.userData = this._authService.user ? this._authService.user.profile : null;
-    if (!this.userData || !this.userData.picture) {
-      this.userData = { picture: 'assets/admin/img/avatars/2.jpg' };
-    }
   }
 
   logout(): void {

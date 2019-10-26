@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.dropdown .avatar-container {
+  float: left;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.card-body .avatar-status {
+  right: -5px !important;
+  bottom: 12px !important;
+}

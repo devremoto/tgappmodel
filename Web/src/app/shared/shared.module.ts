@@ -13,6 +13,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { BaseService, HttpService } from '../services/services';
 import { ImgResizeComponent } from './imgResize/imgResizeComponent';
 import { SessionStorageService } from './util/session-storage.service';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
   declarations: [ImgResizeComponent, BreadcrumbsComponent],
@@ -25,7 +26,8 @@ import { SessionStorageService } from './util/session-storage.service';
     ReactiveFormsModule,
     DirectivesModule,
     PipesModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    AvatarModule
   ],
   exports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { SessionStorageService } from './util/session-storage.service';
     PipesModule,
     Ng2SmartTableModule,
     ImgResizeComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    AvatarModule
   ]
 })
 export class SharedModule {}

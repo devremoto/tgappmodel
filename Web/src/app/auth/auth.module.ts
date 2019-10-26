@@ -15,6 +15,7 @@ import { LanguageCustomService } from '../services/custom/Language';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
 import { SessionStorageService } from '../shared/util/session-storage.service';
+import { LogoutCallBackComponent } from './logout-callback';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { SessionStorageService } from '../shared/util/session-storage.service';
     RouterModule.forChild([
       { path: 'login', component: LoginComponent },
       { path: 'callback', component: LoginCallBackComponent },
+      { path: 'logout-callback', component: LogoutCallBackComponent },
       { path: 'unauthorized/:id', component: UnauthorizedComponent }
     ]),
     TranslateModule.forChild(),
@@ -33,8 +35,8 @@ import { SessionStorageService } from '../shared/util/session-storage.service';
     AccountService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
-  declarations: [LoginCallBackComponent, UnauthorizedComponent, LoginComponent],
-  exports: [LoginCallBackComponent]
+  declarations: [LoginCallBackComponent, LogoutCallBackComponent, UnauthorizedComponent, LoginComponent],
+  exports: [LoginCallBackComponent, LogoutCallBackComponent]
 })
 export class AuthModule {
   constructor(public language: LanguageCustomService) {

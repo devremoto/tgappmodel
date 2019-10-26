@@ -1,11 +1,8 @@
-@echo off
 call pre.bat
 
-cd %~dp0
+docker-compose -f docker-compose.yml build
 
-docker-compose -f docker-compose-build.yml build
-
-docker-compose -f docker-compose-build.yml up -d
+docker-compose -f docker-compose.yml up -d
 
 rem Open front/admin and swagger for api
 start %HOST_URL%

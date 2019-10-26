@@ -39,7 +39,7 @@ export const Config: IConfig = <IConfig>{
   client_id: environment.ClientId,
   response_type: 'id_token token',
   scope: 'openid profile offline_access role sso api1',
-  post_logout_redirect_uri: `${siteUrl}/callback`,
+  post_logout_redirect_uri: `${siteUrl}/logout-callback`,
   silent_redirect_uri: `${siteUrl}/callback&renew=true`,
   allowSilentRenew: true
 };

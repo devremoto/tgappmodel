@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   ApiName: 'api1',
   ImgFolder: '~/images',
-  Authority: 'https://localhost:5000',
+  Authority: 'http://localhost:5000',
   RequireHttpsMetadata: false,
   UseAuthority: true,
   HostServer: 'http://localhost',
