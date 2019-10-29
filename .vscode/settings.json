@@ -8,7 +8,6 @@
     "files.exclude": {
         "**/node_modules": true
     },
-    "ttProcessor.TTPath": "/usr/lib/monodevelop/AddIns/MonoDevelop.TextTemplating/TextTransform.exe",
     "typescript.autoClosingTags": false,
     "beautify.language": {
         "ts": {
@@ -37,6 +36,5 @@
         ]
     },
     "prettier.tslintIntegration": true,
-    "scss.lint.duplicateProperties": "error",
-    "ttProcessor.SolutionDirectory": "/mnt/405A884F5A88441E/desenvolvimento/cs/TgAppModel/Templates/"
+    "scss.lint.duplicateProperties": "error"
 }

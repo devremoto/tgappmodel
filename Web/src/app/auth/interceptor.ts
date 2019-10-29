@@ -2,7 +2,6 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators/tap';
-
 import { AuthService } from './services/auth.service';
 
 @Injectable({ providedIn: 'root' })

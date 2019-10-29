@@ -1,0 +1,19 @@
+version: "2.2"
+services:
+  tg-app-model-front:
+    extends:
+      file: docker-compose.yml
+      service: tg-app-model-front
+    networks:
+      - tg-app-model-network
+
+  tg-app-model-api:
+    extends:
+      file: docker-compose.yml
+      service: tg-app-model-api
+    networks:
+      - tg-app-model-network
+
+networks:
+  tg-app-model-network:
+    driver: bridge

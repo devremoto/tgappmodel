@@ -4,7 +4,7 @@ setx PORT 4200
 setx AppModelConfiguration_ApiName "api1"
 setx AppModelConfiguration_ImgFolder "images"
 setx AppModelConfiguration_Authority "https://192.168.0.5:5001"
-setx AppModelConfiguration_UseAuthority true
+setx AppModelConfiguration_UseAuthority false
 setx AppModelConfiguration_CorsOrigins_0 http://localhost:${PORT}
 rem Set url for api CORS
 rem setx AppModelConfiguration_CorsOrigins_1 http://localhost:8100

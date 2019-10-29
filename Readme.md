@@ -1,16 +1,16 @@
 # TUGON App Model
 
-App model is starter a .NET core web application ready with some features including new libraries and frameworks.
+App model is a basic .NET core web application ready with some features including new libraries and frameworks.
 At the frontend we use angular 8 and at back and we have a REST api with .net Core and DDD approach
 
 ## Backend
 
-- .Net CORE
+- .Net CORE 3.0
 - Asp.net CORE
 - Entityframework CORE
 - Swagger
 - NLog
-- BingTrranslate API
+- BingTranslate API
 
 ## Frontend
 
@@ -21,11 +21,6 @@ At the frontend we use angular 8 and at back and we have a REST api with .net Co
 - Angular2Toaster
 - CoreUI (Admin)
 - AGM Core - Google maps
-
-## T4
-
-On visual studio code uses the extension
-TT-Processor
 
 # Getting started
 
@@ -124,7 +119,11 @@ Pomelo.EntityFrameworkCore.MySql.Design
 
 > In Api\Startup.cs - find all usage of UseSqlite and change to `UseMySql`.
 
-#Environment variables
+# Environment variables
+
+Set the enviroment variables for the project, You can also use the /API/appsetings.json for Backend and `/Web/src/app/envirement/enviroment.ts` and `/Web/src/app/config.ts` for frontend,
+
+But setting the enviorment variables makes it much easier.
 
 ## windows
 
@@ -153,10 +152,10 @@ setx  SmtpConfiguration:Password "YourPa$$w0rd"
 setx  SmtpConfiguration:Port 587
 setx  SmtpConfiguration:Server "your.mailserver.com"
 setx  SmtpConfiguration:User "your_user_name"
-setx  BingTranslateConfiguration:Key "YOUR_GOOGLE_MAPS_API_KEY"
+setx  BingTranslateConfiguration:Key "YOUR_BING_TRANSLATE_KEY"
 ```
 
-## ubuntu
+## Linux - Uuntu
 
 > On the `Terminal` run this command bellow:
 
@@ -183,19 +182,19 @@ export  AppModelConfiguration_ApiUrl http://localhost:52050/api/
 export  AppModelConfiguration_HostServer http://localhost
 export  AppModelConfiguration_HostPort 4200
 export  AppModelConfiguration_ImgFolder "~/images"
-export  SmtpConfiguration_DisplayName "Adilson"
+export  SmtpConfiguration_DisplayName "Your Name"
 export  SmtpConfiguration_EnableSsl false
 export  SmtpConfiguration_MailAddress "your@email.com"
 export  SmtpConfiguration_Password "YourPa$$w0rd"
 export  SmtpConfiguration_Port 587
 export  SmtpConfiguration_Server "your.mailserver.com"
 export  SmtpConfiguration_User "your_user_name"
-export  BingTranslateConfiguration_Key "YOUR_GOOGLE_MAPS_API_KEY"
+export  BingTranslateConfiguration_Key "YOUR_BING_TRANSLATE_KEY"
 ```
 
 # Identity Server
 
-This project uses Identity Server as Identity Provider and tonke issuer.
+This project uses Identity Server as Identity Provider and token issuer.
 
 ## Identity Server (IdentityServer4.Admin - .net core)
 
@@ -211,6 +210,40 @@ You can also download my customized version at [https://github.com/devremoto/ide
 > - **pass** "Pa\$\$word123";
 > - **email** "admin@example.com";
 
+## DOCKER
+
+The application is configured to run on docker:
+
+### API
+
+- Api\Dockerfile
+
+### Web
+
+- Web\Dockerfile
+
+At root folder we have the docker-compose scripts for build and run the containers
+
+-
+
+## Code Generation - T4
+
+At the folder `Infra/Templates` whe have the tamplates that helps to generate the code to the whole application, base on the entites on `Domain` Project
+
+Obs: The code generation currentily works on <b>Visual Studio</b> versions
+unfortunatelly it doesn't work properly on <b>Visual Studio Code</b> due to the lach of EnvDte Library, but if you want to try, there's a project call TT-Processor as discribed bellow:
+
+On visual studio code uses the extension
+TT-Processor
+
+You need to open File -> Preferences -> Settings and add path in TTPath. OR You can also add following configuration in settings.json. You can add following path in configuration.
+
+- `Windows`: "ttProcessor.TTPath": "C:\\\"Program Files (x86)\"\\\"Common Files\"\\\"microsoft shared\"\\TextTemplating\\14.0\\TextTransform.exe"
+- `Mac`: "ttProcessor.TTPath": "mono \"/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.TextTemplating/TextTransform.exe\""
+  Note: You need to have Visual Studio For Mac installed.
+- `Linux`: "ttProcessor.TTPath": "/usr/lib/monodevelop/AddIns/MonoDevelop.TextTemplating/TextTransform.exe"
+  Note: You need to have monodevelop installed.
+
 # Contact
 
 ## Get in touch with [Tugon](http://www.tugon.com.br)
@@ -224,3 +257,7 @@ You can also download my customized version at [https://github.com/devremoto/ide
 - **Skype** [fazsite](skype:fazsite?call)
 - **Github** github.com/devremoto
 - **Twitter** twitter.com/zumcoder
+
+## DISABLE HSTS FROM localhost
+
+chrome://net-internals/#hsts

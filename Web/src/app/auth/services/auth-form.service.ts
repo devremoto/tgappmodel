@@ -5,6 +5,7 @@ import { LoginModel } from 'src/app/models/LoginModel';
 
 import { SessionStorageService } from '../../shared/util/session-storage.service';
 import { AuthService } from './auth.service';
+import { Config } from '../../config';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServiceForm extends AuthService implements OnInit {
@@ -33,8 +34,12 @@ export class AuthServiceForm extends AuthService implements OnInit {
 
     return this.user;
   }
+
   isLoggedIn(): boolean {
-    return this.user && this.user.access_token && this.user.access_token !== null; // && !this.user.expired;
+    if (Config.useAuthorityServer) {
+      return this.user && this.user.access_token && this.user.access_token !== null; // && !this.user.expired;
+    }
+    return false;
   }
 
   getToken(): string {
