@@ -224,7 +224,32 @@ The application is configured to run on docker:
 
 At root folder we have the docker-compose scripts for build and run the containers
 
--
+> BUIL docker-compose-build-build.yml
+> RUN docker-compose-build-run.yml
+
+there some bach and shel scripts to help with the commands
+
+### Windows
+
+> env-local.bat - SET ENV VARIABLES
+> install.bat - BUILD the images run the conainers
+> run.bat - RUN the containers
+> run-local.bat - run the app locally - NO DOCKER
+
+# LINUX - Ubuntu
+
+> env-local.sh - SET ENV VARIABLES
+> install.sh - BUILD the images run the conainers
+> run.bat - RUN the containers
+> run-local.sh - run the app locally - NO DOCKER
+
+`Obs` on linux dont forget to make the file executable first with
+
+ex.:
+
+```sh
+sudo chmod +x ./install.sh && ./install.sh
+```
 
 ## Code Generation - T4
 
