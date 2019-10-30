@@ -100,18 +100,18 @@ namespace Data.EF
                         },
                         new SocialNetwork
                         {
-                            Name="Web",
+                            Name="Blog",
                             Active=true,
-                            CssIcon="fa fa-globe",
+                            CssIcon="fa fa-rss",
                             Url="http://devremoto.com.br"
 
                         },
                         new SocialNetwork
                         {
-                            Name="Web",
+                            Name="Tugon",
                             Active=true,
                             CssIcon="fa fa-globe",
-                            Url="http://devremoto.com.br"
+                            Url="http://tugon.com.br"
 
                         },
                         new SocialNetwork
@@ -119,11 +119,11 @@ namespace Data.EF
                             Name="email",
                             Active=true,
                             CssIcon="fa fa-at",
-                            Url="mailto:adilson@almeidapedro.com.br"
+                            Url="mailto:adilson@almeidapedro.com.br?subject=Contact&body=Hi, Good Morning!"
                         }
                     }
 
-                    );
+                );
             }
             context.SaveChanges();
         }

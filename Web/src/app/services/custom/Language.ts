@@ -13,7 +13,8 @@ import { HttpService } from '../services';
 export class LanguageCustomService extends LanguageService {
   constructor(protected _http: HttpService, public translate: TranslateService, private _sessionStorageService: SessionStorageService) {
     super(_http);
-    (this._config = Config), this.init();
+    this._config = Config;
+    this.init();
     this._time = new Date().getTime();
     translate.onLangChange.subscribe((result: LangChangeEvent) => {
       this.loadFile(<Language>{ code: result.lang }, this.prefix, this.sufix);
@@ -31,7 +32,12 @@ export class LanguageCustomService extends LanguageService {
   language: Language;
   private _default: Language;
   get default() {
-    this._default = this.languages.filter(x => x.code === 'pt-br')[0];
+    const defaultLang = 'pt-br';
+    const userLang = navigator.language ? navigator.language.toLowerCase() : defaultLang;
+    this._default = this.languages.find(x => x.code === userLang);
+    if (!this._default) {
+      this._default = this.languages.find(x => x.code === defaultLang);
+    }
     return this._default;
   }
   set default(value: Language) {
@@ -75,7 +81,7 @@ export class LanguageCustomService extends LanguageService {
   }
 
   setLanguage(language: Language) {
-    const lang = this.getLanguageByCode(language.code);
+    const lang = this.getLanguageByCode(language.code) || this.default;
     this._sessionStorageService.setObjectCache<Language>('lang', lang);
     this.translate.use(lang.code);
   }

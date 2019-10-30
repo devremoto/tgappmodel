@@ -5,14 +5,24 @@
       "label": "build",
       "command": "dotnet",
       "type": "process",
-      "args": ["build", "${workspaceFolder}/Api/Api.csproj"],
+      "linux": {
+        "args": ["build", "${workspaceFolder}/Api/Api.csproj"]
+      },
+      "windows": {
+        "args": ["build", "${workspaceFolder}\\Api\\Api.csproj"]
+      },
       "problemMatcher": "$tsc"
     },
     {
       "label": "publish",
       "command": "dotnet",
       "type": "process",
-      "args": ["publish", "${workspaceFolder}/Api/Api.csproj"],
+      "linux": {
+        "args": ["build", "${workspaceFolder}/Api/Api.csproj"]
+      },
+      "windows": {
+        "args": ["build", "${workspaceFolder}\\Api\\Api.csproj"]
+      },
       "problemMatcher": "$tsc"
     },
     {
@@ -21,8 +31,8 @@
       "options": {
         "cwd": "${workspaceFolder}/Web"
       },
-      "type": "process",
-      "args": ["serve", "-o", "--port=4300"],
+      "args": ["serve", "-o"],
+      "type": "shell",
       "problemMatcher": "$tsc"
     },
     {

@@ -3,19 +3,22 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Services.Interfaces;
 using System.Linq;
+using CrossCutting.Services.Configuration;
 
 namespace Application.Services
 {
-	public partial class MailingAppService
+    public partial class MailingAppService
     {
         private IEmailService _emailService;
+        private SmtpConfiguration _config;
 
-        public MailingAppService(IMailingService service, IUnitOfWork uow, IEmailService emailService)
+        public MailingAppService(IMailingService service, IUnitOfWork uow, IEmailService emailService, SmtpConfiguration config)
         : base(service, uow)
         {
             _uow = uow;
             _service = service;
             _emailService = emailService;
+            _config = config;
         }
 
         public void SignUp(Mailing model)
@@ -44,7 +47,7 @@ namespace Application.Services
             try
             {
                 mailing?.ValidateSendEmail();
-                _emailService.SendEmail(mailing.Email, "adilson@almeidapedro.com.br", "Cadastro adicionado ao Mailing", $"{mailing.Email}<br />Cadastro adicionado ao Mailing",null);
+                _emailService.SendEmail(mailing.Email, _config.MailAddress, "Cadastro adicionado ao Mailing", $"{mailing.Email}<br />Cadastro adicionado ao Mailing", null);
                 //_service.SendEmail(contact);
             }
             catch (System.Exception e)
