@@ -3,15 +3,13 @@ import { ActivatedRoute } from '../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-unauthorized',
-  templateUrl: './unauthorized.component.html',
-  styles: []
+  templateUrl: './unauthorized.component.html'
 })
 export class UnauthorizedComponent implements OnInit {
   private error: number;
-  private statuses: { code: number, text: string }[];
-  status: { code: number, text: string };
+  private statuses: { code: number; text: string }[];
+  status: { code: number; text: string };
   constructor(private _router: ActivatedRoute) {
-
     this.error = this._router.snapshot.params['id'] * 1;
     this.statuses = [
       { code: 0, text: 'Errro Bravo' },
@@ -77,11 +75,9 @@ export class UnauthorizedComponent implements OnInit {
       { code: 508, text: 'Loop Detected' },
       { code: 510, text: 'Not Extended' },
       { code: 511, text: 'Network Authentication Required' },
-      { code: 599, text: 'Network Connect Timeout Error' },
-
+      { code: 599, text: 'Network Connect Timeout Error' }
     ];
   }
-
 
   ngOnInit() {
     this.status = this.statuses
@@ -89,9 +85,6 @@ export class UnauthorizedComponent implements OnInit {
       .map(x => {
         x.text = x.text.toUpperCase();
         return x;
-      }
-      )[0];
-
+      })[0];
   }
-
 }

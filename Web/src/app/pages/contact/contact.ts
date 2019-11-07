@@ -25,7 +25,7 @@ export class ContactComponent implements OnInit {
   name: string;
   zoom = 18;
   socialNetworks: SocialNetwork[];
-  @ViewChild('content', null) modalContent: TemplateRef<any>;
+  @ViewChild('content', {static: false}) modalContent: TemplateRef<any>;
   modalRef: NgbModalRef;
   contactForm: FormGroup;
   loading = false;
