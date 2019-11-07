@@ -10,7 +10,7 @@ import { Language } from '../../../models/Language';
 
 @Component({
   selector: 'app-list-language',
-  templateUrl: './LanguageIndex.component.html',
+  templateUrl: './LanguageIndex.component.html'
 })
 export class LanguageIndexComponent implements OnInit, OnChanges {
     private _edit = false;

@@ -152,14 +152,14 @@ export class LanguageEditorFormComponent implements OnInit {
       );
       return;
     }
-    const child = <ObjectTree>{
+    const child = {
       key: parent.newPropName.toLocaleUpperCase(),
       path: `${parent.path}.${parent.newPropName.toLocaleUpperCase()}`,
       from: parent.from,
       to: parent.to,
-      parent: parent,
+      parent,
       value: ''
-    };
+    } as ObjectTree;
     const exists = parent.child.filter(x => x.key === child.key);
     if (exists.length === 0) {
       parent.child.push(child);
@@ -184,7 +184,7 @@ export class LanguageEditorFormComponent implements OnInit {
     //    this.popOver.close();
   }
 
-  addPropClick(e: Event, pop, item: ObjectTree) {
+  addPropClick(e: Event, pop, item?: ObjectTree) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();

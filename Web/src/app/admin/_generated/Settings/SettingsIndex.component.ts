@@ -10,7 +10,7 @@ import { Settings } from '../../../models/Settings';
 
 @Component({
   selector: 'app-list-settings',
-  templateUrl: './SettingsIndex.component.html',
+  templateUrl: './SettingsIndex.component.html'
 })
 export class SettingsIndexComponent implements OnInit, OnChanges {
     private _edit = false;

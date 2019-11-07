@@ -10,7 +10,7 @@ import { Contact } from '../../../models/Contact';
 
 @Component({
   selector: 'app-list-contact',
-  templateUrl: './ContactIndex.component.html',
+  templateUrl: './ContactIndex.component.html'
 })
 export class ContactIndexComponent implements OnInit, OnChanges {
     private _edit = false;

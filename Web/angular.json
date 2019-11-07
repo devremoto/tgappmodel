@@ -48,7 +48,8 @@
                 }
               ],
               "sourceMap": true,
-              "vendorChunk": true
+              "vendorChunk": true,
+              "aot": true
             },
             "production": {
               "fileReplacements": [

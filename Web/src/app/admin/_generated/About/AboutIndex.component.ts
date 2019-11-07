@@ -10,7 +10,7 @@ import { About } from '../../../models/About';
 
 @Component({
   selector: 'app-list-about',
-  templateUrl: './AboutIndex.component.html',
+  templateUrl: './AboutIndex.component.html'
 })
 export class AboutIndexComponent implements OnInit, OnChanges {
     private _edit = false;

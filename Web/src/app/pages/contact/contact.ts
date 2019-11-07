@@ -9,14 +9,7 @@ import { ContactCustomService } from '../../services/custom/Contact';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
 
 @Component({
-  styles: [
-    `
-      .sebm-google-map-container {
-        height: 300px;
-        width: 100%;
-      }
-    `
-  ],
+  styleUrls: ['./contact.css'],
   templateUrl: './contact.html',
   providers: [ContactCustomService, SocialNetworkCustomService]
 })

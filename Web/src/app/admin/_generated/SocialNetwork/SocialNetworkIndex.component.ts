@@ -10,7 +10,7 @@ import { SocialNetwork } from '../../../models/SocialNetwork';
 
 @Component({
   selector: 'app-list-social-network',
-  templateUrl: './SocialNetworkIndex.component.html',
+  templateUrl: './SocialNetworkIndex.component.html'
 })
 export class SocialNetworkIndexComponent implements OnInit, OnChanges {
     private _edit = false;

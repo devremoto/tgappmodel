@@ -10,7 +10,7 @@ import { Mailing } from '../../../models/Mailing';
 
 @Component({
   selector: 'app-list-mailing',
-  templateUrl: './MailingIndex.component.html',
+  templateUrl: './MailingIndex.component.html'
 })
 export class MailingIndexComponent implements OnInit, OnChanges {
     private _edit = false;

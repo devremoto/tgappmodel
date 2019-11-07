@@ -6,26 +6,20 @@ import { Config } from '../../../config';
 @Component({
   selector: 'app-admin-header',
   templateUrl: './header.html',
-  styleUrls: ['./header.css'],
-  styles: [
-    `
-      .logo-url {
-        background-image: url(${Config.logoUrl}) !important;
-      }
-    `
-  ]
+  styleUrls: ['./header.css']
 })
 export class HeaderAdminComponent implements OnInit {
   userData: any;
-  constructor(private _authService: AuthService) {
+  logoUrl = Config.logoUrl;
+  constructor(private authService: AuthService) {
     // window.__theme = 'bs4';
   }
 
   ngOnInit(): void {
-    this.userData = this._authService.user ? this._authService.user.profile : null;
+    this.userData = this.authService.user ? this.authService.user.profile : null;
   }
 
   logout(): void {
-    this.userData = this._authService.fullLogout('admin');
+    this.userData = this.authService.fullLogout('admin');
   }
 }

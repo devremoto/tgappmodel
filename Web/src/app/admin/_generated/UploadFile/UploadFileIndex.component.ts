@@ -10,7 +10,7 @@ import { UploadFile } from '../../../models/UploadFile';
 
 @Component({
   selector: 'app-list-upload-file',
-  templateUrl: './UploadFileIndex.component.html',
+  templateUrl: './UploadFileIndex.component.html'
 })
 export class UploadFileIndexComponent implements OnInit, OnChanges {
     private _edit = false;
