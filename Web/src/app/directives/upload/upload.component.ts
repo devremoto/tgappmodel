@@ -35,10 +35,10 @@ export class UploadComponent implements OnInit, AfterViewInit {
   @Output() complete: any = new EventEmitter();
   @Output() serverDelete: any = new EventEmitter();
 
-  @ViewChild('input', {static: false}) element: ElementRef;
-  @ViewChild('video', {static: false}) video: ElementRef;
-  @ViewChild('image', {static: false}) image: ElementRef;
-  @ViewChild('doc', {static: false}) doc: ElementRef;
+  @ViewChild('input') element: ElementRef;
+  @ViewChild('video') video: ElementRef;
+  @ViewChild('image') image: ElementRef;
+  @ViewChild('doc') doc: ElementRef;
 
   videoFilterExt = '|avi|mpeg|mp4|ogg|';
   imgFilterExt = '|jpg|png|jpeg|bmp|gif|';

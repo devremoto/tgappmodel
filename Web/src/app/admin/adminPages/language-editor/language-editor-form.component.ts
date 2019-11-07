@@ -22,7 +22,7 @@ export class LanguageEditorFormComponent implements OnInit {
   }
   _defaultLanguage: Language;
 
-  @ViewChild('popContent', {static: false}) public popOver: NgbPopover;
+  @ViewChild('popContent') public popOver: NgbPopover;
   currentPop: NgbPopover;
   rootItem: ObjectTree = <ObjectTree>{
     path: '',
