@@ -6,6 +6,11 @@
 *.user
 *.userosscache
 *.sln.docstates
+**/**/appModel.db
+*.db
+/*.db
+[Dd]ata/DB/
+**/appModel.db
 
 env.bat
 env.sh
@@ -272,3 +277,4 @@ paket-files/
 __pycache__/
 *.pyc
 Templates/**/*.txt
+Data/DB/appModel.db

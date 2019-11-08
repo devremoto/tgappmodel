@@ -178,7 +178,7 @@ __proto__: Object
 
   public SendEmail() {
     if (this.validate()) {
-      const contact = <Contact>this.contactForm.value;
+      const contact = this.contactForm.value as Contact;
       this.loading = true;
       this._service.sendEmail(contact).subscribe(
         () => {

@@ -10,3 +10,5 @@
 env.bat
 env.sh
 packages
+**/*.db
+*.db

@@ -14,6 +14,7 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "aot": true,
+            "buildOptimizer": true,
             "customWebpackConfig": {
               "path": "./app-config.js"
             },
@@ -48,8 +49,7 @@
                 }
               ],
               "sourceMap": true,
-              "vendorChunk": true,
-              "aot": true
+              "vendorChunk": false
             },
             "production": {
               "fileReplacements": [
@@ -74,12 +74,14 @@
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "port": 4200,
-            "browserTarget": "web:build"
+            "browserTarget": "web:build",
+            "aot": true
           },
           "outputPath": "wwwroot",
           "configurations": {
             "production": {
-              "browserTarget": "web:build:production"
+              "browserTarget": "web:build:production",
+              "aot": true
             },
             "dev": {
               "browserTarget": "web:build:dev"
@@ -142,5 +144,8 @@
       }
     }
   },
-  "defaultProject": "web"
+  "defaultProject": "web",
+  "cli": {
+    "analytics": false
+  }
 }

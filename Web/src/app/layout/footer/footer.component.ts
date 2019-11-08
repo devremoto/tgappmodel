@@ -12,8 +12,7 @@ import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork'
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'],
-  providers: [SocialNetworkCustomService, MailingCustomService]
+  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
   constructor(
@@ -63,9 +62,9 @@ export class FooterComponent implements OnInit {
 
   private validate(): boolean {
     if (this.mailingForm.invalid) {
-      const errors = this.mailingForm.controls['email'].errors;
+      const errors = this.mailingForm.controls.email.errors;
       errors.map(error => {
-        this._toasterService.pop('error', 'Erro', this.validationMessages['email'][error]);
+        this._toasterService.pop('error', 'Erro', this.validationMessages.email[error]);
       });
       return false;
     }

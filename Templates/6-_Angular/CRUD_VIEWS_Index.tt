@@ -106,7 +106,7 @@ foreach(var field in classModel.Fields){#>
                                 <a class="button-icon" style="color:red;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.REMOVE' | translate }}" (click)="remove(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
                                     <i class="fa fa-trash-o"></i>
                                 </a>&nbsp;
-								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.DUPLICATE' | translate }}" (click)="duplicate(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
+								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.DUPLICATE' | translate }}" (click)="duplicate(<#=classSet.ToCamelCase(classModel.Name)#>)">
                                     <i class="fa fa-copy"></i>
                                 </a>
                             </div>
@@ -115,7 +115,7 @@ foreach(var field in classModel.Fields){#>
 
 
                 </table>
-				<ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size" [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged($event)" [rotate]="true"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
+				<ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size" [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged()" [rotate]="true"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
 
 				</div>
 				</div>
@@ -145,7 +145,7 @@ import { <#=classModel.Name#> } from '../../../models/<#=classModel.Name#>';
 
 @Component({
   selector: 'app-list-<#=classSet.ToDash(classModel.Name)#>',
-  templateUrl: './<#=classModel.Name#>Index.component.html',
+  templateUrl: './<#=classModel.Name#>Index.component.html'
 })
 export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges {
     private _edit = false;
