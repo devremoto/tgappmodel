@@ -1,5 +1,5 @@
 ﻿export class About {
-  id: string;
+  id;
   title: string;
   image: string;
   description: string;

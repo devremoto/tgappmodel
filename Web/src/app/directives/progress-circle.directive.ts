@@ -10,8 +10,8 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
     progressbar: 'circle',
     color: '#fff',
     trailColor: '#fff',
-    to: { 'color': '#ffd200', 'width': 3 },
-    from: { 'color': '#3498db', 'width': 3 },
+    to: { color: '#ffd200', width: 3 },
+    from: { color: '#3498db', width: 3 },
 
     value: 1,
     strokeWidth: 4,
@@ -21,7 +21,7 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
     text: {
       autoStyleContainer: false
     },
-    step: function (state, circle) {
+    step(state, circle) {
       circle.path.setAttribute('stroke', state.color);
       circle.path.setAttribute('stroke-width', state.width);
 
@@ -47,7 +47,7 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
 
   animate() {
     const options = this.options;
-    $(this.el.nativeElement).each(function (key, obj) {
+    $(this.el.nativeElement).each(function(key, obj) {
       const bar = new ProgressBar.Circle(obj, options);
       bar.animate(options.value);
     });

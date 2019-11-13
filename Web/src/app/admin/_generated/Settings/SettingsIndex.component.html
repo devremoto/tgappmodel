@@ -14,13 +14,13 @@
 				<table class="table table-responsive-sm table-hover">
                     <tr>
                         <th style="width:90%">
-                            {{'SETTINGS.GRID.COLUMN.ID' | translate }}
+                            {{'SETTINGS.GRID.COLUMN.KEY' | translate }}
                         </th>   
 						<th style="width:10%">{{'SETTINGS.GRID.COLUMN.ACTIONS' | translate }}</th>                      
                     </tr>
                     <tr *ngFor="let settings of settingsList; let index=index">
                         <td>
-                            {{settings.id}}
+                            {{settings.key}}
                         </td>
                         <td>
                             <div class="panel-ctrls">

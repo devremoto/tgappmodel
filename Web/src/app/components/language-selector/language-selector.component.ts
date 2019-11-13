@@ -11,7 +11,7 @@ export class LanguageSelectorComponent implements OnInit {
   public status: { isopen: boolean } = { isopen: false };
   @Input()
   cssClass = 'primary';
-  language: Language = <Language>{};
+  language: Language = {} as Language;
   languages: Array<Language> = [];
   constructor(public translate: LanguageCustomService) {}
 

@@ -23,7 +23,7 @@ export class SessionStorageService {
   public getObjectCache<TT>(key: string) {
     const result = sessionStorage.getItem(key);
     if (result) {
-      return <TT>JSON.parse(result);
+      return JSON.parse(result) as TT;
     }
   }
 

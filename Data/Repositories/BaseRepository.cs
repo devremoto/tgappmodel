@@ -43,13 +43,16 @@ namespace Data.Repositories
 
         public virtual T Update(T obj)
         {
-            DbSet.Update(obj);
-            return obj;
+            return DbSet.Update(obj).Entity;
         }
 
         public virtual void Remove(params object[] keys)
         {
-            DbSet.Remove(DbSet.Find(keys));
+			var entity = DbSet.Find(keys);
+			if (entity != null)
+			{
+				DbSet.Remove(entity);
+			}
         }
 
         public virtual void Remove(T entity)

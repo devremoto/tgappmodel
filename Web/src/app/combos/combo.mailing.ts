@@ -6,7 +6,7 @@ import { Mailing } from '../models/Mailing';
   selector: 'app-combo-mailing',
   template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="mailing" class="{{cssClass}}" autofocus >
-      <option *ngFor="let mailing of mailingList" [value]="mailing.id">{{mailing.id}}</option>
+      <option *ngFor="let mailing of mailingList" [value]="mailing.id">{{mailing.email}}</option>
     </select>`
 })
 export class ComboMailingComponent implements OnInit {

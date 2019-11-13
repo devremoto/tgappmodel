@@ -85,15 +85,15 @@ export class LanguageEditorComponent implements OnInit {
 
   loadTree(root: any, defaultLang: any, parent: ObjectTree): any {
     const $this = this;
-    Object.keys(root).forEach(function (key) {
+    Object.keys(root).forEach(function(key) {
       $this.path.push(key);
-      const item = <ObjectTree>{
-        key: key,
+      const item = {
+        key,
         from: $this._defaultLanguage.code,
         to: $this.file.path.replace('.json', '').split(' ')[0],
         path: $this.path.join('.'),
-        parent: parent
-      };
+        parent
+      } as ObjectTree;
       if (root[key] && typeof root[key] === 'object') {
         // alert(JSON.stringify(root[key]))
         $this.loadTree(root[key], defaultLang ? defaultLang[key] : null, item);

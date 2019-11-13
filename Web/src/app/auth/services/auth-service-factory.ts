@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 export class AuthServiceFactory {
   static factory() {
-    return Config.useAuthorityServer || <any>Config.useAuthorityServer === 'true' ? AuthServiceOidc : AuthServiceForm;
+    return Config.useAuthorityServer || (Config.useAuthorityServer as any) === 'true' ? AuthServiceOidc : AuthServiceForm;
   }
 
   static resolver(_router: Router, _storage: SessionStorageService) {

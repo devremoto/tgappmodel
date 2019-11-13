@@ -11,15 +11,9 @@ namespace Data.EF
     {
         public static void EnsureSeedDataForContext(this AppDbContext context)
         {
-            var languages = new List<Language>();
-            if (context.Languages.Any())
+            if (!context.Languages.Any())
             {
-                languages = context.Languages.ToList();
-            }
-            else
-            {
-
-                languages = new List<Language>
+                var languages = new List<Language>
                 {
                     new Language
                     {

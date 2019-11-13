@@ -10,13 +10,15 @@ import { Config } from '../../../config';
 })
 export class HeaderAdminComponent implements OnInit {
   userData: any;
-  logoUrl = Config.logoUrl;
+  style = { 'background-image': `url(${Config.logoUrl}) !important;` };
   constructor(private authService: AuthService) {
     // window.__theme = 'bs4';
   }
 
   ngOnInit(): void {
-    this.userData = this.authService.user ? this.authService.user.profile : null;
+    this.userData = this.authService.user
+      ? this.authService.user.profile
+      : null;
   }
 
   logout(): void {

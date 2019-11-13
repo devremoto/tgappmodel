@@ -1,5 +1,5 @@
 ﻿export class Mailing {
-  id: string;
+  id;
   email: string;
   active;
 

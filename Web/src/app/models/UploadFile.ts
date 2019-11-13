@@ -1,5 +1,5 @@
 ﻿export class UploadFile {
-  id: string;
+  id;
   name: string;
   inputFileField: string;
   size;

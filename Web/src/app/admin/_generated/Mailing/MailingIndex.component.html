@@ -14,13 +14,13 @@
 				<table class="table table-responsive-sm table-hover">
                     <tr>
                         <th style="width:90%">
-                            {{'MAILING.GRID.COLUMN.ID' | translate }}
+                            {{'MAILING.GRID.COLUMN.EMAIL' | translate }}
                         </th>   
 						<th style="width:10%">{{'MAILING.GRID.COLUMN.ACTIONS' | translate }}</th>                      
                     </tr>
                     <tr *ngFor="let mailing of mailingList; let index=index">
                         <td>
-                            {{mailing.id}}
+                            {{mailing.email}}
                         </td>
                         <td>
                             <div class="panel-ctrls">

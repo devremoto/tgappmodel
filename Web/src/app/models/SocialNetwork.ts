@@ -1,5 +1,5 @@
 ﻿export class SocialNetwork {
-  id: string;
+  id;
   name: string;
   cssIcon: string;
   url: string;

@@ -1,8 +1,10 @@
-﻿namespace Domain.Entities
+﻿using System;
+
+namespace Domain.Entities
 {
     public class UploadFile
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string InputFileField { get; set; }
         public long Size { get; set; }

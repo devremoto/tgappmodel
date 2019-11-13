@@ -10,7 +10,7 @@ namespace Data.EF.Mappings
         {
 
 			builder.HasKey(x => x.Id);
-            builder.Property(t => t.Id).HasColumnName("ID");
+            builder.Property(t => t.Id).HasColumnName("ID").ValueGeneratedOnAdd();
             builder.Property(t => t.Name).HasColumnName("NAME");
             builder.Property(t => t.InputFileField).HasColumnName("INPUT_FILE_FIELD");
             builder.Property(t => t.Size).HasColumnName("SIZE");

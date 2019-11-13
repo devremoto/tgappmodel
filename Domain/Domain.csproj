@@ -2,12 +2,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
 
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <!-- <Exec Command='copy "$(TargetPath)" "../Templates/$(TargetFileName)"' /> -->
+  </Target>
+
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy $(TargetPath) $(ProjectDir)..\Templates\$(TargetFileName)" />
   </Target>
 
 </Project>

@@ -52,9 +52,9 @@ namespace CleanUp
                 DeleteFile("Application\\ViewModels\\Custom\\", file, "", "ViewModel.cs");
                 DeleteFile("Application\\ViewModels\\", file, "", "ViewModel.cs");
                 DeleteFile("Domain\\Interfaces\\_generated\\", file, "I", "Repository.cs");
-
                 DeleteFile("Domain\\Services\\Interfaces\\_generated\\", file, "I", "Service.cs");
-                DeleteDir(Path.Combine(Environment.CurrentDirectory, "../../../", "web\\src\\app\\admin\\_generated\\", file));
+                DeleteFile("Tests\\Repositories\\", file, "I", "Repository.cs");
+                DeleteDir(Path.Combine(Environment.CurrentDirectory, "../../../../../", "web\\src\\app\\admin\\_generated\\", file));
                 if (!exists)
                 {
                     DeleteFile("Domain\\Services\\_generated\\", file, "", "Service.cs");
@@ -90,7 +90,7 @@ namespace CleanUp
         {
             try
             {
-                var path = Path.Combine(Environment.CurrentDirectory, "../../../", dir, $"{prefix}{file}{sufix}");
+                var path = Path.Combine(Environment.CurrentDirectory, "../../../../../", dir, $"{prefix}{file}{sufix}");
                 if (File.Exists(path))
                 {
                     File.Delete(path);

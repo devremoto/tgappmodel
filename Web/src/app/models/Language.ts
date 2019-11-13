@@ -1,5 +1,5 @@
 ﻿export class Language {
-  id: string;
+  id;
   code: string;
   name: string;
   image: string;

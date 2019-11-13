@@ -1,4 +1,4 @@
-version: '2.2'
+version: "2.2"
 services:
   tg-app-model-front:
     image: devremoto/tgappmodel-front
@@ -20,6 +20,7 @@ services:
       - AppModelConfiguration:CorsOrigins:1=${STS_ADMIN_SERVER}
       - AppModelConfiguration:CorsOrigins:2=http://localhost:${HOST_PORT}
       - AppModelConfiguration:CorsOrigins:3=${HOST_URL}
+      - AppModelConfiguration:DbType=${DB_TYPE}
       - AppModelConfiguration:ApiName=${API_NAME}
       - AppModelConfiguration:MapKey="your_google_map_key"
       - AppModelConfiguration:ImgFolder=~/images

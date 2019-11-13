@@ -22,23 +22,17 @@ foreach(var classModel in classSet.Classes){#>
 	var spacedName = classSet.ToSpacedName(classModel.Name);
 	var parents = classModel.Fields.Where(x=>x.IsParent);
 #>
-using Api.Models;
-using Application.AutoMapper;
 using Application.Interfaces;
 using Application.ViewModels;
-using AutoMapper;
-using CrossCutting.Extensions;
 using Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    public partial class <#= classModel.Name #>Controller    
+    public partial class <#= classModel.Name #>Controller 
+
     {
         
 		private readonly I<#= classModel.Name #>AppService _service;
@@ -100,22 +94,6 @@ namespace Api.Controllers
 
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] <#= classModel.Name #>ViewModel model)
-        {
-            try
-            {
-				var entity = _mapper.Map<<#= classModel.Name #>>(model);
-				var result = await Task.FromResult(_service.Save(entity, true));
-                return Ok(_mapper.Map<<#= classModel.Name #>ViewModel>(result));
-            }
-            catch(Exception e)
-            {
-                return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
-            }
-        }
-
-        [Route("{id}")]
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] <#= classModel.Name #>ViewModel model, TKey id)
         {
             try
             {

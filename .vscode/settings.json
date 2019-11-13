@@ -3,8 +3,6 @@
     "javascript.preferences.quoteStyle": "single",
     "typescript.preferences.quoteStyle": "single",
     "editor.autoClosingQuotes": "always",
-    "prettier.singleQuote": true,
-    "prettier.printWidth": 150,
     "files.exclude": {
         "**/node_modules": true
     },

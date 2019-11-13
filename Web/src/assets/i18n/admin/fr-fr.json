@@ -1,7 +1,7 @@
 ﻿{
 	"ABOUT":{
-		"TITLE" : "ENVIRON",
-		"MENU" : "environ",
+		"TITLE" : "SUR",
+		"MENU" : "Sur",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
@@ -11,14 +11,14 @@
 				"ACTIONS":"Actions"
 			},
 			"BUTTON": {
-				"EDIT":"réviser",
-				"REMOVE":"supprimer",
-				"DUPLICATE":"double",
-				"NEW": "ajouter ENVIRON"
+				"EDIT":"Modifier",
+				"REMOVE":"Supprimer",
+				"DUPLICATE":"Double",
+				"NEW": "Ajouter SUR"
 			},
 			"CONFIRM_DELETE":"Voulez-vous vraiment supprimer cet élément?",
 			"REMOVE": {
-				"SUCCESS":"environ Enlevé",
+				"SUCCESS":"Sur Enlevé",
 				"ERROR":"Erreur lors de la suppression"
 			},
 			"DUPLICATE": {
@@ -38,14 +38,14 @@
 				"CANCEL":"Annuler"
 			},
 			"SAVE": {
-				"SUCCESS":"environ : sauvé avec succès",
+				"SUCCESS":"Sur : sauvé avec succès",
 				"ERROR":"Erreur lors de l'enregistrement"
 			}
 		}
 	},
 	"CONTACT":{
 		"TITLE" : "CONTACT",
-		"MENU" : "contact",
+		"MENU" : "Contact",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
@@ -57,14 +57,14 @@
 				"ACTIONS":"Actions"
 			},
 			"BUTTON": {
-				"EDIT":"réviser",
-				"REMOVE":"supprimer",
-				"DUPLICATE":"double",
-				"NEW": "ajouter CONTACT"
+				"EDIT":"Modifier",
+				"REMOVE":"Supprimer",
+				"DUPLICATE":"Double",
+				"NEW": "Ajouter CONTACT"
 			},
 			"CONFIRM_DELETE":"Voulez-vous vraiment supprimer cet élément?",
 			"REMOVE": {
-				"SUCCESS":"contact Enlevé",
+				"SUCCESS":"Contact Enlevé",
 				"ERROR":"Erreur lors de la suppression"
 			},
 			"DUPLICATE": {
@@ -86,34 +86,34 @@
 				"CANCEL":"Annuler"
 			},
 			"SAVE": {
-				"SUCCESS":"contact : sauvé avec succès",
+				"SUCCESS":"Contact : sauvé avec succès",
 				"ERROR":"Erreur lors de l'enregistrement"
 			}
 		}
 	},
 	"LANGUAGE":{
-		"TITLE" : "LANGAGE",
-		"MENU" : "langage",
+		"TITLE" : "LANGUE",
+		"MENU" : "Langue",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
 				"CODE":"CODE",
 				"NAME":"NOM",
 				"IMAGE":"IMAGE",
-				"ACTIVE":"ACTIF",
-				"DEFAULT":"MANQUER À SES ENGAGEMENTS",
+				"ACTIVE":"ACTIVE",
+				"DEFAULT":"PAR DÉFAUT",
 				"LOADED":"CHARGÉ",
 				"ACTIONS":"Actions"
 			},
 			"BUTTON": {
-				"EDIT":"réviser",
-				"REMOVE":"supprimer",
-				"DUPLICATE":"double",
-				"NEW": "ajouter LANGAGE"
+				"EDIT":"Modifier",
+				"REMOVE":"Supprimer",
+				"DUPLICATE":"Double",
+				"NEW": "Ajouter LANGUE"
 			},
 			"CONFIRM_DELETE":"Voulez-vous vraiment supprimer cet élément?",
 			"REMOVE": {
-				"SUCCESS":"langage Enlevé",
+				"SUCCESS":"Langue Enlevé",
 				"ERROR":"Erreur lors de la suppression"
 			},
 			"DUPLICATE": {
@@ -126,8 +126,8 @@
 				"CODE":"CODE",
 				"NAME":"NOM",
 				"IMAGE":"IMAGE",
-				"ACTIVE":"ACTIF",
-				"DEFAULT":"MANQUER À SES ENGAGEMENTS",
+				"ACTIVE":"ACTIVE",
+				"DEFAULT":"PAR DÉFAUT",
 				"LOADED":"CHARGÉ",
 				"ID":"ID"
 			},
@@ -136,30 +136,30 @@
 				"CANCEL":"Annuler"
 			},
 			"SAVE": {
-				"SUCCESS":"langage : sauvé avec succès",
+				"SUCCESS":"Langue : sauvé avec succès",
 				"ERROR":"Erreur lors de l'enregistrement"
 			}
 		}
 	},
 	"MAILING":{
-		"TITLE" : "ENVOI",
-		"MENU" : "envoi",
+		"TITLE" : "DIFFUSION",
+		"MENU" : "Diffusion",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
 				"EMAIL":"EMAIL",
-				"ACTIVE":"ACTIF",
+				"ACTIVE":"ACTIVE",
 				"ACTIONS":"Actions"
 			},
 			"BUTTON": {
-				"EDIT":"réviser",
-				"REMOVE":"supprimer",
-				"DUPLICATE":"double",
-				"NEW": "ajouter ENVOI"
+				"EDIT":"Modifier",
+				"REMOVE":"Supprimer",
+				"DUPLICATE":"Double",
+				"NEW": "Ajouter DIFFUSION"
 			},
 			"CONFIRM_DELETE":"Voulez-vous vraiment supprimer cet élément?",
 			"REMOVE": {
-				"SUCCESS":"envoi Enlevé",
+				"SUCCESS":"Diffusion Enlevé",
 				"ERROR":"Erreur lors de la suppression"
 			},
 			"DUPLICATE": {
@@ -170,7 +170,7 @@
 		"FORM" : {
 			"LABEL" : {	
 				"EMAIL":"EMAIL",
-				"ACTIVE":"ACTIF",
+				"ACTIVE":"ACTIVE",
 				"ID":"ID"
 			},
 			"BUTTON": {
@@ -178,7 +178,7 @@
 				"CANCEL":"Annuler"
 			},
 			"SAVE": {
-				"SUCCESS":"envoi : sauvé avec succès",
+				"SUCCESS":"Diffusion : sauvé avec succès",
 				"ERROR":"Erreur lors de l'enregistrement"
 			}
 		}
@@ -189,15 +189,15 @@
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
-				"KEY":"CLÉ",
+				"KEY":"MOI?",
 				"VALUE":"VALEUR",
 				"ACTIONS":"Actions"
 			},
 			"BUTTON": {
-				"EDIT":"réviser",
-				"REMOVE":"supprimer",
-				"DUPLICATE":"double",
-				"NEW": "ajouter PARAMÈTRES"
+				"EDIT":"Modifier",
+				"REMOVE":"Supprimer",
+				"DUPLICATE":"Double",
+				"NEW": "Ajouter PARAMÈTRES"
 			},
 			"CONFIRM_DELETE":"Voulez-vous vraiment supprimer cet élément?",
 			"REMOVE": {
@@ -211,7 +211,7 @@
 		},
 		"FORM" : {
 			"LABEL" : {	
-				"KEY":"CLÉ",
+				"KEY":"MOI?",
 				"VALUE":"VALEUR",
 				"ID":"ID"
 			},
@@ -234,14 +234,14 @@
 				"NAME":"NOM",
 				"CSS_ICON":"ICÔNE CSS",
 				"URL":"URL",
-				"ACTIVE":"ACTIF",
+				"ACTIVE":"ACTIVE",
 				"ACTIONS":"Actions"
 			},
 			"BUTTON": {
-				"EDIT":"réviser",
-				"REMOVE":"supprimer",
-				"DUPLICATE":"double",
-				"NEW": "ajouter RÉSEAU SOCIAL"
+				"EDIT":"Modifier",
+				"REMOVE":"Supprimer",
+				"DUPLICATE":"Double",
+				"NEW": "Ajouter RÉSEAU SOCIAL"
 			},
 			"CONFIRM_DELETE":"Voulez-vous vraiment supprimer cet élément?",
 			"REMOVE": {
@@ -258,7 +258,7 @@
 				"NAME":"NOM",
 				"CSS_ICON":"ICÔNE CSS",
 				"URL":"URL",
-				"ACTIVE":"ACTIF",
+				"ACTIVE":"ACTIVE",
 				"ID":"ID"
 			},
 			"BUTTON": {
@@ -281,16 +281,16 @@
 				"INPUT_FILE_FIELD":"CHAMP DE FICHIERS D'ENTRÉE",
 				"SIZE":"TAILLE",
 				"TYPE":"TYPE",
-				"FILE_NAME":"NOM",
-				"CONTROLLER":"DIRECTEUR",
-				"EXTENSION":"PROLONGATION",
+				"FILE_NAME":"NOM DU FICHIER",
+				"CONTROLLER":"CONTRÔLEUR",
+				"EXTENSION":"EXTENSION",
 				"ACTIONS":"Actions"
 			},
 			"BUTTON": {
-				"EDIT":"réviser",
-				"REMOVE":"supprimer",
-				"DUPLICATE":"double",
-				"NEW": "ajouter TÉLÉCHARGER LE FICHIER"
+				"EDIT":"Modifier",
+				"REMOVE":"Supprimer",
+				"DUPLICATE":"Double",
+				"NEW": "Ajouter TÉLÉCHARGER LE FICHIER"
 			},
 			"CONFIRM_DELETE":"Voulez-vous vraiment supprimer cet élément?",
 			"REMOVE": {
@@ -308,9 +308,9 @@
 				"INPUT_FILE_FIELD":"CHAMP DE FICHIERS D'ENTRÉE",
 				"SIZE":"TAILLE",
 				"TYPE":"TYPE",
-				"FILE_NAME":"NOM",
-				"CONTROLLER":"DIRECTEUR",
-				"EXTENSION":"PROLONGATION",
+				"FILE_NAME":"NOM DU FICHIER",
+				"CONTROLLER":"CONTRÔLEUR",
+				"EXTENSION":"EXTENSION",
 				"ID":"ID"
 			},
 			"BUTTON": {
@@ -327,14 +327,14 @@
 	"NAME":"",
 	"DIALOG":{
 		"CONFIRM":{
-			"TITLE":"confirmation"
+			"TITLE":"Confirmation"
 		},		
 		"OK":"D'accord",
 		"CANCEL":"Annuler"
 	},
 	"TOASTER":{
 		"TITLE":{
-			"SUCCESS":"succès",
+			"SUCCESS":"Succès",
 			"ERROR":"Erreur"
 		}
 	},

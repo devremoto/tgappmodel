@@ -24,13 +24,13 @@ export interface IConfig {
   allowSilentRenew: boolean;
 }
 
-export const Config: IConfig = <IConfig>{
+export const Config: IConfig = {
   siteTile: `TUGON - APP MODEL`,
   logoUrl: '/assets/admin/img/logo.png',
   favicon: '/favicon.png',
   useAuthorityServer: environment.UseAuthority,
   siteUrl,
-  apiAddress: apiAddress,
+  apiAddress,
   authorityAddress: environment.Authority,
   iss: authorityAddress,
   server: authorityAddress,
@@ -42,4 +42,4 @@ export const Config: IConfig = <IConfig>{
   post_logout_redirect_uri: `${siteUrl}/logout-callback`,
   silent_redirect_uri: `${siteUrl}/callback&renew=true`,
   allowSilentRenew: true
-};
+} as IConfig;

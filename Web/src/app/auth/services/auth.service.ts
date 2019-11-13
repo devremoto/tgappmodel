@@ -17,7 +17,10 @@ export abstract class AuthService {
   userManager: UserManager;
   protected _user: User;
 
-  constructor(protected _router: Router, protected _storage: SessionStorageService) {
+  constructor(
+    protected _router: Router,
+    protected _storage: SessionStorageService
+  ) {
     this._localStorage = this._storage.localStorage;
     this._sessionStorage = this._storage.sessionStorage;
     this.userManager = new UserManager({
@@ -89,7 +92,7 @@ export abstract class AuthService {
 
   protected getLogoutUrl() {
     const url = this._sessionStorage.getItem('logout_url');
-    return url;
+    return url || '/admin';
   }
 
   protected clearLogoutUrl() {

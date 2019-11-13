@@ -17,17 +17,17 @@ export class LanguageCustomService extends LanguageService {
     this.init();
     this._time = new Date().getTime();
     translate.onLangChange.subscribe((result: LangChangeEvent) => {
-      this.loadFile(<Language>{ code: result.lang }, this.prefix, this.sufix);
+      this.loadFile({ code: result.lang } as Language, this.prefix, this.sufix);
     });
   }
 
   languages: Array<Language> = [
-    <Language>{ code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png' },
-    <Language>{ code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png' },
-    <Language>{ code: 'fr-fr', active: false, image: '/assets/admin/img/flags/France.png' },
-    <Language>{ code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png' },
-    <Language>{ code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png' },
-    <Language>{ code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png' }
+    { code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png' } as Language,
+    { code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png' } as Language,
+    { code: 'fr-fr', active: false, image: '/assets/admin/img/flags/France.png' } as Language,
+    { code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png' } as Language,
+    { code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png' } as Language,
+    { code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png' } as Language
   ];
   language: Language;
   private _default: Language;

@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { BaseService, HttpService } from '../services';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { UploadFile } from '../../models/UploadFile';
+import { PagingModel } from '../../models/PagingModel';
 
 @Injectable({
   providedIn: 'root',

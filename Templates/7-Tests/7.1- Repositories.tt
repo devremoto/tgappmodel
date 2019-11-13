@@ -1,0 +1,130 @@
+﻿<#@ template language="C#" hostSpecific="true"  #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="../main.ttinclude" #>
+<#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="../ClassModel.ttinclude" #>
+<#@ output extension=".txt"  #><#
+var manager = TemplateFileManager.Create(this);
+
+CreateDirectory("..\\..\\..\\Domain\\Services\\_generated");	
+
+foreach(var classModel in classSet.Classes){#>
+<#
+manager.StartNewFile("Repositories\\"+classModel.Name+ "Tests.cs","Tests","",null);
+#>
+using CrossCutting.IoC;
+using Domain.Entities;
+using Domain.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
+using System;
+using System.Linq;
+
+namespace Tests.Repositories
+{
+	public class  <#=classModel.Name#>Tests
+	{
+		private ServiceProvider _provider;
+		private I<#=classModel.Name#>Repository _repository;
+		private IUnitOfWork _uow;
+		private Guid _guid;
+
+		[SetUp]
+		public void Setup()
+		{
+			var services = IocBootStrapper.ConfigureTestServices();
+
+			_provider = services.GetProvider();
+			_uow = _provider.GetService<IUnitOfWork>();
+			_repository = _provider.GetService<I<#=classModel.Name#>Repository>();
+			var entity = _repository.Add(new  <#=classModel.Name#> { });
+			_uow.Commit();
+			_guid = entity.Id;
+		}
+
+		[Test]
+		public void GetOne()
+		{
+			var entity = _repository.GetOne(_guid);
+			Assert.AreEqual(_guid, entity.Id);
+		}
+
+
+		[Test]
+		public void Remove()
+		{
+			var entity = _repository.GetOne(_guid);
+			Assert.IsNotNull(entity);
+			_repository.Remove(entity);
+			_uow.Commit();
+			entity = _repository.GetOne(_guid);
+			Assert.IsNull(entity);
+		}
+
+		[Test]
+		public void List()
+		{
+			var list = _repository.GetAll();
+			var count = list.Count();
+			Assert.IsTrue(count > 0, $"count = {count}");
+			Assert.IsTrue(count == 1, $"count = {count}");
+		}
+
+		[Test]
+		public void Update()
+		{
+			var entity = _repository.GetOne(_guid);
+
+<# foreach(var field in classModel.Fields){#>
+<#if(!field.IsClass && !field.IsEnum){#>
+<#if(!field.IsKey){#>
+            var current<#=field.Name #> = entity.<#=field.Name#>; 
+            <#= classSet.MockValue(field)#>
+
+<#}}#>
+<#if(field.IsClass){#>
+<#if(field.IsCollection){#>
+		var <<#=field.Name#>> = entity.<#=field.Name#>;
+<#}}}#>
+			var result = _repository.Update(entity);
+			Assert.AreEqual(_guid, entity.Id);
+			Assert.AreEqual(_guid, result.Id);
+
+<# foreach(var field in classModel.Fields){#>
+<#if(!field.IsClass && !field.IsEnum){#>
+<#if(!field.IsKey){#>
+            Assert.AreEqual(result.<#=field.Name#>, entity.<#=field.Name#>);
+            Assert.AreNotEqual(result.<#=field.Name#>, current<#=field.Name #>);
+
+<#}}#>
+<#if(field.IsClass){#>
+<#if(field.IsCollection){#>
+		var <<#=field.Name#>> = entity.<#=field.Name#>;
+<#}}}#>
+		}
+
+		[Test]
+		public void Find()
+		{
+			var entity = _repository.Find(x => x.Id == _guid);
+			Assert.IsNotNull(entity);
+		}
+
+		[TearDown]
+		public void Cleanup()
+		{
+			_repository.Remove(_guid);      
+			_uow.Commit();
+		}
+
+	}
+}
+
+<#
+manager.EndBlock();
+}
+manager.Process(false);
+#>

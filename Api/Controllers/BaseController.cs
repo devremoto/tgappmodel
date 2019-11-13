@@ -138,7 +138,23 @@ namespace Api.Controllers
             }
         }
 
-        [HttpGet]
+		[Route("{id}")]
+		[HttpPut]
+		public async Task<IActionResult> Update([FromBody] TViewModel model, TKey id)
+		{
+			try
+			{
+				var entity = _mapper.Map<T>(model);
+				var result = await Task.FromResult(_service.Update(entity));
+				return Ok(_mapper.Map<TViewModel>(result));
+			}
+			catch (Exception e)
+			{
+				return BadRequest($"Error while saving {modelName} {e.Message}");
+			}
+		}
+
+		[HttpGet]
         [AllowAnonymous]
         [Route("image/{name}")]
         public async Task<IActionResult> Image(string name, [FromQuery]double w = 0, [FromQuery]double h = 0, [FromQuery] bool base64 = false)

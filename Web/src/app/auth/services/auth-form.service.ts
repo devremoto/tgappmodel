@@ -1,29 +1,34 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, UserManager, UserSettings } from 'oidc-client';
 import { LoginModel } from 'src/app/models/LoginModel';
 
 import { SessionStorageService } from '../../shared/util/session-storage.service';
 import { AuthService } from './auth.service';
 import { Config } from '../../config';
+import { User } from 'oidc-client';
 
 @Injectable({ providedIn: 'root' })
-export class AuthServiceForm extends AuthService implements OnInit {
+export class AuthServiceForm extends AuthService {
   token: string;
   id_token: string;
   callbackUrl: string;
-  userManager: UserManager;
-  user: User;
+  user = {
+    access_token: null,
+    expires_at: Date.now() + 30000,
+    id_token: 'sdfsdfsdf',
+    profile: {},
+    refresh_token: 'asdasd',
+    session_state: null,
+    token_type: null,
+    scope: null,
+    state: null
+  } as User;
   _localStorage: Storage;
   _sessionStorage: Storage;
   LoginModel: LoginModel;
   constructor(_router: Router, _storage: SessionStorageService) {
     super(_router, _storage);
     this.init().then(user => (this.user = user));
-  }
-
-  async ngOnInit() {
-    await this.init();
   }
 
   async init() {
@@ -36,10 +41,9 @@ export class AuthServiceForm extends AuthService implements OnInit {
   }
 
   isLoggedIn(): boolean {
-    if (Config.useAuthorityServer) {
-      return this.user && this.user.access_token && this.user.access_token !== null; // && !this.user.expired;
-    }
-    return false;
+    return (
+      this.user && this.user.access_token && this.user.access_token !== null
+    ); // && !this.user.expired;
   }
 
   getToken(): string {
@@ -50,21 +54,30 @@ export class AuthServiceForm extends AuthService implements OnInit {
     return this.user.id_token;
   }
 
-  getUser(): Promise<User> {
-    this.user = this._storage.getObjectCache<User>('user');
+  getUser(): Promise<any> {
+    this.user = this._storage.getObjectCache<any>('user');
     return new Promise(resolve => {
       resolve(this.user);
     });
   }
 
-  login() {
-    this.user = new User(<UserSettings>{
+  login(loginModel: LoginModel) {
+    this.user = {
       access_token: 'sdadasdasd',
       expires_at: Date.now() + 30000,
       id_token: 'adasdasd',
-      profile: {},
-      refresh_token: 'asdsad'
-    });
+      profile: {
+        role: 'admin',
+        roles: ['admin'],
+        name: loginModel.username,
+        email: 'teste@teste.com'
+      },
+      refresh_token: 'asdsad',
+      session_state: null,
+      token_type: null,
+      scope: null,
+      state: null
+    } as User;
 
     this.user.access_token = 'sdadasdasd';
 

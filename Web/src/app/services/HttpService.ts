@@ -55,8 +55,8 @@ export class HttpService {
     return this.get(`${this.config.siteUrl}/file/image/${fileName}`, {
       w: w || 0,
       h: h || 0,
-      base64: base64,
-      controller: controller
+      base64,
+      controller
     });
   }
 
@@ -64,8 +64,8 @@ export class HttpService {
     return this.get(`${this.config.apiAddress}/file/image/${fileName}`, {
       w: w || 0,
       h: h || 0,
-      base64: base64,
-      controller: controller
+      base64,
+      controller
     });
   }
 

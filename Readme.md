@@ -1,6 +1,6 @@
 # TUGON App Model
 
-App model is a basic .NET core web application ready with some features including new libraries and frameworks.
+TUGON App Model is a basic .NET core web application ready with some features including new libraries and frameworks.
 At the frontend we use angular 8 and at back and we have a REST api with .net Core and DDD approach
 
 ## Backend
@@ -15,7 +15,7 @@ At the frontend we use angular 8 and at back and we have a REST api with .net Co
 ## Frontend
 
 - T4 (Text Template Transformation Toolkit)
-- Angular 8
+- Angular 9
 - NG Bootstrap
 - NGX Translate
 - Angular2Toaster
@@ -24,7 +24,40 @@ At the frontend we use angular 8 and at back and we have a REST api with .net Co
 
 # Getting started
 
-## Migration
+## Requiriments
+
+### Backend
+
+The back needs .net core sdk 3.0
+
+> [`.NET Core SDK 3.0` - **Donwload** - https://dotnet.microsoft.com/download ](https://dotnet.microsoft.com/download 'Donwload')
+
+### Frontend
+
+The frontend needs angular 9, to install angular you need first install node js
+
+> [`NodeJS 12.13.0` - **Donwload** - https://nodejs.org/en ](https://nodejs.org/en/ 'Donwload')
+
+If you already have the node installed you dont,t need to re-install, go to angular instalation
+
+```bat
+npm i -g @angular/cli@9.0.0-rc.1
+```
+
+> [`Angular` - **Website** - https://angular.io/ ](https://angular.io/)
+
+## Run
+
+In order to run the applicaction localy execute the command:
+`run-local.bat` on root folder
+
+## Unit Tests
+
+The unit tests runs EF Core on Memory, you can find the tests on `Tests` Folder
+
+**Obs.:** The tests covers only the Repositories
+
+## EF Migration
 
 The app already comes with inital migration on Data project, but if you need to add migrations as shown below:
 
@@ -36,6 +69,12 @@ Update-Database -s Api -p Data -c AppDbContext
 ```
 
 ### dotnet CLI
+
+In case you don't have install ef tools, run on the console:
+
+```
+dotnet tool install --global dotnet-ef
+```
 
 ```
 dotnet ef migrations add migration_name -s Api -p Data -c AppDbContext
@@ -49,81 +88,31 @@ The app uses EntityframeworkCore as ORM, so you can use other relational databas
 - SQL Server
 - Sqlite
 - PostgreSQL
+- In Memory
 
-Below are the setup sample
-
-### Sqlite
-
-In order to use Sqlite first make sure you have the Nugget packages on Api project
-
-`.NET CLI`
-
-```bat
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite.Design
-```
-
-`Package Manager`
-
-```bat
-Install-Packge Microsoft.EntityFrameworkCore.Sqlite
-Install-Packge Microsoft.EntityFrameworkCore.Sqlite.Design
-```
-
-`appsettings.json`
+You can edite the `appsettings.json` on Api project
 
 ```JSON
 "ConnectionStrings": {
-    "AppDbConnection":"Data Source=../Data/DB/appDBModel.db"
-  }
-```
-
-> In `Api\Startup.cs` - make sure that you are using `UseSqlite`.
-
-### SQL Server
-
-In order to use SQL Server first make sure you have the Nugget packages on Api project
-
-```
-Microsoft.EntityFrameworkCore.SqlServer
-Microsoft.EntityFrameworkCore.SqlServer.Design
-```
-
-```JSON
-  "ConnectionStrings": {
-    "AppDbConnection": "Data Source=localhost;Initial Catalog=appDBModel;Integrated Security=True"
+    "SqliteDbConnection": "Data Source=../Data/DB/appDBModel.db",
+    "SqlServerDbConnection": "Server=.;Initial Catalog=appDBModel;Persist Security Info=False;User ID=sa;Password=pa$$;MultipleActiveResultSets=False;Connection Timeout=30;",
+    "MysqlDbConnection": "server=localhost,port=3306;database=jpproject;user=root;password=pa$$",
+    "PostgreSqlDbConnection": "Server=localhost;Port=5432;Database=appDBModel;User Id=user;Password=pa$$;",
+    "InMemoryDbConnection": "appDBModel"
+  },
+  "AppModelConfiguration": {
+    ...
+    "DbType": "SQLITE" // "SQLSERVER", "INMEMORY"
   },
 ```
 
-> In `Api\Startup.cs` - find all usage of UseSqlite and change to `UseSqlServer`.
-
-### PostgreSQL
-
-In order to use PostgreSQL first make sure you have the Nugget packages on Api project
-
-```
-Npgsql.EntityFrameworkCore.PostgreSQL
-Npgsql.EntityFrameworkCore.PostgreSQL.Design
-```
-
-> In `Api\Startup.cs` - find all usage of UseSqlite and change to `UseNpgsql`.
-
-### MySql
-
-In order to use MySql first make sure you have the Nugget packages on Api project
-
-```
-Pomelo.EntityFrameworkCore.MySql
-Pomelo.EntityFrameworkCore.MySql.Design
-```
-
-> In Api\Startup.cs - find all usage of UseSqlite and change to `UseMySql`.
+> In `Api\Startup.cs` - make sure that you are using `UseSqlite`.
 
 # Environment variables
 
 Set the enviroment variables for the project, You can also use the /API/appsetings.json for Backend and `/Web/src/app/envirement/enviroment.ts` and `/Web/src/app/config.ts` for frontend,
 
-But setting the enviorment variables makes it much easier.
+Or you can set the enviroment variables as below
 
 ## windows
 
@@ -275,13 +264,13 @@ You need to open File -> Preferences -> Settings and add path in TTPath. OR You 
 
 - **Mobile** [+55 11 9 9353-6732](https://Api.whatsapp.com/send?phone=5511993536732&text=I%20want%20to%20receive%20more%20information%20about%20TUGON%20app%20model)
 - **E-mail** adilson@almeidapedro.com.br
-- **Web** devremoto.com.br / www.tugon.com.br
-- **Resume** adilson.almeidapedro.com.br
-- **LinkedIn** linkedin.com/in/adilsonpedro
-- **Facebook** facebook.com/DesenvolvedorRemoto
+- **Web** [devremoto.com.br](www.devremoto.com.br) / [www.tugon.com.br](www.tugon.com.br)
+- **Resume** [adilson.almeidapedro.com.br](http://adilson.almeidapedro.com.br)
+- **LinkedIn** [linkedin.com/in/adilsonpedro](https://linkedin.com/in/adilsonpedro)
+- **Facebook** [facebook.com/DesenvolvedorRemoto](https://facebook.com/DesenvolvedorRemoto)
 - **Skype** [fazsite](skype:fazsite?call)
-- **Github** github.com/devremoto
-- **Twitter** twitter.com/zumcoder
+- **Github** [github.com/devremoto](https://github.com/devremoto)
+- **Twitter** [twitter.com/zumcoder](https://twitter.com/zumcoder)
 
 ## DISABLE HSTS FROM localhost
 

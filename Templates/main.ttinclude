@@ -1,5 +1,4 @@
-﻿<#@ assembly name="System.Core" #>
-<#@ assembly name="System.Data" #>
+﻿<#@ assembly name="System.Data" #>
 <#@ assembly name="System.Data.Entity" #>
 <#@ assembly name="System.Xml" #>
 <#@ assembly name="System.Xml.Linq"#>

@@ -9,5 +9,12 @@
         public string ApiName { get; set; }
         public string[] CorsOrigins { get; set; } = new[] { "http://localhost:4200" };
         public string ClientId { get; set; }
-    }
+		public DbType DbType { get; set; } = DbType.SQLITE;
+	}
+
+	public enum DbType{
+		SQLITE,
+		SQLSERVER,
+		MEMORY,
+	}
 }

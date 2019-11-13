@@ -16,10 +16,10 @@
 				"DUPLICATE":"Duplicar",
 				"NEW": "Adicionar SOBRE"
 			},
-			"CONFIRM_DELETE":"Você realmente quer remover este item?",
+			"CONFIRM_DELETE":"Você realmente quer remover esse item?",
 			"REMOVE": {
 				"SUCCESS":"Sobre Removido",
-				"ERROR":"Erro ao remover"
+				"ERROR":"Erro durante a remoção"
 			},
 			"DUPLICATE": {
 				"SUCCESS":"Duplicado",
@@ -38,7 +38,7 @@
 				"CANCEL":"Cancelar"
 			},
 			"SAVE": {
-				"SUCCESS":"Sobre : salvo com êxito",
+				"SUCCESS":"Sobre : salvo com sucesso",
 				"ERROR":"Erro ao salvar"
 			}
 		}
@@ -62,10 +62,10 @@
 				"DUPLICATE":"Duplicar",
 				"NEW": "Adicionar CONTATO"
 			},
-			"CONFIRM_DELETE":"Você realmente quer remover este item?",
+			"CONFIRM_DELETE":"Você realmente quer remover esse item?",
 			"REMOVE": {
 				"SUCCESS":"Contato Removido",
-				"ERROR":"Erro ao remover"
+				"ERROR":"Erro durante a remoção"
 			},
 			"DUPLICATE": {
 				"SUCCESS":"Duplicado",
@@ -86,7 +86,7 @@
 				"CANCEL":"Cancelar"
 			},
 			"SAVE": {
-				"SUCCESS":"Contato : salvo com êxito",
+				"SUCCESS":"Contato : salvo com sucesso",
 				"ERROR":"Erro ao salvar"
 			}
 		}
@@ -111,10 +111,10 @@
 				"DUPLICATE":"Duplicar",
 				"NEW": "Adicionar LÍNGUA"
 			},
-			"CONFIRM_DELETE":"Você realmente quer remover este item?",
+			"CONFIRM_DELETE":"Você realmente quer remover esse item?",
 			"REMOVE": {
 				"SUCCESS":"Língua Removido",
-				"ERROR":"Erro ao remover"
+				"ERROR":"Erro durante a remoção"
 			},
 			"DUPLICATE": {
 				"SUCCESS":"Duplicado",
@@ -136,7 +136,7 @@
 				"CANCEL":"Cancelar"
 			},
 			"SAVE": {
-				"SUCCESS":"Língua : salvo com êxito",
+				"SUCCESS":"Língua : salvo com sucesso",
 				"ERROR":"Erro ao salvar"
 			}
 		}
@@ -157,10 +157,10 @@
 				"DUPLICATE":"Duplicar",
 				"NEW": "Adicionar MAILING"
 			},
-			"CONFIRM_DELETE":"Você realmente quer remover este item?",
+			"CONFIRM_DELETE":"Você realmente quer remover esse item?",
 			"REMOVE": {
 				"SUCCESS":"Mailing Removido",
-				"ERROR":"Erro ao remover"
+				"ERROR":"Erro durante a remoção"
 			},
 			"DUPLICATE": {
 				"SUCCESS":"Duplicado",
@@ -178,7 +178,7 @@
 				"CANCEL":"Cancelar"
 			},
 			"SAVE": {
-				"SUCCESS":"Mailing : salvo com êxito",
+				"SUCCESS":"Mailing : salvo com sucesso",
 				"ERROR":"Erro ao salvar"
 			}
 		}
@@ -199,10 +199,10 @@
 				"DUPLICATE":"Duplicar",
 				"NEW": "Adicionar CONFIGURAÇÕES"
 			},
-			"CONFIRM_DELETE":"Você realmente quer remover este item?",
+			"CONFIRM_DELETE":"Você realmente quer remover esse item?",
 			"REMOVE": {
 				"SUCCESS":"Configurações Removido",
-				"ERROR":"Erro ao remover"
+				"ERROR":"Erro durante a remoção"
 			},
 			"DUPLICATE": {
 				"SUCCESS":"Duplicado",
@@ -220,19 +220,19 @@
 				"CANCEL":"Cancelar"
 			},
 			"SAVE": {
-				"SUCCESS":"Configurações : salvo com êxito",
+				"SUCCESS":"Configurações : salvo com sucesso",
 				"ERROR":"Erro ao salvar"
 			}
 		}
 	},
 	"SOCIAL_NETWORK":{
 		"TITLE" : "REDE SOCIAL",
-		"MENU" : "Rede social",
+		"MENU" : "Rede Social",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
 				"NAME":"NOME",
-				"CSS_ICON":"ÍCONE DO CSS",
+				"CSS_ICON":"ÍCONE DE CSS",
 				"URL":"URL",
 				"ACTIVE":"ATIVO",
 				"ACTIONS":"Ações"
@@ -243,10 +243,10 @@
 				"DUPLICATE":"Duplicar",
 				"NEW": "Adicionar REDE SOCIAL"
 			},
-			"CONFIRM_DELETE":"Você realmente quer remover este item?",
+			"CONFIRM_DELETE":"Você realmente quer remover esse item?",
 			"REMOVE": {
-				"SUCCESS":"Rede social Removido",
-				"ERROR":"Erro ao remover"
+				"SUCCESS":"Rede Social Removido",
+				"ERROR":"Erro durante a remoção"
 			},
 			"DUPLICATE": {
 				"SUCCESS":"Duplicado",
@@ -256,7 +256,7 @@
 		"FORM" : {
 			"LABEL" : {	
 				"NAME":"NOME",
-				"CSS_ICON":"ÍCONE DO CSS",
+				"CSS_ICON":"ÍCONE DE CSS",
 				"URL":"URL",
 				"ACTIVE":"ATIVO",
 				"ID":"ID"
@@ -266,19 +266,19 @@
 				"CANCEL":"Cancelar"
 			},
 			"SAVE": {
-				"SUCCESS":"Rede social : salvo com êxito",
+				"SUCCESS":"Rede Social : salvo com sucesso",
 				"ERROR":"Erro ao salvar"
 			}
 		}
 	},
 	"UPLOAD_FILE":{
-		"TITLE" : "CARREGAR ARQUIVO",
-		"MENU" : "Carregar arquivo",
+		"TITLE" : "ARQUIVO DE UPLOAD",
+		"MENU" : "Arquivo de upload",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
 				"NAME":"NOME",
-				"INPUT_FILE_FIELD":"CAMPO ARQUIVO DE ENTRADA",
+				"INPUT_FILE_FIELD":"CAMPO DE ARQUIVOS DE ENTRADA",
 				"SIZE":"TAMANHO",
 				"TYPE":"TIPO",
 				"FILE_NAME":"NOME DO ARQUIVO",
@@ -290,12 +290,12 @@
 				"EDIT":"Editar",
 				"REMOVE":"Excluir",
 				"DUPLICATE":"Duplicar",
-				"NEW": "Adicionar CARREGAR ARQUIVO"
+				"NEW": "Adicionar ARQUIVO DE UPLOAD"
 			},
-			"CONFIRM_DELETE":"Você realmente quer remover este item?",
+			"CONFIRM_DELETE":"Você realmente quer remover esse item?",
 			"REMOVE": {
-				"SUCCESS":"Carregar arquivo Removido",
-				"ERROR":"Erro ao remover"
+				"SUCCESS":"Arquivo de upload Removido",
+				"ERROR":"Erro durante a remoção"
 			},
 			"DUPLICATE": {
 				"SUCCESS":"Duplicado",
@@ -305,7 +305,7 @@
 		"FORM" : {
 			"LABEL" : {	
 				"NAME":"NOME",
-				"INPUT_FILE_FIELD":"CAMPO ARQUIVO DE ENTRADA",
+				"INPUT_FILE_FIELD":"CAMPO DE ARQUIVOS DE ENTRADA",
 				"SIZE":"TAMANHO",
 				"TYPE":"TIPO",
 				"FILE_NAME":"NOME DO ARQUIVO",
@@ -318,7 +318,7 @@
 				"CANCEL":"Cancelar"
 			},
 			"SAVE": {
-				"SUCCESS":"Carregar arquivo : salvo com êxito",
+				"SUCCESS":"Arquivo de upload : salvo com sucesso",
 				"ERROR":"Erro ao salvar"
 			}
 		}

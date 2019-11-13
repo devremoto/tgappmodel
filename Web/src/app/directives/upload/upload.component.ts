@@ -12,14 +12,14 @@ declare var $: any;
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit, AfterViewInit {
-  _upload: UploadComponent;
+  uploadComponent: UploadComponent;
   src: string;
 
   reader: FileReader;
 
   file: FileModel = new FileModel();
-  item: FileItem = <FileItem>{};
-  msg_error: string;
+  item: FileItem = {} as FileItem;
+  msgError: string;
   @Input() id: string;
   @Input() name: string;
   @Input() path: string;
@@ -47,7 +47,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   config: any;
   constructor() {
     this.config = Config;
-    this._upload = this;
+    this.uploadComponent = this;
     this.uploader.onAfterAddingFile = this.onAfterAddingFile.bind(this);
   }
 
@@ -60,7 +60,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {}
 
   updateData() {
     this.model = this.file.fileName;
@@ -69,7 +69,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
 
   loadFileFromPath(): any {
     const ext = this.path.slice(this.path.lastIndexOf('.') + 1);
-    this.file = <FileModel>{
+    this.file = {
       fileName: this.path,
       name: this.name,
       id: this.id,
@@ -77,7 +77,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
       formattedSize: '',
       type: `application/${ext}`,
       extension: ext
-    };
+    } as FileModel;
     this.checkFile(this.file);
     if (this.file.isImage) {
       this.src = `${this.config.siteUrl}/file/image/${this.path}?w=${this.width}&h=${this.height}`;
@@ -94,20 +94,20 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   onAfterAddingFile(fileItem: FileItem) {
-    this._upload.item = fileItem;
-    this._upload.file = <FileModel>{
+    this.uploadComponent.item = fileItem;
+    this.uploadComponent.file = {
       fileName: fileItem.file.name,
-      name: this._upload.name,
-      id: this._upload.id,
+      name: this.uploadComponent.name,
+      id: this.uploadComponent.id,
       size: fileItem.file.size,
-      formattedSize: this._upload.formatSize(fileItem.file.size),
+      formattedSize: this.uploadComponent.formatSize(fileItem.file.size),
       type: fileItem.file.type
-    };
-    this._upload.checkFile(this._upload.item.file);
-    this._upload.readFile(this._upload.item.file);
+    } as FileModel;
+    this.uploadComponent.checkFile(this.uploadComponent.item.file);
+    this.uploadComponent.readFile(this.uploadComponent.item.file);
   }
 
-  loadFileSize(type) {
+  loadFileSize(type: string) {
     let doc: ElementRef = null;
     switch (type) {
       case 'doc':
@@ -122,13 +122,13 @@ export class UploadComponent implements OnInit, AfterViewInit {
     }
     if (!doc || (doc && !doc.nativeElement)) {
       setTimeout(() => {
-        this._upload.loadFileSize(type);
+        this.uploadComponent.loadFileSize(type);
       }, 300);
       return;
     }
 
     const file = doc.nativeElement;
-    $(file).ready(function () {
+    $(file).ready(function() {
       const info: any = performance.getEntriesByName(file.src || file.href);
       if (info && info.length === 0) {
         setTimeout(() => {
@@ -146,12 +146,12 @@ export class UploadComponent implements OnInit, AfterViewInit {
     });
   }
 
-  scaleImage(maxWidth, maxHeight) {
+  scaleImage(maxWidth: number, maxHeight: number) {
     const image = this.image.nativeElement;
 
     if (!image.clientWidth) {
       setTimeout(() => {
-        this._upload.scaleImage(maxHeight, maxWidth);
+        this.uploadComponent.scaleImage(maxHeight, maxWidth);
       }, 300);
       return;
     }
@@ -167,7 +167,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
     this.element.nativeElement.click();
   }
 
-  checkFile(file) {
+  checkFile(file: any) {
     this.file.isDoc = false;
     this.file.isImage = false;
     this.file.isVideo = false;
@@ -179,47 +179,47 @@ export class UploadComponent implements OnInit, AfterViewInit {
     this.file.isDoc = true;
   }
 
-  isImage(file) {
+  isImage(file: any) {
     const type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
     const ext = '|' + file.ext + '|';
     this.file.isImage = this.imgFilterExt.indexOf(type) !== -1 || this.imgFilterExt.indexOf(ext) !== -1;
     return this.file.isImage;
   }
 
-  isVideo(file) {
+  isVideo(file: any) {
     const type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
     const ext = '|' + file.ext + '|';
     this.file.isVideo = this.videoFilterExt.indexOf(type) !== -1 || this.videoFilterExt.indexOf(ext) !== -1;
     return this.file.isVideo;
   }
 
-  readFile(file) {
-    file = $(this._upload.element.nativeElement);
+  readFile(file: any) {
+    file = $(this.uploadComponent.element.nativeElement);
     this.reader = new FileReader();
     this.reader.onloadend = this.onLoadFile.bind(this);
     this.reader.readAsDataURL(this.item._file);
   }
 
   onLoadFile() {
-    if (this._upload.file.isVideo) {
-      const video = $(this._upload.video.nativeElement);
-      video.attr('src', this._upload.reader.result);
+    if (this.uploadComponent.file.isVideo) {
+      const video = $(this.uploadComponent.video.nativeElement);
+      video.attr('src', this.uploadComponent.reader.result);
       return;
     }
-    if (this._upload.file.isImage) {
-      const img = $(this._upload.image.nativeElement);
-      img.attr('src', this._upload.reader.result);
-      this._upload.scaleImage(this._upload.width, this._upload.height);
+    if (this.uploadComponent.file.isImage) {
+      const img = $(this.uploadComponent.image.nativeElement);
+      img.attr('src', this.uploadComponent.reader.result);
+      this.uploadComponent.scaleImage(this.uploadComponent.width, this.uploadComponent.height);
     }
 
-    if (this._upload.file.isDoc) {
-      const doc = $(this._upload.doc.nativeElement);
-      doc.attr('href', this._upload.reader.result);
-      doc.attr('download', this._upload.file.fileName);
+    if (this.uploadComponent.file.isDoc) {
+      const doc = $(this.uploadComponent.doc.nativeElement);
+      doc.attr('href', this.uploadComponent.reader.result);
+      doc.attr('download', this.uploadComponent.file.fileName);
     }
   }
 
-  formatSize(value) {
+  formatSize(value: number) {
     const bite = 1024;
     if (value >= bite * 1000000) {
       return (value / (bite * 1000000)).toFixed(2) + ' Gb';

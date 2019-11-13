@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.slider();
   }
   constructor(translate: LanguageCustomService, route: ActivatedRoute) {
-    const lang = route.snapshot.queryParams['lang'];
-    translate.setLanguage(<Language>{ code: lang });
+    const lang = route.snapshot.queryParams.lang;
+    translate.setLanguage({ code: lang } as Language);
   }
 
   ngOnInit() {}

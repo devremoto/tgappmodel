@@ -41,7 +41,7 @@ namespace Application.Services
 <# 
 var list = new List<string>();
 foreach(var key in classModel.Keys){
-	list.Add($"model.{key.Name} == default({key.DataType})");
+	list.Add($"model.{key.Name} == default");
 }
 #>
 			if (!edit || <#= string.Join("||",list)#>)

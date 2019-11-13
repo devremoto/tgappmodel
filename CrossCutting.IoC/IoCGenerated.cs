@@ -10,7 +10,7 @@ namespace CrossCutting.IoC
 {
     public static class IoCGenerated
     {
-        public static void AddAppServices(this IServiceCollection services)
+        public static IServiceCollection AddAppServices(this IServiceCollection services)
         {
 			services.AddTransient<IAboutAppService, AboutAppService>();
 			services.AddTransient<IAboutRepository, AboutRepository>();
@@ -40,6 +40,7 @@ namespace CrossCutting.IoC
 			services.AddTransient<IUploadFileRepository, UploadFileRepository>();
 			services.AddTransient<IUploadFileService, UploadFileService>();
 
+            return services;
         }
     }
 }

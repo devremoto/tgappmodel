@@ -15,19 +15,19 @@ export class LoginCallBackComponent implements OnInit {
   ngOnInit() {
     const params = this._router.parseUrl(this._router.url).queryParams;
 
-    if (window.location.hash && !params['renew']) {
+    if (window.location.hash && !params.renew) {
       this._auth.callBackLogin();
       this.message = 'Logging in';
       return;
     }
 
-    if (params['logoutId']) {
+    if (params.logoutId) {
       this._auth.callBackLogout();
       this.message = 'Logging out';
       return;
     }
 
-    if (params['renew']) {
+    if (params.renew) {
       this._auth.callBackRenew();
       this.message = '';
       return;

@@ -10,7 +10,7 @@ export class UnauthorizedComponent implements OnInit {
   private statuses: { code: number; text: string }[];
   status: { code: number; text: string };
   constructor(private _router: ActivatedRoute) {
-    this.error = this._router.snapshot.params['id'] * 1;
+    this.error = this._router.snapshot.params.id * 1;
     this.statuses = [
       { code: 0, text: 'Errro Bravo' },
       { code: 100, text: 'Continue' },

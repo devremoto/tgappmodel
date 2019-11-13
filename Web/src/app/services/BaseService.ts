@@ -16,9 +16,9 @@ export class BaseService<T> {
   constructor(protected httpService: HttpService) {
     this._emitter = new Subject<any>();
     if (!this._controller) {
-      const comp: T = Object.assign({}, <T>{}, {});
+      const comp: T = Object.assign({}, {} as T, {});
 
-      this._controller = (<T>comp).constructor.name;
+      this._controller = (comp as T).constructor.name;
     }
   }
 
@@ -60,7 +60,7 @@ export class BaseService<T> {
     return this.httpService.get(`${this._controller}/${id}`).pipe(
       map<any, T>(response => {
         this.emit(this._controller + '-getOne', response);
-        return <T>response;
+        return response as T;
       })
     );
   }
@@ -69,7 +69,7 @@ export class BaseService<T> {
     return this.httpService.get(`${this._controller}/${id}`).pipe(
       map<any, T>(response => {
         this.emit(this._controller + '-getOne', response);
-        return <T>response;
+        return response as T;
       })
     );
   }
@@ -94,7 +94,7 @@ export class BaseService<T> {
       `${this._controller}/upload`,
       data,
       name,
-      { entity: entity, files: [{ name: name }] }
+      { entity, files: [{ name }] }
     );
   }
 
@@ -115,12 +115,12 @@ export class BaseService<T> {
     let fields: Array<FileModel> = new Array<FileModel>();
 
     for (const obj of inputFiles) {
-      fields.push(<FileModel>{
+      fields.push({
         id: obj.id,
         name: obj.name,
         inputFileField: obj.name,
         controller: this._controller
-      });
+      } as FileModel);
 
       for (const file of obj.files) {
         files.push(file);
@@ -129,9 +129,9 @@ export class BaseService<T> {
 
     if (files && files.length > 0) {
       return this.httpService
-        .upload(files, { entity: entity, files: fields })
+        .upload(files, { entity, files: fields })
         .map<any, UploadModel>(response => {
-          const obj = <UploadModel>response;
+          const obj = response as UploadModel;
           if (obj) {
             for (const file of obj.files) {
               const splitted = file.inputFileField.split('.');
@@ -154,7 +154,7 @@ export class BaseService<T> {
     }
 
     return new Observable<UploadModel>(x => {
-      x.next(<UploadModel>{ entity: entity, files: fields });
+      x.next({ entity, files: fields } as UploadModel);
     });
   }
 
@@ -172,7 +172,7 @@ export class BaseService<T> {
         if (base64) {
           return response._body;
         } else {
-          return <T>response;
+          return response as T;
         }
       });
   }
@@ -226,7 +226,7 @@ export class BaseService<T> {
       .pipe(
         map(event => {
           if (event.data) {
-            return <T>event.data;
+            return event.data as T;
           }
           return null;
         })

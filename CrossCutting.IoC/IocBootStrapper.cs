@@ -10,32 +10,52 @@ using Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
-using IConfiguration = Microsoft.Extensions.Configuration.IConfigurationRoot;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using CrossCutting.Services.Services;
 using CrossCutting.Services.Mail;
+using Microsoft.EntityFrameworkCore;
+using Data.EF;
 
 namespace CrossCutting.IoC
 {
-    public static class IocBootStrapper
-    {
+	public static class IocBootStrapper
+	{
 
-        public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
-        {
-			services.AddOptions();			
-			//services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+		public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
+		{
+			services.AddOptions();
 			services.AddAutoMapper(typeof(MapperConfig).GetTypeInfo().Assembly);
-            services.AddAppServices();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+			services.AddAppServices();
+			services.AddUnitOfWork();
 			services.AddZipCodeConfiguration();
 			services.AddSmtpConfiguration(configuration);
 			services.AddBingConfiguration(configuration);
+			return services;
+		}
 
-        }
+		public static IServiceCollection ConfigureTestServices(this IServiceCollection services)
+		{
+			services
+			.AddSqlInMemory()
+			.AddUnitOfWork()
+			.AddAppServices();
+			return services;
+		}
+		public static IServiceCollection ConfigureTestServices()
+		{
+			return new ServiceCollection()
+			.ConfigureTestServices();
+		}
+		public static IServiceCollection AddUnitOfWork(this IServiceCollection services)
+		{
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
+			return services;
+		}
 
 		public static void SetConfiguration<T>(this IServiceCollection services)
-		where T: class
+		where T : class
 		{
-			services.Configure<T>(typeof(T).Name, opt=> { });
+			services.Configure<T>(typeof(T).Name, opt => { });
 		}
 
 		public static T GetConfiguration<T>(this IConfiguration configuration)
@@ -63,5 +83,47 @@ namespace CrossCutting.IoC
 		{
 			services.AddTransient<IZipCode, ZipCodeBr>();
 		}
+
+		public static IServiceCollection AddSqlite(this IServiceCollection services, IConfiguration configuration)
+		{
+			var connectionString = configuration.GetConnectionString("SQliteDbConnection");
+
+			services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
+			return services;
+
+		}
+
+		public static IServiceCollection AddSqlInMemory(this IServiceCollection services, IConfiguration configuration)
+		{
+			var connectionString = configuration.GetConnectionString("InMemoryDbConnection");
+
+			services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(connectionString));
+			return services;
+
+		}
+
+		public static IServiceCollection AddSqlInMemory(this IServiceCollection services)
+		{
+
+			services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("InMemoryDbConnection"));
+			return services;
+
+		}
+
+		public static IServiceCollection AddSqlServer(this IServiceCollection services, IConfiguration configuration)
+		{
+			var connectionString = configuration.GetConnectionString("SqlServerDbConnection");
+
+			services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
+			return services;
+
+		}
+
+		public static ServiceProvider GetProvider(this IServiceCollection services)
+		{
+			return services.BuildServiceProvider();
+		}
+
+
 	}
 }

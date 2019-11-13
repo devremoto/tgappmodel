@@ -33,7 +33,7 @@ export class BreadcrumbsService {
             url += '/' + routeSnapshot.url.map(segment => segment.path).join('/');
             breadcrumbs.push({
               label: route.snapshot.data,
-              url:   url
+              url
             });
             currentRoute = route;
           }

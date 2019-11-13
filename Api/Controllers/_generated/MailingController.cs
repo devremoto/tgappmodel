@@ -1,20 +1,14 @@
-﻿using Api.Models;
-using Application.AutoMapper;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.ViewModels;
-using AutoMapper;
-using CrossCutting.Extensions;
 using Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    public partial class MailingController    
+    public partial class MailingController 
+
     {
         
 		private readonly IMailingAppService _service;

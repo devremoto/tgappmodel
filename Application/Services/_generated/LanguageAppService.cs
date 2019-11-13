@@ -21,7 +21,7 @@ namespace Application.Services
         {
 			var result = new Language();
 
-			if (!edit || model.Id == default(Guid))
+			if (!edit || model.Id == default)
 				result = _service.Add(model);
 			else
 				result = _service.Update(model);			

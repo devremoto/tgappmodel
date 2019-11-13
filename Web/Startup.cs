@@ -51,28 +51,15 @@ namespace web
     {
       loggerFactory.AddFile("Logs/log-{Date}.txt");
 
+      app.UseCors(builder => builder.WithOrigins("http://tugon.com.br", "http://www.tugon.com.br").AllowAnyHeader().AllowAnyMethod());
+      app.UseExceptionHandler("/Home/Error");
       if (env.IsDevelopment())
       {
         app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-      }
-      else
-      {
-        //app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-        app.UseCors(builder => builder.WithOrigins("http://tugon.com.br", "http://www.tugon.com.br").AllowAnyHeader().AllowAnyMethod());
-      }
-
-      if (env.IsDevelopment())
-      {
         app.UseDeveloperExceptionPage();
-      }
-      else
-      {
-        app.UseExceptionHandler("/Home/Error");
       }
 
       app.UseRouting();
-
-
 
       app.UseStaticFiles(new StaticFileOptions
       {
@@ -107,10 +94,7 @@ namespace web
           //spa.
         }
       });
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapControllers();
-      });
+      app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 
     }

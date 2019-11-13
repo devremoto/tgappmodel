@@ -24,13 +24,13 @@ export class LanguageEditorFormComponent implements OnInit {
 
   @ViewChild('popContent') public popOver: NgbPopover;
   currentPop: NgbPopover;
-  rootItem: ObjectTree = <ObjectTree>{
+  rootItem: ObjectTree = {
     path: '',
     from: '',
     to: '',
     parent: null,
     child: new Array<ObjectTree>()
-  };
+  } as ObjectTree;
   @Input() items: ObjectTree[];
   @Input() jObject: any;
   @Input() jObjectDefault: any;
@@ -55,16 +55,16 @@ export class LanguageEditorFormComponent implements OnInit {
         elementDefault = elementDefault[arr[i]];
         element = element[arr[i]];
       }
-      return <JsonTranslate>{
+      return {
         jsonDefault: elementDefault[arr[arr.length - 1]],
         translated: element[arr[arr.length - 1]]
-      };
+      } as JsonTranslate;
     }
 
-    return <JsonTranslate>{
+    return {
       jsonDefault: elementDefault,
       translated: element
-    };
+    } as JsonTranslate;
   }
 
   addObject(e: Event, node: ObjectTree, root: boolean = false) {
@@ -93,14 +93,14 @@ export class LanguageEditorFormComponent implements OnInit {
   }
 
   setTree(tree: ObjectTree[], node: ObjectTree, root: boolean = false) {
-    const child = <ObjectTree>{
+    const child = {
       key: node.newPropName.toLocaleUpperCase(),
       path: `${node.path}.${node.newPropName.toLocaleUpperCase()}`,
       parent: root ? null : node,
       child: new Array<ObjectTree>(),
       from: node.from,
       to: node.to
-    };
+    } as ObjectTree;
 
     const exists = tree.filter(x => x.key === child.key);
     if (!exists.length) {
