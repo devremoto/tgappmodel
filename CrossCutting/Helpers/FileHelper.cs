@@ -6,7 +6,7 @@ using System.Net.Mime;
 
 namespace CrossCutting.Helpers
 {
-    public class FileHelper
+    public static class FileHelper
     {
         private static IDictionary<string, string> _mappings = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase) {
 
@@ -592,10 +592,10 @@ namespace CrossCutting.Helpers
         {
             if (extension == null)
             {
-                throw new ArgumentNullException("extension");
+                throw new ArgumentNullException(nameof(extension));
             }
 
-            if (!extension.StartsWith("."))
+            if (!extension.StartsWith(".",StringComparison.InvariantCulture))
             {
                 extension = "." + extension;
             }
@@ -609,7 +609,7 @@ namespace CrossCutting.Helpers
         {
             if (mime == null)
             {
-                throw new ArgumentNullException("mime");
+                throw new ArgumentNullException(nameof(mime));
             }
 
 

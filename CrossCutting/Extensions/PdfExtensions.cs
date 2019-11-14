@@ -6,7 +6,7 @@ namespace CrossCutting.Extensions
 	{
 		public static byte[] ToPdf(this string htmlContent, string cssContent)
 		{
-			return null;//new PdfHelper().Generate(htmlContent, cssContent);
+			return new PdfHelper().Generate(htmlContent, cssContent);
 		}
 	}
 }
