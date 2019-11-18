@@ -17,7 +17,8 @@ namespace Application.Interfaces
         void Remove(T model);
         void Remove(params object[] keys);
         T Update(T model);
-        void Dispose();
+		T Save(T model, bool edit);
+		void Dispose();
         void SaveJson();
         List<T> GetJson(int hours = 24);
     }

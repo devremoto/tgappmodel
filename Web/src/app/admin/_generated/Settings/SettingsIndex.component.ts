@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,12 +7,13 @@ import { DialogService } from '../../../components/dialog/dialog.service';
 import { SettingsModalComponent } from './SettingsModal.component';
 import { SettingsService } from '../../../services/generated/SettingsService';
 import { Settings } from '../../../models/Settings';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-settings',
   templateUrl: './SettingsIndex.component.html'
 })
-export class SettingsIndexComponent implements OnInit, OnChanges {
+export class SettingsIndexComponent implements OnInit, OnChanges, OnDestroy {
     private _edit = false;
     paging: PagingModel<Settings>;
     screen = 'Settings';
@@ -21,6 +22,7 @@ export class SettingsIndexComponent implements OnInit, OnChanges {
     settingsList: Settings[];
     @Input() autoLoad = true;
     private modalRef: NgbModalRef;
+    private subscription = new Subscription();
 
     constructor(
       private _service: SettingsService,
@@ -35,10 +37,22 @@ export class SettingsIndexComponent implements OnInit, OnChanges {
 
     ngOnInit() {
       this.load();
-      this._service.on('Settings-save').subscribe((data) => {
+      this.subscription.add(this._service.hubService.on('SettingsCreate').subscribe((data) => {
         this.pageChanged();
         this.hideModal();
-      });
+      }));
+      this.subscription.add(this._service.hubService.on('SettingsUpdate').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+      this.subscription.add(this._service.hubService.on('SettingsRemove').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -104,7 +118,6 @@ export class SettingsIndexComponent implements OnInit, OnChanges {
               if (this.paging.totalCount <= this.paging.size) {
                 this.paging.number--;
               }
-              this.getAll();
               const successMsg = this.translate.instant('SETTINGS.GRID.REMOVE.SUCCESS');
               this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
             },

@@ -1,4 +1,5 @@
-﻿using Api.Helpers.Image;
+﻿using Api.Controllers.Hubs;
+using Api.Helpers.Image;
 using Api.Helpers.Upload;
 using Api.Models;
 using Application.Interfaces;
@@ -18,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,13 +43,15 @@ namespace Api.Controllers
         protected readonly IMapper _mapper;
         private readonly IWebHostEnvironment _hostingEnvironment;
         protected AppModelConfiguration _settings;
-        private string _imgFolder;
+		protected INotificationHub _notification;
+		private string _imgFolder;
 
-        public BaseController(IWebHostEnvironment hostingEnvironment, AppModelConfiguration settings, IBaseAppService<T> service, IMapper mapper)
+        public BaseController(IWebHostEnvironment hostingEnvironment, AppModelConfiguration settings, IBaseAppService<T> service, IMapper mapper, INotificationHub notification)
         {
             _imgFolder = settings.ImgFolder;
             _hostingEnvironment = hostingEnvironment;
             _settings = settings;
+			_notification = notification;
             WebRootPath = _hostingEnvironment.WebRootPath;
             ContentRootPath = _hostingEnvironment.ContentRootPath;
             _service = service;
@@ -67,7 +71,8 @@ namespace Api.Controllers
                 var model = await Task.FromResult(_service.GetOne(id));
                 if (model != null)
                     return NotFound();
-                return Ok(model);
+				await _notification.Notify(HubAction.GetOne, model, typeof(T));
+				return Ok(model);
             }
             catch (Exception e)
             {
@@ -82,7 +87,8 @@ namespace Api.Controllers
             try
             {
                 var model = await Task.FromResult(_service.GetAll());
-                return Ok(model);
+				await _notification.Notify(HubAction.GetAll, model.ToList(), typeof(T));
+				return Ok(model);
             }
             catch (Exception e)
             {
@@ -99,6 +105,7 @@ namespace Api.Controllers
             {
                 var entity = _mapper.Map<PagingViewModel<T>>(page);
                 var model = await Task.FromResult(_service.GetByAllPage(entity));
+				await _notification.Notify(HubAction.GetAllPage, model, typeof(T));
                 return Ok(model);
             }
             catch (Exception e)
@@ -115,7 +122,8 @@ namespace Api.Controllers
             {
                 var entity = _mapper.Map<T>(model);
                 await Task.Run(() => _service.Remove(entity));
-                return Ok();
+				await _notification.Notify(HubAction.Remove,entity, typeof(T));
+				return Ok();
             }
             catch
             {
@@ -129,8 +137,13 @@ namespace Api.Controllers
         {
             try
             {
-                await Task.Run(() => _service.Remove(id));
-                return Ok();
+				var entity = _service.GetOne(id);
+				if (entity != null)
+				{
+					await Task.Run(() => _service.Remove(id));
+					await _notification.Notify(HubAction.Remove, entity, typeof(T));
+				}
+				return Ok();
             }
             catch
             {
@@ -146,6 +159,7 @@ namespace Api.Controllers
 			{
 				var entity = _mapper.Map<T>(model);
 				var result = await Task.FromResult(_service.Update(entity));
+				await _notification.Notify(HubAction.Update, result, typeof(T));
 				return Ok(_mapper.Map<TViewModel>(result));
 			}
 			catch (Exception e)
@@ -154,6 +168,38 @@ namespace Api.Controllers
 			}
 		}
 
+
+		[HttpPost]
+		public async Task<IActionResult> Create([FromBody] TViewModel model)
+        {
+			try
+			{
+				var entity = _mapper.Map <T>(model);
+				var result = await Task.FromResult(_service.Save(entity, false));
+				await _notification.Notify(HubAction.Create, result, typeof(T));
+				return Created("", _mapper.Map <TViewModel>(result));
+            }
+			catch (Exception e)
+			{
+				return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
+			}
+		}
+
+		[HttpPut]
+		public async Task<IActionResult> Update([FromBody] TViewModel model)
+        {
+			try
+			{
+				var entity = _mapper.Map <T>(model);
+				var result = await Task.FromResult(_service.Save(entity, true));
+				await _notification.Notify(HubAction.Update, result, typeof(T));
+				return Ok(_mapper.Map <TViewModel>(result));
+            }
+			catch (Exception e)
+			{
+				return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
+			}
+		}
 		[HttpGet]
         [AllowAnonymous]
         [Route("image/{name}")]
@@ -437,7 +483,8 @@ namespace Api.Controllers
             try
             {
                 var model = await Task.FromResult(_service.GetJson());
-                return Ok(model);
+				await _notification.Notify(HubAction.GetJson, model.ToList(), typeof(T));
+				return Ok(model);
             }
             catch (Exception e)
             {

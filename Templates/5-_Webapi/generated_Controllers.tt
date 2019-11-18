@@ -76,36 +76,7 @@ namespace Api.Controllers
             }
         }
 <#}}#>
-
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] <#= classModel.Name #>ViewModel model)
-        {
-            try
-            {
-				var entity = _mapper.Map<<#= classModel.Name #>>(model);
-				var result = await Task.FromResult(_service.Save(entity, false));
-                return Created("",_mapper.Map<<#= classModel.Name #>ViewModel>(result));
-            }
-            catch(Exception e)
-            {
-                return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
-            }
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] <#= classModel.Name #>ViewModel model)
-        {
-            try
-            {
-				var entity = _mapper.Map<<#= classModel.Name #>>(model);
-				var result = await Task.FromResult(_service.Save(entity, true));
-                return Ok(_mapper.Map<<#= classModel.Name #>ViewModel>(result));
-            }
-            catch(Exception e)
-            {
-                return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
-            }
-        }
+        
 
 		protected override void Dispose(bool disposing)
 		{

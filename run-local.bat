@@ -7,4 +7,4 @@ start cmd /c "cd %~dp0/Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_POR
 ) else (
     start cmd /c "cd %~dp0/Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT%" 
 )
-start cmd /c "title=back & cd %~dp0/Api & dotnet build & dotnet run seed"
+start cmd /c "title=back & cd %~dp0/Api & dotnet build & dotnet watch run seed"

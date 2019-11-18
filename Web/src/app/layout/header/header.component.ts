@@ -5,6 +5,7 @@ import { Config } from '../../config';
 import { SocialNetwork } from '../../models/SocialNetwork';
 import { LanguageCustomService } from '../../services/custom/Language';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
+import { HubService } from '../../services/hub.service';
 
 declare var $: any;
 @Component({
@@ -19,8 +20,9 @@ export class HeaderComponent implements OnInit {
   socialNetworks: SocialNetwork[];
   logo = Config.logoUrl;
 
-  constructor(private _socialNetworkService: SocialNetworkCustomService, private _sanitizer: DomSanitizer, public translate: LanguageCustomService) {
+  constructor(private _socialNetworkService: SocialNetworkCustomService, private _sanitizer: DomSanitizer, public translate: LanguageCustomService) {//, private hubService:HubService) {
     translate.init();
+    //hubService.register("SocialNetworkGetJson");
   }
 
   ngOnInit() {

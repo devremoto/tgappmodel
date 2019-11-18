@@ -1,4 +1,4 @@
-﻿export class About {
+export class About {
   id;
   title: string;
   image: string;

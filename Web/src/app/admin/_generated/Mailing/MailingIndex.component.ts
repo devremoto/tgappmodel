@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,12 +7,13 @@ import { DialogService } from '../../../components/dialog/dialog.service';
 import { MailingModalComponent } from './MailingModal.component';
 import { MailingService } from '../../../services/generated/MailingService';
 import { Mailing } from '../../../models/Mailing';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-mailing',
   templateUrl: './MailingIndex.component.html'
 })
-export class MailingIndexComponent implements OnInit, OnChanges {
+export class MailingIndexComponent implements OnInit, OnChanges, OnDestroy {
     private _edit = false;
     paging: PagingModel<Mailing>;
     screen = 'Mailing';
@@ -21,6 +22,7 @@ export class MailingIndexComponent implements OnInit, OnChanges {
     mailingList: Mailing[];
     @Input() autoLoad = true;
     private modalRef: NgbModalRef;
+    private subscription = new Subscription();
 
     constructor(
       private _service: MailingService,
@@ -35,10 +37,22 @@ export class MailingIndexComponent implements OnInit, OnChanges {
 
     ngOnInit() {
       this.load();
-      this._service.on('Mailing-save').subscribe((data) => {
+      this.subscription.add(this._service.hubService.on('MailingCreate').subscribe((data) => {
         this.pageChanged();
         this.hideModal();
-      });
+      }));
+      this.subscription.add(this._service.hubService.on('MailingUpdate').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+      this.subscription.add(this._service.hubService.on('MailingRemove').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -104,7 +118,6 @@ export class MailingIndexComponent implements OnInit, OnChanges {
               if (this.paging.totalCount <= this.paging.size) {
                 this.paging.number--;
               }
-              this.getAll();
               const successMsg = this.translate.instant('MAILING.GRID.REMOVE.SUCCESS');
               this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
             },

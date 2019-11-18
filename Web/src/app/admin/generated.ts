@@ -1,4 +1,4 @@
-﻿// models imports/////////////////////////////////
+// models imports/////////////////////////////////
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthCanActivateGuard } from '../auth/auth-can-activate.guard';
@@ -62,130 +62,130 @@ import { UploadFileModalComponent } from './_generated/UploadFile/UploadFileModa
     RouterModule.forChild([
       {
         path: 'about',
-        data: {title: 'ABOUT.TITLE'},
+        data: { title: 'ABOUT.TITLE' },
         component: AboutIndexComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'about/:id?',
-        data: {title: 'ABOUT.TITLE'},
+        data: { title: 'ABOUT.TITLE' },
         component: AboutEditComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'contact',
-        data: {title: 'CONTACT.TITLE'},
+        data: { title: 'CONTACT.TITLE' },
         component: ContactIndexComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'contact/:id?',
-        data: {title: 'CONTACT.TITLE'},
+        data: { title: 'CONTACT.TITLE' },
         component: ContactEditComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'language',
-        data: {title: 'LANGUAGE.TITLE'},
+        data: { title: 'LANGUAGE.TITLE' },
         component: LanguageIndexComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'language/:id?',
-        data: {title: 'LANGUAGE.TITLE'},
+        data: { title: 'LANGUAGE.TITLE' },
         component: LanguageEditComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'mailing',
-        data: {title: 'MAILING.TITLE'},
+        data: { title: 'MAILING.TITLE' },
         component: MailingIndexComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'mailing/:id?',
-        data: {title: 'MAILING.TITLE'},
+        data: { title: 'MAILING.TITLE' },
         component: MailingEditComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'settings',
-        data: {title: 'SETTINGS.TITLE'},
+        data: { title: 'SETTINGS.TITLE' },
         component: SettingsIndexComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'settings/:id?',
-        data: {title: 'SETTINGS.TITLE'},
+        data: { title: 'SETTINGS.TITLE' },
         component: SettingsEditComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'socialNetwork',
-        data: {title: 'SOCIAL_NETWORK.TITLE'},
+        data: { title: 'SOCIAL_NETWORK.TITLE' },
         component: SocialNetworkIndexComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'socialNetwork/:id?',
-        data: {title: 'SOCIAL_NETWORK.TITLE'},
+        data: { title: 'SOCIAL_NETWORK.TITLE' },
         component: SocialNetworkEditComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'uploadFile',
-        data: {title: 'UPLOAD_FILE.TITLE'},
+        data: { title: 'UPLOAD_FILE.TITLE' },
         component: UploadFileIndexComponent,
         canActivate: [AuthCanActivateGuard]
       },
       {
         path: 'uploadFile/:id?',
-        data: {title: 'UPLOAD_FILE.TITLE'},
+        data: { title: 'UPLOAD_FILE.TITLE' },
         component: UploadFileEditComponent,
         canActivate: [AuthCanActivateGuard]
       },
     ])
-    ],
-    exports: [
-      AdminLayoutModule,
-      SharedModule,
-      AboutEditComponent,
-      AboutIndexComponent,
-      AboutModalComponent,
-      ContactEditComponent,
-      ContactIndexComponent,
-      ContactModalComponent,
-      LanguageEditComponent,
-      LanguageIndexComponent,
-      LanguageModalComponent,
-      MailingEditComponent,
-      MailingIndexComponent,
-      MailingModalComponent,
-      SettingsEditComponent,
-      SettingsIndexComponent,
-      SettingsModalComponent,
-      SocialNetworkEditComponent,
-      SocialNetworkIndexComponent,
-      SocialNetworkModalComponent,
-      UploadFileEditComponent,
-      UploadFileIndexComponent,
-      UploadFileModalComponent,
-    ],
-    entryComponents: [
-        AboutModalComponent,
-        ContactModalComponent,
-        LanguageModalComponent,
-        MailingModalComponent,
-        SettingsModalComponent,
-        SocialNetworkModalComponent,
-        UploadFileModalComponent,
+  ],
+  exports: [
+    AdminLayoutModule,
+    SharedModule,
+    AboutEditComponent,
+    AboutIndexComponent,
+    AboutModalComponent,
+    ContactEditComponent,
+    ContactIndexComponent,
+    ContactModalComponent,
+    LanguageEditComponent,
+    LanguageIndexComponent,
+    LanguageModalComponent,
+    MailingEditComponent,
+    MailingIndexComponent,
+    MailingModalComponent,
+    SettingsEditComponent,
+    SettingsIndexComponent,
+    SettingsModalComponent,
+    SocialNetworkEditComponent,
+    SocialNetworkIndexComponent,
+    SocialNetworkModalComponent,
+    UploadFileEditComponent,
+    UploadFileIndexComponent,
+    UploadFileModalComponent,
+  ],
+  entryComponents: [
+    AboutModalComponent,
+    ContactModalComponent,
+    LanguageModalComponent,
+    MailingModalComponent,
+    SettingsModalComponent,
+    SocialNetworkModalComponent,
+    UploadFileModalComponent,
   ]
 })
 export class GeneratedAdminModule {
-    constructor(private _languageService: LanguageCustomService) {
-    }
+  constructor(private _languageService: LanguageCustomService) {
+  }
 
-    translate(key: string) {
-        return this._languageService.translate.instant(key);
-    }
+  translate(key: string) {
+    return this._languageService.translate.instant(key);
+  }
 }

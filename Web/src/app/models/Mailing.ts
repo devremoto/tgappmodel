@@ -1,4 +1,4 @@
-﻿export class Mailing {
+export class Mailing {
   id;
   email: string;
   active;

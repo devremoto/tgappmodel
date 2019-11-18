@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,12 +7,13 @@ import { DialogService } from '../../../components/dialog/dialog.service';
 import { LanguageModalComponent } from './LanguageModal.component';
 import { LanguageService } from '../../../services/generated/LanguageService';
 import { Language } from '../../../models/Language';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-language',
   templateUrl: './LanguageIndex.component.html'
 })
-export class LanguageIndexComponent implements OnInit, OnChanges {
+export class LanguageIndexComponent implements OnInit, OnChanges, OnDestroy {
     private _edit = false;
     paging: PagingModel<Language>;
     screen = 'Language';
@@ -21,6 +22,7 @@ export class LanguageIndexComponent implements OnInit, OnChanges {
     languageList: Language[];
     @Input() autoLoad = true;
     private modalRef: NgbModalRef;
+    private subscription = new Subscription();
 
     constructor(
       private _service: LanguageService,
@@ -35,10 +37,22 @@ export class LanguageIndexComponent implements OnInit, OnChanges {
 
     ngOnInit() {
       this.load();
-      this._service.on('Language-save').subscribe((data) => {
+      this.subscription.add(this._service.hubService.on('LanguageCreate').subscribe((data) => {
         this.pageChanged();
         this.hideModal();
-      });
+      }));
+      this.subscription.add(this._service.hubService.on('LanguageUpdate').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+      this.subscription.add(this._service.hubService.on('LanguageRemove').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -104,7 +118,6 @@ export class LanguageIndexComponent implements OnInit, OnChanges {
               if (this.paging.totalCount <= this.paging.size) {
                 this.paging.number--;
               }
-              this.getAll();
               const successMsg = this.translate.instant('LANGUAGE.GRID.REMOVE.SUCCESS');
               this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
             },

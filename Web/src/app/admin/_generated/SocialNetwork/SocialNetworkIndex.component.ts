@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,12 +7,13 @@ import { DialogService } from '../../../components/dialog/dialog.service';
 import { SocialNetworkModalComponent } from './SocialNetworkModal.component';
 import { SocialNetworkService } from '../../../services/generated/SocialNetworkService';
 import { SocialNetwork } from '../../../models/SocialNetwork';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-social-network',
   templateUrl: './SocialNetworkIndex.component.html'
 })
-export class SocialNetworkIndexComponent implements OnInit, OnChanges {
+export class SocialNetworkIndexComponent implements OnInit, OnChanges, OnDestroy {
     private _edit = false;
     paging: PagingModel<SocialNetwork>;
     screen = 'SocialNetwork';
@@ -21,6 +22,7 @@ export class SocialNetworkIndexComponent implements OnInit, OnChanges {
     socialNetworkList: SocialNetwork[];
     @Input() autoLoad = true;
     private modalRef: NgbModalRef;
+    private subscription = new Subscription();
 
     constructor(
       private _service: SocialNetworkService,
@@ -35,10 +37,22 @@ export class SocialNetworkIndexComponent implements OnInit, OnChanges {
 
     ngOnInit() {
       this.load();
-      this._service.on('SocialNetwork-save').subscribe((data) => {
+      this.subscription.add(this._service.hubService.on('SocialNetworkCreate').subscribe((data) => {
         this.pageChanged();
         this.hideModal();
-      });
+      }));
+      this.subscription.add(this._service.hubService.on('SocialNetworkUpdate').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+      this.subscription.add(this._service.hubService.on('SocialNetworkRemove').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -104,7 +118,6 @@ export class SocialNetworkIndexComponent implements OnInit, OnChanges {
               if (this.paging.totalCount <= this.paging.size) {
                 this.paging.number--;
               }
-              this.getAll();
               const successMsg = this.translate.instant('SOCIAL_NETWORK.GRID.REMOVE.SUCCESS');
               this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
             },

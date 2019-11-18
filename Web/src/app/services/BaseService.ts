@@ -6,35 +6,39 @@ import { FileModel } from '../models/FileModel';
 import { PagingModel } from '../models/PagingModel';
 import { UploadModel } from '../models/UploadModel';
 import { HttpService } from './HttpService';
+import { HubService } from './hub.service';
 
 @Injectable({ providedIn: 'root' })
 export class BaseService<T> {
   public page: PagingModel<T> = new PagingModel<T>();
-  protected _controller: string;
-  private _emitter: Subject<any>;
+  protected controller: string;
+  private emitter: Subject<any>;
 
-  constructor(protected httpService: HttpService) {
-    this._emitter = new Subject<any>();
-    if (!this._controller) {
+  constructor(
+    protected httpService: HttpService,
+    public hubService: HubService
+  ) {
+    this.emitter = new Subject<any>();
+    if (!this.controller) {
       const comp: T = Object.assign({}, {} as T, {});
 
-      this._controller = (comp as T).constructor.name;
+      this.controller = (comp as T).constructor.name;
     }
   }
 
   getAll(): Observable<T[]> {
-    return this.httpService.get(this._controller).pipe(
+    return this.httpService.get(this.controller).pipe(
       map<any, T[]>(response => {
-        this.emit(this._controller + '-getAll', response);
+        this.emit(this.controller + '-getAll', response);
         return response;
       })
     );
   }
 
   getJson(): Observable<T[]> {
-    return this.httpService.get(this._controller + '/GetJson').pipe(
+    return this.httpService.get(this.controller + '/GetJson').pipe(
       map<any, T[]>(response => {
-        this.emit(this._controller + '-getJson', response);
+        this.emit(this.controller + '-getJson', response);
         return response;
       })
     );
@@ -44,7 +48,7 @@ export class BaseService<T> {
     this.page = page;
 
     return this.httpService
-      .post(this._controller + '/getAllPage', this.page)
+      .post(this.controller + '/getAllPage', this.page)
       .pipe(
         map<any, PagingModel<T>>(response => {
           return response;
@@ -53,29 +57,29 @@ export class BaseService<T> {
   }
 
   getLink(method: string, params?: any): string {
-    return this.httpService.getLink(`${this._controller}/${method}`, params);
+    return this.httpService.getLink(`${this.controller}/${method}`, params);
   }
 
   getById(id: any): Observable<T> {
-    return this.httpService.get(`${this._controller}/${id}`).pipe(
+    return this.httpService.get(`${this.controller}/${id}`).pipe(
       map<any, T>(response => {
-        this.emit(this._controller + '-getOne', response);
+        this.emit(this.controller + '-getOne', response);
         return response as T;
       })
     );
   }
 
   getOne(id: any): Observable<T> {
-    return this.httpService.get(`${this._controller}/${id}`).pipe(
+    return this.httpService.get(`${this.controller}/${id}`).pipe(
       map<any, T>(response => {
-        this.emit(this._controller + '-getOne', response);
+        this.emit(this.controller + '-getOne', response);
         return response as T;
       })
     );
   }
 
   post<TResult>(method: string, params?: any): Observable<TResult> {
-    return this.httpService.post(`${this._controller}/${method}`, params).pipe(
+    return this.httpService.post(`${this.controller}/${method}`, params).pipe(
       map<any, TResult>(response => {
         return response;
       })
@@ -83,7 +87,7 @@ export class BaseService<T> {
   }
 
   get<TResult>(method: string, params?: any): Observable<TResult> {
-    return this.httpService.get(`${this._controller}/${method}`, params).pipe(
+    return this.httpService.get(`${this.controller}/${method}`, params).pipe(
       map<any, TResult>(response => {
         return response;
       })
@@ -91,7 +95,7 @@ export class BaseService<T> {
   }
   apiUpload64(data: string, name?: string, entity?: any) {
     return this.httpService.apiUpload64(
-      `${this._controller}/upload`,
+      `${this.controller}/upload`,
       data,
       name,
       { entity, files: [{ name }] }
@@ -100,7 +104,7 @@ export class BaseService<T> {
 
   apiUpload(data: string, entity?: any) {
     return this.httpService.apiUpload(
-      `${this._controller}/upload`,
+      `${this.controller}/upload`,
       data,
       entity
     );
@@ -119,7 +123,7 @@ export class BaseService<T> {
         id: obj.id,
         name: obj.name,
         inputFileField: obj.name,
-        controller: this._controller
+        controller: this.controller
       } as FileModel);
 
       for (const file of obj.files) {
@@ -143,7 +147,7 @@ export class BaseService<T> {
                 obj.entity[file.inputFileField] = file.fileName;
               }
             }
-            this.emit(this._controller + '-upload', obj);
+            this.emit(this.controller + '-upload', obj);
             files = [];
             fields = [];
 
@@ -168,7 +172,7 @@ export class BaseService<T> {
     return this.httpService
       .image(fileName, controller, w, h, base64)
       .map<any, T>(response => {
-        this.emit(this._controller + '-image', response);
+        this.emit(this.controller + '-image', response);
         if (base64) {
           return response._body;
         } else {
@@ -196,31 +200,29 @@ export class BaseService<T> {
   }
 
   private callSave(entity: T, edit?: boolean): Observable<T> {
-    return this.httpService.save(this._controller, entity, edit).pipe(
+    return this.httpService.save(this.controller, entity, edit).pipe(
       map<any, T>(response => {
         const obj = response;
-        this.emit(this._controller + '-save', obj);
+        this.emit(this.controller + '-save', obj);
         return obj;
       })
     );
   }
 
   removeById(entity: string) {
-    return this.httpService.delete(`${this._controller}/${entity}`).pipe(
+    return this.httpService.delete(`${this.controller}/${entity}`).pipe(
       map(() => {
-        this.emit(this._controller + '-remove', entity);
+        this.emit(this.controller + '-remove', entity);
       })
     );
   }
 
   on(key: any): Observable<any> {
-    const observer = this._emitter.asObservable();
+    const observer = this.emitter.asObservable();
     return observer
       .pipe(
         filter(event => {
-          return (
-            event.key === key || event.key === `${this._controller}-${key}`
-          );
+          return event.key === key || event.key === `${this.controller}-${key}`;
         })
       )
       .pipe(
@@ -234,10 +236,10 @@ export class BaseService<T> {
   }
 
   emit(key: any, data?: any) {
-    this._emitter.next({ key, data });
+    this.emitter.next({ key, data });
   }
 
   setControler(controller: string): void {
-    this._controller = controller;
+    this.controller = controller;
   }
 }

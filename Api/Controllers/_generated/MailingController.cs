@@ -15,36 +15,7 @@ namespace Api.Controllers
 
 
 
-
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] MailingViewModel model)
-        {
-            try
-            {
-				var entity = _mapper.Map<Mailing>(model);
-				var result = await Task.FromResult(_service.Save(entity, false));
-                return Created("",_mapper.Map<MailingViewModel>(result));
-            }
-            catch(Exception e)
-            {
-                return BadRequest($"Error while saving Mailing {e.Message}");
-            }
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] MailingViewModel model)
-        {
-            try
-            {
-				var entity = _mapper.Map<Mailing>(model);
-				var result = await Task.FromResult(_service.Save(entity, true));
-                return Ok(_mapper.Map<MailingViewModel>(result));
-            }
-            catch(Exception e)
-            {
-                return BadRequest($"Error while saving Mailing {e.Message}");
-            }
-        }
+        
 
 		protected override void Dispose(bool disposing)
 		{

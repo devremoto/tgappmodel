@@ -6,13 +6,14 @@ import { Language } from '../../models/Language';
 import { SessionStorageService } from '../../shared/util/session-storage.service';
 import { LanguageService } from '../generated/LanguageService';
 import { HttpService } from '../services';
+import { HubService } from '../hub.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageCustomService extends LanguageService {
-  constructor(protected _http: HttpService, public translate: TranslateService, private _sessionStorageService: SessionStorageService) {
-    super(_http);
+  constructor(protected _http: HttpService, public translate: TranslateService, private _sessionStorageService: SessionStorageService, public hubService: HubService) {
+    super(_http, hubService);
     this._config = Config;
     this.init();
     this._time = new Date().getTime();

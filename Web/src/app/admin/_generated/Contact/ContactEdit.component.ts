@@ -1,16 +1,19 @@
-﻿import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+﻿import { Component, Input, OnInit, Output, OnDestroy, EventEmitter} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { ContactService } from '../../../services/generated/ContactService';
 import { Contact } from '../../../models/Contact';
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
   selector: 'app-form-contact',
   templateUrl: './ContactEdit.component.html'
 })
-export class ContactEditComponent implements OnInit {
+export class ContactEditComponent implements OnInit, OnDestroy {
 
+
+  private subscription= new Subscription();
 
   constructor(
     private _service: ContactService,
@@ -30,6 +33,10 @@ export class ContactEditComponent implements OnInit {
 
     ngOnInit() {
       this.contact = this.contact || new Contact();
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     save(contact: Contact) {

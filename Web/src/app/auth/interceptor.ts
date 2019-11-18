@@ -1,21 +1,33 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpHeaders,
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators/tap';
 import { AuthService } from './services/auth.service';
+import { Config } from '../config';
 
 @Injectable({ providedIn: 'root' })
 export class AuthInterceptor implements HttpInterceptor {
   headers: HttpHeaders;
-  constructor(private _auth: AuthService) {
-    if (this._auth && this.headers) {
-      this._auth.onLogout.subscribe(() => {
+  constructor(private authService: AuthService) {
+    if (this.authService && this.headers) {
+      this.authService.onLogout.subscribe(() => {
         this.headers.delete('Authorization');
       });
     }
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
     const newReq = this.setHeaders(req);
 
     return next.handle(newReq).pipe(
@@ -35,8 +47,11 @@ export class AuthInterceptor implements HttpInterceptor {
   setHeaders(request: HttpRequest<any>) {
     const newReq = request.clone({
       setHeaders: {
-        // 'Access-Control-Allow-Origin': Config.siteUrl,
-        Authorization: this._auth && this._auth.isLoggedIn() ? `Bearer ${this._auth.getToken()}` : ''
+        'Access-Control-Allow-Origin': Config.siteUrl,
+        Authorization:
+          this.authService && this.authService.isLoggedIn()
+            ? `Bearer ${this.authService.getToken()}`
+            : ''
       }
     });
 
@@ -50,7 +65,7 @@ export class AuthInterceptor implements HttpInterceptor {
   handleRequest(error: HttpErrorResponse) {
     if (error.status === 401 || error.status === 403 || error.status === 500) {
       // this._auth.logout();
-      this._auth.navigateToUrl(`/unauthorized/${error.status}`);
+      this.authService.navigateToUrl(`/unauthorized/${error.status}`);
       // this._auth.login();
     }
 

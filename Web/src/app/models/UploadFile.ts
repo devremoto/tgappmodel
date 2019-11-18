@@ -1,4 +1,4 @@
-﻿export class UploadFile {
+export class UploadFile {
   id;
   name: string;
   inputFileField: string;

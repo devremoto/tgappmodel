@@ -1,4 +1,4 @@
-declare var process: Process;
+//declare var process: Process;
 interface Process {
   env: Env;
 }

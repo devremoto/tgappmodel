@@ -118,7 +118,7 @@ manager.EndBlock();
 ///////////////////////////////////////////////////////
 manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Edit.component.ts",webProject,"");
 #>
-import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, OnDestroy, EventEmitter} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { <#=classModel.Name#>Service } from '../../../services/generated/<#=classModel.Name#>Service';
@@ -130,17 +130,20 @@ import { <#=child #> } from '../../../models/<#=child #>';
 import { <#=field #> } from '../../../models/<#=field #>';
 import { <#=field #>ModalComponent } from '../<#=field #>/<#=field #>Modal.component';
 <# } #>
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
   selector: 'app-form-<#=classSet.ToDash(classModel.Name)#>',
   templateUrl: './<#=classModel.Name#>Edit.component.html'
 })
-export class <#=classModel.Name#>EditComponent implements OnInit {
+export class <#=classModel.Name#>EditComponent implements OnInit, OnDestroy {
 
 <# foreach(var field in  fieldChildren){#>
 	<#=classSet.ToCamelCase(field.DataType)#>: <#=field.DataType#>;
 <#}#>
+
+  private subscription= new Subscription();
 
   constructor(
     private _service: <#=classModel.Name#>Service,
@@ -163,6 +166,10 @@ export class <#=classModel.Name#>EditComponent implements OnInit {
 
     ngOnInit() {
       this.<#=camelCaseName#> = this.<#=camelCaseName#> || new <#=classModel.Name#>();
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     save(<#=camelCaseName#>: <#=classModel.Name#>) {

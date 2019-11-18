@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.Controllers.Hubs;
+using Api.Models;
 using Application.Interfaces;
 using Application.ViewModels;
 using AutoMapper;
@@ -16,9 +17,9 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public partial class LanguageController : BaseController<Guid, ILanguageAppService, Language, LanguageViewModel>
     {
-        public LanguageController(ILanguageAppService service, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper)
-            : base(hostingEnvironment, configuration, service, mapper)
-        {
+        public LanguageController(ILanguageAppService service, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper, INotificationHub notification)
+		: base(hostingEnvironment, configuration, service, mapper, notification)
+		{
             _service = service;
         }
         [Route("translation")]

@@ -1,4 +1,4 @@
-﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,12 +7,13 @@ import { DialogService } from '../../../components/dialog/dialog.service';
 import { ContactModalComponent } from './ContactModal.component';
 import { ContactService } from '../../../services/generated/ContactService';
 import { Contact } from '../../../models/Contact';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-contact',
   templateUrl: './ContactIndex.component.html'
 })
-export class ContactIndexComponent implements OnInit, OnChanges {
+export class ContactIndexComponent implements OnInit, OnChanges, OnDestroy {
     private _edit = false;
     paging: PagingModel<Contact>;
     screen = 'Contact';
@@ -21,6 +22,7 @@ export class ContactIndexComponent implements OnInit, OnChanges {
     contactList: Contact[];
     @Input() autoLoad = true;
     private modalRef: NgbModalRef;
+    private subscription = new Subscription();
 
     constructor(
       private _service: ContactService,
@@ -35,10 +37,22 @@ export class ContactIndexComponent implements OnInit, OnChanges {
 
     ngOnInit() {
       this.load();
-      this._service.on('Contact-save').subscribe((data) => {
+      this.subscription.add(this._service.hubService.on('ContactCreate').subscribe((data) => {
         this.pageChanged();
         this.hideModal();
-      });
+      }));
+      this.subscription.add(this._service.hubService.on('ContactUpdate').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+      this.subscription.add(this._service.hubService.on('ContactRemove').subscribe((data) => {
+        this.pageChanged();
+        this.hideModal();
+      }));
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -104,7 +118,6 @@ export class ContactIndexComponent implements OnInit, OnChanges {
               if (this.paging.totalCount <= this.paging.size) {
                 this.paging.number--;
               }
-              this.getAll();
               const successMsg = this.translate.instant('CONTACT.GRID.REMOVE.SUCCESS');
               this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
             },

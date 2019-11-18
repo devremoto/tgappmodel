@@ -23,6 +23,7 @@ foreach(var classModel in classSet.Classes){#>
 		var spacedName = classSet.ToSpacedName(classModel.Name);
 	  var parents = classModel.Fields.Where(x=>x.IsParent);
 #>
+using Api.Controllers.Hubs;
 using Api.Models;
 using Application.Interfaces;
 using Application.ViewModels;
@@ -39,8 +40,8 @@ namespace Api.Controllers
   [Route("api/[controller]")]
   public partial class <#= classModel.Name #>Controller :  BaseController<<#=classModel.Keys[0].DataType#>, I<#= classModel.Name #>AppService, <#= classModel.Name #>, <#= classModel.Name #>ViewModel>
   {
-    public <#= classModel.Name #>Controller(I<#= classModel.Name #>AppService service<# foreach(var parent in parents.Select(x=>x.DataType).Distinct()){#>, I<#=parent#>AppService  <#=classSet.ToCamelCase(parent)#>AppService<#}#>, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper)
-    : base(hostingEnvironment, configuration, service, mapper)
+    public <#= classModel.Name #>Controller(I<#= classModel.Name #>AppService service<# foreach(var parent in parents.Select(x=>x.DataType).Distinct()){#>, I<#=parent#>AppService  <#=classSet.ToCamelCase(parent)#>AppService<#}#>, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper, INotificationHub<<#= classModel.Name #>> notification)
+    : base(hostingEnvironment, configuration, service, mapper, notification)
     {
     _service = service;
 <# foreach(var parent in parents.Select(x=>x.DataType).Distinct()){#>

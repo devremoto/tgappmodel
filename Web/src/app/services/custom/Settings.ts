@@ -6,6 +6,7 @@ import { Settings } from '../../models/Settings';
 import { SessionStorageService } from '../../shared/util/session-storage.service';
 import { SettingsService } from '../generated/SettingsService';
 import { HttpService } from '../services';
+import { HubService } from '../hub.service';
 
 //////
 
@@ -17,9 +18,9 @@ export class SettingsCustomService extends SettingsService {
 
   constructor(
     protected _http: HttpService,
-    private _sessionStorage: SessionStorageService
+    private _sessionStorage: SessionStorageService, public hubService: HubService
   ) {
-    super(_http);
+    super(_http, hubService);
   }
 
   get json() {

@@ -1,16 +1,19 @@
-﻿import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+﻿import { Component, Input, OnInit, Output, OnDestroy, EventEmitter} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingsService } from '../../../services/generated/SettingsService';
 import { Settings } from '../../../models/Settings';
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
   selector: 'app-form-settings',
   templateUrl: './SettingsEdit.component.html'
 })
-export class SettingsEditComponent implements OnInit {
+export class SettingsEditComponent implements OnInit, OnDestroy {
 
+
+  private subscription= new Subscription();
 
   constructor(
     private _service: SettingsService,
@@ -30,6 +33,10 @@ export class SettingsEditComponent implements OnInit {
 
     ngOnInit() {
       this.settings = this.settings || new Settings();
+    }
+
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
     }
 
     save(settings: Settings) {

@@ -10,7 +10,7 @@ namespace Domain.Interfaces
         T GetOne(params object[] keys);
         IQueryable<T> GetAll(params string[] includeProperties);
         T Update(T entity);
-        void Remove(params object[] keys);
+		void Remove(params object[] keys);
         void Remove(T entity);
         IQueryable<T> Find(Expression<Func<T, bool>> predicate, params string[] includeProperties);
         int SaveChanges();
