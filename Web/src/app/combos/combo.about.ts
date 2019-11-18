@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { AboutService } from '../services/generated/AboutService';
 import { About } from '../models/About';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-about',
@@ -9,7 +10,7 @@ import { About } from '../models/About';
       <option *ngFor="let about of aboutList" [value]="about.id">{{about.description}}</option>
     </select>`
 })
-export class ComboAboutComponent implements OnInit {
+export class ComboAboutComponent implements OnInit, OnDestroy {
     appErrorMessage: any;
     about: About;
     aboutList: About[];
@@ -17,11 +18,12 @@ export class ComboAboutComponent implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: AboutService) {
-        this._service.on('About-save').subscribe((data) => {
+        this.subscription.add(this._service.on('About-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -34,8 +36,12 @@ export class ComboAboutComponent implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: About) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.aboutList = result;
                     if (data) {
@@ -45,7 +51,7 @@ export class ComboAboutComponent implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: About) {

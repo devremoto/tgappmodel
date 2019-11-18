@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { UploadFileService } from '../services/generated/UploadFileService';
 import { UploadFile } from '../models/UploadFile';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-upload-file',
@@ -9,7 +10,7 @@ import { UploadFile } from '../models/UploadFile';
       <option *ngFor="let uploadFile of uploadFileList" [value]="uploadFile.id">{{uploadFile.name}}</option>
     </select>`
 })
-export class ComboUploadFileComponent implements OnInit {
+export class ComboUploadFileComponent implements OnInit, OnDestroy {
     appErrorMessage: any;
     uploadFile: UploadFile;
     uploadFileList: UploadFile[];
@@ -17,11 +18,12 @@ export class ComboUploadFileComponent implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: UploadFileService) {
-        this._service.on('UploadFile-save').subscribe((data) => {
+        this.subscription.add(this._service.on('UploadFile-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -34,8 +36,12 @@ export class ComboUploadFileComponent implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: UploadFile) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.uploadFileList = result;
                     if (data) {
@@ -45,7 +51,7 @@ export class ComboUploadFileComponent implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: UploadFile) {

@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { MailingService } from '../services/generated/MailingService';
 import { Mailing } from '../models/Mailing';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-mailing',
@@ -9,7 +10,7 @@ import { Mailing } from '../models/Mailing';
       <option *ngFor="let mailing of mailingList" [value]="mailing.id">{{mailing.email}}</option>
     </select>`
 })
-export class ComboMailingComponent implements OnInit {
+export class ComboMailingComponent implements OnInit, OnDestroy {
     appErrorMessage: any;
     mailing: Mailing;
     mailingList: Mailing[];
@@ -17,11 +18,12 @@ export class ComboMailingComponent implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: MailingService) {
-        this._service.on('Mailing-save').subscribe((data) => {
+        this.subscription.add(this._service.on('Mailing-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -34,8 +36,12 @@ export class ComboMailingComponent implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: Mailing) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.mailingList = result;
                     if (data) {
@@ -45,7 +51,7 @@ export class ComboMailingComponent implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: Mailing) {

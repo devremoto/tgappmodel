@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { LanguageService } from '../services/generated/LanguageService';
 import { Language } from '../models/Language';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-language',
@@ -9,7 +10,7 @@ import { Language } from '../models/Language';
       <option *ngFor="let language of languageList" [value]="language.id">{{language.name}}</option>
     </select>`
 })
-export class ComboLanguageComponent implements OnInit {
+export class ComboLanguageComponent implements OnInit, OnDestroy {
     appErrorMessage: any;
     language: Language;
     languageList: Language[];
@@ -17,11 +18,12 @@ export class ComboLanguageComponent implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: LanguageService) {
-        this._service.on('Language-save').subscribe((data) => {
+        this.subscription.add(this._service.on('Language-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -34,8 +36,12 @@ export class ComboLanguageComponent implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: Language) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.languageList = result;
                     if (data) {
@@ -45,7 +51,7 @@ export class ComboLanguageComponent implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: Language) {

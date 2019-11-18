@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ContactService } from '../services/generated/ContactService';
 import { Contact } from '../models/Contact';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-contact',
@@ -9,7 +10,7 @@ import { Contact } from '../models/Contact';
       <option *ngFor="let contact of contactList" [value]="contact.id">{{contact.name}}</option>
     </select>`
 })
-export class ComboContactComponent implements OnInit {
+export class ComboContactComponent implements OnInit, OnDestroy {
     appErrorMessage: any;
     contact: Contact;
     contactList: Contact[];
@@ -17,11 +18,12 @@ export class ComboContactComponent implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: ContactService) {
-        this._service.on('Contact-save').subscribe((data) => {
+        this.subscription.add(this._service.on('Contact-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -34,8 +36,12 @@ export class ComboContactComponent implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: Contact) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.contactList = result;
                     if (data) {
@@ -45,7 +51,7 @@ export class ComboContactComponent implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: Contact) {

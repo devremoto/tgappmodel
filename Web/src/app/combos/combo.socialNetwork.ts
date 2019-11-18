@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { SocialNetworkService } from '../services/generated/SocialNetworkService';
 import { SocialNetwork } from '../models/SocialNetwork';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-social-network',
@@ -9,7 +10,7 @@ import { SocialNetwork } from '../models/SocialNetwork';
       <option *ngFor="let socialNetwork of socialNetworkList" [value]="socialNetwork.id">{{socialNetwork.name}}</option>
     </select>`
 })
-export class ComboSocialNetworkComponent implements OnInit {
+export class ComboSocialNetworkComponent implements OnInit, OnDestroy {
     appErrorMessage: any;
     socialNetwork: SocialNetwork;
     socialNetworkList: SocialNetwork[];
@@ -17,11 +18,12 @@ export class ComboSocialNetworkComponent implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: SocialNetworkService) {
-        this._service.on('SocialNetwork-save').subscribe((data) => {
+        this.subscription.add(this._service.on('SocialNetwork-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -34,8 +36,12 @@ export class ComboSocialNetworkComponent implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: SocialNetwork) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.socialNetworkList = result;
                     if (data) {
@@ -45,7 +51,7 @@ export class ComboSocialNetworkComponent implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: SocialNetwork) {

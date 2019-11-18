@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { SettingsService } from '../services/generated/SettingsService';
 import { Settings } from '../models/Settings';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-settings',
@@ -9,7 +10,7 @@ import { Settings } from '../models/Settings';
       <option *ngFor="let settings of settingsList" [value]="settings.id">{{settings.key}}</option>
     </select>`
 })
-export class ComboSettingsComponent implements OnInit {
+export class ComboSettingsComponent implements OnInit, OnDestroy {
     appErrorMessage: any;
     settings: Settings;
     settingsList: Settings[];
@@ -17,11 +18,12 @@ export class ComboSettingsComponent implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: SettingsService) {
-        this._service.on('Settings-save').subscribe((data) => {
+        this.subscription.add(this._service.on('Settings-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -34,8 +36,12 @@ export class ComboSettingsComponent implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: Settings) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.settingsList = result;
                     if (data) {
@@ -45,7 +51,7 @@ export class ComboSettingsComponent implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: Settings) {

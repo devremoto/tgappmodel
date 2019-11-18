@@ -46,9 +46,10 @@ if(classModel.Fields.Any(x=>x.Name =="Nome")){
 
 manager.StartNewFile($"{webAppPath}combos\\combo.{classSet.ToCamelCase(classModel.Name)}.ts",webProject,"");
 #>
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { <#=classModel.Name#>Service } from '../services/generated/<#=classModel.Name#>Service';
 import { <#=classModel.Name#> } from '../models/<#=classModel.Name#>';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-<#=classSet.ToDash(classModel.Name)#>',
@@ -57,7 +58,7 @@ import { <#=classModel.Name#> } from '../models/<#=classModel.Name#>';
       <option *ngFor="let <#=camelCaseName#> of <#=camelCaseName#>List" [value]="<#=camelCaseName#>.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>">{{<#=camelCaseName#>.<#=prop#>}}</option>
     </select>`
 })
-export class Combo<#=classModel.Name#>Component implements OnInit {
+export class Combo<#=classModel.Name#>Component implements OnInit, OnDestroy {
     appErrorMessage: any;
     <#=camelCaseName#>: <#=classModel.Name#>;
     <#=camelCaseName#>List: <#=classModel.Name#>[];
@@ -65,11 +66,12 @@ export class Combo<#=classModel.Name#>Component implements OnInit {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
+    subscription = new Subscription();
 
     constructor(private _service: <#=classModel.Name#>Service) {
-        this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
+        this.subscription.add(this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
             this.reload(data);
-        });
+        }));
     }
 
     updateData(event) {
@@ -82,8 +84,12 @@ export class Combo<#=classModel.Name#>Component implements OnInit {
         this.getAll();
     }
 
+    ngOnDestroy(){
+      this.subscription.unsubscribe();
+    }
+
     public getAll(data?: <#=classModel.Name#>) {
-        this._service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.<#=camelCaseName#>List = result;
                     if (data) {
@@ -93,7 +99,7 @@ export class Combo<#=classModel.Name#>Component implements OnInit {
             error => {
                 this.appErrorMessage = error;
             }
-        );
+        ));
     }
 
     public reload(data?: <#=classModel.Name#>) {
