@@ -48,8 +48,9 @@ npm i -g @angular/cli@9.0.0-rc.2
 
 ## Run
 
-In order to run the applicaction localy execute the command:
-`run-local.bat` on root folder
+In order to run the application locally, execute the command:
+`run-local.bat` on root folder<br />
+See: [Scripts](#Scripts) section
 
 ## Unit Tests
 
@@ -144,7 +145,7 @@ setx  SmtpConfiguration:User "your_user_name"
 setx  BingTranslateConfiguration:Key "YOUR_BING_TRANSLATE_KEY"
 ```
 
-## Linux - Uuntu
+## Linux - Ubuntu
 
 > On the `Terminal` run this command bellow:
 
@@ -222,19 +223,19 @@ There some bach and shel scripts to help with the commands
 
 ## Windows
 
-> Set `pre.bat` according to your needs
-> Rename the file `env.bat.txt` to `env.bat` to SET ENV VARIABLES
-> install.bat - BUILD the images run the conainers
-> run.bat - RUN the containers
-> run-local.bat - run the app locally - NO DOCKER
+> - Set `pre.bat` according to your needs
+> - Rename the file `env.bat.txt` to `env.bat` to SET ENV VARIABLES
+> - install.bat - BUILD the images run the conainers
+> - run.bat - RUN the containers
+> - run-local.bat - run the app locally - NO DOCKER
 
 ## LINUX - Ubuntu
 
-> Set `pre.sh` according to your needs
-> Rename the file `env.sh.txt` to `env.sh` to SET ENV VARIABLES
-> install.sh - BUILD the images run the conainers
-> run.sh - RUN the containers
-> run-local.sh - run the app locally - NO DOCKER
+> - Set `pre.sh` according to your needs
+> - Rename the file `env.sh.txt` to `env.sh` to SET ENV VARIABLES
+> - install.sh - BUILD the images run the conainers
+> - run.sh - RUN the containers
+> - run-local.sh - run the app locally - NO DOCKER
 
 `Obs` on linux don't forget to turn the `.sh` files into executables first with
 
@@ -271,7 +272,7 @@ You need to open File -> Preferences -> Settings and add path in TTPath. OR You 
 ## Get in touch with [Tugon](http://www.tugon.com.br)
 
 - **Mobile** +55 11 9 9353-6732
-- **WathsApp** [+55 11 9 9353-6732](https://Api.whatsapp.com/send?phone=5511993536732&text=I%20want%20to%20receive%20more%20information%20about%20TUGON%20app%20model)
+- **WhatsApp** [+55 11 9 9353-6732](https://Api.whatsapp.com/send?phone=5511993536732&text=I%20want%20to%20receive%20more%20information%20about%20TUGON%20app%20model)
 - **E-mail** [adilson@almeidapedro.com.br](mailto:adilson@almeidapedro.com.br)
 - **Web** [devremoto.com.br](www.devremoto.com.br) / [www.tugon.com.br](www.tugon.com.br)
 - **Resume** [adilson.almeidapedro.com.br](http://adilson.almeidapedro.com.br)
