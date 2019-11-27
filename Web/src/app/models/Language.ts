@@ -6,6 +6,7 @@ export class Language {
   active;
   default;
   loaded;
+  locale:any;
 
   constructor() {
   }

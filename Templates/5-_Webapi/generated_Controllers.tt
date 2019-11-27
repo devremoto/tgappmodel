@@ -24,7 +24,9 @@ foreach(var classModel in classSet.Classes){#>
 #>
 using Application.Interfaces;
 using Application.ViewModels;
+using CrossCutting.Extensions;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;

@@ -1,7 +1,7 @@
 @echo off
 
 SET HOST_PORT=4200
-SET HOST_IP=192.168.0.5
+SET HOST_IP=localhost
 SET HOST_SERVER=http://%HOST_IP%
 SET HOST_URL=%HOST_SERVER%:%HOST_PORT%
 
@@ -25,4 +25,4 @@ if %USE_SSL% == true (
     SET STS_SERVER=https://%HOST_IP%:%STS_HTTPS_PORT%
 )
 echo %STS_SERVER%
-docker-compose down
+rem docker-compose down

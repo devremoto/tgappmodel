@@ -41,7 +41,7 @@ The frontend needs angular 9, to install angular you need first install node js
 If you already have the node installed you dont,t need to re-install, go to angular instalation
 
 ```bat
-npm i -g @angular/cli@9.0.0-rc.1
+npm i -g @angular/cli@9.0.0-rc.2
 ```
 
 > [`Angular` - **Website** - https://angular.io/ ](https://angular.io/)
@@ -216,31 +216,39 @@ At root folder we have the docker-compose scripts for build and run the containe
 > BUIL docker-compose-build-build.yml
 > RUN docker-compose-build-run.yml
 
-there some bach and shel scripts to help with the commands
+# Scripts
 
-### Windows
+There some bach and shel scripts to help with the commands
 
-> env-local.bat - SET ENV VARIABLES
+## Windows
+
+> Set `pre.bat` according to your needs
+> Rename the file `env.bat.txt` to `env.bat` to SET ENV VARIABLES
 > install.bat - BUILD the images run the conainers
 > run.bat - RUN the containers
 > run-local.bat - run the app locally - NO DOCKER
 
-# LINUX - Ubuntu
+## LINUX - Ubuntu
 
-> env-local.sh - SET ENV VARIABLES
+> Set `pre.sh` according to your needs
+> Rename the file `env.sh.txt` to `env.sh` to SET ENV VARIABLES
 > install.sh - BUILD the images run the conainers
-> run.bat - RUN the containers
+> run.sh - RUN the containers
 > run-local.sh - run the app locally - NO DOCKER
 
-`Obs` on linux dont forget to make the file executable first with
+`Obs` on linux don't forget to turn the `.sh` files into executables first with
 
 ex.:
 
 ```sh
 sudo chmod +x ./install.sh && ./install.sh
+sudo chmod +x ./run.sh && ./run.sh
+sudo chmod +x ./run-local.sh && ./run-local.sh
+sudo chmod +x ./env.sh && ./env.sh
+sudo chmod +x ./pre.sh && ./pre.sh
 ```
 
-## Code Generation - T4
+# Code Generation - T4
 
 At the folder `Infra/Templates` whe have the tamplates that helps to generate the code to the whole application, base on the entites on `Domain` Project
 
@@ -262,8 +270,9 @@ You need to open File -> Preferences -> Settings and add path in TTPath. OR You 
 
 ## Get in touch with [Tugon](http://www.tugon.com.br)
 
-- **Mobile** [+55 11 9 9353-6732](https://Api.whatsapp.com/send?phone=5511993536732&text=I%20want%20to%20receive%20more%20information%20about%20TUGON%20app%20model)
-- **E-mail** adilson@almeidapedro.com.br
+- **Mobile** +55 11 9 9353-6732
+- **WathsApp** [+55 11 9 9353-6732](https://Api.whatsapp.com/send?phone=5511993536732&text=I%20want%20to%20receive%20more%20information%20about%20TUGON%20app%20model)
+- **E-mail** [adilson@almeidapedro.com.br](mailto:adilson@almeidapedro.com.br)
 - **Web** [devremoto.com.br](www.devremoto.com.br) / [www.tugon.com.br](www.tugon.com.br)
 - **Resume** [adilson.almeidapedro.com.br](http://adilson.almeidapedro.com.br)
 - **LinkedIn** [linkedin.com/in/adilsonpedro](https://linkedin.com/in/adilsonpedro)

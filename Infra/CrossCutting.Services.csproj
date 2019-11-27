@@ -12,15 +12,7 @@
 	  <ProjectReference Include="..\CrossCutting\CrossCutting.csproj" />
 	</ItemGroup>
 
-	  <Target Name="CopyCrossCutting" AfterTargets="Build">
-    <ItemGroup>
-        <MockFile Include="$(OutDir)Mocks\**\*.*" />
-    </ItemGroup>
-    <!--<Delete 
-        Files="$(ProjectDir)..\Templates\$(TargetFileName)"  />-->
-    <Copy 
-        SourceFiles="$(TargetPath)" 
-        DestinationFolder="$(ProjectDir)..\Templates" 
-        SkipUnchangedFiles="true" />
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="copy $(TargetPath) $(ProjectDir)..\Templates\$(TargetFileName)" />
   </Target>
 </Project>

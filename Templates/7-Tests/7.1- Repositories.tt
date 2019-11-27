@@ -21,6 +21,7 @@ using Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Tests.Repositories
@@ -87,7 +88,8 @@ namespace Tests.Repositories
 <#}}#>
 <#if(field.IsClass){#>
 <#if(field.IsCollection){#>
-		var <<#=field.Name#>> = entity.<#=field.Name#>;
+            var current<#=field.Name #> = entity.<#=field.Name#>;
+            entity.<#=field.Name#> = new List<<#=field.DataType #>>();
 <#}}}#>
 			var result = _repository.Update(entity);
 			Assert.AreEqual(_guid, entity.Id);
@@ -102,7 +104,8 @@ namespace Tests.Repositories
 <#}}#>
 <#if(field.IsClass){#>
 <#if(field.IsCollection){#>
-		var <<#=field.Name#>> = entity.<#=field.Name#>;
+            Assert.AreEqual(result.<#=field.Name#>, entity.<#=field.Name#>);
+            Assert.AreNotEqual(result.<#=field.Name#>, current<#=field.Name #>);
 <#}}}#>
 		}
 

@@ -87,15 +87,15 @@ foreach(var field in classModel.Fields.OrderByDescending(x=>x.DataType)){#>
 #>
 						<div class="form-group col-md-<#=cssColumn#>">
 							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd'" (change)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event.target.value" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
 						</div>
 <#
 	break;
 	case "datetime":
 #>
-						<div class="form-group col-md-<#=cssColumn#>">
+						<div class="form-group col-md-4">
 							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd HH:mm'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-ddTHH:mm'" (change)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event.target.value" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
 						</div>
 <#
 	break;

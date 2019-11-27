@@ -13,7 +13,7 @@ export class LanguageSelectorComponent implements OnInit {
   cssClass = 'primary';
   language: Language = {} as Language;
   languages: Array<Language> = [];
-  constructor(public translate: LanguageCustomService) {}
+  constructor(public translate: LanguageCustomService) { }
 
   ngOnInit() {
     this.languages = this.translate.getLanguages();
@@ -28,5 +28,6 @@ export class LanguageSelectorComponent implements OnInit {
   changeLanguage(language: Language) {
     this.translate.setLanguage(language);
     this.language = language;
+    // window.location.reload();
   }
 }

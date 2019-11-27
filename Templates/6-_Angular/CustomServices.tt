@@ -38,14 +38,15 @@ foreach(var classModel in classSet.Classes){
 import { Injectable } from '@angular/core';
 import { HttpService } from '../services';
 import { <#=classModel.Name#>Service } from '../generated/<#=classModel.Name#>Service';
+import { MatchService } from '../generated/MatchService';
 
 @Injectable({
   providedIn: 'root',
 })
 export class <#=classModel.Name#>CustomService extends <#=classModel.Name#>Service {
 
-    constructor(protected _http: HttpService) {
-        super(_http);
+    constructor(protected _http: HttpService, public hubService: HubService) {
+    super(_http, hubService);
     }  
 }
 <#

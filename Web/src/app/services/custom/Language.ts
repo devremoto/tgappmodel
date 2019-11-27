@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import localeFr from '@angular/common/locales/fr';
+import localeEs from '@angular/common/locales/es';
+import localeEn from '@angular/common/locales/en';
+import localePt from '@angular/common/locales/pt';
+import localeDe from '@angular/common/locales/de';
 
 import { Config } from '../../config';
 import { Language } from '../../models/Language';
@@ -7,11 +12,23 @@ import { SessionStorageService } from '../../shared/util/session-storage.service
 import { LanguageService } from '../generated/LanguageService';
 import { HttpService } from '../services';
 import { HubService } from '../hub.service';
+import { registerLocaleData } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageCustomService extends LanguageService {
+  getLocale() {
+    var codeArr = this.lang.code.split('-')
+    var code = this.lang.code;
+    if (codeArr.length > 1) {
+      code = `${codeArr[0]}-${codeArr[1].toLocaleUpperCase()}`
+    }
+    console.log(this.lang.locale);
+    registerLocaleData(this.lang.locale);    
+    return code;
+
+  }
   constructor(protected _http: HttpService, public translate: TranslateService, private _sessionStorageService: SessionStorageService, public hubService: HubService) {
     super(_http, hubService);
     this._config = Config;
@@ -19,16 +36,17 @@ export class LanguageCustomService extends LanguageService {
     this._time = new Date().getTime();
     translate.onLangChange.subscribe((result: LangChangeEvent) => {
       this.loadFile({ code: result.lang } as Language, this.prefix, this.sufix);
+      this.getLocale();
     });
   }
 
   languages: Array<Language> = [
-    { code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png' } as Language,
-    { code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png' } as Language,
-    { code: 'fr-fr', active: false, image: '/assets/admin/img/flags/France.png' } as Language,
-    { code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png' } as Language,
-    { code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png' } as Language,
-    { code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png' } as Language
+    { code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png', locale:localePt } as Language,
+    { code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png', locale: localeEn} as Language,
+    { code: 'fr-fr', active: false, image: '/assets/admin/img/flags/France.png', locale: localeFr } as Language,
+    { code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png', locale: localeDe} as Language,
+    { code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png' , locale: localeDe} as Language,
+    { code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png', locale: localeEs} as Language
   ];
   language: Language;
   private _default: Language;
@@ -46,17 +64,16 @@ export class LanguageCustomService extends LanguageService {
   }
 
   get lang(): Language {
-    this._lang = this._sessionStorageService.getObjectCache<Language>('lang') || this.default;
-    this._sessionStorageService.setObjectCache<Language>('lang', this._lang);
+    this.language = this._sessionStorageService.getObjectCache<Language>('lang') || this.default;
+    this._sessionStorageService.setObjectCache<Language>('lang', this.language);
     this.translate.setDefaultLang(this.default.code);
-    return this._lang;
+    return this.language;
   }
   sufix: string;
   prefix: string;
   private _time: number;
   private _config;
 
-  private _lang: Language;
 
   loadAll(folder?: string) {
     const others = this.getLanguages(); // .filter(x => x.code !== this.lang);

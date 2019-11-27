@@ -19,9 +19,10 @@ export class HeaderComponent implements OnInit {
   animationDelay = 2500;
   socialNetworks: SocialNetwork[];
   logo = Config.logoUrl;
-
+  today = new Date();
   constructor(private _socialNetworkService: SocialNetworkCustomService, private _sanitizer: DomSanitizer, public translate: LanguageCustomService) {//, private hubService:HubService) {
     translate.init();
+
     //hubService.register("SocialNetworkGetJson");
   }
 

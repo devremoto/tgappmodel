@@ -1,10 +1,16 @@
 @echo off
-call pre.bat
+del Data\DB\appDBModel.db
+call env.bat
 title=RUN LOCAL
-start cmd /c "title=PRE BUILD & call env.bat & exit"
 if %USE_ENV% == true (
-start cmd /c "cd %~dp0/Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT% --configuration=dev" 
+start cmd /c "cd Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT% --configuration=dev" 
 ) else (
-    start cmd /c "cd %~dp0/Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT%" 
+    start cmd /c "cd Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT%" 
 )
-start cmd /c "title=back & cd %~dp0/Api & dotnet build & dotnet watch run seed"
+start cmd /c "title=back & cd Api & dotnet build & dotnet watch run --urls http://+:%API_PORT% seed"
+
+goto comment
+call env.bat
+cd Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT% --configuration=dev
+
+:comment
