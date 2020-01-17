@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Adilson de Almeida Pedro",
+  "classifications": ["Solution/"],
+  "name": "TG APP MODEL",
+  "identity": "TG.AppModel",
+  "groupIdentity": "TG.AppModel",
+  "shortName": "tg-app",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "MyProject.Con",
+  "preferNameDirectory": true,
+  "symbols": {
+    "ns": {
+      "type": "parameter",
+      "defaultValue": "",
+      "replaces": "TG.AppModel",
+      "fileRename": "TG.AppModel"
+    },
+    "title": {
+      "type": "parameter",
+      "defaultValue": "TgAppModel",
+      "replaces": "TgAppModel"
+    },
+    "name": {
+      "type": "parameter",
+      "defaultValue": "TgAppModel",
+      "replaces": "TgAppModel"
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "**/node_modules/**",
+        "**/packages/**",
+        "**/wwwroot/**",
+        ".git/**",
+        ".vs/**",
+        ".vscode/**"
+      ]
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        {
+          "text": "Run 'dotnet restore'"
+        }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true
+    }
+  ]
+}

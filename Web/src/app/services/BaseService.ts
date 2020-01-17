@@ -53,7 +53,9 @@ export class BaseService<T> {
         map<any, PagingModel<T>>(response => {
           return response;
         })
-      );
+      ).subscribe(x => {
+        console.log(x);
+      });
   }
 
   getLink(method: string, params?: any): string {
