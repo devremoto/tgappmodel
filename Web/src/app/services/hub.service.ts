@@ -28,7 +28,6 @@ export class HubService {
   }
 
   registerCrud(controller: string) {
-    console.log(`controller registred ${controller}`);
     this.register(`${controller}GetOne`);
     this.register(`${controller}GetAll`);
     this.register(`${controller}GetJson`);

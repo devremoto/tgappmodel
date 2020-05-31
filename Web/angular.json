@@ -23,7 +23,13 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/favicon.png", "src/assets", "src/Web.config", "src/nginx.conf"],
+            "assets": [
+              "src/favicon.ico",
+              "src/favicon.png",
+              "src/assets",
+              "src/Web.config",
+              "src/nginx.conf"
+            ],
             "styles": ["src/styles.css"],
             "scripts": [
               "src/assets/pages/js/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js",
@@ -34,10 +40,7 @@
               "src/assets/pages/js/plugins/countto/jquery.countTo.js",
               "src/assets/pages/js/plugins/jquery-waypoints/jquery.waypoints.min.js",
               "src/assets/pages/js/plugins/parsley-validation/parsley.min.js",
-              "src/assets/pages/js/bravana.js",
-              "src/assets/lib/html-docx.js",
-              "src/assets/lib/FileSaver.js",
-              "src/assets/js/jsrsasign.js"
+              "src/assets/pages/js/bravana.js"
             ]
           },
           "configurations": {

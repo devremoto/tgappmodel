@@ -50,12 +50,10 @@ export class BaseService<T> {
     return this.httpService
       .post(this.controller + '/getAllPage', this.page)
       .pipe(
-        map<any, PagingModel<T>>(response => {
+        map<any, PagingModel<T>>((response) => {
           return response;
         })
-      ).subscribe(x => {
-        console.log(x);
-      });
+      )
   }
 
   getLink(method: string, params?: any): string {

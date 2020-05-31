@@ -18,18 +18,31 @@ import { registerLocaleData } from '@angular/common';
   providedIn: 'root'
 })
 export class LanguageCustomService extends LanguageService {
+  locale = [
+    { key: 'pt', locale: localePt },
+    { key: 'es', locale: localeEs },
+    { key: 'en', locale: localeEn },
+    { key: 'fr', locale: localeFr },
+    { key: 'de', locale: localeDe }
+  ]
   getLocale() {
-    var codeArr = this.lang.code.split('-')
-    var code = this.lang.code;
+    const codeArr = this.lang.code.split('-');
+    this.lang.locale = localeEn;
+    let code = this.lang.code;
     if (codeArr.length > 1) {
-      code = `${codeArr[0]}-${codeArr[1].toLocaleUpperCase()}`
+      code = `${codeArr[0]}-${codeArr[1].toLocaleUpperCase()}`;
+      this.lang.locale = this.locale.find(x => x.key === code);
     }
-    console.log(this.lang.locale);
-    registerLocaleData(this.lang.locale);    
+    registerLocaleData(this.lang.locale, code);
     return code;
 
   }
-  constructor(protected _http: HttpService, public translate: TranslateService, private _sessionStorageService: SessionStorageService, public hubService: HubService) {
+
+  constructor(
+    protected _http: HttpService,
+    public translate: TranslateService,
+    private _sessionStorageService: SessionStorageService,
+    public hubService: HubService) {
     super(_http, hubService);
     this._config = Config;
     this.init();
@@ -41,12 +54,12 @@ export class LanguageCustomService extends LanguageService {
   }
 
   languages: Array<Language> = [
-    { code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png', locale:localePt } as Language,
-    { code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png', locale: localeEn} as Language,
+    { code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png', locale: localePt } as Language,
+    { code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png', locale: localeEn } as Language,
     { code: 'fr-fr', active: false, image: '/assets/admin/img/flags/France.png', locale: localeFr } as Language,
-    { code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png', locale: localeDe} as Language,
-    { code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png' , locale: localeDe} as Language,
-    { code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png', locale: localeEs} as Language
+    { code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png', locale: localeDe } as Language,
+    { code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png', locale: localeDe } as Language,
+    { code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png', locale: localeEs } as Language
   ];
   language: Language;
   private _default: Language;
