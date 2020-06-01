@@ -51,7 +51,7 @@ export class SocialNetworkIndexComponent implements OnInit, OnChanges, OnDestroy
       }));
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 
@@ -63,7 +63,7 @@ export class SocialNetworkIndexComponent implements OnInit, OnChanges, OnDestroy
     }
 
     private openModal() {
-      const options = <NgbModalOptions>{ size: 'lg', backdrop: 'static', windowClass: 'modal-primary'};
+      const options = { size: 'lg', backdrop: 'static', windowClass: 'modal-primary'} as NgbModalOptions;
       this.modalRef  = this._modalService.open(SocialNetworkModalComponent, options);
       this.modalRef.componentInstance.name = 'socialNetworkModal';
       this.modalRef.componentInstance.edit = this._edit;

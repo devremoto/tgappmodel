@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-modal-social-network',
   templateUrl: './SocialNetworkModal.component.html'
 })
-export class SocialNetworkModalComponent implements OnDestroy{
+export class SocialNetworkModalComponent implements OnDestroy {
 
   @Input() edit: boolean;
   @Input() entity: SocialNetwork;
@@ -44,7 +44,7 @@ export class SocialNetworkModalComponent implements OnDestroy{
     this._activeModal.dismiss('Cross click');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

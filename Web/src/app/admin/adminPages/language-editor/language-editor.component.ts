@@ -41,12 +41,11 @@ export class LanguageEditorComponent implements OnInit {
 
   folderUp() {
 
-    const arrStr = `${this.asset.folder}${this.asset.path}`;
+    const arrStr = `${this.asset.folder}${this.asset.path}`
     const arrPath = arrStr.split('/');
     this.upFolder = { path: '', folder: '/' };
-    arrPath.splice(-1, 1);
+    arrPath.splice(-1, 1)
     this.upFolder.folder = arrPath.join('/');
-    // this.asset.folder = this.upFolder.folder;
     this.upFolder.path = '';
 
   }
@@ -55,11 +54,11 @@ export class LanguageEditorComponent implements OnInit {
     this.path = [];
     this.asset = asset || { path: '', folder: '' };
     this.folder = asset || { path: '', folder: '/' };
-    this.jsonDefault = await this.loadDefaultLanguage(asset);
+    this.jsonDefault = await this.loadDefaultLanguage(this.folder);
     this.tree = [];
     this.json = {};
     this.file = new Asset();
-    this.folderUp();
+    this.folderUp()
     this._languageService.getAssets(`${this.asset.folder}${this.asset.path}`).subscribe(result => {
       this.assets = result;
       this.files = this.assets.filter(x => !x.isDir);
@@ -85,15 +84,15 @@ export class LanguageEditorComponent implements OnInit {
 
   loadTree(root: any, defaultLang: any, parent: ObjectTree): any {
     const $this = this;
-    Object.keys(root).forEach(function(key) {
+    Object.keys(root).forEach(function (key) {
       $this.path.push(key);
-      const item = {
-        key,
+      const item = <ObjectTree>{
+        key: key,
         from: $this._defaultLanguage.code,
         to: $this.file.path.replace('.json', '').split(' ')[0],
         path: $this.path.join('.'),
-        parent
-      } as ObjectTree;
+        parent: parent
+      };
       if (root[key] && typeof root[key] === 'object') {
         // alert(JSON.stringify(root[key]))
         $this.loadTree(root[key], defaultLang ? defaultLang[key] : null, item);

@@ -13,7 +13,7 @@
 <!-- GOOGLE FONTS -->
 <link href='https://fonts.googleapis.com/css?family=Raleway:700,400,400italic,500' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700,300,300italic' rel='stylesheet'
-      type='text/css'>
+  type='text/css'>
 <!-- FAVICONS -->
 <link rel="shortcut icon" href="/assets/pages/ico/favicon.ico">
 
@@ -41,27 +41,27 @@
       </p>
       <div class="form-group">
         <label for="contact-name"
-               class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.NAME' | translate}}</label>
+          class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.NAME' | translate}}</label>
         <input type="text" class="form-control" id="contact-name" name="name" [(ngModel)]="contact.name"
-               placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.NAME' | translate}}" required>
+          placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.NAME' | translate}}" required>
       </div>
       <div class="form-group">
         <label for="contact-email"
-               class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.EMAIL' | translate}}</label>
+          class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.EMAIL' | translate}}</label>
         <input type="email" class="form-control" id="contact-email" name="email" [(ngModel)]="contact.email"
-               placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.EMAIL' | translate}}" required />
+          placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.EMAIL' | translate}}" required />
       </div>
       <div class="form-group">
         <label for="contact-subject"
-               class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.SUBJECT' | translate}}</label>
+          class="control-label sr-only">{{'FOOTER.CONTACT.FORM.LABELS.SUBJECT' | translate}}</label>
         <input type="text" class="form-control" id="contact-subject" name="subject" [(ngModel)]="contact.subject"
-               placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.SUBJECT' | translate}}" />
+          placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.SUBJECT' | translate}}" />
       </div>
       <div class="form-group">
         <label for="contact-message"
-               class="control-label sr-only">*{{'FOOTER.CONTACT.FORM.LABELS.NAME' | translate}}</label>
+          class="control-label sr-only">*{{'FOOTER.CONTACT.FORM.LABELS.NAME' | translate}}</label>
         <textarea class="form-control" id="contact-message" name="message" [(ngModel)]="contact.message" rows="5"
-                  cols="30" placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.MESSAGE' | translate}}" required></textarea>
+          cols="30" placeholder="{{'FOOTER.CONTACT.FORM.FIELDS.MESSAGE' | translate}}" required></textarea>
       </div>
       <button id="submit-button" [disabled]="loading" (click)="sendEmail(contact)" class="btn btn-primary">
         <i class="fa fa-spin fa-spinner" *ngIf="loading"></i>

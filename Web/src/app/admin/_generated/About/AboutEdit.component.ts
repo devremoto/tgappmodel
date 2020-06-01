@@ -13,7 +13,7 @@ declare var $: any;
 export class AboutEditComponent implements OnInit, OnDestroy {
 
 
-  private subscription= new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private _service: AboutService,
@@ -35,7 +35,7 @@ export class AboutEditComponent implements OnInit, OnDestroy {
       this.about = this.about || new About();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 

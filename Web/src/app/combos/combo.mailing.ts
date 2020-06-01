@@ -36,7 +36,7 @@ export class ComboMailingComponent implements OnInit, OnDestroy {
         this.getAll();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 
@@ -44,9 +44,9 @@ export class ComboMailingComponent implements OnInit, OnDestroy {
         this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.mailingList = result;
-                    if (data) {
-                        this.updateData(data.id);
-                    }
+                if (data) {
+                    this.updateData(data.id);
+                }
             },
             error => {
                 this.appErrorMessage = error;

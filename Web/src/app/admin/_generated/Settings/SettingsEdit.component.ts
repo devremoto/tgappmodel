@@ -13,7 +13,7 @@ declare var $: any;
 export class SettingsEditComponent implements OnInit, OnDestroy {
 
 
-  private subscription= new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private _service: SettingsService,
@@ -35,7 +35,7 @@ export class SettingsEditComponent implements OnInit, OnDestroy {
       this.settings = this.settings || new Settings();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 

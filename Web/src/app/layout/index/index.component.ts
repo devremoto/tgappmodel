@@ -39,7 +39,7 @@ export class IndexComponent implements OnInit {
     // $(document).ready(window.contactWidget)
 
     // submenu dropdown click event
-    $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(e) {
+    $('ul.dropdown-menu [data-toggle=dropdown]').on('click', (e: any) => {
       e.preventDefault();
       e.stopPropagation();
       $(this)
@@ -52,7 +52,7 @@ export class IndexComponent implements OnInit {
     });
 
     // hide collapsible menu once menu item clicked
-    $('.nav-onepage li a').click(function() {
+    $('.nav-onepage li a').click(() => {
       const navbarCollapse = $(this).parents('.navbar-collapse.collapse');
 
       if (navbarCollapse.hasClass('in')) {
@@ -62,7 +62,7 @@ export class IndexComponent implements OnInit {
 
     // full transparent fixed-top navbar should have background when scrolled
     if ($('.navbar-fixed-top.navbar-no-background').length > 0) {
-      $(window).scroll(function() {
+      $(window).scroll(() => {
         if ($(document).scrollTop() > 100) {
           $('.navbar-fixed-top').removeClass('navbar-no-background');
         } else {
@@ -73,7 +73,7 @@ export class IndexComponent implements OnInit {
 
     // transparent fixed-top navbar should have solid background when scrolled
     if ($('.navbar-fixed-top.navbar-transparent').length > 0) {
-      $(window).scroll(function() {
+      $(window).scroll(() => {
         if ($(document).scrollTop() > 100) {
           $('.navbar-fixed-top').removeClass('navbar-transparent');
         } else {
@@ -87,7 +87,7 @@ export class IndexComponent implements OnInit {
     }
 
     if ($('.navbar-fixed-top.navbar-shrinkable').length > 0) {
-      $(window).scroll(function() {
+      $(window).scroll(() => {
         if ($(document).scrollTop() > 300) {
           $('.navbar-fixed-top').addClass('shrink-active');
         } else {
@@ -98,7 +98,7 @@ export class IndexComponent implements OnInit {
 
     // scroll to top
     if ($(window).width() > 992) {
-      $(window).scroll(function() {
+      $(window).scroll(() => {
         if ($(this).scrollTop() > 300) {
           $('.back-to-top').fadeIn();
         } else {
@@ -106,7 +106,7 @@ export class IndexComponent implements OnInit {
         }
       });
 
-      $('.back-to-top').click(function(e) {
+      $('.back-to-top').click((e) => {
         e.preventDefault();
 
         $('body, html').animate(
@@ -150,7 +150,7 @@ export class IndexComponent implements OnInit {
       // use min-height for any changing content
       $('#contact-widget-bottom').css('min-height', $widgetHeight);
 
-      $panelHeading.on('click', function() {
+      $panelHeading.on('click', () => {
         if (!$panelShown) {
           $('#contact-name').focus();
           $('#contact-widget-bottom').animate(

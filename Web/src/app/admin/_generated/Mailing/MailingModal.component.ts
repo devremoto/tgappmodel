@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-modal-mailing',
   templateUrl: './MailingModal.component.html'
 })
-export class MailingModalComponent implements OnDestroy{
+export class MailingModalComponent implements OnDestroy {
 
   @Input() edit: boolean;
   @Input() entity: Mailing;
@@ -44,7 +44,7 @@ export class MailingModalComponent implements OnDestroy{
     this._activeModal.dismiss('Cross click');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

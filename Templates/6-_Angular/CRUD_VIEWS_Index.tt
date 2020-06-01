@@ -192,7 +192,7 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges, On
       }));
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 
@@ -209,7 +209,7 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges, On
     }
 
     private openModal() {
-      const options = <NgbModalOptions>{ size: 'lg', backdrop: 'static', windowClass: 'modal-primary'};
+      const options = { size: 'lg', backdrop: 'static', windowClass: 'modal-primary'} as NgbModalOptions;
       this.modalRef  = this._modalService.open(<#=classModel.Name#>ModalComponent, options);
       this.modalRef.componentInstance.name = '<#=camelCaseName#>Modal';
       this.modalRef.componentInstance.edit = this._edit;

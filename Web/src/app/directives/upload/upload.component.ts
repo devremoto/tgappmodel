@@ -31,8 +31,8 @@ export class UploadComponent implements OnInit, AfterViewInit {
   @Input() model: any;
 
   @Output() modelChange: any = new EventEmitter();
-  @Output() change: any = new EventEmitter();
-  @Output() complete: any = new EventEmitter();
+  @Output() changeEvent: any = new EventEmitter();
+  @Output() completeEvent: any = new EventEmitter();
   @Output() serverDelete: any = new EventEmitter();
 
   @ViewChild('input') element: ElementRef;
@@ -60,7 +60,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   updateData() {
     this.model = this.file.fileName;
@@ -128,20 +128,20 @@ export class UploadComponent implements OnInit, AfterViewInit {
     }
 
     const file = doc.nativeElement;
-    $(file).ready(function() {
+    $(file).ready(() => {
       const info: any = performance.getEntriesByName(file.src || file.href);
       if (info && info.length === 0) {
         setTimeout(() => {
-          this._upload.loadFileSize(type);
+          this.uploadComponent.loadFileSize(type);
         }, 300);
         return;
       }
       if (type === 'doc') {
-        file.download = this._upload.file.fileName;
+        file.download = this.uploadComponent.file.fileName;
       }
       if (info[0].transferSize) {
-        this._upload.file.size = info[0].transferSize;
-        this._upload.file.formattedSize = this._upload.formatSize(info[0].transferSize);
+        this.uploadComponent.file.size = info[0].transferSize;
+        this.uploadComponent.file.formattedSize = this.uploadComponent.formatSize(info[0].transferSize);
       }
     });
   }

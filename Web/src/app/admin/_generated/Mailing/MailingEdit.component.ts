@@ -13,7 +13,7 @@ declare var $: any;
 export class MailingEditComponent implements OnInit, OnDestroy {
 
 
-  private subscription= new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private _service: MailingService,
@@ -35,7 +35,7 @@ export class MailingEditComponent implements OnInit, OnDestroy {
       this.mailing = this.mailing || new Mailing();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 

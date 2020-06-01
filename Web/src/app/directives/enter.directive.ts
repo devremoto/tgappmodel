@@ -7,14 +7,14 @@ export class EnterDirective {
 
   constructor(private el: ElementRef) {
     this.init();
-   }
+  }
 
   init() {
     // Get the input field
     const input = this.el.nativeElement;
 
     // Execute a function when the user releases a key on the keyboard
-    window.addEventListener('keyup', function(event) {
+    window.addEventListener('keyup', (event) => {
       // Cancel the default action, if needed
       event.preventDefault();
       // Number 13 is the "Enter" key on the keyboard

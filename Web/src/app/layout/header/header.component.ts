@@ -20,10 +20,11 @@ export class HeaderComponent implements OnInit {
   socialNetworks: SocialNetwork[];
   logo = Config.logoUrl;
   today = new Date();
-  constructor(private _socialNetworkService: SocialNetworkCustomService, private _sanitizer: DomSanitizer, public translate: LanguageCustomService) {//, private hubService:HubService) {
+  constructor(
+    private _socialNetworkService: SocialNetworkCustomService,
+    private _sanitizer: DomSanitizer,
+    public translate: LanguageCustomService) {
     translate.init();
-
-    //hubService.register("SocialNetworkGetJson");
   }
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class HeaderComponent implements OnInit {
       result => {
         this.socialNetworks = result;
       },
-      () => {}
+      () => { }
     );
   }
 }

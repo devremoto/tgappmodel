@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-modal-language',
   templateUrl: './LanguageModal.component.html'
 })
-export class LanguageModalComponent implements OnDestroy{
+export class LanguageModalComponent implements OnDestroy {
 
   @Input() edit: boolean;
   @Input() entity: Language;
@@ -44,7 +44,7 @@ export class LanguageModalComponent implements OnDestroy{
     this._activeModal.dismiss('Cross click');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

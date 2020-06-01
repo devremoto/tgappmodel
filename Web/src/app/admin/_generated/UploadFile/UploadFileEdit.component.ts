@@ -13,7 +13,7 @@ declare var $: any;
 export class UploadFileEditComponent implements OnInit, OnDestroy {
 
 
-  private subscription= new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private _service: UploadFileService,
@@ -35,7 +35,7 @@ export class UploadFileEditComponent implements OnInit, OnDestroy {
       this.uploadFile = this.uploadFile || new UploadFile();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 

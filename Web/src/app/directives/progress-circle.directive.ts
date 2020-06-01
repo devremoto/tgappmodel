@@ -47,7 +47,7 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
 
   animate() {
     const options = this.options;
-    $(this.el.nativeElement).each(function(key, obj) {
+    $(this.el.nativeElement).each((key, obj) => {
       const bar = new ProgressBar.Circle(obj, options);
       bar.animate(options.value);
     });

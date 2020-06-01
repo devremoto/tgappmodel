@@ -18,13 +18,29 @@ import { registerLocaleData } from '@angular/common';
   providedIn: 'root'
 })
 export class LanguageCustomService extends LanguageService {
+  sufix: string;
+  prefix: string;
+  private _time: number;
+  private _config;
   locale = [
     { key: 'pt', locale: localePt },
     { key: 'es', locale: localeEs },
     { key: 'en', locale: localeEn },
     { key: 'fr', locale: localeFr },
     { key: 'de', locale: localeDe }
-  ]
+  ];
+
+  languages: Array<Language> = [
+    { code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png', locale: localePt } as Language,
+    { code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png', locale: localeEn } as Language,
+    { code: 'fr-fr', active: false, image: '/assets/admin/img/flags/France.png', locale: localeFr } as Language,
+    { code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png', locale: localeDe } as Language,
+    { code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png', locale: localeDe } as Language,
+    { code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png', locale: localeEs } as Language
+  ];
+  language: Language;
+  private _default: Language;
+
   getLocale() {
     const codeArr = this.lang.code.split('-');
     this.lang.locale = localeEn;
@@ -53,16 +69,6 @@ export class LanguageCustomService extends LanguageService {
     });
   }
 
-  languages: Array<Language> = [
-    { code: 'pt-br', active: true, image: '/assets/admin/img/flags/Brazil.png', locale: localePt } as Language,
-    { code: 'en-us', active: true, image: '/assets/admin/img/flags/United-Kingdom.png', locale: localeEn } as Language,
-    { code: 'fr-fr', active: false, image: '/assets/admin/img/flags/France.png', locale: localeFr } as Language,
-    { code: 'de-de', active: false, image: '/assets/admin/img/flags/Germany.png', locale: localeDe } as Language,
-    { code: 'cn-cn', active: false, image: '/assets/admin/img/flags/China.png', locale: localeDe } as Language,
-    { code: 'es-es', active: true, image: '/assets/admin/img/flags/Spain.png', locale: localeEs } as Language
-  ];
-  language: Language;
-  private _default: Language;
   get default() {
     const defaultLang = 'pt-br';
     const userLang = navigator.language ? navigator.language.toLowerCase() : defaultLang;
@@ -82,11 +88,6 @@ export class LanguageCustomService extends LanguageService {
     this.translate.setDefaultLang(this.default.code);
     return this.language;
   }
-  sufix: string;
-  prefix: string;
-  private _time: number;
-  private _config;
-
 
   loadAll(folder?: string) {
     const others = this.getLanguages(); // .filter(x => x.code !== this.lang);
@@ -145,10 +146,10 @@ export class LanguageCustomService extends LanguageService {
     this.sufix = sufix;
     this.prefix = prefix;
     const key = `${prefix}${language.code}${sufix}`;
-    const obj = this._sessionStorageService.getObjectCache<Object>(key);
+    const obj = this._sessionStorageService.getObjectCache<any>(key);
     if (!obj && !language.loaded) {
       this._http.get(`${this._config.siteUrl}${key}?${this._time}`, null, false).subscribe(result => {
-        this._sessionStorageService.setObjectCache<Object>(key, result);
+        this._sessionStorageService.setObjectCache<any>(key, result);
         this.translate.setTranslation(language.code, result, true);
         language.loaded = true;
       });

@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-modal-settings',
   templateUrl: './SettingsModal.component.html'
 })
-export class SettingsModalComponent implements OnDestroy{
+export class SettingsModalComponent implements OnDestroy {
 
   @Input() edit: boolean;
   @Input() entity: Settings;
@@ -44,7 +44,7 @@ export class SettingsModalComponent implements OnDestroy{
     this._activeModal.dismiss('Cross click');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

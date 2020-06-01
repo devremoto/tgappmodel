@@ -13,7 +13,7 @@ declare var $: any;
 export class SocialNetworkEditComponent implements OnInit, OnDestroy {
 
 
-  private subscription= new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private _service: SocialNetworkService,
@@ -35,7 +35,7 @@ export class SocialNetworkEditComponent implements OnInit, OnDestroy {
       this.socialNetwork = this.socialNetwork || new SocialNetwork();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 

@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ContactService } from '../services/generated/ContactService';
 import { Contact } from '../models/Contact';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-combo-contact',
-    template: `
+  selector: 'app-combo-contact',
+  template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="contact" class="{{cssClass}}" autofocus >
       <option *ngFor="let contact of contactList" [value]="contact.id">{{contact.name}}</option>
     </select>`
@@ -20,8 +20,8 @@ export class ComboContactComponent implements OnInit, OnDestroy {
     @Output() modelChange: any = new EventEmitter();
     subscription = new Subscription();
 
-    constructor(private service: ContactService) {
-        this.subscription.add(this.service.on('Contact-save').subscribe((data) => {
+    constructor(private _service: ContactService) {
+        this.subscription.add(this._service.on('Contact-save').subscribe((data) => {
             this.reload(data);
         }));
     }
@@ -37,11 +37,11 @@ export class ComboContactComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+      this.subscription.unsubscribe();
     }
 
     public getAll(data?: Contact) {
-        this.subscription.add(this.service.getAll().subscribe(
+        this.subscription.add(this._service.getAll().subscribe(
             result => {
                 this.contactList = result;
                 if (data) {

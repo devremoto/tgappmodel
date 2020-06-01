@@ -13,7 +13,7 @@ declare var $: any;
 export class LanguageEditComponent implements OnInit, OnDestroy {
 
 
-  private subscription= new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private _service: LanguageService,
@@ -35,7 +35,7 @@ export class LanguageEditComponent implements OnInit, OnDestroy {
       this.language = this.language || new Language();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 

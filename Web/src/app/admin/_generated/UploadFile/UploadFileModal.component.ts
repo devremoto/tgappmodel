@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-modal-upload-file',
   templateUrl: './UploadFileModal.component.html'
 })
-export class UploadFileModalComponent implements OnDestroy{
+export class UploadFileModalComponent implements OnDestroy {
 
   @Input() edit: boolean;
   @Input() entity: UploadFile;
@@ -44,7 +44,7 @@ export class UploadFileModalComponent implements OnDestroy{
     this._activeModal.dismiss('Cross click');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

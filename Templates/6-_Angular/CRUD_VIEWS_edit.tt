@@ -143,7 +143,7 @@ export class <#=classModel.Name#>EditComponent implements OnInit, OnDestroy {
 	<#=classSet.ToCamelCase(field.DataType)#>: <#=field.DataType#>;
 <#}#>
 
-  private subscription= new Subscription();
+  private subscription = new Subscription();
 
   constructor(
     private _service: <#=classModel.Name#>Service,
@@ -168,7 +168,7 @@ export class <#=classModel.Name#>EditComponent implements OnInit, OnDestroy {
       this.<#=camelCaseName#> = this.<#=camelCaseName#> || new <#=classModel.Name#>();
     }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       this.subscription.unsubscribe();
     }
 

@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-modal-contact',
   templateUrl: './ContactModal.component.html'
 })
-export class ContactModalComponent implements OnDestroy{
+export class ContactModalComponent implements OnDestroy {
 
   @Input() edit: boolean;
   @Input() entity: Contact;
@@ -44,7 +44,7 @@ export class ContactModalComponent implements OnDestroy{
     this._activeModal.dismiss('Cross click');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }
