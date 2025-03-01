@@ -6,8 +6,9 @@ import { Contact } from '../../../models/Contact';
 declare let $: any;
 
 @Component({
-  selector: 'app-form-contact',
-  templateUrl: './ContactEdit.component.html'
+    selector: 'app-form-contact',
+    templateUrl: './ContactEdit.component.html',
+    standalone: false
 })
 export class ContactEditComponent implements OnInit {
 

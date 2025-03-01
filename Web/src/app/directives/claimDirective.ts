@@ -1,7 +1,8 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appClaim]'
+    selector: '[appClaim]',
+    standalone: false
 })
 export class ClaimDirective {
   @Input('appClaim') name: string;

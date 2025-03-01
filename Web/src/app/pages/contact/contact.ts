@@ -9,16 +9,17 @@ import { ContactCustomService } from '../../services/custom/Contact';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
 
 @Component({
-  selector: 'app-contact',
-  styles: [
-    `
+    selector: 'app-contact',
+    styles: [
+        `
       .sebm-google-map-container {
         height: 300px;
         width: 100%;
       }
     `
-  ],
-  templateUrl: './contact.html',
+    ],
+    templateUrl: './contact.html',
+    standalone: false
 })
 export class ContactComponent implements OnInit {
   errorMessage: string;

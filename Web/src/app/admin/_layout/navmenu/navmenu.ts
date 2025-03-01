@@ -3,9 +3,10 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
-  selector: 'app-admin-nav-menu',
-  templateUrl: './navmenu.html',
-  styleUrls: ['./navmenu.css']
+    selector: 'app-admin-nav-menu',
+    templateUrl: './navmenu.html',
+    styleUrls: ['./navmenu.css'],
+    standalone: false
 })
 export class NavMenuAdminComponent {
   isLoggedIn: boolean;

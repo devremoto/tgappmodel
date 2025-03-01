@@ -7,9 +7,10 @@ import { FileModel } from '../../models/FileModel';
 declare let $: any;
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+    selector: 'app-upload',
+    templateUrl: './upload.component.html',
+    styleUrls: ['./upload.component.css'],
+    standalone: false
 })
 export class UploadComponent implements OnInit, AfterViewInit {
   _upload: UploadComponent;

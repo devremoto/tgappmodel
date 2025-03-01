@@ -7,8 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare let $: any;
 
 @Component({
-  selector: 'app-modal-language',
-  templateUrl: './LanguageModal.component.html'
+    selector: 'app-modal-language',
+    templateUrl: './LanguageModal.component.html',
+    standalone: false
 })
 export class LanguageModalComponent {
 

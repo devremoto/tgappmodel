@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 declare let $: any;
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.css']
+    selector: 'app-dashboard',
+    templateUrl: './index.component.html',
+    styleUrls: ['./index.component.css'],
+    standalone: false
 })
 export class IndexComponent implements OnInit {
     ngOnInit(): void {

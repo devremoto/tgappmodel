@@ -7,7 +7,8 @@ import { About } from '../models/About';
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="about" class="{{cssClass}}" autofocus >
       <option *ngFor="let about of aboutList" [value]="about.id">{{about.description}}</option>
-    </select>`
+    </select>`,
+    standalone: false
 })
 export class ComboAboutComponent implements OnInit {
     appErrorMessage: any;

@@ -5,7 +5,8 @@ import { LoginModel } from '../models/LoginModel';
 import { User } from 'oidc-client';
 
 @Component({
-  templateUrl: './callback.html',
+    templateUrl: './callback.html',
+    standalone: false
 })
 export class LoginCallBackComponent implements OnInit {
   user: User;

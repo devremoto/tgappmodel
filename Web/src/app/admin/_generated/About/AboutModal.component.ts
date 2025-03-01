@@ -7,8 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare let $: any;
 
 @Component({
-  selector: 'app-modal-about',
-  templateUrl: './AboutModal.component.html'
+    selector: 'app-modal-about',
+    templateUrl: './AboutModal.component.html',
+    standalone: false
 })
 export class AboutModalComponent {
 

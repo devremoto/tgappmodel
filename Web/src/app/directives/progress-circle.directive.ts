@@ -3,7 +3,8 @@ declare let ProgressBar: any;
 declare let $: any;
 
 @Directive({
-  selector: '[appProgressCircle]'
+    selector: '[appProgressCircle]',
+    standalone: false
 })
 export class ProgressCircleDirective implements OnInit, AfterViewInit {
   @Input('appProgressCircle') options: any = {

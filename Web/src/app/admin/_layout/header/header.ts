@@ -4,9 +4,10 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Config } from '../../../config';
 
 @Component({
-  selector: 'app-admin-header',
-  templateUrl: './header.html',
-  styleUrls: ['./header.css'],
+    selector: 'app-admin-header',
+    templateUrl: './header.html',
+    styleUrls: ['./header.css'],
+    standalone: false
 })
 export class HeaderAdminComponent implements OnInit {
   userData: any;

@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 import { LanguageCustomService } from './services/custom/Language';
 
 @Component({
-  // tslint:disable-next-line: component-selector
-  selector: 'body',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    // tslint:disable-next-line: component-selector
+    selector: 'body',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 export class AppComponent {
   title = 'body';

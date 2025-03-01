@@ -7,7 +7,8 @@ import { Settings } from '../models/Settings';
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="settings" class="{{cssClass}}" autofocus >
       <option *ngFor="let settings of settingsList" [value]="settings.id">{{settings.id}}</option>
-    </select>`
+    </select>`,
+    standalone: false
 })
 export class ComboSettingsComponent implements OnInit {
     appErrorMessage: any;

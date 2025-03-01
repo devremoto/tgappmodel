@@ -3,11 +3,12 @@ import { ContactService } from '../services/generated/ContactService';
 import { Contact } from '../models/Contact';
 
 @Component({
-  selector: 'app-combo-contact',
-  template: `
+    selector: 'app-combo-contact',
+    template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="contact" class="{{cssClass}}" autofocus >
       <option *ngFor="let contact of contactList" [value]="contact.id">{{contact.name}}</option>
-    </select>`
+    </select>`,
+    standalone: false
 })
 export class ComboContactComponent implements OnInit {
     appErrorMessage: any;

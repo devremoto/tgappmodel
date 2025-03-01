@@ -4,9 +4,9 @@ import { BreadcrumbsService } from './breadcrumbs.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  // tslint:disable-next-line: component-selector
-  selector: '[app-breadcrumbs]',
-  template: `
+    // tslint:disable-next-line: component-selector
+    selector: '[app-breadcrumbs]',
+    template: `
     <ng-template ngFor let-breadcrumb [ngForOf]="breadcrumbs | async" let-last="last">
       <li class="breadcrumb-item" *ngIf="breadcrumb.label.title && (breadcrumb.url.slice(-1) === '/' || last)" [ngClass]="{ active: last }">
         <a *ngIf="!last" [routerLink]="breadcrumb.url">{{ breadcrumb.label.title | translate }}</a>
@@ -14,7 +14,8 @@ import { Observable } from 'rxjs';
       </li>
       <ng-content></ng-content>
     </ng-template>
-  `
+  `,
+    standalone: false
 })
 export class BreadcrumbsComponent implements OnInit {
   @Input() fixed: boolean;

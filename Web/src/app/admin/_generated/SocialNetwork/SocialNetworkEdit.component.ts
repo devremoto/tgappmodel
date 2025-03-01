@@ -6,8 +6,9 @@ import { SocialNetwork } from '../../../models/SocialNetwork';
 declare let $: any;
 
 @Component({
-  selector: 'app-form-social-network',
-  templateUrl: './SocialNetworkEdit.component.html'
+    selector: 'app-form-social-network',
+    templateUrl: './SocialNetworkEdit.component.html',
+    standalone: false
 })
 export class SocialNetworkEditComponent implements OnInit {
 

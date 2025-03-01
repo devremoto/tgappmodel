@@ -3,11 +3,12 @@ import { SocialNetworkService } from '../services/generated/SocialNetworkService
 import { SocialNetwork } from '../models/SocialNetwork';
 
 @Component({
-  selector: 'app-combo-social-network',
-  template: `
+    selector: 'app-combo-social-network',
+    template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="socialNetwork" class="{{cssClass}}" autofocus >
       <option *ngFor="let socialNetwork of socialNetworkList" [value]="socialNetwork.id">{{socialNetwork.name}}</option>
-    </select>`
+    </select>`,
+    standalone: false
 })
 export class ComboSocialNetworkComponent implements OnInit {
     appErrorMessage: any;

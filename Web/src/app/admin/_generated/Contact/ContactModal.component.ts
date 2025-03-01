@@ -7,8 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare let $: any;
 
 @Component({
-  selector: 'app-modal-contact',
-  templateUrl: './ContactModal.component.html'
+    selector: 'app-modal-contact',
+    templateUrl: './ContactModal.component.html',
+    standalone: false
 })
 export class ContactModalComponent {
 

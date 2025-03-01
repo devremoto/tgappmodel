@@ -7,8 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare let $: any;
 
 @Component({
-  selector: 'app-modal-social-network',
-  templateUrl: './SocialNetworkModal.component.html'
+    selector: 'app-modal-social-network',
+    templateUrl: './SocialNetworkModal.component.html',
+    standalone: false
 })
 export class SocialNetworkModalComponent {
 

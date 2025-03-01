@@ -6,7 +6,8 @@ import { Config } from '../config';
 declare let $: any;
 
 @Directive({
-  selector: '[appInRole]'
+    selector: '[appInRole]',
+    standalone: false
 })
 export class InRoleDirective implements OnInit {
   userRoles: string[] = [];

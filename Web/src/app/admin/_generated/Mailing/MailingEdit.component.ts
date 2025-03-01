@@ -6,8 +6,9 @@ import { Mailing } from '../../../models/Mailing';
 declare let $: any;
 
 @Component({
-  selector: 'app-form-mailing',
-  templateUrl: './MailingEdit.component.html'
+    selector: 'app-form-mailing',
+    templateUrl: './MailingEdit.component.html',
+    standalone: false
 })
 export class MailingEditComponent implements OnInit {
 

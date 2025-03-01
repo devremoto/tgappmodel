@@ -6,8 +6,9 @@ import { Settings } from '../../../models/Settings';
 declare let $: any;
 
 @Component({
-  selector: 'app-form-settings',
-  templateUrl: './SettingsEdit.component.html'
+    selector: 'app-form-settings',
+    templateUrl: './SettingsEdit.component.html',
+    standalone: false
 })
 export class SettingsEditComponent implements OnInit {
 

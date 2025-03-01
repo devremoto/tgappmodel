@@ -9,10 +9,11 @@ import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork'
 
 declare let $: any;
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  providers: []
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css'],
+    providers: [],
+    standalone: false
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   title = 'app';

@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 	<select [ngModel]="model" (ngModelChange)="updateData($event)"  name="about" class="{{cssClass}}" >
 		<option *ngFor="let item of list" [value]="(item|arrayProp:value)">{{item|arrayProp:description}}</option>
 	</select>`,
+    standalone: false
 })
 export class ComboComponent implements OnInit {
     appErrorMessage: any;

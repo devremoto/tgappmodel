@@ -9,8 +9,9 @@ import { LanguageService } from '../../../services/generated/LanguageService';
 import { Language } from '../../../models/Language';
 
 @Component({
-  selector: 'app-list-language',
-  templateUrl: './LanguageIndex.component.html',
+    selector: 'app-list-language',
+    templateUrl: './LanguageIndex.component.html',
+    standalone: false
 })
 export class LanguageIndexComponent implements OnInit, OnChanges {
   private _edit = false;

@@ -6,8 +6,9 @@ import { Language } from '../../../models/Language';
 declare let $: any;
 
 @Component({
-  selector: 'app-form-language',
-  templateUrl: './LanguageEdit.component.html'
+    selector: 'app-form-language',
+    templateUrl: './LanguageEdit.component.html',
+    standalone: false
 })
 export class LanguageEditComponent implements OnInit {
 

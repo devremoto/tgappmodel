@@ -7,7 +7,8 @@ import { Language } from '../models/Language';
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="language" class="{{cssClass}}" autofocus >
       <option *ngFor="let language of languageList" [value]="language.id">{{language.name}}</option>
-    </select>`
+    </select>`,
+    standalone: false
 })
 export class ComboLanguageComponent implements OnInit {
     appErrorMessage: any;

@@ -7,8 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare let $: any;
 
 @Component({
-  selector: 'app-modal-mailing',
-  templateUrl: './MailingModal.component.html'
+    selector: 'app-modal-mailing',
+    templateUrl: './MailingModal.component.html',
+    standalone: false
 })
 export class MailingModalComponent {
 

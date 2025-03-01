@@ -7,9 +7,10 @@ import { Asset } from '../../../viewModels/Asset';
 import { ObjectTree } from '../../../viewModels/ObjectTree';
 
 @Component({
-  selector: 'app-language-editor',
-  templateUrl: './language-editor.component.html',
-  styleUrls: ['./language-editor.component.css']
+    selector: 'app-language-editor',
+    templateUrl: './language-editor.component.html',
+    styleUrls: ['./language-editor.component.css'],
+    standalone: false
 })
 export class LanguageEditorComponent implements OnInit {
   fileDefault: Asset;

@@ -7,8 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare let $: any;
 
 @Component({
-  selector: 'app-modal-upload-file',
-  templateUrl: './UploadFileModal.component.html'
+    selector: 'app-modal-upload-file',
+    templateUrl: './UploadFileModal.component.html',
+    standalone: false
 })
 export class UploadFileModalComponent {
 

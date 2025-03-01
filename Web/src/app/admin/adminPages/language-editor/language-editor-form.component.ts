@@ -10,9 +10,10 @@ import { ToastrService } from 'ngx-toastr';
 declare let $: any;
 
 @Component({
-  selector: 'app-language-editor-form',
-  templateUrl: './language-editor-form.component.html',
-  styleUrls: ['./language-editor-form.component.css']
+    selector: 'app-language-editor-form',
+    templateUrl: './language-editor-form.component.html',
+    styleUrls: ['./language-editor-form.component.css'],
+    standalone: false
 })
 export class LanguageEditorFormComponent implements OnInit {
   constructor(private _languageService: LanguageCustomService, private _toasterService: ToastrService) {

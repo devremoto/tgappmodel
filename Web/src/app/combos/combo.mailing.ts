@@ -7,7 +7,8 @@ import { Mailing } from '../models/Mailing';
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="mailing" class="{{cssClass}}" autofocus >
       <option *ngFor="let mailing of mailingList" [value]="mailing.id">{{mailing.id}}</option>
-    </select>`
+    </select>`,
+    standalone: false
 })
 export class ComboMailingComponent implements OnInit {
     appErrorMessage: any;

@@ -7,8 +7,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 declare let $: any;
 
 @Component({
-  selector: 'app-modal-settings',
-  templateUrl: './SettingsModal.component.html'
+    selector: 'app-modal-settings',
+    templateUrl: './SettingsModal.component.html',
+    standalone: false
 })
 export class SettingsModalComponent {
 

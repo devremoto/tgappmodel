@@ -6,8 +6,9 @@ import { About } from '../../../models/About';
 declare let $: any;
 
 @Component({
-  selector: 'app-form-about',
-  templateUrl: './AboutEdit.component.html'
+    selector: 'app-form-about',
+    templateUrl: './AboutEdit.component.html',
+    standalone: false
 })
 export class AboutEditComponent implements OnInit {
 

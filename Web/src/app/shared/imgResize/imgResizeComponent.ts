@@ -4,11 +4,12 @@ import { Config } from '../../config';
 import { ImgService } from './ImgService';
 
 @Component({
-  template: `
+    template: `
     <img *ngIf="path" [src]="path" alt="{{ image }} " class="{{ cssClass }}" style="{{ style }}" />
   `,
-  selector: 'app-img-resize',
-  providers: [ImgService]
+    selector: 'app-img-resize',
+    providers: [ImgService],
+    standalone: false
 })
 export class ImgResizeComponent implements OnInit, OnChanges {
   public path: string;

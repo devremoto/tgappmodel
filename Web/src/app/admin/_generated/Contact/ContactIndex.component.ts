@@ -9,8 +9,9 @@ import { ContactService } from '../../../services/generated/ContactService';
 import { Contact } from '../../../models/Contact';
 
 @Component({
-  selector: 'app-list-contact',
-  templateUrl: './ContactIndex.component.html',
+    selector: 'app-list-contact',
+    templateUrl: './ContactIndex.component.html',
+    standalone: false
 })
 export class ContactIndexComponent implements OnInit {
   private _edit = false;

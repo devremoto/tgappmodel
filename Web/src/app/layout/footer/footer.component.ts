@@ -10,10 +10,11 @@ import { MailingCustomService } from '../../services/custom/Mailing';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css'],
-  providers: [SocialNetworkCustomService, MailingCustomService]
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.css'],
+    providers: [SocialNetworkCustomService, MailingCustomService],
+    standalone: false
 })
 export class FooterComponent implements OnInit {
   constructor(

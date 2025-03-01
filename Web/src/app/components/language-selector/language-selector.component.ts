@@ -3,9 +3,10 @@ import { Language } from 'src/app/models/Language';
 import { LanguageCustomService } from 'src/app/services/custom/Language';
 
 @Component({
-  selector: 'app-language-selector',
-  templateUrl: './language-selector.component.html',
-  styleUrls: ['./language-selector.component.css']
+    selector: 'app-language-selector',
+    templateUrl: './language-selector.component.html',
+    styleUrls: ['./language-selector.component.css'],
+    standalone: false
 })
 export class LanguageSelectorComponent implements OnInit {
   public status: { isopen: boolean } = { isopen: false };

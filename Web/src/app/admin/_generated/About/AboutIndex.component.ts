@@ -9,8 +9,9 @@ import { AboutService } from '../../../services/generated/AboutService';
 import { About } from '../../../models/About';
 
 @Component({
-  selector: 'app-list-about',
-  templateUrl: './AboutIndex.component.html',
+    selector: 'app-list-about',
+    templateUrl: './AboutIndex.component.html',
+    standalone: false
 })
 export class AboutIndexComponent implements OnInit {
   private _edit = false;

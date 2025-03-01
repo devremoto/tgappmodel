@@ -6,8 +6,9 @@ import { UploadFile } from '../../../models/UploadFile';
 declare let $: any;
 
 @Component({
-  selector: 'app-form-upload-file',
-  templateUrl: './UploadFileEdit.component.html'
+    selector: 'app-form-upload-file',
+    templateUrl: './UploadFileEdit.component.html',
+    standalone: false
 })
 export class UploadFileEditComponent implements OnInit {
 

@@ -9,8 +9,9 @@ import { MailingService } from '../../../services/generated/MailingService';
 import { Mailing } from '../../../models/Mailing';
 
 @Component({
-  selector: 'app-list-mailing',
-  templateUrl: './MailingIndex.component.html',
+    selector: 'app-list-mailing',
+    templateUrl: './MailingIndex.component.html',
+    standalone: false
 })
 export class MailingIndexComponent implements OnInit, OnChanges {
   private _edit = false;
