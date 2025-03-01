@@ -1,9 +1,7 @@
-using System;
+namespace CrossCutting.Services.Configuration;
 
-namespace CrossCutting.Services.Configuration
+public class BingTranslateConfiguration
 {
-    public class BingTranslateConfiguration
-    {
-        public string Key { get; set; }
-    }
+    public string Key { get; set; }
+    public string SubscriptionKeyHeader { get; set; }
 }

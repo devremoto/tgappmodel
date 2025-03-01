@@ -2,16 +2,9 @@
 using Domain.Interfaces;
 using Domain.Services.Interfaces;
 
-namespace Domain.Services
-{
-    public partial class AboutService : BaseService<About>, IAboutService
-    {
-        IAboutRepository _repository;
-        public AboutService(IAboutRepository repository)
-            : base(repository)
-        {
-            _repository = repository;
-        }
+namespace Domain.Services;
 
-    }
+public partial class AboutService(IAboutRepository repository) : BaseService<About>(repository), IAboutService
+{
+    readonly IAboutRepository _repository = repository;
 }

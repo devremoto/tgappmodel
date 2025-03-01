@@ -1,12 +1,9 @@
-﻿using Application.ViewModels;
-using Domain.Entities;
-using System;
+﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface ISocialNetworkAppService : IBaseAppService<SocialNetwork>
 {
-    public partial interface ISocialNetworkAppService : IBaseAppService<SocialNetwork>
-    {
-		SocialNetwork Save(SocialNetwork viewModel, bool edit = false);
-    }
+    SocialNetwork Save(SocialNetwork viewModel, bool edit = false);
 }
 

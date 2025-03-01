@@ -1,5 +1,5 @@
 export class Asset {
-  path: string;
+  path?: string;
   isDir?: boolean;
   content?: string;
   folder?: string;

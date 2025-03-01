@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" hostSpecific="true"  #>
+﻿<#@ template language="C#" hostSpecific="true" compilerOptions="optimize+" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -59,7 +59,7 @@ namespace CrossCutting.IoC
 {
     public static class IoCGenerated
     {
-        public static IServiceCollection AddAppServices(this IServiceCollection services)
+        public static void AddAppServices(this IServiceCollection services)
         {
 <#foreach(var classModel in classSet.Classes){#>
 			services.AddTransient<I<#=classModel.Name#>AppService, <#=classModel.Name#>AppService>();
@@ -67,7 +67,6 @@ namespace CrossCutting.IoC
 			services.AddTransient<I<#=classModel.Name#>Service, <#=classModel.Name#>Service>();
 
 <#}#>
-            return services;
         }
     }
 }

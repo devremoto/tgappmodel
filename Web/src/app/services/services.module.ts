@@ -6,19 +6,19 @@ import { LanguageCustomService } from './custom/Language';
 import { ZipCodeCustomService } from './custom/ZipCode';
 
 @NgModule({
-  imports: [
-    ServiceGeneratedModule
-  ],
-  exports: [
-    ServiceGeneratedModule
-  ],
-  declarations: [],
-  providers: [
-    ContactCustomService,
-    SocialNetworkCustomService,
-    ZipCodeCustomService,
-    // DatePipe,
-    LanguageCustomService,
-  ]
+    imports: [
+        ServiceGeneratedModule
+    ],
+    exports: [
+        ServiceGeneratedModule
+    ],
+    declarations: [],
+    providers: [
+        ContactCustomService,
+      SocialNetworkCustomService,
+        ZipCodeCustomService,
+        // DatePipe,
+        LanguageCustomService,
+    ]
 })
 export class ServicesModule { }

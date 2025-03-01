@@ -1,8 +1,8 @@
 import { Directive, HostListener } from '@angular/core';
 
 /**
- * Allows the sidebar to be toggled via click.
- */
+* Allows the sidebar to be toggled via click.
+*/
 @Directive({
   selector: '[appSidebarToggler]'
 })
@@ -12,7 +12,7 @@ export class SidebarToggleDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    document.querySelector('body').classList.toggle('sidebar-hidden');
+    document?.querySelector('body')?.classList?.toggle('sidebar-hidden');
   }
 }
 
@@ -25,7 +25,7 @@ export class SidebarMinimizeDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    document.querySelector('body').classList.toggle('sidebar-minimized');
+    document?.querySelector('body')?.classList?.toggle('sidebar-minimized');
   }
 }
 
@@ -43,13 +43,13 @@ export class MobileSidebarToggleDirective {
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {
     $event.preventDefault();
-    document.querySelector('body').classList.toggle('sidebar-mobile-show');
+    document?.querySelector('body')?.classList.toggle('sidebar-mobile-show');
   }
 }
 
 /**
- * Allows the off-canvas sidebar to be closed via click.
- */
+* Allows the off-canvas sidebar to be closed via click.
+*/
 @Directive({
   selector: '[appSidebarClose]'
 })

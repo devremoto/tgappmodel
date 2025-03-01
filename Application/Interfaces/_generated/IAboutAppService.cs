@@ -1,12 +1,9 @@
-﻿using Application.ViewModels;
-using Domain.Entities;
-using System;
+﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface IAboutAppService : IBaseAppService<About>
 {
-    public partial interface IAboutAppService : IBaseAppService<About>
-    {
-		About Save(About viewModel, bool edit = false);
-    }
+    About Save(About viewModel, bool edit = false);
 }
 

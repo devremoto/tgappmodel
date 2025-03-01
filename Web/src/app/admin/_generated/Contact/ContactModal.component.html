@@ -6,7 +6,7 @@
 		<button type="button" class="close" (click)="hideModal()">×</button>		
 	</div>
 	<div class="modal-body">
-		<app-form-contact [edit]="edit" [(contact)]="entity" ></app-form-contact>
+		<app-form-contact [edit]="edit" [contact]="entity" ></app-form-contact>
 	</div>
 	<div class="modal-footer">		
 		<button type="button" (click)="hideModal()" class="btn btn-default">{{'CONTACT.FORM.BUTTON.CANCEL' | translate }}</button>

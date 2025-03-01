@@ -1,63 +1,57 @@
-﻿using System;
-using System.Linq.Expressions;
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
 using Domain.Services.Interfaces;
+using System;
 using System.Linq;
+using System.Linq.Expressions;
 
-namespace Domain.Services
+namespace Domain.Services;
+
+public class BaseService<T>(IBaseRepository<T> baseRepository) : IBaseService<T> where T : class
 {
-    public class BaseService<T> : IBaseService<T> where T : class
+    protected IBaseRepository<T> _baseRepository = baseRepository;
+
+    public T Add(T entity)
     {
-        protected IBaseRepository<T> _baseRepository;
+        return _baseRepository.Add(entity);
+    }
 
-        public BaseService(IBaseRepository<T> baseRepository)
-        {
-            _baseRepository = baseRepository;
-        }
+    public void Dispose()
+    {
+        _baseRepository.Dispose();
+    }
 
-        public T Add(T entity)
-        {
-            return _baseRepository.Add(entity);
-        }
+    public IQueryable<T> Find(Expression<Func<T, bool>> predicate, params string[] includeProperties)
+    {
+        return _baseRepository.Find(predicate, includeProperties);
+    }
 
-        public void Dispose()
-        {
-            _baseRepository.Dispose();
-        }
+    public IQueryable<T> GetAll(params string[] includeProperties)
+    {
+        return _baseRepository.GetAll(includeProperties);
+    }
 
-        public IQueryable<T> Find(Expression<Func<T, bool>> predicate, params string[] includeProperties)
-        {
-            return _baseRepository.Find(predicate, includeProperties);
-        }
+    public T GetOne(params object[] keys)
+    {
+        return _baseRepository.GetOne(keys);
+    }
 
-        public IQueryable<T> GetAll(params string[] includeProperties)
-        {
-            return _baseRepository.GetAll(includeProperties);
-        }
+    public void Remove(params object[] keys)
+    {
+        _baseRepository.Remove(keys);
+    }
 
-        public T GetOne(params object[] keys)
-        {
-            return _baseRepository.GetOne(keys);
-        }
+    public void Remove(T entity)
+    {
+        _baseRepository.Remove(entity);
+    }
 
-        public void Remove(params object[] keys)
-        {
-            _baseRepository.Remove(keys);
-        }
+    public int SaveChanges()
+    {
+        return _baseRepository.SaveChanges();
+    }
 
-        public void Remove(T entity)
-        {
-            _baseRepository.Remove(entity);
-        }
-
-        public int SaveChanges()
-        {
-            return _baseRepository.SaveChanges();
-        }
-
-        public T Update(T entity)
-        {
-            return _baseRepository.Update(entity);
-        }
+    public T Update(T entity)
+    {
+        return _baseRepository.Update(entity);
     }
 }

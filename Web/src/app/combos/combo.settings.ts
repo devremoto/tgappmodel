@@ -1,16 +1,15 @@
-﻿import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SettingsService } from '../services/generated/SettingsService';
 import { Settings } from '../models/Settings';
-import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-combo-settings',
-  template: `
+    selector: 'app-combo-settings',
+    template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="settings" class="{{cssClass}}" autofocus >
-      <option *ngFor="let settings of settingsList" [value]="settings.id">{{settings.key}}</option>
+      <option *ngFor="let settings of settingsList" [value]="settings.id">{{settings.id}}</option>
     </select>`
 })
-export class ComboSettingsComponent implements OnInit, OnDestroy {
+export class ComboSettingsComponent implements OnInit {
     appErrorMessage: any;
     settings: Settings;
     settingsList: Settings[];
@@ -18,15 +17,14 @@ export class ComboSettingsComponent implements OnInit, OnDestroy {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
-    subscription = new Subscription();
 
     constructor(private _service: SettingsService) {
-        this.subscription.add(this._service.on('Settings-save').subscribe((data) => {
+        this._service.on('Settings-save').subscribe((data) => {
             this.reload(data);
-        }));
+        });
     }
 
-    updateData(event) {
+    updateData(even: any) {
         this.model = event;
         this.modelChange.emit(event);
     }
@@ -36,12 +34,8 @@ export class ComboSettingsComponent implements OnInit, OnDestroy {
         this.getAll();
     }
 
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
-    }
-
     public getAll(data?: Settings) {
-        this.subscription.add(this._service.getAll().subscribe(
+        this._service.getAll().subscribe(
             result => {
                 this.settingsList = result;
                 if (data) {
@@ -51,7 +45,7 @@ export class ComboSettingsComponent implements OnInit, OnDestroy {
             error => {
                 this.appErrorMessage = error;
             }
-        ));
+        );
     }
 
     public reload(data?: Settings) {

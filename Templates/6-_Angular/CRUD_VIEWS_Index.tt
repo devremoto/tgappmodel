@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" hostSpecific="true"  #>
+﻿<#@ template language="C#" hostSpecific="true" compilerOptions="optimize+" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -106,7 +106,7 @@ foreach(var field in classModel.Fields){#>
                                 <a class="button-icon" style="color:red;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.REMOVE' | translate }}" (click)="remove(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
                                     <i class="fa fa-trash-o"></i>
                                 </a>&nbsp;
-								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.DUPLICATE' | translate }}" (click)="duplicate(<#=classSet.ToCamelCase(classModel.Name)#>)">
+								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.DUPLICATE' | translate }}" (click)="duplicate(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
                                     <i class="fa fa-copy"></i>
                                 </a>
                             </div>
@@ -115,7 +115,7 @@ foreach(var field in classModel.Fields){#>
 
 
                 </table>
-				<ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size" [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged()" [rotate]="true"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
+				<ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size" [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged($event)" [rotate]="true"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
 
 				</div>
 				</div>
@@ -133,7 +133,7 @@ manager.EndBlock();
 manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Index.component.ts",webProject,"");
 
 #>
-import { Component, Input, OnInit, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
@@ -142,13 +142,12 @@ import { DialogService } from '../../../components/dialog/dialog.service';
 import { <#=classModel.Name#>ModalComponent } from './<#=classModel.Name#>Modal.component';
 import { <#=classModel.Name#>Service } from '../../../services/generated/<#=classModel.Name#>Service';
 import { <#=classModel.Name#> } from '../../../models/<#=classModel.Name#>';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-<#=classSet.ToDash(classModel.Name)#>',
-  templateUrl: './<#=classModel.Name#>Index.component.html'
+  templateUrl: './<#=classModel.Name#>Index.component.html',
 })
-export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges, OnDestroy {
+export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges {
     private _edit = false;
     paging: PagingModel<<#=classModel.Name#>>;
     screen = '<#=classModel.Name#>';
@@ -163,7 +162,6 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges, On
     @Input() <#=classSet.ToCamelCase(field.Name)#>Id: any;
 <#}#>
     private modalRef: NgbModalRef;
-    private subscription = new Subscription();
 
     constructor(
       private _service: <#=classModel.Name#>Service,
@@ -178,22 +176,10 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges, On
 
     ngOnInit() {
       this.load();
-      this.subscription.add(this._service.hubService.on('<#=classModel.Name#>Create').subscribe((data) => {
+      this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
         this.pageChanged();
         this.hideModal();
-      }));
-      this.subscription.add(this._service.hubService.on('<#=classModel.Name#>Update').subscribe((data) => {
-        this.pageChanged();
-        this.hideModal();
-      }));
-      this.subscription.add(this._service.hubService.on('<#=classModel.Name#>Remove').subscribe((data) => {
-        this.pageChanged();
-        this.hideModal();
-      }));
-    }
-
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
+      });
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -209,7 +195,7 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges, On
     }
 
     private openModal() {
-      const options = { size: 'lg', backdrop: 'static', windowClass: 'modal-primary'} as NgbModalOptions;
+      const options = <NgbModalOptions>{ size: 'lg', backdrop: 'static', windowClass: 'modal-primary'};
       this.modalRef  = this._modalService.open(<#=classModel.Name#>ModalComponent, options);
       this.modalRef.componentInstance.name = '<#=camelCaseName#>Modal';
       this.modalRef.componentInstance.edit = this._edit;
@@ -325,6 +311,7 @@ foreach(var field in classModel.Fields.Where(x=>x.DataType.Contains("DateTime"))
               if (this.paging.totalCount <= this.paging.size) {
                 this.paging.number--;
               }
+              this.getAll();
               const successMsg = this.translate.instant('<#=underscoreName#>.GRID.REMOVE.SUCCESS');
               this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
             },

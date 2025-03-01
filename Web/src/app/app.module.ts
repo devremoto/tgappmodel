@@ -1,5 +1,5 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, LOCALE_ID } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -29,14 +29,11 @@ import { SharedModule } from './shared/shared.module';
     NgbModule,
     TranslateModule.forRoot()
   ],
-  providers: [
-    { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: LOCALE_ID, deps: [LanguageCustomService], useFactory: (locale: LanguageCustomService) => locale.getLocale() }
-  ],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {
+export class AppModule implements OnInit {
   constructor(language: LanguageCustomService, private title: Title) {
     language.init('/assets/i18n/admin/');
     language.init('/assets/i18n/admin/layout/');
@@ -45,12 +42,16 @@ export class AppModule {
   }
 
   setFavicon(icon: string) {
-    let link: HTMLLinkElement;
+    let link;
     link = document.createElement('link');
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
     link.href = icon;
     document.getElementsByTagName('head')[0].appendChild(link);
+  }
+
+  ngOnInit(): void {
+    this.init();
   }
 
   init() {

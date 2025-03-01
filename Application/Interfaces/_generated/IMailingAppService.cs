@@ -1,12 +1,9 @@
-﻿using Application.ViewModels;
-using Domain.Entities;
-using System;
+﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface IMailingAppService : IBaseAppService<Mailing>
 {
-    public partial interface IMailingAppService : IBaseAppService<Mailing>
-    {
-		Mailing Save(Mailing viewModel, bool edit = false);
-    }
+    Mailing Save(Mailing viewModel, bool edit = false);
 }
 

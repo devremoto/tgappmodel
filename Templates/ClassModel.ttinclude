@@ -1,12 +1,11 @@
-
+<#@ assembly name="System" #>
 <#@ assembly name="System.Core" #>
-
 <#@ assembly name="System.Data" #>
 <#@ assembly name="System.Linq" #>
 <#@ assembly name="System.Runtime.Caching" #>
-
-<#@ assembly name="$(ProjectDir)Domain.dll" #>
-
+<#@ assembly name="$(ProjectDir)\Domain.dll" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq"#>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Linq" #>
@@ -16,7 +15,7 @@
 <#@ import namespace="System.IO" #><#
 var webProject = "Web";
 var webFolder = "Web";
-var webAppPath = "src\\app\\";
+var webAppPath = $"src\\app\\";
 var webAppFullPath = $"{webFolder}\\{webAppPath}" ;
 #>
 <#+
@@ -26,20 +25,36 @@ public class ClassSet{
 	//static string cacheKey = "_classSet";
 	//static CacheItemPolicy policy;
 	static ClassSet _instance;
-  public string templateDir;
-  public string solutionDir;
+	public string templateDir;
     public static ClassSet Instance
     {
         get
         {	
 			try{
-				if(_instance == null){				
+				if(_instance == null){
+				/*
+					if (!cache.Contains(cacheKey)){ 
+						_instance = new ClassSet();
+						policy = new CacheItemPolicy();
+						policy.AbsoluteExpiration = DateTimeOffset.Now.AddSeconds(600.0);
+						cache.Add(cacheKey, _instance, policy);					
+					}else{
+						var obj = cache.Get(cacheKey);					
+						_instance = obj ==null?new ClassSet():(ClassSet)obj;	
+					}
+					*/
 					_instance = new ClassSet();
+				}else{
+					//cache.Set(cacheKey, _instance, policy);	
 				}
+
+				if(_instance==null)
+					throw new Exception("Não tem a instancia");
 
 				return _instance;
 			}catch(Exception e){
-
+				Debug.Print(e.Message);
+				Console.WriteLine(e.Message);
 			}
 
 			return null;
@@ -142,8 +157,7 @@ public class ClassSet{
 			orderFields=false;
 		Classes=new List<ClassModel>();
 		try{
-   var path=solutionDir;
-		Assembly models = Assembly.LoadFrom(solutionDir+"\\Templates\\Domain.dll");
+		Assembly models = Assembly.GetAssembly(typeof(Domain.Entities.Contact));
 		var types = models.GetTypes(); 
 
 		 
@@ -194,21 +208,16 @@ public class ClassSet{
                              field.IsForeingKey = true;
                        }
 						switch(field.DataType){
-              //case "Guid":
+              case "Guid":
 							case "String":
 								field.DataType = "string";
 							break;
 							case "Boolean":
 								field.DataType = "bool";
 							break;
-              case "Int64":
-								field.DataType = "long";
-							break;
 							case "Int32":
 								field.DataType = "int";
 							break;
-                         
-
 						}
 
 						if(field.IsClass && !prop.PropertyType.Namespace.Contains("Generic") && !prop.PropertyType.Namespace.Contains("Collection") && !prop.PropertyType.Namespace.Contains("List")){
@@ -238,9 +247,7 @@ public class ClassSet{
         });    
              
 		return this;
-		}catch(Exception e){
-
-        Debug.Write(e.Message);
+		}catch{
 
 		}
 
@@ -337,21 +344,7 @@ public class ClassSet{
 		}
 
 	}
-
-      public string MockValue (Field field) {
-       var value = field.DataType.ToLower() switch {
-          "string" => $" = \"{field.Name}\"",
-          "bool" => $" = !entity.{field.Name}",
-          "decimal" => $" += 1",
-          "int" => $" += 1",
-          "float" => $" += 1",
-          "double" => $" += 1",
-          "long" => $" += 1",
-          "datetime" => $" = DateTime.Now",
-          _ => $" = entity.{field.Name}"
-        };
-        return $"entity.{field.Name}{value};";
-      }	
+	
 }
 
 public class ClassModel
@@ -411,13 +404,6 @@ string GetCurrentDirectory()
     return System.IO.Path.GetDirectoryName(Host.TemplateFile);
 }
 
-public string GetSolutionDirectory()
-{
-    var serviceProvider = this.Host as IServiceProvider;
-    var dte = serviceProvider.GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE;
-    return System.IO.Path.GetDirectoryName(dte.Solution.FullName);
-}
-
 void CreateDirectory(string path){
 	if(!System.IO.Directory.Exists(path))
 		System.IO.Directory.CreateDirectory(GetCurrentDirectory()+path);	
@@ -448,7 +434,6 @@ ClassSet classSet {
 		if(_classSet==null){
 			    _classSet= ClassSet.Instance;
 				_classSet.templateDir = GetCurrentDirectory();
-        _classSet.solutionDir = GetSolutionDirectory();
 				_classSet.GetClasses();
 		}		
 		

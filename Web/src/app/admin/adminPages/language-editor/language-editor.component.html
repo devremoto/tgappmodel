@@ -5,7 +5,7 @@
       {{'TRANSLATOR.HEADER.PRINT' | translate}}</a>
     <a class="btn btn-sm btn-info float-right" (click)="save(file,fileDefault)"><i class="fa fa-save"></i>
       {{'TRANSLATOR.HEADER.SAVE' | translate}}</a>
-    <a class="btn btn-sm btn-info float-right" (click)="download(file)"><i class="fa fa-download"></i>
+    <a class="btn btn-sm btn-info float-right" (click)="download([file])"><i class="fa fa-download"></i>
       {{'TRANSLATOR.HEADER.DOWNLOAD' | translate}}</a>
   </div>
   <div class="card-body">
@@ -42,4 +42,3 @@
     </div>
   </div>
 </div>
-<toaster-container></toaster-container>

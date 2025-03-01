@@ -6,7 +6,7 @@
 		<button type="button" class="close" (click)="hideModal()">×</button>		
 	</div>
 	<div class="modal-body">
-		<app-form-settings [edit]="edit" [(settings)]="entity" ></app-form-settings>
+		<app-form-settings [edit]="edit" [settings]="entity" ></app-form-settings>
 	</div>
 	<div class="modal-footer">		
 		<button type="button" (click)="hideModal()" class="btn btn-default">{{'SETTINGS.FORM.BUTTON.CANCEL' | translate }}</button>

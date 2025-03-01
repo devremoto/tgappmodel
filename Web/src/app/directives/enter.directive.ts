@@ -1,5 +1,5 @@
 import { Directive, ElementRef } from '@angular/core';
-declare var window: any;
+declare let window: any;
 @Directive({
   selector: '[appEnter]'
 })
@@ -14,7 +14,7 @@ export class EnterDirective {
     const input = this.el.nativeElement;
 
     // Execute a function when the user releases a key on the keyboard
-    window.addEventListener('keyup', (event) => {
+    window.addEventListener('keyup', (event: any) => {
       // Cancel the default action, if needed
       event.preventDefault();
       // Number 13 is the "Enter" key on the keyboard

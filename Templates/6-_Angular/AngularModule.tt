@@ -5,8 +5,8 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ include file="../main.ttinclude" #>
-<#@ include file="../ClassModel.ttinclude" #>
+<#@ include file="..\main.ttinclude" #>
+<#@ include file="..\ClassModel.ttinclude" #>
 <#@ output extension=".txt"  #><#
 //System.Diagnostics.Debugger.Launch();
 var manager = TemplateFileManager.Create(this);
@@ -22,7 +22,8 @@ foreach(var classModel in classSet.Classes){
 		var underscoreName = classSet.ToUnderscore(classModel.Name).ToUpper();
 		var parents = (classModel.Fields!=null)?classModel.Fields.Where(x=>x.IsParent):null;
 		var classChild = (classModel.Fields!=null)?classModel.Fields.Where(x=>x.IsCollection):null;
-		manager.IsAutoIndentEnabled=true;
+
+		//manager.IsAutoIndentEnabled=true;
 		
 #>
 <#	
@@ -44,17 +45,15 @@ import 'rxjs/add/operator/map';
 <#}#>
 import { <#=classModel.Name#> } from '../../models/<#=classModel.Name#>';
 import { PagingModel } from '../../models/PagingModel';
-import { HubService } from '../hub.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class <#=classModel.Name#>Service extends BaseService<<#=classModel.Name#>> {
 
-    constructor(protected _http: HttpService, public hubService: HubService) {
-        super(_http, hubService); 
-            this.controller = '<#=classModel.Name#>';
-            this.hubService.registerCrud(this.controller);
+    constructor(protected _http: HttpService) {
+        super(_http);
+            this._controller = '<#=classModel.Name#>';
     }
 
     getOne(entity: <#= classModel.Name #>): Observable<<#= classModel.Name #>> {

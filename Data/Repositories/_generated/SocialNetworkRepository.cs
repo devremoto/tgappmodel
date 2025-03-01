@@ -2,15 +2,9 @@
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Data.Repositories
+namespace Data.Repositories;
+
+public partial class SocialNetworkRepository(AppDbContext db) : BaseRepository<SocialNetwork>(db), ISocialNetworkRepository
 {
-    public partial class SocialNetworkRepository : BaseRepository<SocialNetwork>, ISocialNetworkRepository
-    {
-        public SocialNetworkRepository(AppDbContext db)
-            : base(db)
-        {
-            
-        }		
-    }
 }
 

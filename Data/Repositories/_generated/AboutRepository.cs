@@ -2,15 +2,9 @@
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Data.Repositories
+namespace Data.Repositories;
+
+public partial class AboutRepository(AppDbContext db) : BaseRepository<About>(db), IAboutRepository
 {
-    public partial class AboutRepository : BaseRepository<About>, IAboutRepository
-    {
-        public AboutRepository(AppDbContext db)
-            : base(db)
-        {
-            
-        }		
-    }
 }
 

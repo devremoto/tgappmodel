@@ -1,13 +1,10 @@
-export class Language {
-  id;
-  code: string;
-  name: string;
-  image: string;
-  active;
-  default;
-  loaded;
-  locale: any;
+﻿export class Language {
+  id?: string;
+  code?: string;
+  name?: string;
+  image?: string;
+  active?: boolean;
+  default?: string;
+  loaded?: boolean;
 
-  constructor() {
-  }
 }

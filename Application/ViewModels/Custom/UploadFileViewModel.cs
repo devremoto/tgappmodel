@@ -1,12 +1,8 @@
-﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
+﻿namespace Application.ViewModels;
 
-namespace Application.ViewModels
+public partial class UploadFileViewModel
 {
-    public partial class UploadFileViewModel
-    {
-		/*
+    /*
 		public string Id{ get; set; }
 		public string Name{ get; set; }
 		public string InputFileField{ get; set; }
@@ -16,5 +12,4 @@ namespace Application.ViewModels
 		public string Controller{ get; set; }
 		public string Extension{ get; set; }
 		*/
-    }
 }

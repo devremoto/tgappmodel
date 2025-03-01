@@ -3,14 +3,13 @@ import { HttpService } from '../services';
 //////
 
 import { SocialNetworkService } from '../generated/SocialNetworkService';
-import { HubService } from '../hub.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SocialNetworkCustomService extends SocialNetworkService {
-  constructor(protected http: HttpService, public hubService: HubService) {
-    super(http, hubService);
 
+  constructor(override http: HttpService) {
+    super(http);
   }
 }

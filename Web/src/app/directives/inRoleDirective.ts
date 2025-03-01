@@ -3,14 +3,14 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { AccountService } from '../auth/account.service';
 import { Config } from '../config';
 
-declare var $: any;
+declare let $: any;
 
 @Directive({
   selector: '[appInRole]'
 })
 export class InRoleDirective implements OnInit {
-  userRoles = [];
-  @Input('appInRole') roles: Array<string> = [];
+  userRoles: string[] = [];
+  @Input('appInRole') roles: string[] = [];
 
   constructor(private el: ElementRef, private _accountService: AccountService) {
     this.setUserRoles();
@@ -28,9 +28,9 @@ export class InRoleDirective implements OnInit {
     }
     const role = data.role || data.roles;
     if (typeof role === 'string') {
-      this.userRoles.push(this._accountService.userInfo().role.toLowerCase());
+      this.userRoles.push(this._accountService.userInfo().role);
     } else {
-      this.userRoles = role.map(x => x.toLowerCase());
+      this.userRoles = role;
     }
   }
 
@@ -44,7 +44,7 @@ export class InRoleDirective implements OnInit {
 
     if (this.userRoles) {
       this.roles.forEach((obj, index) => {
-        if (this.userRoles.indexOf(this.roles[index].toLowerCase()) >= 0) {
+        if (this.userRoles.indexOf(this.roles[index] as never) >= 0) {
           i++;
           return;
         }

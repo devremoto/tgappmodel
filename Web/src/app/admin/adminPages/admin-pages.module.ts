@@ -26,7 +26,7 @@ import { UserSettingsComponent } from './user-settings/user-settings.component';
     UserSettingsComponent,
     AppSettingsComponent,
     DashboardComponent,
-    LanguageSettingsComponent
+    LanguageSettingsComponent,
   ]
 })
 export class AdminPagesModule {

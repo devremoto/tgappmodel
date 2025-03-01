@@ -9,7 +9,7 @@ export class AuthCanActivateGuard implements CanActivate {
     this.config = Config;
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url = state.url;
     const logged = this.authService.isLoggedIn();
     if (!logged) {
@@ -17,7 +17,7 @@ export class AuthCanActivateGuard implements CanActivate {
         this.authService.setCallbackUrl(url);
       }
       this.authService.redirectLogin();
-      return;
+      return false;
     }
     return logged;
   }

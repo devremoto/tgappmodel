@@ -1,8 +1,8 @@
-export class UploadFile {
-  id;
+﻿export class UploadFile {
+  id?: string;
   name: string;
   inputFileField: string;
-  size;
+  size: number;
   type: string;
   fileName: string;
   controller: string;

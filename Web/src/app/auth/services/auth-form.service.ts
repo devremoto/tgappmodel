@@ -1,34 +1,27 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User, UserManager, UserSettings } from 'oidc-client';
 import { LoginModel } from 'src/app/models/LoginModel';
 
 import { SessionStorageService } from '../../shared/util/session-storage.service';
 import { AuthService } from './auth.service';
-import { Config } from '../../config';
-import { User } from 'oidc-client';
 
 @Injectable({ providedIn: 'root' })
-export class AuthServiceForm extends AuthService {
-  token: string;
-  id_token: string;
-  callbackUrl: string;
-  user = {
-    access_token: null,
-    expires_at: Date.now() + 30000,
-    id_token: 'sdfsdfsdf',
-    profile: {},
-    refresh_token: 'asdasd',
-    session_state: null,
-    token_type: null,
-    scope: null,
-    state: null
-  } as User;
-  _localStorage: Storage;
-  _sessionStorage: Storage;
+export class AuthServiceForm extends AuthService implements OnInit {
+  override token: string;
+  override id_token: string;
+  override callbackUrl: string;
+  override userManager: UserManager;
+  override _localStorage: Storage;
+  override _sessionStorage: Storage;
   LoginModel: LoginModel;
   constructor(_router: Router, _storage: SessionStorageService) {
     super(_router, _storage);
     this.init().then(user => (this.user = user));
+  }
+
+  async ngOnInit() {
+    await this.init();
   }
 
   async init() {
@@ -39,45 +32,33 @@ export class AuthServiceForm extends AuthService {
 
     return this.user;
   }
-
   isLoggedIn(): boolean {
-    return (
-      this.user && this.user.access_token && this.user.access_token !== null
-    ); // && !this.user.expired;
+    return this.user && !!this.user.access_token && this.user.access_token !== null; // && !this.user.expired;
   }
 
   getToken(): string {
-    return this.user ? this.user.access_token : null;
+    return this.user ? this.user.access_token : '';
   }
 
   getIdToken(): string {
     return this.user.id_token;
   }
 
-  getUser(): Promise<any> {
-    this.user = this._storage.getObjectCache<any>('user');
+  getUser(): Promise<User> {
+    this.user = this._storage.getObjectCache<User>('user')!;
     return new Promise(resolve => {
       resolve(this.user);
     });
   }
 
-  login(loginModel: LoginModel) {
-    this.user = {
+  login() {
+    this.user = new User(<UserSettings>{
       access_token: 'sdadasdasd',
       expires_at: Date.now() + 30000,
       id_token: 'adasdasd',
-      profile: {
-        role: 'admin',
-        roles: ['admin'],
-        name: loginModel.username,
-        email: 'teste@teste.com'
-      },
-      refresh_token: 'asdsad',
-      session_state: null,
-      token_type: null,
-      scope: null,
-      state: null
-    } as User;
+      profile: {},
+      refresh_token: 'asdsad'
+    });
 
     this.user.access_token = 'sdadasdasd';
 
@@ -89,7 +70,7 @@ export class AuthServiceForm extends AuthService {
     this.navigateTo('/login');
   }
 
-  navigateTo(segment, params?: any) {
+  navigateTo(segment: string, params?: any) {
     if (params) {
       this._router.navigate([segment, params]);
     } else {
@@ -97,7 +78,7 @@ export class AuthServiceForm extends AuthService {
     }
   }
 
-  navigateToUrl(url) {
+  navigateToUrl(url: string) {
     this._router.navigateByUrl(url);
   }
 

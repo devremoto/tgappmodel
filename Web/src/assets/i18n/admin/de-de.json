@@ -1,7 +1,7 @@
 ﻿{
 	"ABOUT":{
 		"TITLE" : "ÜBER",
-		"MENU" : "Über",
+		"MENU" : "über",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
@@ -11,14 +11,14 @@
 				"ACTIONS":"Aktionen"
 			},
 			"BUTTON": {
-				"EDIT":"Bearbeiten",
-				"REMOVE":"Löschen",
-				"DUPLICATE":"Doppelte",
-				"NEW": "Hinzufügen ÜBER"
+				"EDIT":"herausgeben",
+				"REMOVE":"streichen",
+				"DUPLICATE":"genau gleich",
+				"NEW": "hinzufügen ÜBER"
 			},
 			"CONFIRM_DELETE":"Möchten Sie dieses Element wirklich entfernen?",
 			"REMOVE": {
-				"SUCCESS":"Über Entfernt",
+				"SUCCESS":"über Entfernt",
 				"ERROR":"Fehler beim Entfernen"
 			},
 			"DUPLICATE": {
@@ -34,22 +34,22 @@
 				"ID":"ID"
 			},
 			"BUTTON": {
-				"SAVE":"Speichern",
+				"SAVE":"retten",
 				"CANCEL":"Abbrechen"
 			},
 			"SAVE": {
-				"SUCCESS":"Über : erfolgreich gespeichert",
+				"SUCCESS":"über : erfolgreich gespeichert",
 				"ERROR":"Fehler beim Speichern"
 			}
 		}
 	},
 	"CONTACT":{
-		"TITLE" : "KONTAKT",
-		"MENU" : "Kontakt",
+		"TITLE" : "BERÜHRUNG",
+		"MENU" : "berührung",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
-				"NAME":"NAMEN",
+				"NAME":"NAME",
 				"PHONE_NUMBER":"TELEFONNUMMER",
 				"EMAIL":"E-MAIL",
 				"SUBJECT":"BETREFF",
@@ -57,14 +57,14 @@
 				"ACTIONS":"Aktionen"
 			},
 			"BUTTON": {
-				"EDIT":"Bearbeiten",
-				"REMOVE":"Löschen",
-				"DUPLICATE":"Doppelte",
-				"NEW": "Hinzufügen KONTAKT"
+				"EDIT":"herausgeben",
+				"REMOVE":"streichen",
+				"DUPLICATE":"genau gleich",
+				"NEW": "hinzufügen BERÜHRUNG"
 			},
 			"CONFIRM_DELETE":"Möchten Sie dieses Element wirklich entfernen?",
 			"REMOVE": {
-				"SUCCESS":"Kontakt Entfernt",
+				"SUCCESS":"berührung Entfernt",
 				"ERROR":"Fehler beim Entfernen"
 			},
 			"DUPLICATE": {
@@ -74,7 +74,7 @@
 		},
 		"FORM" : {
 			"LABEL" : {	
-				"NAME":"NAMEN",
+				"NAME":"NAME",
 				"PHONE_NUMBER":"TELEFONNUMMER",
 				"EMAIL":"E-MAIL",
 				"SUBJECT":"BETREFF",
@@ -82,38 +82,38 @@
 				"ID":"ID"
 			},
 			"BUTTON": {
-				"SAVE":"Speichern",
+				"SAVE":"retten",
 				"CANCEL":"Abbrechen"
 			},
 			"SAVE": {
-				"SUCCESS":"Kontakt : erfolgreich gespeichert",
+				"SUCCESS":"berührung : erfolgreich gespeichert",
 				"ERROR":"Fehler beim Speichern"
 			}
 		}
 	},
 	"LANGUAGE":{
 		"TITLE" : "SPRACHE",
-		"MENU" : "Sprache",
+		"MENU" : "sprache",
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
-				"CODE":"CODE",
-				"NAME":"NAMEN",
+				"CODE":"REGELBUCH",
+				"NAME":"NAME",
 				"IMAGE":"BILD",
 				"ACTIVE":"AKTIV",
-				"DEFAULT":"STANDARD",
-				"LOADED":"GELADEN",
+				"DEFAULT":"DEFAULT",
+				"LOADED":"BELADEN",
 				"ACTIONS":"Aktionen"
 			},
 			"BUTTON": {
-				"EDIT":"Bearbeiten",
-				"REMOVE":"Löschen",
-				"DUPLICATE":"Doppelte",
-				"NEW": "Hinzufügen SPRACHE"
+				"EDIT":"herausgeben",
+				"REMOVE":"streichen",
+				"DUPLICATE":"genau gleich",
+				"NEW": "hinzufügen SPRACHE"
 			},
 			"CONFIRM_DELETE":"Möchten Sie dieses Element wirklich entfernen?",
 			"REMOVE": {
-				"SUCCESS":"Sprache Entfernt",
+				"SUCCESS":"sprache Entfernt",
 				"ERROR":"Fehler beim Entfernen"
 			},
 			"DUPLICATE": {
@@ -123,20 +123,20 @@
 		},
 		"FORM" : {
 			"LABEL" : {	
-				"CODE":"CODE",
-				"NAME":"NAMEN",
+				"CODE":"REGELBUCH",
+				"NAME":"NAME",
 				"IMAGE":"BILD",
 				"ACTIVE":"AKTIV",
-				"DEFAULT":"STANDARD",
-				"LOADED":"GELADEN",
+				"DEFAULT":"DEFAULT",
+				"LOADED":"BELADEN",
 				"ID":"ID"
 			},
 			"BUTTON": {
-				"SAVE":"Speichern",
+				"SAVE":"retten",
 				"CANCEL":"Abbrechen"
 			},
 			"SAVE": {
-				"SUCCESS":"Sprache : erfolgreich gespeichert",
+				"SUCCESS":"sprache : erfolgreich gespeichert",
 				"ERROR":"Fehler beim Speichern"
 			}
 		}
@@ -152,10 +152,10 @@
 				"ACTIONS":"Aktionen"
 			},
 			"BUTTON": {
-				"EDIT":"Bearbeiten",
-				"REMOVE":"Löschen",
-				"DUPLICATE":"Doppelte",
-				"NEW": "Hinzufügen MAILING"
+				"EDIT":"herausgeben",
+				"REMOVE":"streichen",
+				"DUPLICATE":"genau gleich",
+				"NEW": "hinzufügen MAILING"
 			},
 			"CONFIRM_DELETE":"Möchten Sie dieses Element wirklich entfernen?",
 			"REMOVE": {
@@ -174,7 +174,7 @@
 				"ID":"ID"
 			},
 			"BUTTON": {
-				"SAVE":"Speichern",
+				"SAVE":"retten",
 				"CANCEL":"Abbrechen"
 			},
 			"SAVE": {
@@ -194,10 +194,10 @@
 				"ACTIONS":"Aktionen"
 			},
 			"BUTTON": {
-				"EDIT":"Bearbeiten",
-				"REMOVE":"Löschen",
-				"DUPLICATE":"Doppelte",
-				"NEW": "Hinzufügen EINSTELLUNGEN"
+				"EDIT":"herausgeben",
+				"REMOVE":"streichen",
+				"DUPLICATE":"genau gleich",
+				"NEW": "hinzufügen EINSTELLUNGEN"
 			},
 			"CONFIRM_DELETE":"Möchten Sie dieses Element wirklich entfernen?",
 			"REMOVE": {
@@ -216,7 +216,7 @@
 				"ID":"ID"
 			},
 			"BUTTON": {
-				"SAVE":"Speichern",
+				"SAVE":"retten",
 				"CANCEL":"Abbrechen"
 			},
 			"SAVE": {
@@ -231,17 +231,17 @@
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
-				"NAME":"NAMEN",
+				"NAME":"NAME",
 				"CSS_ICON":"CSS ICON",
 				"URL":"URL",
 				"ACTIVE":"AKTIV",
 				"ACTIONS":"Aktionen"
 			},
 			"BUTTON": {
-				"EDIT":"Bearbeiten",
-				"REMOVE":"Löschen",
-				"DUPLICATE":"Doppelte",
-				"NEW": "Hinzufügen SOZIALES NETZWERK"
+				"EDIT":"herausgeben",
+				"REMOVE":"streichen",
+				"DUPLICATE":"genau gleich",
+				"NEW": "hinzufügen SOZIALES NETZWERK"
 			},
 			"CONFIRM_DELETE":"Möchten Sie dieses Element wirklich entfernen?",
 			"REMOVE": {
@@ -255,14 +255,14 @@
 		},
 		"FORM" : {
 			"LABEL" : {	
-				"NAME":"NAMEN",
+				"NAME":"NAME",
 				"CSS_ICON":"CSS ICON",
 				"URL":"URL",
 				"ACTIVE":"AKTIV",
 				"ID":"ID"
 			},
 			"BUTTON": {
-				"SAVE":"Speichern",
+				"SAVE":"retten",
 				"CANCEL":"Abbrechen"
 			},
 			"SAVE": {
@@ -277,20 +277,20 @@
 		"GRID" : {
 			"COLUMN" : {		
 				"ID":"ID",
-				"NAME":"NAMEN",
+				"NAME":"NAME",
 				"INPUT_FILE_FIELD":"EINGABEDATEIFELD",
 				"SIZE":"GRÖßE",
-				"TYPE":"TYP",
+				"TYPE":"DRUCKTYPE",
 				"FILE_NAME":"DATEINAME",
-				"CONTROLLER":"CONTROLLER",
-				"EXTENSION":"ERWEITERUNG",
+				"CONTROLLER":"KONTROLLEUR",
+				"EXTENSION":"ANBAU",
 				"ACTIONS":"Aktionen"
 			},
 			"BUTTON": {
-				"EDIT":"Bearbeiten",
-				"REMOVE":"Löschen",
-				"DUPLICATE":"Doppelte",
-				"NEW": "Hinzufügen DATEI HOCHLADEN"
+				"EDIT":"herausgeben",
+				"REMOVE":"streichen",
+				"DUPLICATE":"genau gleich",
+				"NEW": "hinzufügen DATEI HOCHLADEN"
 			},
 			"CONFIRM_DELETE":"Möchten Sie dieses Element wirklich entfernen?",
 			"REMOVE": {
@@ -304,17 +304,17 @@
 		},
 		"FORM" : {
 			"LABEL" : {	
-				"NAME":"NAMEN",
+				"NAME":"NAME",
 				"INPUT_FILE_FIELD":"EINGABEDATEIFELD",
 				"SIZE":"GRÖßE",
-				"TYPE":"TYP",
+				"TYPE":"DRUCKTYPE",
 				"FILE_NAME":"DATEINAME",
-				"CONTROLLER":"CONTROLLER",
-				"EXTENSION":"ERWEITERUNG",
+				"CONTROLLER":"KONTROLLEUR",
+				"EXTENSION":"ANBAU",
 				"ID":"ID"
 			},
 			"BUTTON": {
-				"SAVE":"Speichern",
+				"SAVE":"retten",
 				"CANCEL":"Abbrechen"
 			},
 			"SAVE": {
@@ -327,14 +327,14 @@
 	"NAME":"",
 	"DIALOG":{
 		"CONFIRM":{
-			"TITLE":"Bestätigung"
+			"TITLE":"bestätigung"
 		},		
 		"OK":"Okay",
 		"CANCEL":"Abbrechen"
 	},
 	"TOASTER":{
 		"TITLE":{
-			"SUCCESS":"Erfolg",
+			"SUCCESS":"erfolg",
 			"ERROR":"Fehler"
 		}
 	},

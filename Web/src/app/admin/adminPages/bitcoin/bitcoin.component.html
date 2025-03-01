@@ -1,0 +1,198 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-header bg-success" *ngIf="ticker">
+          <div class="font-weight-bold">
+            <span>BUY</span><span class="float-right">{{ ticker.buy | currency }}</span>
+          </div>
+          <div>
+            <span>
+              <small>Today {{ ticker.date2 | date: 'HH:mm:ss' }}</small>
+            </span>
+            <span class="float-right">
+              <small>
+                H {{ ticker.high - ticker.buy | currency }} ({{ ticker.buyHV | number }}%) <br />
+                L {{ ticker.buy - ticker.low | currency }} ({{ ticker.buyLV | number }}%)
+              </small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3" *ngIf="ticker">
+      <div class="card">
+        <div class="card-header bg-danger">
+          <div class="font-weight-bold">
+            <span>SALE</span><span class="float-right">{{ ticker.sell | currency }}</span>
+          </div>
+
+          <div>
+            <span>
+              <small>Today {{ ticker.date2 | date: 'HH:mm:ss' }}</small>
+            </span>
+            <span class="float-right">
+              <small>
+                H {{ ticker.high - ticker.sell | currency }} ({{ ticker.sellHV | number }}%) <br />
+                L {{ ticker.sell - ticker.low | currency }} ({{ ticker.sellLV | number }}%)
+              </small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-header bg-warning" *ngIf="ticker">
+          <div class="font-weight-bold">
+            <span>LOWER</span><span class="float-right">{{ ticker.low | currency }}</span>
+          </div>
+          <div>
+            <span>
+              <small>Today {{ ticker.date2 | date: 'HH:mm:ss' }}</small>
+            </span>
+            <span class="float-right">
+              <small>
+                {{ ticker.diff | currency }} <br />
+                T ({{ ticker.pct | number }}%)
+              </small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-header bg-primary" *ngIf="ticker">
+          <div class="font-weight-bold">
+            <span>HIGHER</span><span class="float-right">{{ ticker.high | currency }}</span>
+          </div>
+          <div>
+            <span>
+              <small>Today {{ ticker.date2 | date: 'HH:mm:ss' }}</small>
+            </span>
+            <span class="float-right">
+              <small>
+                {{ ticker.diff | currency }} <br />
+                T ({{ ticker.pct | number }}%)
+              </small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="block-area" *ngIf="ticker">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <span>{{ ticker.now | date: 'HH:mm:ss' }} </span>
+        </div>
+        <div class="card-actions">
+          <a style="cursor:pointer" class="btn-setting" placement="left" ngbTooltip="{{ 'ABOUT.GRID.BUTTON.NEW' | translate }}"
+            ><i class="fa fa-file"></i
+          ></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 card-body collapse show" style="min-height:422px">
+          <ng2-smart-table class="table table-striped" [settings]="settings" [source]="trades"></ng2-smart-table>
+        </div>
+        <div class="col-sm-6 card-body collapse show" style="min-height:422px" id="collapseExample">
+          <table class=" table table-responsive-sm table-hover table-sm">
+            <tr>
+              <th>
+                ID
+              </th>
+              <th>
+                DATE
+              </th>
+              <th>
+                TYPE
+              </th>
+              <th>
+                PRICE
+              </th>
+              <th>
+                AMOUNT
+              </th>
+            </tr>
+            <tr *ngFor="let trade of sells; let index = index">
+              <td>
+                {{ trade.tid }}
+              </td>
+              <td>
+                {{ trade.newdate | date: 'yyyy/MM/dd' }}
+              </td>
+              <td>
+                {{ trade.type }}
+              </td>
+              <td>
+                {{ trade.price | currency }}
+              </td>
+              <td>
+                {{ trade.amount }}
+              </td>
+            </tr>
+          </table>
+
+          <!-- <ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size"
+          [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize"
+          [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm"
+          (pageChange)="pageChanged($event)" [rotate]="true" previousText="&lsaquo;" nextText="&rsaquo;"
+          firstText="&laquo;" lastText="&raquo;"></ngb-pagination> -->
+        </div>
+
+        <div class="col-sm-6 card-body collapse show" style="min-height:422px" id="collapseExample">
+          <table class=" table table-responsive-sm table-hover table-sm">
+            <tr>
+              <th>
+                ID
+              </th>
+              <th>
+                DATE
+              </th>
+              <th>
+                TYPE
+              </th>
+              <th>
+                PRICE
+              </th>
+              <th>
+                AMOUNT
+              </th>
+            </tr>
+            <tr *ngFor="let trade of buys; let index = index">
+              <td>
+                {{ trade.tid }}
+              </td>
+              <td>
+                {{ trade.newdate | date: 'yyyy/MM/dd' }}
+              </td>
+              <td>
+                {{ trade.type }}
+              </td>
+              <td>
+                {{ trade.price | currency }}
+              </td>
+              <td>
+                {{ trade.amount }}
+              </td>
+            </tr>
+          </table>
+
+          <!-- <ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size"
+            [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize"
+            [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm"
+            (pageChange)="pageChanged($event)" [rotate]="true" previousText="&lsaquo;" nextText="&rsaquo;"
+            firstText="&laquo;" lastText="&raquo;"></ngb-pagination> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<toaster-container></toaster-container>

@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Terminal=true
-Name=Click-Script
-Icon=utilities-terminal
-Exec=gnome-terminal -e "bash -c 'cd /mnt/405A884F5A88441E/desenvolvimento/cs/TgAppModel & ./install.sh;$SHELL'"
-Categories=Application;

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FileUploadModule } from 'ng2-file-upload';
 
 import { AsideToggleDirective } from './aside.directive';
 import { ClaimDirective } from './claimDirective';
@@ -15,9 +14,11 @@ import { ScrollTopDirective } from './scrollTopDirective';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './sidebar.directive';
 import { UploadComponent } from './upload/upload.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { BreadcrumbsComponent } from './breadcrumb.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, FileUploadModule, TranslateModule],
+  imports: [CommonModule, FormsModule, TranslateModule, RouterModule],
   declarations: [
     EnterDirective,
     InRoleDirective,
@@ -29,7 +30,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ProgressCircleDirective,
     AsideToggleDirective,
     NlbrDirective,
-    UploadComponent
+    UploadComponent,
+    BreadcrumbsComponent
   ],
   exports: [
     EnterDirective,
@@ -43,8 +45,8 @@ import { TranslateModule } from '@ngx-translate/core';
     AsideToggleDirective,
     NlbrDirective,
     UploadComponent,
-    FileUploadModule,
-    TranslateModule
+    TranslateModule,
+    BreadcrumbsComponent
   ]
 })
-export class DirectivesModule {}
+export class DirectivesModule { }

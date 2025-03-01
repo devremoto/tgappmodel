@@ -7,21 +7,26 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  @Input() title;
-  @Input() message;
-  @Input() callback: any;
+
+  @Input() title: string;
+  @Input() message: string;
+  @Input() callback: Function;
   @Input() windowClass: string;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
-  close(result) {
+  close(result: any) {
     if (result) {
       this.activeModal.close('confirmed');
       this.callback();
+
     } else {
       this.activeModal.dismiss('not confirmed');
     }
   }
+
+
 }

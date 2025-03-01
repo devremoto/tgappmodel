@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class SessionStorageService {
-  constructor() {}
+
 
   public setObjectCache<TT>(key: string, value: TT) {
     sessionStorage.setItem(key, JSON.stringify(value));
@@ -16,18 +16,19 @@ export class SessionStorageService {
     return getSessionStorage();
   }
 
-  getLocaltorage(): any {
+  getLocaltorage() {
     return this.sessionStorage;
   }
 
   public getObjectCache<TT>(key: string) {
     const result = sessionStorage.getItem(key);
     if (result) {
-      return JSON.parse(result) as TT;
+      return <TT>JSON.parse(result);
     }
+    return null;
   }
 
-  public setCache(key: string, value: any) {
+  public setCache(key: string, value: string) {
     this.sessionStorage.setItem(key, value);
   }
 
@@ -39,7 +40,7 @@ export class SessionStorageService {
     this.sessionStorage.removeItem(key);
   }
 
-  public setLocalCache(key: string, value: any) {
+  public setLocalCache(key: string, value: string) {
     this.localStorage.setItem(key, value);
   }
 

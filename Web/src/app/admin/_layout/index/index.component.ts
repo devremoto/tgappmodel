@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-declare var $: any;
+declare let $: any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './index.component.html',

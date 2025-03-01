@@ -8,6 +8,6 @@ export interface ObjectTree {
   to: string;
   folder: string;
   newPropName: string;
-  parent: ObjectTree;
+  parent: ObjectTree | null;
   child: ObjectTree[];
 }

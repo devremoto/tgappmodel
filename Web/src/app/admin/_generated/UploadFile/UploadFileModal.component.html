@@ -6,7 +6,7 @@
 		<button type="button" class="close" (click)="hideModal()">×</button>		
 	</div>
 	<div class="modal-body">
-		<app-form-upload-file [edit]="edit" [(uploadFile)]="entity" ></app-form-upload-file>
+		<app-form-upload-file [edit]="edit" [uploadFile]="entity" ></app-form-upload-file>
 	</div>
 	<div class="modal-footer">		
 		<button type="button" (click)="hideModal()" class="btn btn-default">{{'UPLOAD_FILE.FORM.BUTTON.CANCEL' | translate }}</button>

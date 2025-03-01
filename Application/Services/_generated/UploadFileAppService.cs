@@ -1,33 +1,30 @@
-﻿using System;
-using Application.Interfaces;
-using Application.ViewModels;
+﻿using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Services.Interfaces;
 
-namespace Application.Services
+namespace Application.Services;
+
+public partial class UploadFileAppService : BaseAppService<UploadFile>, IUploadFileAppService
 {
-    public partial class UploadFileAppService : BaseAppService<UploadFile>, IUploadFileAppService
+    readonly IUploadFileService _service;
+    public UploadFileAppService(IUploadFileService service, IUnitOfWork uow)
+    : base(service, uow)
     {
-		IUploadFileService _service;
-        public UploadFileAppService(IUploadFileService service, IUnitOfWork uow)
-		: base(service, uow)
-        {
-			_uow = uow;
-            _service = service;
-        }
+        _uow = uow;
+        _service = service;
+    }
 
-		public UploadFile Save(UploadFile model, bool edit = false)
-        {
-			var result = new UploadFile();
-
-			if (!edit || model.Id == default)
-				result = _service.Add(model);
-			else
-				result = _service.Update(model);			
-			_uow.Commit();
-			//SaveJson();
-            return result;
-        }
-	}        
+    public UploadFile Save(UploadFile model, bool edit = false)
+    {
+        _ = new UploadFile();
+        UploadFile result;
+        if (!edit || model.Id == default(string))
+            result = _service.Add(model);
+        else
+            result = _service.Update(model);
+        _uow.Commit();
+        //SaveJson();
+        return result;
+    }
 }

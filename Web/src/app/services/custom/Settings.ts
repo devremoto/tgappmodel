@@ -6,7 +6,6 @@ import { Settings } from '../../models/Settings';
 import { SessionStorageService } from '../../shared/util/session-storage.service';
 import { SettingsService } from '../generated/SettingsService';
 import { HttpService } from '../services';
-import { HubService } from '../hub.service';
 
 //////
 
@@ -14,13 +13,13 @@ import { HubService } from '../hub.service';
   providedIn: 'root'
 })
 export class SettingsCustomService extends SettingsService {
-  settings: Settings[];
+  settings: Settings[] = [];
 
   constructor(
-    protected _http: HttpService,
-    private _sessionStorage: SessionStorageService, public hubService: HubService
+    override http: HttpService,
+    private _sessionStorage: SessionStorageService
   ) {
-    super(_http, hubService);
+    super(http);
   }
 
   get json() {
@@ -30,15 +29,15 @@ export class SettingsCustomService extends SettingsService {
   async load() {
     this.settings = this._sessionStorage.getObjectCache<Array<Settings>>(
       'settings'
-    );
+    ) || [];
     if (!this.settings.length) {
-      this.settings = await this.getJson().toPromise();
+      this.settings = await this.getJson().toPromise() || [];
     }
     return this.settings;
   }
 
-  getByKey(key) {
-    const result = this.settings.filter(x => (x.key = key));
+  getByKey(key: string) {
+    const result = this.settings.filter(x => (x.key == key));
     if (result.length === 1) {
       return result[0];
     }

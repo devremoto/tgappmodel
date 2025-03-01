@@ -7,17 +7,24 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { AuthInterceptor } from '../auth/interceptor';
 import { BreadcrumbsComponent } from '../directives/breadcrumb.component';
-import { DirectivesModule } from '../directives/directives.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { BaseService, HttpService } from '../services/services';
 import { ImgResizeComponent } from './imgResize/imgResizeComponent';
 import { SessionStorageService } from './util/session-storage.service';
-import { AvatarModule } from 'ngx-avatar';
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
-  declarations: [ImgResizeComponent, BreadcrumbsComponent],
+  declarations: [ImgResizeComponent],
   providers: [HttpService, BaseService, SessionStorageService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  imports: [CommonModule, HttpClientModule, RouterModule, FormsModule, ReactiveFormsModule, DirectivesModule, PipesModule, AvatarModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PipesModule,
+    DirectivesModule
+  ],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -25,11 +32,10 @@ import { AvatarModule } from 'ngx-avatar';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    DirectivesModule,
     PipesModule,
     ImgResizeComponent,
-    BreadcrumbsComponent,
-    AvatarModule
+    DirectivesModule
+
   ]
 })
-export class SharedModule {}
+export class SharedModule { }

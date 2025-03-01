@@ -1,15 +1,13 @@
-﻿namespace Application.Services
+﻿namespace Application.Services;
+
+public partial class SocialNetworkAppService
 {
-    public partial class SocialNetworkAppService
-    {
-		
-        /*public SocialNetworkAppService(ISocialNetworkService service, IUnitOfWork uow)
+
+    /*public SocialNetworkAppService(ISocialNetworkService service, IUnitOfWork uow)
 		:base(service, uow)
-        {
+    {
 			_uow = uow;
 			_service = service;
-        }*/
+    }*/
 
-	}
-        
 }

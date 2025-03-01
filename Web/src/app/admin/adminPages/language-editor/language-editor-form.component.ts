@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
-import { BodyOutputType, ToasterService } from 'angular2-toaster';
 
 import { Language } from '../../../models/Language';
 import { LanguageCustomService } from '../../../services/custom/Language';
 import { JsonTranslate } from '../../../viewModels/JsonTranslate';
 import { ObjectTree } from '../../../viewModels/ObjectTree';
+import { ToastrService } from 'ngx-toastr';
 
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: 'app-language-editor-form',
@@ -15,7 +15,7 @@ declare var $: any;
   styleUrls: ['./language-editor-form.component.css']
 })
 export class LanguageEditorFormComponent implements OnInit {
-  constructor(private _languageService: LanguageCustomService, private _toasterService: ToasterService) {
+  constructor(private _languageService: LanguageCustomService, private _toasterService: ToastrService) {
     this._languageService.getDefaultLanguage().subscribe(result => {
       this._defaultLanguage = result;
     });
@@ -55,28 +55,27 @@ export class LanguageEditorFormComponent implements OnInit {
         elementDefault = elementDefault[arr[i]];
         element = element[arr[i]];
       }
-      return {
+      return <JsonTranslate>{
         jsonDefault: elementDefault[arr[arr.length - 1]],
         translated: element[arr[arr.length - 1]]
-      } as JsonTranslate;
+      };
     }
 
-    return {
+    return <JsonTranslate>{
       jsonDefault: elementDefault,
       translated: element
-    } as JsonTranslate;
+    };
   }
 
-  addObject(e: Event, node: ObjectTree, root: boolean = false) {
+  addObject(e: Event, node: ObjectTree, root = false) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
     if (!node.newPropName) {
-      this._toasterService.pop(
-        'error',
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR'),
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.EMPTY_PROPERTY')
+      this._toasterService.error(
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.EMPTY_PROPERTY'),
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR')
       );
       return;
     }
@@ -92,15 +91,15 @@ export class LanguageEditorFormComponent implements OnInit {
     }
   }
 
-  setTree(tree: ObjectTree[], node: ObjectTree, root: boolean = false) {
-    const child = {
+  setTree(tree: ObjectTree[], node: ObjectTree, root = false) {
+    const child = <ObjectTree>{
       key: node.newPropName.toLocaleUpperCase(),
       path: `${node.path}.${node.newPropName.toLocaleUpperCase()}`,
       parent: root ? null : node,
       child: new Array<ObjectTree>(),
       from: node.from,
       to: node.to
-    } as ObjectTree;
+    };
 
     const exists = tree.filter(x => x.key === child.key);
     if (!exists.length) {
@@ -109,10 +108,9 @@ export class LanguageEditorFormComponent implements OnInit {
       parentJson.translated[node.newPropName] = {};
       parentJson.jsonDefault[node.newPropName] = {};
     } else {
-      this._toasterService.pop(
-        'error',
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR'),
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.ADD_ERROR', { key: child.key, path: node.path })
+      this._toasterService.error(
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.ADD_ERROR', { key: child.key, path: node.path }),
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR')
       );
     }
   }
@@ -122,19 +120,14 @@ export class LanguageEditorFormComponent implements OnInit {
       if (result) {
         item.value = result;
         this.setPropertyValue(item);
-        this._toasterService.pop({
-          type: 'success',
-          title: item.defaultValue + ' traduzido para',
-          body: '<b>' + result + '</b>',
-          bodyOutputType: BodyOutputType.TrustedHtml,
-          timeout: 2000
-        });
+        this._toasterService.error(
+          `<b>${result}</b>`, `${item.defaultValue} translated to ${item.to}`);
       }
     });
   }
 
   private setPropertyValue(item: ObjectTree) {
-    const element = this.getJsonElement(item.parent);
+    const element = this.getJsonElement(item?.parent!);
     element.translated[item.key] = item.value;
     element.jsonDefault[item.key] = item.defaultValue;
   }
@@ -145,21 +138,21 @@ export class LanguageEditorFormComponent implements OnInit {
       e.stopPropagation();
     }
     if (!parent || !parent.newPropName) {
-      this._toasterService.pop(
-        'error',
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR'),
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.EMPTY_PROPERTY')
+      this._toasterService.error(
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.EMPTY_PROPERTY'),
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR')
+
       );
       return;
     }
-    const child = {
+    const child = <ObjectTree>{
       key: parent.newPropName.toLocaleUpperCase(),
       path: `${parent.path}.${parent.newPropName.toLocaleUpperCase()}`,
       from: parent.from,
       to: parent.to,
-      parent,
+      parent: parent,
       value: ''
-    } as ObjectTree;
+    };
     const exists = parent.child.filter(x => x.key === child.key);
     if (exists.length === 0) {
       parent.child.push(child);
@@ -167,10 +160,9 @@ export class LanguageEditorFormComponent implements OnInit {
       parentJson.translated[parent.newPropName] = '';
       parentJson.jsonDefault[parent.newPropName] = '';
     } else {
-      this._toasterService.pop(
-        'error',
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR'),
-        this._languageService.translate.instant('TRANSLATOR.TOASTER.ADD_ERROR', { key: child.key, path: parent.path })
+      this._toasterService.error(
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.ADD_ERROR', { key: child.key, path: parent.path }),
+        this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR')
       );
     }
     this.emit();
@@ -184,14 +176,14 @@ export class LanguageEditorFormComponent implements OnInit {
     //    this.popOver.close();
   }
 
-  addPropClick(e: Event, pop, item?: ObjectTree) {
+  addPropClick(e: Event, pop: NgbPopover, item?: ObjectTree) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
       this.currentPop = pop;
       if (item) {
         setTimeout(() => {
-          $(`#${item.key}_pop`).focus();
+          $(`#${item.key}_pop`).focus()
         }, 1000);
       }
 
@@ -203,13 +195,13 @@ export class LanguageEditorFormComponent implements OnInit {
   copy(parent: ObjectTree) {
     const message = `{{ '${parent.path}' |  translate }}`;
     this.copyMessage(message);
-    this._toasterService.pop('success', 'chave copiada para o clipboard', message);
+    this._toasterService.success(message, 'key copied to clipboard');
   }
 
   copyJs(parent: ObjectTree) {
     const message = `this._languageService.translate.instant('${parent.path}')`;
     this.copyMessage(message);
-    this._toasterService.pop('success', 'chave copiada para o clipboard', message);
+    this._toasterService.success(message, 'key copied to clipboard');
   }
   remove(obj: ObjectTree, e?: Event) {
     if (e) {
@@ -234,16 +226,17 @@ export class LanguageEditorFormComponent implements OnInit {
     this.emit();
   }
   fidPathInTree(item: ObjectTree): ObjectTree {
-    let result: ObjectTree;
+    let result: ObjectTree | null = null;
     const $this = this;
     if (item.parent) {
-      $(item.parent.child).each(obj => {
+      $(item.parent.child).each((obj: ObjectTree) => {
         if (item.path === obj.path) {
           result = obj;
           return false;
         } else if (obj.child) {
-          $this.fidPathInTree(obj);
+          return $this.fidPathInTree(obj);
         }
+        return
       });
       if (result) {
         return result;
@@ -251,7 +244,7 @@ export class LanguageEditorFormComponent implements OnInit {
     } else {
       result = item;
     }
-    return result;
+    return result!;
   }
   copyMessage(val: string) {
     const selBox = document.createElement('textarea');

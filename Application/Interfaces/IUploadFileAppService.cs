@@ -1,9 +1,8 @@
 ﻿
-namespace Application.Interfaces
-{
-    public partial interface IUploadFileAppService 
-    {
+namespace Application.Interfaces;
 
-    }
+public partial interface IUploadFileAppService
+{
+
 }
 

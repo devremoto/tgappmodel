@@ -1,10 +1,9 @@
-﻿namespace Api.Models
+﻿namespace Api.Models;
+
+public interface IAppModelConfiguration
 {
-    public interface IAppModelConfiguration
-    {
-        string Authority { get; set; }
-        string ImgFolder { get; set; }
-        bool RequireHttpsMetadata { get; set; }
-        string ApiName { get; }
-    }
+    string Authority { get; set; }
+    string ImgFolder { get; set; }
+    bool RequireHttpsMetadata { get; set; }
+    string ApiName { get; }
 }

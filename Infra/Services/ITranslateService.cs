@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace CrossCutting.Services.Services
+namespace CrossCutting.Services.Services;
+
+public interface ITranslateService
 {
-    public interface ITranslateService
-    {
-        Task<string> TranslateAsync(string text, string from, string to);
-		 string Translate(string text, string from, string to);
-	}
+    Task<string> TranslateAsync(string text, string from, string to);
+    string Translate(string text, string from, string to);
 }

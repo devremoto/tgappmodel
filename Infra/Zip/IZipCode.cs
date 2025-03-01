@@ -1,7 +1,6 @@
-﻿namespace CrossCutting.Services.Zip
+﻿namespace CrossCutting.Services.Zip;
+
+public interface IZipCode
 {
-    public interface IZipCode
-    {
-        string Json(string code);
-    }
+    string Json(string code);
 }

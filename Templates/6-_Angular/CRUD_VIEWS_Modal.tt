@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" hostSpecific="true"  #>
+﻿<#@ template language="C#" hostSpecific="true" compilerOptions="optimize+" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -114,24 +114,22 @@ manager.EndBlock();
 manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Modal.component.ts",webProject,"");
 
 #>
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ToasterService } from 'angular2-toaster';
 import { <#=classModel.Name#>Service } from '../../../services/generated/<#=classModel.Name#>Service';
 import { <#=classModel.Name#> } from '../../../models/<#=classModel.Name#>';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
   selector: 'app-modal-<#=classSet.ToDash(classModel.Name)#>',
   templateUrl: './<#=classModel.Name#>Modal.component.html'
 })
-export class <#=classModel.Name#>ModalComponent implements OnDestroy {
+export class <#=classModel.Name#>ModalComponent {
 
   @Input() edit: boolean;
   @Input() entity: <#=classModel.Name#>;
-  subscription = new Subscription();
 
   constructor(
       private _translate: TranslateService,
@@ -139,13 +137,13 @@ export class <#=classModel.Name#>ModalComponent implements OnDestroy {
       private _service: <#=classModel.Name#>Service,
       private _activeModal: NgbActiveModal
     ) {
-        this.subscription.add(this._service.on('<#=classModel.Name#>-save').subscribe(data => {
+        this._service.on('<#=classModel.Name#>-save').subscribe(data => {
           this.hideModal();
-        }));
+        });
     }
 
   save(<#=camelCaseName#>: <#=classModel.Name#>) {
-    this.subscription.add(this._service.save(<#=camelCaseName#>, this.edit, $('input[type=file]')).subscribe(
+    this._service.save(<#=camelCaseName#>, this.edit, $('input[type=file]')).subscribe(
       () => {
         const successMsg = this._translate.instant('<#=underscoreName#>.FORM.SAVE.SUCCESS');
         this._toasterService.pop('success', this._translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
@@ -153,15 +151,11 @@ export class <#=classModel.Name#>ModalComponent implements OnDestroy {
       () => {
         const errorMsg = this._translate.instant('<#=underscoreName#>.FORM.SAVE.ERROR');
         this._toasterService.pop('error', this._translate.instant('APP.TOASTER.TITLE.ERROR'), errorMsg);
-      }));
+      });
   }
 
   hideModal() {
     this._activeModal.dismiss('Cross click');
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
 

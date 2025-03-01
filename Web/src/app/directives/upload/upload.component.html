@@ -4,8 +4,8 @@
             <span class="btn btn-primary btn-file" (click)="click()" style="cursor:pointer">
                 <span><i *ngIf="cssIcon" [class]="cssIcon">&nbsp;</i>&nbsp;{{label}}</span>
                 <input type="hidden" [ngModel]=model (ngModelChange)="updateData()" />
-                <input #input type="file" (change)="updateData()" style="cursor:pointer" ng2FileSelect
-                    [uploader]="uploader" class="form-control" [id]="id" [name]="name" />
+                <!-- <input #input type="file" (change)="updateData()" style="cursor:pointer" ng2FileSelect
+                    [uploader]="uploader" class="form-control" [id]="id" [name]="name" /> -->
             </span>
         </td>
 

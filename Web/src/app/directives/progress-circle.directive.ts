@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnInit, AfterViewInit } from '@angular/core';
-declare var ProgressBar: any;
-declare var $: any;
+declare let ProgressBar: any;
+declare let $: any;
 
 @Directive({
   selector: '[appProgressCircle]'
@@ -10,8 +10,8 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
     progressbar: 'circle',
     color: '#fff',
     trailColor: '#fff',
-    to: { color: '#ffd200', width: 3 },
-    from: { color: '#3498db', width: 3 },
+    to: { 'color': '#ffd200', 'width': 3 },
+    from: { 'color': '#3498db', 'width': 3 },
 
     value: 1,
     strokeWidth: 4,
@@ -21,7 +21,7 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
     text: {
       autoStyleContainer: false
     },
-    step(state, circle) {
+    step: (state: any, circle: any) => {
       circle.path.setAttribute('stroke', state.color);
       circle.path.setAttribute('stroke-width', state.width);
 
@@ -47,7 +47,7 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
 
   animate() {
     const options = this.options;
-    $(this.el.nativeElement).each((key, obj) => {
+    $(this.el.nativeElement).each((key: any, obj: any) => {
       const bar = new ProgressBar.Circle(obj, options);
       bar.animate(options.value);
     });

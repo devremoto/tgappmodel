@@ -1,5 +1,4 @@
-﻿using Api.Controllers.Hubs;
-using Api.Models;
+﻿using Api.Models;
 using Application.Interfaces;
 using Application.ViewModels;
 using AutoMapper;
@@ -11,36 +10,30 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Controllers
+namespace Api.Controllers;
+
+[Authorize]
+[Route("api/[controller]")]
+public partial class LanguageController(ILanguageAppService service, IWebHostEnvironment hostEnvironment, AppModelConfiguration configuration, IMapper mapper) : BaseController<Guid, ILanguageAppService, Language, LanguageViewModel>(hostEnvironment, configuration, service, mapper)
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    public partial class LanguageController : BaseController<Guid, ILanguageAppService, Language, LanguageViewModel>
+    [Route("translation")]
+    [Route("translation/{text}/{from}/{to}")]
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> TranslateAsync(string text, string from, string to)
     {
-        public LanguageController(ILanguageAppService service, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper, INotificationHub notification)
-		: base(hostingEnvironment, configuration, service, mapper, notification)
-		{
-            _service = service;
-        }
-        [Route("translation")]
-        [Route("translation/{text}/{from}/{to}")]
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> TranslateAsync(string text, string from, string to)
-        {
-            var result = await _service.TranslateAsync(text, from, to);
-            return Ok(new { text = result });
-        }
+        var result = await _service.TranslateAsync(text, from, to);
+        return Ok(new { text = result });
+    }
 
-        [Route("default")]
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Default(string text, string from, string to)
-        {
-            var result = _service.Find(x => x.Default).FirstOrDefault();
+    [Route("default")]
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> Default(string text, string from, string to)
+    {
+        var result = _service.Find(x => x.Default).FirstOrDefault();
 
-            return Ok(await Task.FromResult(result));
-        }
+        return Ok(await Task.FromResult(result));
     }
 }
 

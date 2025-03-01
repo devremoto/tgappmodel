@@ -1,25 +1,20 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LanguageCustomService } from 'src/app/services/custom/Language';
-import { Language } from 'src/app/models/Language';
+import { TranslateService } from '@ngx-translate/core';
 
-declare var window: any;
+declare let window: any;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent {
   ngAfterViewInit(): void {
     this.slider();
   }
-  constructor(translate: LanguageCustomService, route: ActivatedRoute) {
-    const lang = route.snapshot.queryParams.lang;
-    translate.setLanguage({ code: lang } as Language);
+  constructor(translate: TranslateService) {
+    translate.use(translate.currentLang);
   }
-
-  ngOnInit() {}
 
   slider() {
     window.sliderFull();

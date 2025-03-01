@@ -1,5 +1,4 @@
-﻿using Api.Controllers.Hubs;
-using Api.Models;
+﻿using Api.Models;
 using Application.Interfaces;
 using Application.ViewModels;
 using AutoMapper;
@@ -9,17 +8,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Api.Controllers
+namespace Api.Controllers;
+
+[Authorize]
+[Route("api/[controller]")]
+public partial class SocialNetworkController(ISocialNetworkAppService service, IWebHostEnvironment hostEnvironment, AppModelConfiguration configuration, IMapper mapper) : BaseController<Guid, ISocialNetworkAppService, SocialNetwork, SocialNetworkViewModel>(hostEnvironment, configuration, service, mapper)
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    public partial class SocialNetworkController : BaseController<Guid, ISocialNetworkAppService, SocialNetwork, SocialNetworkViewModel>
-    {
-        public SocialNetworkController(ISocialNetworkAppService service, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper, INotificationHub notification)
-		: base(hostingEnvironment, configuration, service, mapper, notification)
-		{
-            _service = service;
-        }
-    }
 }
 

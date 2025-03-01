@@ -1,11 +1,10 @@
 ﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface IMailingAppService
 {
-    public partial interface IMailingAppService 
-    {
-        void SendEmail(Mailing mailingModel);
-        void SignUp(Mailing mailingModel);
-    }
+    void SendEmail(Mailing mailingModel);
+    void SignUp(Mailing mailingModel);
 }
 

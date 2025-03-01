@@ -1,6 +1,8 @@
 {
-  "APP": {
-    "COPYRIGHT": "Tugon. All rigths reserveds.",
-    "SLOGAN": "Empresa especializada em consultoria e desenvolvimento de aplições web e mobile"
-  }
+    "HOME": {
+        "BANNER": {
+            "MESSAGE": "Experienced in",
+            "FIRST": "Software Development"
+        }
+    }
 }

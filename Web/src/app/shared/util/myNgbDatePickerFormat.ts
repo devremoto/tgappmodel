@@ -14,25 +14,25 @@ export class MyNgbDateParserFormatter extends NgbDateParserFormatter {
       return '';
     }
     try {
-      return this.datePipe.transform(new Date(date.year, date.month - 1, date.day), args);
+      return this.datePipe.transform(new Date(date.year, date.month - 1, date.day), args) || `${date.day}/${date.month}/${date.year}`;
     } catch (e) {
       return '';
     }
   }
 
   parse(value: string): NgbDateStruct {
-    let returnVal: NgbDateStruct;
+    let returnVal: NgbDateStruct | null;
     if (!value) {
       returnVal = null;
     } else {
       try {
-        const dateParts = this.datePipe.transform(value, 'M-d-y').split('-');
+        const dateParts = this.datePipe.transform(value, 'M-d-y')!.split('-');
         returnVal = { year: parseInt(dateParts[2], 10), month: parseInt(dateParts[0], 10), day: parseInt(dateParts[1], 10) };
       } catch (e) {
         returnVal = null;
       }
     }
-    return returnVal;
+    return returnVal!;
   }
 }
 

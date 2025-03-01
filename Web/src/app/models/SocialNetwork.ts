@@ -1,10 +1,7 @@
-export class SocialNetwork {
-  id;
+﻿export class SocialNetwork {
+  id?: string;
   name: string;
   cssIcon: string;
   url: string;
-  active;
-
-  constructor() {
-  }
+  active: boolean;
 }

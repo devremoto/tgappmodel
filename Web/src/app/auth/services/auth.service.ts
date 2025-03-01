@@ -9,18 +9,15 @@ import { SessionStorageService } from '../../shared/util/session-storage.service
 export abstract class AuthService {
   protected _sessionStorage: any;
   protected _localStorage: any;
-  protected token: string;
-  protected id_token: string;
+  protected token: string | null;
+  protected id_token: string | null;
   protected callbackUrl: string;
   onLogin: EventEmitter<User> = new EventEmitter();
   onLogout: EventEmitter<string> = new EventEmitter();
   userManager: UserManager;
-  protected _user: User;
+  protected _user: User | null = {} as User;
 
-  constructor(
-    protected _router: Router,
-    protected _storage: SessionStorageService
-  ) {
+  constructor(protected _router: Router, protected _storage: SessionStorageService) {
     this._localStorage = this._storage.localStorage;
     this._sessionStorage = this._storage.sessionStorage;
     this.userManager = new UserManager({
@@ -44,8 +41,8 @@ export abstract class AuthService {
   protected abstract getIdToken(): string;
   abstract redirectLogin(): void;
   abstract login(loginModel: any): void;
-  protected abstract navigateTo(segment, params?: any): void;
-  abstract navigateToUrl(url): void;
+  protected abstract navigateTo(segment: any, params?: any): void;
+  abstract navigateToUrl(url: string): void;
   abstract callBackLogin(): void;
   protected abstract logout(url?: any): void;
   abstract fullLogout(url?: any): void;
@@ -54,7 +51,7 @@ export abstract class AuthService {
 
   public get user(): User {
     this._user = this._storage.getObjectCache<User>('user');
-    return this._user;
+    return this._user!;
   }
 
   public set user(user: User) {
@@ -71,7 +68,7 @@ export abstract class AuthService {
     this.token = null;
   }
 
-  setCallbackUrl(url) {
+  setCallbackUrl(url: string) {
     this.callbackUrl = url;
     this._sessionStorage.setItem('callback_url', url);
   }
@@ -85,14 +82,14 @@ export abstract class AuthService {
     this._sessionStorage.removeItem('callback_url');
   }
 
-  protected setLogoutUrl(url) {
+  protected setLogoutUrl(url: string) {
     this.callbackUrl = url;
     this._sessionStorage.setItem('logout_url', url);
   }
 
   protected getLogoutUrl() {
     const url = this._sessionStorage.getItem('logout_url');
-    return url || '/admin';
+    return url;
   }
 
   protected clearLogoutUrl() {

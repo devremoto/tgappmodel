@@ -1,12 +1,11 @@
 ﻿<style>
-  .avatar-container {
-    float: left;
-    width: 500px !important
-  }
+.logo-url {
+  background-image: url({{Config.logoUrl}}) !important;
+}
 </style>
 <header class="app-header navbar">
   <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
-  <a class="navbar-brand" [ngStyle]="style" routerLink="/admin"></a>
+  <a class="navbar-brand logo-url" routerLink="/admin"></a>
   <ul class="nav navbar-nav d-md-down-none">
     <li class="nav-item">
       <a class="nav-link navbar-toggler" href="#" appSidebarToggler>&#9776;</a>
@@ -40,9 +39,7 @@
     </li>
     <li class="nav-item dropdown" ngbDropdown>
       <a class="nav-link dropdown-toggle" style="cursor:pointer" ngbDropdownToggle>
-        <ngx-avatar name="{{userData?.name}}" src="{{userData?.picture}}" gravatarId="{{userData?.email}}" size="30"
-          [round]="true">{{userData?.name}}
-        </ngx-avatar>
+        <img *ngIf="userData?.picture" [src]="userData?.picture" class="img-avatar" [alt]="userData?.name">
         <span class="d-md-down-none">{{userData?.name}}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="simple-dropdown" ngbDropdownMenu>

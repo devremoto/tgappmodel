@@ -2,15 +2,9 @@
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Data.Repositories
+namespace Data.Repositories;
+
+public partial class MailingRepository(AppDbContext db) : BaseRepository<Mailing>(db), IMailingRepository
 {
-    public partial class MailingRepository : BaseRepository<Mailing>, IMailingRepository
-    {
-        public MailingRepository(AppDbContext db)
-            : base(db)
-        {
-            
-        }		
-    }
 }
 

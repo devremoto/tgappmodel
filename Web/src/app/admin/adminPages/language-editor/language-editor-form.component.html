@@ -1,7 +1,7 @@
-<ng-template #p triggers="mouseenter:mouseleave" [appInRole]="['admin']">
+<ng-template #p triggers="mouseenter:mouseleave" [appInRole]="['admin']" >
   <div class="form-group row">
     <div class="form-group col-12">
-      <input [(ngModel)]="rootItem.newPropName" class="form-control " [id]="rootItem.newPropName">
+      <input [(ngModel)]="rootItem.newPropName" class="form-control " [id]="rootItem.newPropName" >
     </div>
     <div class="form-group col-12">
       <a class="btn btn-sm btn-success float-right"
@@ -43,10 +43,10 @@
       </div>
     </div>
     <div *ngIf="item.child">
-      <ng-template #popContent triggers="mouseout">
+      <ng-template #popContent triggers="mouseout" >
         <div class="form-group row">
           <div class="form-group col-12">
-            <input [(ngModel)]="item.newPropName" [id]="item.key+'_pop'" class="form-control text-uppercase" autofocus autocomplete="off" />
+            <input [(ngModel)]="item.newPropName"  [id]="item.key+'_pop'" class="form-control text-uppercase" autofocus autocomplete="off" />
           </div>
           <div class="form-group col-12">
             <button type="button" class="btn btn-sm btn-primary"
@@ -76,11 +76,11 @@
             <span class="col-4" title="{{item.path}}">
               <a class="btn btn-sm btn-danger float-right" (click)="remove(item,$event)"><i class="fa fa-remove"></i></a>
               <a class="btn btn-sm btn-primary float-right" (click)="addPropClick($event,pop,item)" [autoClose]="false" #pop="ngbPopover" [ngbPopover]="popContent"
-                placement="left" popoverTitle="{{ 'TRANSLATOR.BUTTONS.ADD_PROPERTY_TO' |  translate:{path:(item.path)} }}"
-                container="body">
+                 placement="left" popoverTitle="{{ 'TRANSLATOR.BUTTONS.ADD_PROPERTY_TO' |  translate:{path:(item.path)} }}"
+                 container="body">
                 <i class="fa fa-plus"></i>
               </a>
-            </span>
+              </span>
 
           </ng-template>
           <ng-template ngbPanelContent>
@@ -94,4 +94,3 @@
 <form class="form-horizontal" [appInRole]="['admin']">
   <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: items }"></ng-container>
 </form>
-<toaster-container></toaster-container>

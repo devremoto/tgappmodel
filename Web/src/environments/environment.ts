@@ -6,12 +6,12 @@ export const environment = {
   production: false,
   ApiName: 'api1',
   ImgFolder: '~/images',
-  Authority: 'http://localhost:5000',
+  Authority: 'https://sso.tugon.com.br',
   RequireHttpsMetadata: false,
   UseAuthority: true,
   HostServer: 'http://localhost',
   HostPort: 4200,
-  ApiUrl: 'http://localhost:52050/api/',
+  ApiUrl: 'https://localhost:52053/api/',
   MapKey: '',
   ClientId: ''
 };

@@ -1,5 +1,5 @@
-export class Settings {
-  id;
+﻿export class Settings {
+  id?: string;
   key: string;
   value: string;
 

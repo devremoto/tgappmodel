@@ -4,17 +4,17 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     selector: 'app-combo',
     template: `
 	<select [ngModel]="model" (ngModelChange)="updateData($event)"  name="about" class="{{cssClass}}" >
-		<option *ngFor="let item of list" value="{{item[value]}}">{{item[description]}}</option>
+		<option *ngFor="let item of list" [value]="(item|arrayProp:value)">{{item|arrayProp:description}}</option>
 	</select>`,
 })
 export class ComboComponent implements OnInit {
     appErrorMessage: any;
-    list: ListItem[];
+    list: ListItem[] = [];
     @Input() modelList: any[];
     @Input() cssClass?: string;
     @Input() model: any;
-    @Input() value: string;
-    @Input() description: string;
+    @Input() value = '';
+    @Input() description = '';
 
     @Output() modelChange: any = new EventEmitter();
 
@@ -22,7 +22,7 @@ export class ComboComponent implements OnInit {
 
     }
 
-    updateData(event) {
+    updateData(even: any) {
         this.model = event;
         this.modelChange.emit(event);
     }

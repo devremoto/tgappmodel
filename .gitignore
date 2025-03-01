@@ -6,11 +6,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-**/**/appModel.db
-*.db
-/*.db
-[Dd]ata/DB/
-**/appModel.db
 
 env.bat
 env.sh
@@ -31,7 +26,6 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
-*/[Ll]og*/
 [Ll]og/
 
 # Visual Studio 2015 cache/options directory
@@ -160,7 +154,7 @@ publish/
 *.azurePubxml
 # TODO: Comment the next line if you want to checkin your web deploy settings
 # but database connection strings (with potential passwords) will be unencrypted
-*.pubxml
+#*.pubxml
 *.publishproj
 
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
@@ -276,5 +270,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-Templates/**/*.txt
-Data/DB/appModel.db
+Api/Logs/
+/Web/.angular/cache/15.2.5/angular-webpack/3b6c5307b76e2b4e757f4c8e38685ea85bd32c30/0.pack
+/Web/.angular/cache/15.2.5/angular-webpack/3b6c5307b76e2b4e757f4c8e38685ea85bd32c30/3.pack
+/Web/.angular/cache/15.2.5/angular-webpack/3b6c5307b76e2b4e757f4c8e38685ea85bd32c30/index.pack
+/Web/.angular/cache/15.2.5/angular-webpack/3b6c5307b76e2b4e757f4c8e38685ea85bd32c30/index.pack.old

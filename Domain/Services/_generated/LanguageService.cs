@@ -2,16 +2,9 @@
 using Domain.Interfaces;
 using Domain.Services.Interfaces;
 
-namespace Domain.Services
-{
-    public partial class LanguageService : BaseService<Language>, ILanguageService
-    {
-        ILanguageRepository _repository;
-        public LanguageService(ILanguageRepository repository)
-            : base(repository)
-        {
-            _repository = repository;
-        }
+namespace Domain.Services;
 
-    }
+public partial class LanguageService(ILanguageRepository repository) : BaseService<Language>(repository), ILanguageService
+{
+    readonly ILanguageRepository _repository = repository;
 }

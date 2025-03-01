@@ -6,14 +6,14 @@
         <img [src]="logo" alt="Tugon" style="max-height:45px" class="logo-footer">
         <br>
         <br>
-        <p>{{'APP.SLOGAN' | translate}}</p>
+        <p>Empresa especializada em consultoria e desenvolvimento de aplições web e mobile</p>
         <!--<p>No need to wait, <a href="#">send us a quote</a></p>-->
         <br>
         <address class="contact-info">
           <!--<p><i class="icon icon_pin_alt ico-styled text-primary"></i> 1234 North Main Street New York, NY 22222</p>-->
-          <p><a href="tel:+55 (11) 9 9353-6732"><i class="icon icon_phone ico-styled text-primary"></i> +55 (11) 9 9353-6732</a></p>
-          <p><a
-              href="mailto:contato@tugon.com.br"><i class="icon icon_mail_alt ico-styled text-primary"></i> contato@tugon.com.br</a></p>
+          <p><i class="icon icon_phone ico-styled text-primary"></i> +55 (11) 9 9353-6732</p>
+          <p><i class="icon icon_mail_alt ico-styled text-primary"></i> <a
+              href="contato@tugon.com.br">contato@tugon.com.br</a></p>
         </address>
       </div>
       <div class="col-md-4" *ngIf="false">
@@ -38,8 +38,7 @@
         <h4 class="footer-heading">{{'FOOTER.SOCIAL_NETWORK.TITLE' | translate}}</h4>
         <ul class="list-inline social-icons social-icons-small">
           <li *ngFor="let socialNetwork of socialNetworks" [title]="socialNetwork.name"><a [target]="'_blank'"
-              [href]="safeUrl(socialNetwork.url)" *ngIf="socialNetwork.active"><i
-                [ngClass]="socialNetwork.cssIcon"></i></a></li>
+              [href]="socialNetwork.url" *ngIf="socialNetwork.active"><i [ngClass]="socialNetwork.cssIcon"></i></a></li>
           <!--[href]="safeUrl(socialNetwork.url)"-->
 
         </ul>
@@ -60,17 +59,15 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="copyright-text left">&copy;{{ year | date:'yyyy'}} {{'APP.COPYRIGHT' | translate}}</p>
+      <p class="copyright-text left">&copy;2017 Tugon. Todos os direitos reservados.</p>
       <nav class="right">
         <ul class="list-inline">
-          <li><a [routerLink]="['/']">{{'MENU.HOME' | translate}}</a></li>
-          <li><a routerLink="/quemsomos">{{'MENU.ABOUT_US' | translate}}</a></li>
-          <li><a routerLink="/contato">{{'MENU.CONTACT' | translate}}</a></li>
+          <li><a [routerLink]="['/']">Home</a></li>
+          <li><a routerLink="/quemsomos">Quem Somos</a></li>
+          <li><a routerLink="/contato">Contato</a></li>
         </ul>
       </nav>
     </div>
   </div>
 
 </footer>
-
-<toaster-container></toaster-container>

@@ -6,7 +6,7 @@
 		<button type="button" class="close" (click)="hideModal()">×</button>		
 	</div>
 	<div class="modal-body">
-		<app-form-social-network [edit]="edit" [(socialNetwork)]="entity" ></app-form-social-network>
+		<app-form-social-network [edit]="edit" [socialNetwork]="entity" ></app-form-social-network>
 	</div>
 	<div class="modal-footer">		
 		<button type="button" (click)="hideModal()" class="btn btn-default">{{'SOCIAL_NETWORK.FORM.BUTTON.CANCEL' | translate }}</button>

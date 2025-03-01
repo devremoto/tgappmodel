@@ -1,17 +1,24 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap/';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { BodyOutputType, ToasterService } from 'angular2-toaster';
+import { ToastrService } from 'ngx-toastr';
 import { Contact } from '../../models/Contact';
 import { SocialNetwork } from '../../models/SocialNetwork';
 import { ContactCustomService } from '../../services/custom/Contact';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
 
 @Component({
-  styleUrls: ['./contact.css'],
+  selector: 'app-contact',
+  styles: [
+    `
+      .sebm-google-map-container {
+        height: 300px;
+        width: 100%;
+      }
+    `
+  ],
   templateUrl: './contact.html',
-  providers: [ContactCustomService, SocialNetworkCustomService]
 })
 export class ContactComponent implements OnInit {
   errorMessage: string;
@@ -23,7 +30,7 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup;
   loading = false;
   contact: Contact;
-  coords: Promise<Coordinates> = new Promise<Coordinates>((resolve, reject) => {
+  coords: Promise<any> = new Promise<any>((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       resp => {
         resolve(resp.coords);
@@ -43,40 +50,40 @@ __proto__: Object
   };
 
   constructor(
-    private _translate: TranslateService,
+    private translate: TranslateService,
     private _service: ContactCustomService,
-    private _toasterService: ToasterService,
+    private _toasterService: ToastrService,
     private _modalService: NgbModal,
     private _socialNetworkService: SocialNetworkCustomService,
     private _formBuilder: FormBuilder
   ) {
     this.load();
 
-    this._translate.onLangChange.subscribe(() => {
+    this.translate.onLangChange.subscribe(() => {
       this.load();
     });
   }
 
   validationMessages: any = {
     email: {
-      required: this._translate.instant('CONTACT.FORM.VALIDATE.EMAIL.REQUIRED'),
-      pattern: this._translate.instant('CONTACT.FORM.VALIDATE.EMAIL.PATTERN')
+      required: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.REQUIRED'),
+      pattern: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.PATTERN')
     },
     name: {
-      required: this._translate.instant('CONTACT.FORM.VALIDATE.NAME.REQUIRED')
+      required: this.translate.instant('CONTACT.FORM.VALIDATE.NAME.REQUIRED')
     },
     subject: {
-      required: this._translate.instant('CONTACT.FORM.VALIDATE.SBJECT.REQUIRED')
+      required: this.translate.instant('CONTACT.FORM.VALIDATE.SBJECT.REQUIRED')
     },
     phoneNumber: {
-      required: this._translate.instant('CONTACT.FORM.VALIDATE.PHONENUMBER.REQUIRED')
+      required: this.translate.instant('CONTACT.FORM.VALIDATE.PHONENUMBER.REQUIRED')
     },
     message: {
-      required: this._translate.instant('CONTACT.FORM.VALIDATE.MESSAGE.REQUIRED')
+      required: this.translate.instant('CONTACT.FORM.VALIDATE.MESSAGE.REQUIRED')
     }
   };
 
-  getPosition(): Promise<Coordinates> {
+  getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
         resp => {
@@ -96,20 +103,20 @@ __proto__: Object
     });
     this.validationMessages = {
       email: {
-        required: this._translate.instant('CONTACT.FORM.VALIDATE.EMAIL.REQUIRED'),
-        pattern: this._translate.instant('CONTACT.FORM.VALIDATE.EMAIL.PATTERN')
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.REQUIRED'),
+        pattern: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.PATTERN')
       },
       name: {
-        required: this._translate.instant('CONTACT.FORM.VALIDATE.NAME.REQUIRED')
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.NAME.REQUIRED')
       },
       subject: {
-        required: this._translate.instant('CONTACT.FORM.VALIDATE.SUBJECT.REQUIRED')
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.SUBJECT.REQUIRED')
       },
       phoneNumber: {
-        required: this._translate.instant('CONTACT.FORM.VALIDATE.PHONENUMBER.REQUIRED')
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.PHONENUMBER.REQUIRED')
       },
       message: {
-        required: this._translate.instant('CONTACT.FORM.VALIDATE.MESSAGE.REQUIRED')
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.MESSAGE.REQUIRED')
       }
     };
   }
@@ -125,11 +132,10 @@ __proto__: Object
       result => {
         this.socialNetworks = result;
       },
-      () => {}
     );
   }
 
-  open(content?) {
+  open(content?: any) {
     this.modalRef = this._modalService.open(content || this.modalContent, { size: 'lg', backdrop: 'static' });
     // modalRef.componentInstance.name = 'contentModal';
   }
@@ -140,35 +146,27 @@ __proto__: Object
 
   private buildForm() {
     this.contactForm = this._formBuilder.group({
-      message: ['', [, Validators.required]],
-      subject: ['', [, Validators.required]],
-      name: ['', [, Validators.required]],
+      message: ['', Validators.required],
+      subject: ['', Validators.required],
+      name: ['', Validators.required],
       email: ['', [, Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+')]],
       phoneNumber: ['']
     });
   }
 
   private validate(): boolean {
-    const messages = [];
+    const messages: any[] = [];
     if (this.contactForm.invalid) {
       for (const control in this.contactForm.controls) {
         if (control) {
-          for (const error in this.contactForm.controls[control].errors) {
-            if (error) {
-              messages.push(this.validationMessages[control][error]);
-            }
-          }
+          (this.contactForm!.controls![control].errors as Array<any>)!.map(error => {
+            messages.push(this.validationMessages[control][error]);
+          });
         }
       }
 
       if (messages.length > 0) {
-        this._toasterService.pop({
-          type: 'error',
-          title: 'Error',
-          body: messages.join('<br />'),
-          bodyOutputType: BodyOutputType.TrustedHtml,
-          timeout: 2000
-        });
+        this._toasterService.error(messages.join('<br />'), 'Error');
       }
       return false;
     }
@@ -178,7 +176,7 @@ __proto__: Object
 
   public SendEmail() {
     if (this.validate()) {
-      const contact = this.contactForm.value as Contact;
+      const contact = <Contact>this.contactForm.value;
       this.loading = true;
       this._service.sendEmail(contact).subscribe(
         () => {
@@ -189,7 +187,7 @@ __proto__: Object
         },
         () => {
           this.errorMessage = 'Problema no envio da mensagem, tente novamente';
-          this._toasterService.pop('error', 'Erro', this.errorMessage);
+          this._toasterService.error(this.errorMessage, 'Erro');
           this.loading = false;
         }
       );

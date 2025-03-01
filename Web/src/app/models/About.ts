@@ -1,5 +1,5 @@
-export class About {
-  id;
+﻿export class About {
+  id?: string;
   title: string;
   image: string;
   description: string;

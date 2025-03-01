@@ -1,16 +1,6 @@
 @echo off
-del Data\DB\appDBModel.db
-call env.bat
+set PORT=4200
+rem env.bat
 title=RUN LOCAL
-if %USE_ENV% == true (
-start cmd /c "cd Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT% --configuration=dev" 
-) else (
-    start cmd /c "cd Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT%" 
-)
-start cmd /c "title=back & cd Api & dotnet build & dotnet watch run --urls http://+:%API_PORT% seed"
-
-goto comment
-call env.bat
-cd Web & ng serve --aot -o --host %HOST_IP% --port=%HOST_PORT% --configuration=dev
-
-:comment
+start cmd /c "cd %~dp0/Web & npm i & title=front & ng serve -o --port=%PORT% --configuration=development & title=front " 
+start cmd /c "title=back & cd %~dp0/Api & dotnet build & dotnet publish & dotnet run seed dotnet run --server.urls http://0.0.0.0:52050 & pause"

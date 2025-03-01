@@ -1,15 +1,13 @@
-﻿namespace Application.Services
+﻿namespace Application.Services;
+
+public partial class AboutAppService
 {
-    public partial class AboutAppService
-    {
-		
-        /*public AboutAppService(IAboutService service, IUnitOfWork uow)
+
+    /*public AboutAppService(IAboutService service, IUnitOfWork uow)
 		:base(service, uow)
-        {
+    {
 			_uow = uow;
 			_service = service;
-        }*/
+    }*/
 
-	}
-        
 }

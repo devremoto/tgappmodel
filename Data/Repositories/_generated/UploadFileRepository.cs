@@ -2,15 +2,9 @@
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Data.Repositories
+namespace Data.Repositories;
+
+public partial class UploadFileRepository(AppDbContext db) : BaseRepository<UploadFile>(db), IUploadFileRepository
 {
-    public partial class UploadFileRepository : BaseRepository<UploadFile>, IUploadFileRepository
-    {
-        public UploadFileRepository(AppDbContext db)
-            : base(db)
-        {
-            
-        }		
-    }
 }
 

@@ -11,13 +11,13 @@ export class LanguageSelectorComponent implements OnInit {
   public status: { isopen: boolean } = { isopen: false };
   @Input()
   cssClass = 'primary';
-  language: Language = {} as Language;
+  language: Language = <Language>{};
   languages: Array<Language> = [];
-  constructor(public translate: LanguageCustomService) { }
+  constructor(public translate: LanguageCustomService) {}
 
   ngOnInit() {
     this.languages = this.translate.getLanguages();
-    this.language = this.languages.find(x => x.code === this.translate.translate.currentLang || x.code === this.translate.lang.code);
+    this.language = this.languages.filter(x => x.code === this.translate.lang.code)[0];
   }
   public toggleDropdown($event: MouseEvent): void {
     $event.preventDefault();
@@ -28,6 +28,5 @@ export class LanguageSelectorComponent implements OnInit {
   changeLanguage(language: Language) {
     this.translate.setLanguage(language);
     this.language = language;
-    // window.location.reload();
   }
 }

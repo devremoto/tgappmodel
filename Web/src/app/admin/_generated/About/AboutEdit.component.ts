@@ -1,49 +1,43 @@
-﻿import { Component, Input, OnInit, Output, OnDestroy, EventEmitter} from '@angular/core';
+﻿import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { AboutService } from '../../../services/generated/AboutService';
 import { About } from '../../../models/About';
-import { Subscription } from 'rxjs';
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: 'app-form-about',
   templateUrl: './AboutEdit.component.html'
 })
-export class AboutEditComponent implements OnInit, OnDestroy {
+export class AboutEditComponent implements OnInit {
 
-
-  private subscription = new Subscription();
 
   constructor(
     private _service: AboutService,
     public translate: TranslateService,
     private _modalService: NgbModal
   ) {
-    }
+  }
 
-    @Output()
-    saveEvent?: EventEmitter<About> = new EventEmitter();
+  @Output()
+  saveEvent?: EventEmitter<About> = new EventEmitter();
 
-    @Input()
-    about: About;
+  @Input()
+  about: About;
 
-    @Input()
-    edit: boolean;
+  @Input()
+  edit: boolean;
 
-    ngOnInit() {
-      this.about = this.about || new About();
-    }
+  ngOnInit() {
+    this.about = this.about || new About();
+  }
 
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
-    }
+  save(about: About) {
+    this._service.save(about, this.edit, $('input[type=file]'));
+  }
 
-    save(about: About) {
-      this._service.save(about, this.edit, $('input[type=file]'));
-    }
-
-    public closeEdit() {
-    }
+  public closeEdit() {
+    console.log('closeEdit')
+  }
 
 }

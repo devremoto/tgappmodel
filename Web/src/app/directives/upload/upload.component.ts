@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FileItem, FileUploader } from 'ng2-file-upload';
+//import { FileItem, FileUploader } from 'ng2-file-upload';
 
 import { Config } from '../../config';
 import { FileModel } from '../../models/FileModel';
 
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: 'app-upload',
@@ -12,17 +12,18 @@ declare var $: any;
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit, AfterViewInit {
-  uploadComponent: UploadComponent;
+  _upload: UploadComponent;
   src: string;
 
   reader: FileReader;
 
   file: FileModel = new FileModel();
-  item: FileItem = {} as FileItem;
-  msgError: string;
-  @Input() id: string;
+  //item: FileItem = <FileItem>{};
+  item: any = <any>{};
+  msg_error: string;
+  @Input() id?: string;
   @Input() name: string;
-  @Input() path: string;
+  @Input() path?: string;
   @Input() width = 320;
   @Input() height = 240;
   @Input() cssClass: string;
@@ -31,8 +32,8 @@ export class UploadComponent implements OnInit, AfterViewInit {
   @Input() model: any;
 
   @Output() modelChange: any = new EventEmitter();
-  @Output() changeEvent: any = new EventEmitter();
-  @Output() completeEvent: any = new EventEmitter();
+  @Output() change: any = new EventEmitter();
+  @Output() complete: any = new EventEmitter();
   @Output() serverDelete: any = new EventEmitter();
 
   @ViewChild('input') element: ElementRef;
@@ -43,11 +44,12 @@ export class UploadComponent implements OnInit, AfterViewInit {
   videoFilterExt = '|avi|mpeg|mp4|ogg|';
   imgFilterExt = '|jpg|png|jpeg|bmp|gif|';
 
-  public uploader: FileUploader = new FileUploader({});
+  //public uploader: FileUploader = new FileUploader({});
+  public uploader: any = {}
   config: any;
   constructor() {
     this.config = Config;
-    this.uploadComponent = this;
+    this._upload = this;
     this.uploader.onAfterAddingFile = this.onAfterAddingFile.bind(this);
   }
 
@@ -68,8 +70,8 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   loadFileFromPath(): any {
-    const ext = this.path.slice(this.path.lastIndexOf('.') + 1);
-    this.file = {
+    const ext = this.path?.slice(this.path?.lastIndexOf('.') + 1);
+    this.file = <FileModel>{
       fileName: this.path,
       name: this.name,
       id: this.id,
@@ -77,7 +79,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
       formattedSize: '',
       type: `application/${ext}`,
       extension: ext
-    } as FileModel;
+    };
     this.checkFile(this.file);
     if (this.file.isImage) {
       this.src = `${this.config.siteUrl}/file/image/${this.path}?w=${this.width}&h=${this.height}`;
@@ -93,22 +95,22 @@ export class UploadComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onAfterAddingFile(fileItem: FileItem) {
-    this.uploadComponent.item = fileItem;
-    this.uploadComponent.file = {
+  onAfterAddingFile(fileItem: any) {//FileItem) {
+    this._upload.item = fileItem;
+    this._upload.file = <FileModel>{
       fileName: fileItem.file.name,
-      name: this.uploadComponent.name,
-      id: this.uploadComponent.id,
+      name: this._upload.name,
+      id: this._upload.id,
       size: fileItem.file.size,
-      formattedSize: this.uploadComponent.formatSize(fileItem.file.size),
+      formattedSize: this._upload.formatSize(fileItem.file.size),
       type: fileItem.file.type
-    } as FileModel;
-    this.uploadComponent.checkFile(this.uploadComponent.item.file);
-    this.uploadComponent.readFile(this.uploadComponent.item.file);
+    };
+    this._upload.checkFile(this._upload.item.file);
+    this._upload.readFile();
   }
 
-  loadFileSize(type: string) {
-    let doc: ElementRef = null;
+  loadFileSize(type: any) {
+    let doc!: ElementRef;
     switch (type) {
       case 'doc':
         doc = this.doc;
@@ -122,7 +124,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
     }
     if (!doc || (doc && !doc.nativeElement)) {
       setTimeout(() => {
-        this.uploadComponent.loadFileSize(type);
+        this._upload.loadFileSize(type);
       }, 300);
       return;
     }
@@ -132,16 +134,16 @@ export class UploadComponent implements OnInit, AfterViewInit {
       const info: any = performance.getEntriesByName(file.src || file.href);
       if (info && info.length === 0) {
         setTimeout(() => {
-          this.uploadComponent.loadFileSize(type);
+          this._upload.loadFileSize(type);
         }, 300);
         return;
       }
       if (type === 'doc') {
-        file.download = this.uploadComponent.file.fileName;
+        file.download = this._upload.file.fileName;
       }
       if (info[0].transferSize) {
-        this.uploadComponent.file.size = info[0].transferSize;
-        this.uploadComponent.file.formattedSize = this.uploadComponent.formatSize(info[0].transferSize);
+        this._upload.file.size = info[0].transferSize;
+        this._upload.file.formattedSize = this._upload.formatSize(info[0].transferSize);
       }
     });
   }
@@ -151,7 +153,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
 
     if (!image.clientWidth) {
       setTimeout(() => {
-        this.uploadComponent.scaleImage(maxHeight, maxWidth);
+        this._upload.scaleImage(maxHeight, maxWidth);
       }, 300);
       return;
     }
@@ -193,29 +195,29 @@ export class UploadComponent implements OnInit, AfterViewInit {
     return this.file.isVideo;
   }
 
-  readFile(file: any) {
-    file = $(this.uploadComponent.element.nativeElement);
+  readFile() {
+    const file = $(this._upload.element.nativeElement);
     this.reader = new FileReader();
     this.reader.onloadend = this.onLoadFile.bind(this);
     this.reader.readAsDataURL(this.item._file);
   }
 
   onLoadFile() {
-    if (this.uploadComponent.file.isVideo) {
-      const video = $(this.uploadComponent.video.nativeElement);
-      video.attr('src', this.uploadComponent.reader.result);
+    if (this._upload.file.isVideo) {
+      const video = $(this._upload.video.nativeElement);
+      video.attr('src', this._upload.reader.result);
       return;
     }
-    if (this.uploadComponent.file.isImage) {
-      const img = $(this.uploadComponent.image.nativeElement);
-      img.attr('src', this.uploadComponent.reader.result);
-      this.uploadComponent.scaleImage(this.uploadComponent.width, this.uploadComponent.height);
+    if (this._upload.file.isImage) {
+      const img = $(this._upload.image.nativeElement);
+      img.attr('src', this._upload.reader.result);
+      this._upload.scaleImage(this._upload.width, this._upload.height);
     }
 
-    if (this.uploadComponent.file.isDoc) {
-      const doc = $(this.uploadComponent.doc.nativeElement);
-      doc.attr('href', this.uploadComponent.reader.result);
-      doc.attr('download', this.uploadComponent.file.fileName);
+    if (this._upload.file.isDoc) {
+      const doc = $(this._upload.doc.nativeElement);
+      doc.attr('href', this._upload.reader.result);
+      doc.attr('download', this._upload.file.fileName);
     }
   }
 

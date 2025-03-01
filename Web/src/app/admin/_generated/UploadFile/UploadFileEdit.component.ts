@@ -1,19 +1,16 @@
-﻿import { Component, Input, OnInit, Output, OnDestroy, EventEmitter} from '@angular/core';
+﻿import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { UploadFileService } from '../../../services/generated/UploadFileService';
 import { UploadFile } from '../../../models/UploadFile';
-import { Subscription } from 'rxjs';
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: 'app-form-upload-file',
   templateUrl: './UploadFileEdit.component.html'
 })
-export class UploadFileEditComponent implements OnInit, OnDestroy {
+export class UploadFileEditComponent implements OnInit {
 
-
-  private subscription = new Subscription();
 
   constructor(
     private _service: UploadFileService,
@@ -33,10 +30,6 @@ export class UploadFileEditComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
       this.uploadFile = this.uploadFile || new UploadFile();
-    }
-
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
     }
 
     save(uploadFile: UploadFile) {

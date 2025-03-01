@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" hostSpecific="true"  #>
+﻿<#@ template language="C#" hostSpecific="true" compilerOptions="optimize+" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -41,7 +41,7 @@ namespace Application.Services
 <# 
 var list = new List<string>();
 foreach(var key in classModel.Keys){
-	list.Add($"model.{key.Name} == default");
+	list.Add($"model.{key.Name} == default({key.DataType})");
 }
 #>
 			if (!edit || <#= string.Join("||",list)#>)

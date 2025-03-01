@@ -1,12 +1,9 @@
-﻿using Application.ViewModels;
-using Domain.Entities;
-using System;
+﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface ILanguageAppService : IBaseAppService<Language>
 {
-    public partial interface ILanguageAppService : IBaseAppService<Language>
-    {
-		Language Save(Language viewModel, bool edit = false);
-    }
+    Language Save(Language viewModel, bool edit = false);
 }
 

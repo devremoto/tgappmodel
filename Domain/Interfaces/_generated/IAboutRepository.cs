@@ -1,9 +1,8 @@
 ﻿using Domain.Entities;
 
-namespace Domain.Interfaces
-{
-    public partial interface IAboutRepository : IBaseRepository<About>
-    {
+namespace Domain.Interfaces;
 
-    }
+public partial interface IAboutRepository : IBaseRepository<About>
+{
+
 }

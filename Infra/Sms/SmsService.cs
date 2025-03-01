@@ -1,7 +1,6 @@
-﻿namespace CrossCutting.Services.Sms
+﻿namespace CrossCutting.Services.Sms;
+
+public class SmsService
 {
-    public class SmsService
-    {
-        
-    }
+
 }

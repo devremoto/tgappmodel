@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToasterService } from 'angular2-toaster';
+import { ToastrService } from 'ngx-toastr';
 
 import { Language } from '../../../models/Language';
 import { LanguageCustomService } from '../../../services/custom/Language';
@@ -26,14 +26,14 @@ export class LanguageEditorComponent implements OnInit {
   path: string[] = [];
   upFolder: Asset;
 
-  constructor(private _languageService: LanguageCustomService, private _toasterService: ToasterService) { }
+  constructor(private _languageService: LanguageCustomService, private _toasterService: ToastrService) { }
 
   ngOnInit() {
     this.getAssets();
   }
 
   private async loadDefaultLanguage(asset: any) {
-    this._defaultLanguage = await this._languageService.getDefaultLanguage().toPromise();
+    this._defaultLanguage = await this._languageService.getDefaultLanguage().toPromise() || new Language();
     return await this._languageService
       .getTranslationFile(`${this.asset.folder}${this.asset.path}/${this._defaultLanguage.code}.json`)
       .toPromise();
@@ -52,14 +52,14 @@ export class LanguageEditorComponent implements OnInit {
 
   async getAssets(asset?: Asset) {
     this.path = [];
-    this.asset = asset || { path: '', folder: '' };
+    this.asset = asset || { path: '', folder: 'assets/i18n/' };
     this.folder = asset || { path: '', folder: '/' };
     this.jsonDefault = await this.loadDefaultLanguage(this.folder);
     this.tree = [];
     this.json = {};
     this.file = new Asset();
     this.folderUp()
-    this._languageService.getAssets(`${this.asset.folder}${this.asset.path}`).subscribe(result => {
+    this._languageService.getAssets(`${this.asset.folder}${this.asset.path}`).subscribe((result: any) => {
       this.assets = result;
       this.files = this.assets.filter(x => !x.isDir);
       this.folders = this.assets.filter(x => x.isDir);
@@ -74,7 +74,7 @@ export class LanguageEditorComponent implements OnInit {
       isDir: false,
       content: JSON.stringify(this.jsonDefault, null, 5)
     };
-    this._languageService.getTranslationFile(`${item.folder}${item.path}`).subscribe(result => {
+    this._languageService.getTranslationFile(`${item.folder}${item.path}`).subscribe((result: any) => {
       this.tree = [];
       this.path = [];
       this.json = result;
@@ -82,14 +82,14 @@ export class LanguageEditorComponent implements OnInit {
     });
   }
 
-  loadTree(root: any, defaultLang: any, parent: ObjectTree): any {
+  loadTree(root: any, defaultLang: any, parent: ObjectTree | null): any {
     const $this = this;
     Object.keys(root).forEach(function (key) {
       $this.path.push(key);
       const item = <ObjectTree>{
         key: key,
         from: $this._defaultLanguage.code,
-        to: $this.file.path.replace('.json', '').split(' ')[0],
+        to: $this.file!.path!.replace('.json', '').split(' ')[0],
         path: $this.path.join('.'),
         parent: parent
       };
@@ -121,19 +121,19 @@ export class LanguageEditorComponent implements OnInit {
 
     this._languageService.saveAsset([file, fileDefault]).subscribe(
       () => {
-        this._toasterService.pop(
-          'success',
+        this._toasterService.success(
+          this._languageService.translate.instant('TRANSLATOR.TOASTER.SAVE'),
           this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_SUCCESS'),
-          this._languageService.translate.instant('TRANSLATOR.TOASTER.SAVE')
+
         );
       },
-      error => {
-        this._toasterService.pop('error', this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR'), error);
+      (error: any) => {
+        this._toasterService.error(error, this._languageService.translate.instant('TRANSLATOR.TOASTER.TITLE_ERROR'));
       }
     );
   }
 
-  download(file) {
+  download(file: any[]) {
     this._languageService.saveAsset(file);
   }
 }

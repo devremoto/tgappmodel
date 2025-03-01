@@ -2,15 +2,9 @@
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Data.Repositories
+namespace Data.Repositories;
+
+public partial class LanguageRepository(AppDbContext db) : BaseRepository<Language>(db), ILanguageRepository
 {
-    public partial class LanguageRepository : BaseRepository<Language>, ILanguageRepository
-    {
-        public LanguageRepository(AppDbContext db)
-            : base(db)
-        {
-            
-        }		
-    }
 }
 

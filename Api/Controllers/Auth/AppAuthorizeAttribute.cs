@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace Api.Controllers.Auth
+namespace Api.Controllers.Auth;
+
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class AppAuthorizeAttribute : Attribute
 {
-	[AttributeUsage(AttributeTargets.Class)]
-	public sealed class AppAuthorizeAttribute : Attribute
-	{
-	}
 }

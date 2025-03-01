@@ -12,7 +12,7 @@ export class AccountService {
     return this._auth.user ? this._auth.user.profile : { role: {}, roles: [] };
   }
 
-  logout(returnUrl) {
+  logout(returnUrl: string) {
     this._auth.fullLogout(returnUrl);
   }
 }

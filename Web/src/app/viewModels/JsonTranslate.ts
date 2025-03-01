@@ -1,4 +1,4 @@
 export interface JsonTranslate {
-    jsonDefault: any;
-    translated: any;
+    jsonDefault: any[];
+    translated: any[];
 }

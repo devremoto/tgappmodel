@@ -5,21 +5,21 @@ import { Config } from '../config';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
-  options: any;
-  config: any;
+  options: {};
+  config = {} as any;
 
   constructor(private http: HttpClient) {
     this.config = Config;
   }
 
-  prepareUrl(url, usePrefix: boolean = true): string {
+  prepareUrl(url: string, usePrefix = true): string {
     if (url.indexOf('://') === -1 && usePrefix) {
       return this.config.apiAddress + url;
     }
     return url;
   }
 
-  upload(files, obj: any) {
+  upload(files: any[], obj: any) {
     const formData = this.loadData(files, obj);
     return this.http.post(`${this.config.siteUrl}/file/upload`, formData);
   }
@@ -33,7 +33,7 @@ export class HttpService {
     return this.http.post(`${this.config.siteUrl}/file/upload`, formData);
   }
 
-  apiUpload(url: string, files, obj: any) {
+  apiUpload(url: string, files: any, obj: any) {
     const formData = this.loadData(files, obj);
     return this.post<any>(url, formData);
   }
@@ -47,29 +47,29 @@ export class HttpService {
     return this.post<any>(url, formData);
   }
 
-  removeFile(fileName) {
+  removeFile(fileName: string) {
     return this.get(`${this.config.siteUrl}/file/remove/${fileName}`);
   }
 
-  image(fileName: string, controller, w?: number, h?: number, base64: boolean = false) {
+  image(fileName: string, controller: string, w?: number, h?: number, base64 = false) {
     return this.get(`${this.config.siteUrl}/file/image/${fileName}`, {
       w: w || 0,
       h: h || 0,
-      base64,
-      controller
+      base64: base64,
+      controller: controller
     });
   }
 
-  apiImage(fileName: string, controller, w?: number, h?: number, base64: boolean = false) {
+  apiImage(fileName: string, controller: string, w?: number, h?: number, base64 = false) {
     return this.get(`${this.config.apiAddress}/file/image/${fileName}`, {
       w: w || 0,
       h: h || 0,
-      base64,
-      controller
+      base64: base64,
+      controller: controller
     });
   }
 
-  private loadData(files, obj: any) {
+  private loadData(files: any[], obj: any) {
     const data = new FormData();
     if (obj) {
       data.append('model', JSON.stringify(obj));
@@ -86,7 +86,7 @@ export class HttpService {
     return this.http.post<T>(this.prepareUrl(url), object);
   }
 
-  save<T>(url: string, object: any, edit: boolean = false) {
+  save<T>(url: string, object: any, edit = false) {
     if (edit) {
       return this.update<T>(url, object);
     }
@@ -102,14 +102,14 @@ export class HttpService {
     return this.http.put<T>(this.prepareUrl(url), object);
   }
 
-  get<T>(url: string, params?: any, usePrefix: boolean = true) {
+  get<T>(url: string, params?: any, usePrefix = true) {
     return this.http.get<T>(this.prepareUrl(url + (params ? this.param(params) : ''), usePrefix), this.options);
   }
 
-  getLink(url: string, params?: any, usePrefix: boolean = true) {
+  getLink(url: string, params?: any, usePrefix = true) {
     return this.prepareUrl(url + (params ? this.param(params) : ''), usePrefix);
   }
-  param(obj) {
+  param(obj: any) {
     const params = new URLSearchParams();
     for (const key in obj) {
       if (obj[key] && typeof obj[key] !== 'object') {

@@ -1,6 +1,6 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
-declare var $: any;
+declare let $: any;
 @Directive({
   selector: '[appReplace]'
 })

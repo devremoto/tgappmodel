@@ -2,16 +2,9 @@
 using Domain.Interfaces;
 using Domain.Services.Interfaces;
 
-namespace Domain.Services
-{
-    public partial class SettingsService : BaseService<Settings>, ISettingsService
-    {
-        ISettingsRepository _repository;
-        public SettingsService(ISettingsRepository repository)
-            : base(repository)
-        {
-            _repository = repository;
-        }
+namespace Domain.Services;
 
-    }
+public partial class SettingsService(ISettingsRepository repository) : BaseService<Settings>(repository), ISettingsService
+{
+    readonly ISettingsRepository _repository = repository;
 }

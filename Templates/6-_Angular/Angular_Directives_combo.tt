@@ -1,4 +1,4 @@
-﻿<#@ template language="C#" hostSpecific="true"  #>
+﻿<#@ template language="C#" hostSpecific="true" compilerOptions="optimize+" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
@@ -46,10 +46,9 @@ if(classModel.Fields.Any(x=>x.Name =="Nome")){
 
 manager.StartNewFile($"{webAppPath}combos\\combo.{classSet.ToCamelCase(classModel.Name)}.ts",webProject,"");
 #>
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { <#=classModel.Name#>Service } from '../services/generated/<#=classModel.Name#>Service';
 import { <#=classModel.Name#> } from '../models/<#=classModel.Name#>';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-combo-<#=classSet.ToDash(classModel.Name)#>',
@@ -58,7 +57,7 @@ import { Subscription } from 'rxjs';
       <option *ngFor="let <#=camelCaseName#> of <#=camelCaseName#>List" [value]="<#=camelCaseName#>.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>">{{<#=camelCaseName#>.<#=prop#>}}</option>
     </select>`
 })
-export class Combo<#=classModel.Name#>Component implements OnInit, OnDestroy {
+export class Combo<#=classModel.Name#>Component implements OnInit {
     appErrorMessage: any;
     <#=camelCaseName#>: <#=classModel.Name#>;
     <#=camelCaseName#>List: <#=classModel.Name#>[];
@@ -66,12 +65,11 @@ export class Combo<#=classModel.Name#>Component implements OnInit, OnDestroy {
     @Input() cssClass?: string;
     @Input() model: any;
     @Output() modelChange: any = new EventEmitter();
-    subscription = new Subscription();
 
     constructor(private _service: <#=classModel.Name#>Service) {
-        this.subscription.add(this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
+        this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
             this.reload(data);
-        }));
+        });
     }
 
     updateData(event) {
@@ -84,22 +82,18 @@ export class Combo<#=classModel.Name#>Component implements OnInit, OnDestroy {
         this.getAll();
     }
 
-    ngOnDestroy() {
-      this.subscription.unsubscribe();
-    }
-
     public getAll(data?: <#=classModel.Name#>) {
-        this.subscription.add(this._service.getAll().subscribe(
+        this._service.getAll().subscribe(
             result => {
                 this.<#=camelCaseName#>List = result;
-                if (data) {
-                    this.updateData(data.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>);
-                }
+                    if (data) {
+                        this.updateData(data.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>);
+                    }
             },
             error => {
                 this.appErrorMessage = error;
             }
-        ));
+        );
     }
 
     public reload(data?: <#=classModel.Name#>) {

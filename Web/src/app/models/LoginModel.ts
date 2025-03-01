@@ -4,7 +4,7 @@ export class LoginModel {
   grant_type: string;
   scope: string;
   client_id: string;
-  client_secret;
+  client_secret: string;
   state: string;
   nonce: string;
   redirect_uri: string;

@@ -1,8 +1,8 @@
 export class Email {
   // properties
-  id;
+  id?: string;
   address: string;
   //////////////
 
-  constructor() {}
+  constructor() { }
 }

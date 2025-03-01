@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent, NavigationStart, NavigationError, NavigationEnd } from '@angular/router';
-import { ToasterService } from 'angular2-toaster';
+import { ToastrService } from 'ngx-toastr';
 import { LanguageCustomService } from '../../services/custom/Language';
 import { ContactCustomService } from '../../services/custom/Contact';
 import { Contact } from '../../models/Contact';
-declare var $: any;
-declare var window: any;
+import { Observer } from 'rxjs';
+declare let $: any;
+declare let window: any;
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -18,12 +19,12 @@ export class IndexComponent implements OnInit {
   loading = false;
   constructor(
     translate: LanguageCustomService,
-    private _toasterService: ToasterService,
+    private _toasterService: ToastrService,
     private _contactService: ContactCustomService,
     router: Router
   ) {
     translate.init();
-    router.events.subscribe((event: RouterEvent) => {
+    router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
       }
 
@@ -62,7 +63,7 @@ export class IndexComponent implements OnInit {
 
     // full transparent fixed-top navbar should have background when scrolled
     if ($('.navbar-fixed-top.navbar-no-background').length > 0) {
-      $(window).scroll(() => {
+      $(window).scroll(function () {
         if ($(document).scrollTop() > 100) {
           $('.navbar-fixed-top').removeClass('navbar-no-background');
         } else {
@@ -73,7 +74,7 @@ export class IndexComponent implements OnInit {
 
     // transparent fixed-top navbar should have solid background when scrolled
     if ($('.navbar-fixed-top.navbar-transparent').length > 0) {
-      $(window).scroll(() => {
+      $(window).scroll(function () {
         if ($(document).scrollTop() > 100) {
           $('.navbar-fixed-top').removeClass('navbar-transparent');
         } else {
@@ -106,7 +107,7 @@ export class IndexComponent implements OnInit {
         }
       });
 
-      $('.back-to-top').click((e) => {
+      $('.back-to-top').click((e: any) => {
         e.preventDefault();
 
         $('body, html').animate(
@@ -150,7 +151,7 @@ export class IndexComponent implements OnInit {
       // use min-height for any changing content
       $('#contact-widget-bottom').css('min-height', $widgetHeight);
 
-      $panelHeading.on('click', () => {
+      $panelHeading.on('click', function () {
         if (!$panelShown) {
           $('#contact-name').focus();
           $('#contact-widget-bottom').animate(
@@ -190,12 +191,12 @@ export class IndexComponent implements OnInit {
         this.name = contact.name;
         this.contact = new Contact();
         // this.open();
-        this._toasterService.pop('success', 'Mensagem enviada', 'Mensagem enviada com sucesso');
+        this._toasterService.success('Message sent successfully', 'Success');
         this.loading = false;
       },
       error => {
         this.errorMessage = 'Problema no envio da mensagem, tente novamente';
-        this._toasterService.pop('error', 'Erro', this.errorMessage);
+        this._toasterService.error(this.errorMessage);
         this.loading = false;
       },
       () => {

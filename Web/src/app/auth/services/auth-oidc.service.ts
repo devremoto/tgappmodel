@@ -6,13 +6,13 @@ import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServiceOidc extends AuthService {
-  token: string;
-  id_token: string;
-  callbackUrl: string;
-  onLogin: EventEmitter<User> = new EventEmitter();
-  onLogout: EventEmitter<string> = new EventEmitter();
-  userManager: UserManager;
-  _localStorage: Storage;
+  override token: string;
+  override id_token: string;
+  override callbackUrl: string;
+  override onLogin: EventEmitter<User> = new EventEmitter();
+  override onLogout: EventEmitter<string> = new EventEmitter();
+  override userManager: UserManager;
+  override _localStorage: Storage;
 
   constructor(_router: Router, _storage: SessionStorageService) {
     super(_router, _storage);
@@ -22,7 +22,7 @@ export class AuthServiceOidc extends AuthService {
 
   isLoggedIn(): boolean {
 
-    return this.user && this.user.access_token && !this.user.expired;
+    return this.user && !!this.user.access_token && !this.user.expired;
   }
 
   getToken(): string {
@@ -35,8 +35,8 @@ export class AuthServiceOidc extends AuthService {
 
   login() {
     this.userManager.removeUser().then(
-      result => { console.log(result); }
-    );
+      result => { console.log(result) }
+    )
     this.redirectLogin();
   }
 
@@ -44,11 +44,11 @@ export class AuthServiceOidc extends AuthService {
     this.userManager.signinRedirect();
   }
 
-  navigateTo(segment, params?: any) {
+  navigateTo(segment: string, params?: any) {
     this._router.navigate([segment, params]);
   }
 
-  navigateToUrl(url) {
+  navigateToUrl(url: string) {
     this._router.navigateByUrl(url);
   }
 

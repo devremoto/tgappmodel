@@ -75,8 +75,8 @@
     <!-- /.conainer-fluid -->
   </main>
   <aside class="aside-menu">
-    <ngb-tabset>
-      <ngb-tab>
+    <div ngbNav #nav="ngbNav"  class="nav-pills flex-column" orientation="vertical">
+      <ng-container ngbNavItem>
         <ng-template ngbTabTitle>
           <i class="icon-list"></i>
         </ng-template>
@@ -203,8 +203,8 @@
           </div>
           <hr class="mx-3 my-0">
         </ng-template>
-      </ngb-tab>
-      <ngb-tab>
+        </ng-container>
+        <ng-container ngbNavItem>
         <ng-template ngbTabTitle>
           <i class="icon-speech"></i>
         </ng-template>
@@ -301,8 +301,8 @@
             </div>
           </div>
         </ng-template>
-      </ngb-tab>
-      <ngb-tab>
+      </ng-container>
+      <ng-container ngbNavItem>
         <ng-template ngbTabTitle>
           <i class="icon-settings"></i>
         </ng-template>
@@ -415,8 +415,8 @@
             <small class="text-muted">25GB/256GB</small>
           </div>
         </ng-template>
-      </ngb-tab>
-    </ngb-tabset>
+      </ng-container>
+    </div>
   </aside>
 </div>
 <app-admin-footer></app-admin-footer>

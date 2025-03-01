@@ -1,5 +1,4 @@
-﻿using Api.Controllers.Hubs;
-using Api.Models;
+﻿using Api.Models;
 using Application.Interfaces;
 using Application.ViewModels;
 using AutoMapper;
@@ -10,34 +9,27 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace Api.Controllers
+namespace Api.Controllers;
+
+[Authorize]
+[Route("api/[controller]")]
+public partial class ContactController(IContactAppService service, IWebHostEnvironment hostEnvironment, AppModelConfiguration configuration, IMapper mapper) : BaseController<Guid, IContactAppService, Contact, ContactViewModel>(hostEnvironment, configuration, service, mapper)
 {
-    [Authorize]
-    [Route("api/[controller]")]
-    public partial class ContactController : BaseController<Guid, IContactAppService, Contact, ContactViewModel>
+    [HttpPost]
+    [Route("SendEmail")]
+    [AllowAnonymous]
+    public async Task<IActionResult> SendEmail([FromBody] ContactViewModel contactModel)
     {
-        public ContactController(IContactAppService service, IWebHostEnvironment hostingEnvironment, AppModelConfiguration configuration, IMapper mapper, INotificationHub notification)
-		: base(hostingEnvironment, configuration, service, mapper, notification)
-		{
-            _service = service;
-        }
 
-        [HttpPost]
-        [Route("SendEmail")]
-        [AllowAnonymous]
-        public async Task<IActionResult> SendEmail([FromBody] ContactViewModel contactModel)
+        try
         {
-
-            try
-            {
-                var entity = _mapper.Map<Contact>(contactModel);
-                await Task.Run(() => _service.SendEmail(entity));
-                return Ok();
-            }
-            catch (System.Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var entity = _mapper.Map<Contact>(contactModel);
+            await Task.Run(() => _service.SendEmail(entity));
+            return Ok();
+        }
+        catch (System.Exception e)
+        {
+            return BadRequest(e.Message);
         }
     }
 }

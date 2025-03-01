@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="7-Tests\3.2-Service.txt" />
-    <None Remove="7-Tests\7.1- Repositories.tt" />
     <None Remove="app.config" />
   </ItemGroup>
 
@@ -17,6 +15,7 @@
   <ItemGroup>
     <None Include="ClassModel.ttinclude" />
     <None Include="main.ttinclude" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="1-_EntityFrameworkCore\1.2-Context.txt">
@@ -221,23 +220,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>generated_Controllers.tt</DependentUpon>
     </Content>
-    <Content Include="7-Tests\7.1- Repositories.tt">
-      <LastGenOutput>7.1- Repositories.txt</LastGenOutput>
-      <Generator>TextTemplatingFileGenerator</Generator>
-    </Content>
-    <Content Include="7-Tests\7.1- Repositories.txt">
-      <DependentUpon>7.1- Repositories.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EnvDTE" Version="8.0.2" />
-    <PackageReference Include="EnvDTE80" Version="8.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="16.3.29318.209" />
-    <PackageReference Include="System.Linq" Version="4.3.0" />
-    <PackageReference Include="System.Runtime" Version="4.3.1" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -355,16 +340,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Translations.tt</DependentUpon>
     </None>
-    <None Update="7-Tests\7.1- Repositories.txt">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>7.1- Repositories.tt</DependentUpon>
-    </None>
-    <None Update="8-_Misc\Html.tt">
+    <None Update="7-_Misc\Html.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Html.txt</LastGenOutput>
     </None>
-    <None Update="8-_Misc\Html.txt">
+    <None Update="7-_Misc\Html.txt">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Html.tt</DependentUpon>

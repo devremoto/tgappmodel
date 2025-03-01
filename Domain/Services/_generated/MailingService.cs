@@ -2,16 +2,9 @@
 using Domain.Interfaces;
 using Domain.Services.Interfaces;
 
-namespace Domain.Services
-{
-    public partial class MailingService : BaseService<Mailing>, IMailingService
-    {
-        IMailingRepository _repository;
-        public MailingService(IMailingRepository repository)
-            : base(repository)
-        {
-            _repository = repository;
-        }
+namespace Domain.Services;
 
-    }
+public partial class MailingService(IMailingRepository repository) : BaseService<Mailing>(repository), IMailingService
+{
+    readonly IMailingRepository _repository = repository;
 }

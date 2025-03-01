@@ -5,7 +5,7 @@ import { ImgService } from './ImgService';
 
 @Component({
   template: `
-    <img *ngIf="path" [(src)]="path" alt="{{ image }} " [class]="cssClass" [style]="style" />
+    <img *ngIf="path" [src]="path" alt="{{ image }} " class="{{ cssClass }}" style="{{ style }}" />
   `,
   selector: 'app-img-resize',
   providers: [ImgService]
@@ -27,7 +27,7 @@ export class ImgResizeComponent implements OnInit, OnChanges {
     this._config = Config;
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.image) {
+    if (changes['image']) {
       this.load();
     }
   }
@@ -53,7 +53,7 @@ export class ImgResizeComponent implements OnInit, OnChanges {
 
   getImagData() {
     this._service.controller = this.controller;
-    this._service.image(this.image, this.controller, this.w, this.h, this.inline).subscribe(result => {
+    this._service.image(this.image, this.controller, this.w, this.h, this.inline).subscribe((result: any) => {
       this.path = result;
     });
   }

@@ -1,12 +1,9 @@
-﻿using Application.ViewModels;
-using Domain.Entities;
-using System;
+﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface ISettingsAppService : IBaseAppService<Settings>
 {
-    public partial interface ISettingsAppService : IBaseAppService<Settings>
-    {
-		Settings Save(Settings viewModel, bool edit = false);
-    }
+    Settings Save(Settings viewModel, bool edit = false);
 }
 

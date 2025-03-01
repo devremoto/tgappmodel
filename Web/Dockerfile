@@ -1,18 +1,17 @@
 
-FROM node:12-alpine as builder
+FROM node:alpine as builder
 RUN apk update && apk add --no-cache make git
 
 WORKDIR /app
 ARG Authority=http://192.168.0.5:5000
 ARG UseAuthority=true
-ARG RequireHttpsMetadata=false
+ARG RequireHttpsMetadata=true
 ARG ApiName=api1
 ARG ImgFolder=~/images
 ARG HostServer=http://192.168.0.5
 ARG HostPort=4500
 ARG ApiUrl=http://192.168.0.5:52050/api/
-ARG ClientId="tgappmodel"
-ARG MapKey
+ARG ApiUrl="tgappmodel"
 
 ENV AppModelConfiguration:Authority=${Authority}
 ENV AppModelConfiguration:UseAuthority=${UseAuthority}
@@ -23,7 +22,6 @@ ENV AppModelConfiguration:HostServer=${HostServer}
 ENV AppModelConfiguration:HostPort=${HostPort}
 ENV AppModelConfiguration:ApiUrl=${ApiUrl}
 ENV AppModelConfiguration:ClientId=${ClientId}
-ENV AppModelConfiguration:MapKey=${MapKey}
 
 COPY package.json package-lock.json  /app/
 RUN cd /app && npm set progress=false && npm install

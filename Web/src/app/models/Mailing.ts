@@ -1,8 +1,5 @@
-export class Mailing {
-  id;
+﻿export class Mailing {
+  id?: string;
   email: string;
-  active;
-
-  constructor() {
-  }
+  active: boolean;
 }

@@ -1,12 +1,9 @@
-import 'rxjs/add/operator/map';
-
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 import { Mailing } from '../../models/Mailing';
 import { MailingService } from '../generated/MailingService';
 import { HttpService } from '../services';
-import { HubService } from '../hub.service';
 
 //////
 
@@ -14,15 +11,15 @@ import { HubService } from '../hub.service';
   providedIn: 'root'
 })
 export class MailingCustomService extends MailingService {
-  constructor(protected _http: HttpService, public hubService: HubService) {
-    super(_http, hubService);
+  constructor(override http: HttpService) {
+    super(http);
   }
 
   sendEmail(mailing: Mailing): Observable<any> {
-    return this._http.post(this.controller + '/sendEmail/', mailing);
+    return this.http.post(this._controller + '/sendEmail/', mailing);
   }
 
   signUp(mailing: Mailing): Observable<any> {
-    return this._http.post(this.controller + '/signUp/', mailing);
+    return this.http.post(this._controller + '/signUp/', mailing);
   }
 }

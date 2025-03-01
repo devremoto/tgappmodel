@@ -1,11 +1,10 @@
 ﻿
 using System.Threading.Tasks;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface ILanguageAppService
 {
-    public partial interface ILanguageAppService 
-    {
-        Task<dynamic> TranslateAsync(string text, string from, string to);
-    }
+    Task<dynamic> TranslateAsync(string text, string from, string to);
 }
 

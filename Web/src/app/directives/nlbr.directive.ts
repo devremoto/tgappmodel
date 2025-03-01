@@ -1,5 +1,5 @@
 import { Directive, ElementRef, AfterViewChecked } from '@angular/core';
-declare var $: any;
+declare let $: any;
 @Directive({
   selector: '[appNlbr]'
 })

@@ -8,7 +8,6 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact';
 import { LibModule } from '../shared/libModule.module';
-import { ToasterService } from 'angular2-toaster/src/toaster.service';
 
 @NgModule({
   declarations: [AboutComponent, ContactComponent, HomeComponent],
@@ -21,8 +20,7 @@ import { ToasterService } from 'angular2-toaster/src/toaster.service';
       // isolate: true
     })
   ],
-  exports: [AboutComponent, ContactComponent, HomeComponent],
-  providers: [ToasterService]
+  exports: [AboutComponent, ContactComponent, HomeComponent]
 })
 export class PagesModule {
   lang: string;

@@ -13,13 +13,13 @@ export class NavDropdownDirective {
 }
 
 /**
- * Allows the dropdown to be toggled via click.
- */
+* Allows the dropdown to be toggled via click.
+*/
 @Directive({
   selector: '[appNavDropdownToggle]'
 })
 export class NavDropdownToggleDirective {
-  constructor(private dropdown: NavDropdownDirective) { }
+  constructor(private dropdown: NavDropdownDirective) {}
 
   @HostListener('click', ['$event'])
   toggleOpen($event: any) {

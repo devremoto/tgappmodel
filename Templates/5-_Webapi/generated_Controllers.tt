@@ -1,11 +1,11 @@
-﻿<#@ template language="C#" hostSpecific="true" debug="True" #>
+﻿<#@ template language="C#" hostSpecific="true" compilerOptions="optimize+" debug="True" #>
 <#@ assembly name="System.Core" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ include file="../main.ttinclude" #>
+<#@ include file="..\main.ttinclude" #>
 <#//@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
-<#@ include file="../ClassModel.ttinclude" #>
+<#@ include file="..\ClassModel.ttinclude" #>
 <#@ output extension=".txt"  #><#
 var manager = TemplateFileManager.Create(this);
 
@@ -22,19 +22,23 @@ foreach(var classModel in classSet.Classes){#>
 	var spacedName = classSet.ToSpacedName(classModel.Name);
 	var parents = classModel.Fields.Where(x=>x.IsParent);
 #>
+using Api.Models;
+using Application.AutoMapper;
 using Application.Interfaces;
 using Application.ViewModels;
+using AutoMapper;
 using CrossCutting.Extensions;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
-    public partial class <#= classModel.Name #>Controller 
-
+    public partial class <#= classModel.Name #>Controller    
     {
         
 		private readonly I<#= classModel.Name #>AppService _service;
@@ -59,7 +63,7 @@ namespace Api.Controllers
 			}
             catch(Exception e)
             {
-                return BadRequest($"Error while retieving <#= spacedName #> {e.Message}");
+                return BadRequest($"Error while retrieving <#= spacedName #> {e.Message}");
             }
         }
 
@@ -78,7 +82,36 @@ namespace Api.Controllers
             }
         }
 <#}}#>
-        
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] <#= classModel.Name #>ViewModel model)
+        {
+            try
+            {
+				var entity = _mapper.Map<<#= classModel.Name #>>(model);
+				var result = await Task.FromResult(_service.Save(entity, false));
+                return Created("",_mapper.Map<<#= classModel.Name #>ViewModel>(result));
+            }
+            catch(Exception e)
+            {
+                return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] <#= classModel.Name #>ViewModel model)
+        {
+            try
+            {
+				var entity = _mapper.Map<<#= classModel.Name #>>(model);
+				var result = await Task.FromResult(_service.Save(entity, true));
+                return Ok(_mapper.Map<<#= classModel.Name #>ViewModel>(result));
+            }
+            catch(Exception e)
+            {
+                return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
+            }
+        }
 
 		protected override void Dispose(bool disposing)
 		{

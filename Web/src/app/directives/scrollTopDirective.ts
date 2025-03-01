@@ -1,15 +1,15 @@
 import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 
-declare var $: any;
+declare let $: any;
 @Directive({
   selector: '[appScrollTop]'
 })
 export class ScrollTopDirective implements AfterViewInit {
   @Input('appScrollTop') to?: string;
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) { }
 
   ngAfterViewInit() {
-    $(this.el.nativeElement).click(function() {
+    $(this.el.nativeElement).click(() => {
       if (this.to) {
         $('#' + this.to).animate({ scrollTop: 0 }, 600);
       } else {

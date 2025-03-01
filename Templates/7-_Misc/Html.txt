@@ -1,0 +1,205 @@
+﻿ 
+
+
+
+//////////////////////////////////////////////////////////
+/// STRING BUILDER HTML FOR  About
+//////////////////////////////////////////////////////////
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ID", Id.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","TITLE", Title.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","IMAGE", Image.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","DESCRIPTION", Description.To<string>());
+
+//////////////////////////////////////////////////////////
+/// STRING BUILDER HTML FOR  Contact
+//////////////////////////////////////////////////////////
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ID", Id.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","NAME", Name.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","PHONE NUMBER", PhoneNumber.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","EMAIL", Email.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","SUBJECT", Subject.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","MESSAGE", Message.To<string>());
+
+//////////////////////////////////////////////////////////
+/// STRING BUILDER HTML FOR  Language
+//////////////////////////////////////////////////////////
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ID", Id.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","CODE", Code.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","NAME", Name.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","IMAGE", Image.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ACTIVE", Active.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","DEFAULT", Default.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","LOADED", Loaded.To<string>());
+
+//////////////////////////////////////////////////////////
+/// STRING BUILDER HTML FOR  Mailing
+//////////////////////////////////////////////////////////
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ID", Id.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","EMAIL", Email.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ACTIVE", Active.To<string>());
+
+//////////////////////////////////////////////////////////
+/// STRING BUILDER HTML FOR  Settings
+//////////////////////////////////////////////////////////
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ID", Id.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","KEY", Key.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","VALUE", Value.To<string>());
+
+//////////////////////////////////////////////////////////
+/// STRING BUILDER HTML FOR  Social Network
+//////////////////////////////////////////////////////////
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ID", Id.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","NAME", Name.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","CSS ICON", CssIcon.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","URL", Url.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ACTIVE", Active.To<string>());
+
+//////////////////////////////////////////////////////////
+/// STRING BUILDER HTML FOR  Upload File
+//////////////////////////////////////////////////////////
+sb.AppendFormat("<b>{0}</b>:{1}<br />","ID", Id.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","NAME", Name.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","INPUT FILE FIELD", InputFileField.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","SIZE", Size.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","TYPE", Type.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","FILE NAME", FileName.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","CONTROLLER", Controller.To<string>());
+sb.AppendFormat("<b>{0}</b>:{1}<br />","EXTENSION", Extension.To<string>());
+
+
+
+//////////////////////////////////////////////////////////
+/// UPDATE CHECK  About
+//////////////////////////////////////////////////////////
+if(currentEntity.Id!=newEntity.Id)
+	currentEntity.Id = newEntity.Id;
+
+if(currentEntity.Title!=newEntity.Title)
+	currentEntity.Title = newEntity.Title;
+
+if(currentEntity.Image!=newEntity.Image)
+	currentEntity.Image = newEntity.Image;
+
+if(currentEntity.Description!=newEntity.Description)
+	currentEntity.Description = newEntity.Description;
+
+
+//////////////////////////////////////////////////////////
+/// UPDATE CHECK  Contact
+//////////////////////////////////////////////////////////
+if(currentEntity.Id!=newEntity.Id)
+	currentEntity.Id = newEntity.Id;
+
+if(currentEntity.Name!=newEntity.Name)
+	currentEntity.Name = newEntity.Name;
+
+if(currentEntity.PhoneNumber!=newEntity.PhoneNumber)
+	currentEntity.PhoneNumber = newEntity.PhoneNumber;
+
+if(currentEntity.Email!=newEntity.Email)
+	currentEntity.Email = newEntity.Email;
+
+if(currentEntity.Subject!=newEntity.Subject)
+	currentEntity.Subject = newEntity.Subject;
+
+if(currentEntity.Message!=newEntity.Message)
+	currentEntity.Message = newEntity.Message;
+
+
+//////////////////////////////////////////////////////////
+/// UPDATE CHECK  Language
+//////////////////////////////////////////////////////////
+if(currentEntity.Id!=newEntity.Id)
+	currentEntity.Id = newEntity.Id;
+
+if(currentEntity.Code!=newEntity.Code)
+	currentEntity.Code = newEntity.Code;
+
+if(currentEntity.Name!=newEntity.Name)
+	currentEntity.Name = newEntity.Name;
+
+if(currentEntity.Image!=newEntity.Image)
+	currentEntity.Image = newEntity.Image;
+
+if(currentEntity.Active!=newEntity.Active)
+	currentEntity.Active = newEntity.Active;
+
+if(currentEntity.Default!=newEntity.Default)
+	currentEntity.Default = newEntity.Default;
+
+if(currentEntity.Loaded!=newEntity.Loaded)
+	currentEntity.Loaded = newEntity.Loaded;
+
+
+//////////////////////////////////////////////////////////
+/// UPDATE CHECK  Mailing
+//////////////////////////////////////////////////////////
+if(currentEntity.Id!=newEntity.Id)
+	currentEntity.Id = newEntity.Id;
+
+if(currentEntity.Email!=newEntity.Email)
+	currentEntity.Email = newEntity.Email;
+
+if(currentEntity.Active!=newEntity.Active)
+	currentEntity.Active = newEntity.Active;
+
+
+//////////////////////////////////////////////////////////
+/// UPDATE CHECK  Settings
+//////////////////////////////////////////////////////////
+if(currentEntity.Id!=newEntity.Id)
+	currentEntity.Id = newEntity.Id;
+
+if(currentEntity.Key!=newEntity.Key)
+	currentEntity.Key = newEntity.Key;
+
+if(currentEntity.Value!=newEntity.Value)
+	currentEntity.Value = newEntity.Value;
+
+
+//////////////////////////////////////////////////////////
+/// UPDATE CHECK  Social Network
+//////////////////////////////////////////////////////////
+if(currentEntity.Id!=newEntity.Id)
+	currentEntity.Id = newEntity.Id;
+
+if(currentEntity.Name!=newEntity.Name)
+	currentEntity.Name = newEntity.Name;
+
+if(currentEntity.CssIcon!=newEntity.CssIcon)
+	currentEntity.CssIcon = newEntity.CssIcon;
+
+if(currentEntity.Url!=newEntity.Url)
+	currentEntity.Url = newEntity.Url;
+
+if(currentEntity.Active!=newEntity.Active)
+	currentEntity.Active = newEntity.Active;
+
+
+//////////////////////////////////////////////////////////
+/// UPDATE CHECK  Upload File
+//////////////////////////////////////////////////////////
+if(currentEntity.Id!=newEntity.Id)
+	currentEntity.Id = newEntity.Id;
+
+if(currentEntity.Name!=newEntity.Name)
+	currentEntity.Name = newEntity.Name;
+
+if(currentEntity.InputFileField!=newEntity.InputFileField)
+	currentEntity.InputFileField = newEntity.InputFileField;
+
+if(currentEntity.Size!=newEntity.Size)
+	currentEntity.Size = newEntity.Size;
+
+if(currentEntity.Type!=newEntity.Type)
+	currentEntity.Type = newEntity.Type;
+
+if(currentEntity.FileName!=newEntity.FileName)
+	currentEntity.FileName = newEntity.FileName;
+
+if(currentEntity.Controller!=newEntity.Controller)
+	currentEntity.Controller = newEntity.Controller;
+
+if(currentEntity.Extension!=newEntity.Extension)
+	currentEntity.Extension = newEntity.Extension;
+

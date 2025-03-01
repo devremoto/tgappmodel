@@ -1,12 +1,9 @@
-﻿using Application.ViewModels;
-using Domain.Entities;
-using System;
+﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface IUploadFileAppService : IBaseAppService<UploadFile>
 {
-    public partial interface IUploadFileAppService : IBaseAppService<UploadFile>
-    {
-		UploadFile Save(UploadFile viewModel, bool edit = false);
-    }
+    UploadFile Save(UploadFile viewModel, bool edit = false);
 }
 

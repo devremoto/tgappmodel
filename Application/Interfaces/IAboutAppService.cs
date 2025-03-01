@@ -1,9 +1,8 @@
 ﻿
-namespace Application.Interfaces
-{
-    public partial interface IAboutAppService 
-    {
+namespace Application.Interfaces;
 
-    }
+public partial interface IAboutAppService
+{
+
 }
 

@@ -1,8 +1,7 @@
-﻿namespace Domain.Interfaces
+﻿namespace Domain.Interfaces;
+
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        void Commit();
-        void Dispose();
-    }
+    void Commit();
+    void Dispose();
 }

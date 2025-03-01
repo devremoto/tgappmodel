@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Domain.Entities;
 
-namespace Domain.Entities
+public interface IEntity
 {
-    public interface IEntity
-    {
-       // object Id { get; set; }
-    }
+    // object Id { get; set; }
 }

@@ -1,12 +1,9 @@
-﻿using Application.ViewModels;
-using Domain.Entities;
-using System;
+﻿using Domain.Entities;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface IContactAppService : IBaseAppService<Contact>
 {
-    public partial interface IContactAppService : IBaseAppService<Contact>
-    {
-		Contact Save(Contact viewModel, bool edit = false);
-    }
+    Contact Save(Contact viewModel, bool edit = false);
 }
 
