@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  ApiName: '
-  a',
+  ApiName: 'api1',
   ImgFolder: '~/images',
   Authority: 'https://localhost:44310',
   RequireHttpsMetadata: false,
