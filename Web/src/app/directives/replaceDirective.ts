@@ -1,14 +1,14 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
-declare let $: any;
+declare let $: Function;
 @Directive({
-    selector: '[appReplace]',
-    standalone: false
+  selector: '[appReplace]',
+
 })
 export class ReplaceDirective implements AfterViewInit {
   userRoles = ['operator'];
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) { }
 
   ngAfterViewInit() {
     this.performReplace();

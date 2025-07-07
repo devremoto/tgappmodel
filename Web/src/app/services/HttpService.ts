@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Config } from '../config';
+import { Config, IConfig } from '../config';
 
 @Injectable({ providedIn: 'root' })
 export class HttpService {
-  options: {};
-  config = {} as any;
+  options: any = {};
+  config: IConfig = {} as IConfig;
 
   constructor(private http: HttpClient) {
     this.config = Config;

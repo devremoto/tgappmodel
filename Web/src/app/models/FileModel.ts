@@ -1,5 +1,5 @@
 export class FileModel {
-    isDoc: boolean;
+    public isDoc: boolean;
     public id?: string;
     public name: string;
     public inputFileField: string;

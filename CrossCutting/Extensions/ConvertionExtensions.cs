@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace CrossCutting.Extensions;
 
@@ -52,12 +53,12 @@ public static class ConvertionExtensions
                         if (names.Contains(prop.Name))
                         {
                             value = prop.GetValue(item);
-                            cells.Add(value != null ? string.Format("{0}{1}{0}", enclosedBy, value.ToString()) : string.Empty);
+                            cells.Add(value != null ? $"{enclosedBy}{value}{enclosedBy}" : string.Empty);
                         }
                     }
                     else
                     {
-                        cells.Add(value != null ? string.Format("{0}{1}{0}", enclosedBy, value.ToString()) : string.Empty);
+                        cells.Add(value != null ? $"{enclosedBy}{value}{enclosedBy}" : string.Empty);
                     }
                 }
             }
@@ -85,12 +86,12 @@ public static class ConvertionExtensions
                             {
                                 name = custom[Array.IndexOf(names, prop.Name)];
                             }
-                            props.Add(string.Format("{0}{1}{0}", enclosedBy, name));
+                            props.Add($"{enclosedBy}{name}{enclosedBy}");
                         }
                     }
                     else
                     {
-                        props.Add(string.Format("{0}{1}{0}", enclosedBy, prop.Name));
+                        props.Add($"{enclosedBy}{prop.Name}{enclosedBy}");
                     }
 
                 }
@@ -162,6 +163,41 @@ public static class ConvertionExtensions
             table.Rows.Add(row);
         }
         return table;
+    }
+
+    public static List<dynamic> ToDyamicList<T>(this List<T> list)
+    {
+        var result = new List<dynamic>();
+        foreach (var item in list)
+        {
+            var obj = new System.Dynamic.ExpandoObject() as IDictionary<string, Object>;
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
+            foreach (PropertyDescriptor prop in properties)
+            {
+                obj.Add(prop.Name, prop.GetValue(item));
+            }
+            result.Add(obj);
+        }
+        return result;
+    }
+
+    public static List<T> FromDynamicList<T>(this List<dynamic> list)
+    {
+        var result = new List<T>();
+        foreach (var item in list)
+        {
+            var obj = Activator.CreateInstance<T>();
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
+            foreach (PropertyDescriptor prop in properties)
+            {
+                if (item.ContainsKey(prop.Name))
+                {
+                    prop.SetValue(obj, item[prop.Name]);
+                }
+            }
+            result.Add(obj);
+        }
+        return result;
     }
 
     public static DataTable ToDataTable<T>(this T obj)

@@ -1,22 +1,25 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LanguageService } from '../services/generated/LanguageService';
 import { Language } from '../models/Language';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-combo-language',
+
+    imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="language" class="{{cssClass}}" autofocus >
       <option *ngFor="let language of languageList" [value]="language.id">{{language.name}}</option>
     </select>`,
-    standalone: false
+
 })
 export class ComboLanguageComponent implements OnInit {
-    appErrorMessage: any;
+    appErrorMessage: unknown;
     language: Language;
     languageList: Language[];
 
     @Input() cssClass?: string;
-    @Input() model: any;
+    @Input() model: unknown;
     @Output() modelChange: any = new EventEmitter();
 
     constructor(private _service: LanguageService) {

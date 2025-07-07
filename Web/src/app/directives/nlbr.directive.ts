@@ -1,8 +1,8 @@
 import { Directive, ElementRef, AfterViewChecked } from '@angular/core';
-declare let $: any;
+declare let $: Function;
 @Directive({
-    selector: '[appNlbr]',
-    standalone: false
+  selector: '[appNlbr]',
+
 })
 export class NlbrDirective implements AfterViewChecked {
   constructor(private el: ElementRef) {

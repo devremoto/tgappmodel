@@ -1,4 +1,3 @@
-version: '3'
 services:
   tg-app-model-front:
     build:

@@ -1,15 +1,18 @@
 ﻿import { Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { UploadFileService } from '../../../services/generated/UploadFileService';
 import { UploadFile } from '../../../models/UploadFile';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-declare let $: any;
+import { UploadFileEditComponent } from './UploadFileEdit.component';
+declare let $: Function;
 
 @Component({
-    selector: 'app-modal-upload-file',
-    templateUrl: './UploadFileModal.component.html',
-    standalone: false
+  selector: 'app-modal-upload-file',
+  templateUrl: './UploadFileModal.component.html',
+
+  imports: [TranslateModule, UploadFileEditComponent]
+
 })
 export class UploadFileModalComponent {
 

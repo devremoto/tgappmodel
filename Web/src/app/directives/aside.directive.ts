@@ -5,7 +5,7 @@ import { Directive, HostListener } from '@angular/core';
 */
 @Directive({
     selector: '[appAsideMenuToggler]',
-    standalone: false
+    
 })
 export class AsideToggleDirective {
   constructor() { }

@@ -1,5 +1,5 @@
 
-FROM node:alpine as builder
+FROM node:alpine AS builder
 RUN apk update && apk add --no-cache make git
 
 WORKDIR /app
@@ -12,6 +12,7 @@ ARG HostServer=http://192.168.0.5
 ARG HostPort=4500
 ARG ApiUrl=http://192.168.0.5:52050/api/
 ARG ApiUrl="tgappmodel"
+ARG ClientId=my-client-id
 
 ENV AppModelConfiguration:Authority=${Authority}
 ENV AppModelConfiguration:UseAuthority=${UseAuthority}

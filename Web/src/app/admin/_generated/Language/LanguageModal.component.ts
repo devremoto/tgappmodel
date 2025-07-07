@@ -4,12 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from '../../../services/generated/LanguageService';
 import { Language } from '../../../models/Language';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-declare let $: any;
+declare let $: Function;
 
 @Component({
-    selector: 'app-modal-language',
-    templateUrl: './LanguageModal.component.html',
-    standalone: false
+  selector: 'app-modal-language',
+  templateUrl: './LanguageModal.component.html',
+
 })
 export class LanguageModalComponent {
 

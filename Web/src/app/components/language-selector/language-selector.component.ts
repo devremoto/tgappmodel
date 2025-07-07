@@ -1,12 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Language } from 'src/app/models/Language';
-import { LanguageCustomService } from 'src/app/services/custom/Language';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { Language } from '../../models/Language';
+import { LanguageCustomService } from '../../services/custom/Language';
 
 @Component({
-    selector: 'app-language-selector',
-    templateUrl: './language-selector.component.html',
-    styleUrls: ['./language-selector.component.css'],
-    standalone: false
+  selector: 'app-language-selector',
+  templateUrl: './language-selector.component.html',
+  styleUrls: ['./language-selector.component.css'],
+
+  imports: [TranslateModule, CommonModule, RouterModule]
 })
 export class LanguageSelectorComponent implements OnInit {
   public status: { isopen: boolean } = { isopen: false };
@@ -14,7 +18,7 @@ export class LanguageSelectorComponent implements OnInit {
   cssClass = 'primary';
   language: Language = <Language>{};
   languages: Array<Language> = [];
-  constructor(public translate: LanguageCustomService) {}
+  constructor(public translate: LanguageCustomService) { }
 
   ngOnInit() {
     this.languages = this.translate.getLanguages();

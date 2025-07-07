@@ -1,15 +1,17 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { Component, AfterViewInit } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
-declare let window: any;
+declare let window: null;
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css'],
-    standalone: false
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
+
+  imports: [TranslateModule, CommonModule]
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.slider();
   }
@@ -18,6 +20,6 @@ export class HomeComponent {
   }
 
   slider() {
-    window.sliderFull();
+    (<any>window).sliderFull();
   }
 }

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'app-app-settings',
     templateUrl: './app-settings.component.html',
     styleUrls: ['./app-settings.component.css'],
-    standalone: false
+    
 })
 export class AppSettingsComponent implements OnInit {
 

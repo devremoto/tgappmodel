@@ -1,23 +1,29 @@
-﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, Input, OnInit, OnChanges, SimpleChanges, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
-import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbModal, NgbModalRef, NgbModalOptions, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../components/dialog/dialog.service';
 import { ContactModalComponent } from './ContactModal.component';
 import { ContactService } from '../../../services/generated/ContactService';
 import { Contact } from '../../../models/Contact';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InRoleDirective } from '../../../directives/inRoleDirective';
 
 @Component({
-    selector: 'app-list-contact',
-    templateUrl: './ContactIndex.component.html',
-    standalone: false
+  selector: 'app-list-contact',
+  templateUrl: './ContactIndex.component.html',
+
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, NgbTooltipModule, InRoleDirective],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class ContactIndexComponent implements OnInit {
   private _edit = false;
   paging: PagingModel<Contact>;
   screen = 'Contact';
-  appErrorMessage: any;
+  appErrorMessage: unknown;
   contact: Contact;
   contactList: Contact[];
   @Input() autoLoad = true;

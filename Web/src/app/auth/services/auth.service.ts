@@ -7,8 +7,8 @@ import { SessionStorageService } from '../../shared/util/session-storage.service
 
 @Injectable({ providedIn: 'root' })
 export abstract class AuthService {
-  protected _sessionStorage: any;
-  protected _localStorage: any;
+  protected _sessionStorage: Storage;
+  protected _localStorage: Storage;
   protected token: string | null;
   protected id_token: string | null;
   protected callbackUrl: string;
@@ -46,8 +46,8 @@ export abstract class AuthService {
   abstract callBackLogin(): void;
   protected abstract logout(url?: any): void;
   abstract fullLogout(url?: any): void;
-  abstract callBackLogout(): any;
-  abstract callBackRenew(): any;
+  abstract callBackLogout(): unknown;
+  abstract callBackRenew(): unknown;
 
   public get user(): User {
     this._user = this._storage.getObjectCache<User>('user');

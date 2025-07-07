@@ -3,11 +3,12 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { AccountService } from '../auth/account.service';
 import { Config } from '../config';
 
-declare let $: any;
+declare let $: Function;
 
 @Directive({
-    selector: '[appInRole]',
-    standalone: false
+  selector: '[appInRole]',
+
+
 })
 export class InRoleDirective implements OnInit {
   userRoles: string[] = [];

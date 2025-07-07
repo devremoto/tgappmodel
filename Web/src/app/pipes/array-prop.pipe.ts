@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
     name: 'arrayProp',
-    standalone: false
+    
 })
 export class ArrayProp implements PipeTransform {
 

@@ -4,12 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { SocialNetworkService } from '../../../services/generated/SocialNetworkService';
 import { SocialNetwork } from '../../../models/SocialNetwork';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-declare let $: any;
+declare let $: Function;
 
 @Component({
-    selector: 'app-modal-social-network',
-    templateUrl: './SocialNetworkModal.component.html',
-    standalone: false
+  selector: 'app-modal-social-network',
+  templateUrl: './SocialNetworkModal.component.html',
+
 })
 export class SocialNetworkModalComponent {
 

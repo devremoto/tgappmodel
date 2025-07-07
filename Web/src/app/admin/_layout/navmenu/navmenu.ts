@@ -6,7 +6,7 @@ import { AuthService } from '../../../auth/services/auth.service';
     selector: 'app-admin-nav-menu',
     templateUrl: './navmenu.html',
     styleUrls: ['./navmenu.css'],
-    standalone: false
+    
 })
 export class NavMenuAdminComponent {
   isLoggedIn: boolean;

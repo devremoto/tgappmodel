@@ -9,15 +9,15 @@ import { MailingService } from '../../../services/generated/MailingService';
 import { Mailing } from '../../../models/Mailing';
 
 @Component({
-    selector: 'app-list-mailing',
-    templateUrl: './MailingIndex.component.html',
-    standalone: false
+  selector: 'app-list-mailing',
+  templateUrl: './MailingIndex.component.html',
+
 })
 export class MailingIndexComponent implements OnInit, OnChanges {
   private _edit = false;
   paging: PagingModel<Mailing>;
   screen = 'Mailing';
-  appErrorMessage: any;
+  appErrorMessage: unknown;
   mailing: Mailing;
   mailingList: Mailing[];
   @Input() autoLoad = true;

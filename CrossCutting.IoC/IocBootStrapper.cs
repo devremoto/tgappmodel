@@ -41,7 +41,7 @@ public static class IocBootStrapper
         services
 
         .AddConfiguration(configuration, env)
-        .AddAutoMapper()
+        .AddMapper()
         .AddAuthService()
         .AddLogConfiguration()
         .AddSmtpConfiguration(configuration)
@@ -238,12 +238,13 @@ public static class IocBootStrapper
         return services;
 
     }
-    #endregion
-    private static IServiceCollection AddAutoMapper(this IServiceCollection services)
+    private static IServiceCollection AddMapper(this IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(ModelToViewModel).GetTypeInfo().Assembly);
+        services.AddAutoMapper(cfg =>
+        {
+            cfg.AddProfile<ModelToViewModel>();
+        });
         return services;
-
     }
 
     private static IServiceCollection SeedData(this IServiceCollection services)
@@ -256,7 +257,7 @@ public static class IocBootStrapper
 
         return services;
     }
-
+    #endregion
     public static void SetConfiguration<T>(this IServiceCollection services)
     where T : class
     {

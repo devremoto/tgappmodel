@@ -1,19 +1,26 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbPopover } from '@ng-bootstrap/ng-bootstrap';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgbPopover, NgbPopoverModule, NgbTooltip, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { Language } from '../../../models/Language';
 import { LanguageCustomService } from '../../../services/custom/Language';
 import { JsonTranslate } from '../../../viewModels/JsonTranslate';
 import { ObjectTree } from '../../../viewModels/ObjectTree';
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { InRoleDirective } from '../../../directives/inRoleDirective';
 
-declare let $: any;
+declare let $: Function;
 
 @Component({
-    selector: 'app-language-editor-form',
-    templateUrl: './language-editor-form.component.html',
-    styleUrls: ['./language-editor-form.component.css'],
-    standalone: false
+  selector: 'app-language-editor-form',
+  templateUrl: './language-editor-form.component.html',
+  styleUrls: ['./language-editor-form.component.css'],
+
+  imports: [InRoleDirective, TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, NgbPopoverModule, NgbTooltipModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class LanguageEditorFormComponent implements OnInit {
   constructor(private _languageService: LanguageCustomService, private _toasterService: ToastrService) {
@@ -33,8 +40,8 @@ export class LanguageEditorFormComponent implements OnInit {
     child: new Array<ObjectTree>()
   } as ObjectTree;
   @Input() items: ObjectTree[];
-  @Input() jObject: any;
-  @Input() jObjectDefault: any;
+  @Input() jObject: unknown;
+  @Input() jObjectDefault: unknown;
   @Output() modelChange: any = new EventEmitter();
   ngOnInit(): void { }
 
@@ -48,8 +55,8 @@ export class LanguageEditorFormComponent implements OnInit {
 
   getJsonElement(node: ObjectTree): JsonTranslate {
     const arr = node.path.split('.');
-    let element = this.jObject;
-    let elementDefault = this.jObjectDefault;
+    let element: { [key: string]: any } = this.jObject as { [key: string]: any };
+    let elementDefault: { [key: string]: any } = this.jObjectDefault as { [key: string]: any };
 
     if (arr.length > 0) {
       for (let i = 0; i < arr.length - 1; i++) {
@@ -106,8 +113,8 @@ export class LanguageEditorFormComponent implements OnInit {
     if (!exists.length) {
       tree.push(child);
       const parentJson = this.getJsonElement(node);
-      parentJson.translated[node.newPropName] = {};
-      parentJson.jsonDefault[node.newPropName] = {};
+      (parentJson.translated as { [key: string]: any })[node.newPropName] = {};
+      (parentJson.jsonDefault as { [key: string]: any })[node.newPropName] = {};
     } else {
       this._toasterService.error(
         this._languageService.translate.instant('TRANSLATOR.TOASTER.ADD_ERROR', { key: child.key, path: node.path }),
@@ -129,8 +136,8 @@ export class LanguageEditorFormComponent implements OnInit {
 
   private setPropertyValue(item: ObjectTree) {
     const element = this.getJsonElement(item?.parent!);
-    element.translated[item.key] = item.value;
-    element.jsonDefault[item.key] = item.defaultValue;
+    (element.translated as { [key: string]: any })[item.key] = item.value;
+    (element.jsonDefault as { [key: string]: any })[item.key] = item.defaultValue;
   }
 
   addField(e: Event, parent: ObjectTree) {
@@ -158,8 +165,8 @@ export class LanguageEditorFormComponent implements OnInit {
     if (exists.length === 0) {
       parent.child.push(child);
       const parentJson = this.getJsonElement(parent);
-      parentJson.translated[parent.newPropName] = '';
-      parentJson.jsonDefault[parent.newPropName] = '';
+      (parentJson.translated as { [key: string]: any })[parent.newPropName] = '';
+      (parentJson.jsonDefault as { [key: string]: any })[parent.newPropName] = '';
     } else {
       this._toasterService.error(
         this._languageService.translate.instant('TRANSLATOR.TOASTER.ADD_ERROR', { key: child.key, path: parent.path }),
@@ -221,9 +228,9 @@ export class LanguageEditorFormComponent implements OnInit {
         this.items.splice(index, 1);
       }
     }
-    const element = this.getJsonElement(obj.parent || obj);
-    delete element.jsonDefault[obj.key];
-    delete element.translated[obj.key];
+    const element = this.getJsonElement(obj.parent || obj) as { jsonDefault: { [key: string]: any }, translated: { [key: string]: any } };
+    delete element.jsonDefault[obj.key as string];
+    delete element.translated[obj.key as string];
     this.emit();
   }
   fidPathInTree(item: ObjectTree): ObjectTree {

@@ -5,19 +5,24 @@ import { Language } from '../../../models/Language';
 import { LanguageCustomService } from '../../../services/custom/Language';
 import { Asset } from '../../../viewModels/Asset';
 import { ObjectTree } from '../../../viewModels/ObjectTree';
+import { LanguageEditorFormComponent } from './language-editor-form.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { InRoleDirective } from '../../../directives/inRoleDirective';
 
 @Component({
-    selector: 'app-language-editor',
-    templateUrl: './language-editor.component.html',
-    styleUrls: ['./language-editor.component.css'],
-    standalone: false
+  selector: 'app-language-editor',
+  templateUrl: './language-editor.component.html',
+  styleUrls: ['./language-editor.component.css'],
+
+  imports: [LanguageEditorFormComponent, TranslateModule, InRoleDirective]
+
 })
 export class LanguageEditorComponent implements OnInit {
   fileDefault: Asset;
-  jsonDefault: any;
+  jsonDefault: unknown;
   private _defaultLanguage: Language;
-  json: any;
-  folder: any;
+  json: unknown;
+  folder: Asset;
   files: Asset[];
   folders: Asset[];
   tree: ObjectTree[] = [];
@@ -98,7 +103,7 @@ export class LanguageEditorComponent implements OnInit {
         // alert(JSON.stringify(root[key]))
         $this.loadTree(root[key], defaultLang ? defaultLang[key] : null, item);
       } else {
-        item.obj = $this.json[item.path];
+        item.obj = (<any>$this).json[item.path];
         item.value = root[key];
         item.defaultValue = defaultLang ? defaultLang[key] : root[key];
       }

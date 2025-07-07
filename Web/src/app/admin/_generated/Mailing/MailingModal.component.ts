@@ -4,12 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { MailingService } from '../../../services/generated/MailingService';
 import { Mailing } from '../../../models/Mailing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-declare let $: any;
+declare let $: Function;
 
 @Component({
-    selector: 'app-modal-mailing',
-    templateUrl: './MailingModal.component.html',
-    standalone: false
+  selector: 'app-modal-mailing',
+  templateUrl: './MailingModal.component.html',
+
 })
 export class MailingModalComponent {
 

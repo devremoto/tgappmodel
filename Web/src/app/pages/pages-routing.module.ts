@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
-import { ComponentsModule } from '../components/components.module';
 import { IndexComponent } from '../layout/index/index.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
@@ -23,8 +21,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [RouterModule.forChild(routes), SharedModule, ComponentsModule],
-  exports: [RouterModule, SharedModule]
+  imports: [RouterModule.forChild(routes),],
+  exports: [RouterModule,]
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

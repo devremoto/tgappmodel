@@ -12,5 +12,6 @@
   "javascript.preferences.quoteStyle": "single",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "nxConsole.generateAiAgentRules": true
 }

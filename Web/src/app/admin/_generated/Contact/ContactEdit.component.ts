@@ -1,14 +1,19 @@
-﻿import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+﻿import { Component, Input, OnInit, Output, EventEmitter, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ContactService } from '../../../services/generated/ContactService';
 import { Contact } from '../../../models/Contact';
-declare let $: any;
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+declare let $: Function;
 
 @Component({
-    selector: 'app-form-contact',
-    templateUrl: './ContactEdit.component.html',
-    standalone: false
+  selector: 'app-form-contact',
+  templateUrl: './ContactEdit.component.html',
+
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class ContactEditComponent implements OnInit {
 

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../auth/account.service';
+import { Profile, ProfileStandardClaims } from 'oidc-client';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css'],
-    standalone: false
+
 })
 export class ProfileComponent implements OnInit {
-    userInfo: any;
-    user: any;
+    userInfo: Profile;
+    user: ProfileStandardClaims
 
     constructor(private _accountService: AccountService) { }
 

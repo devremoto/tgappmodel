@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 
@@ -8,13 +8,18 @@ import { Mailing } from '../../models/Mailing';
 import { SocialNetwork } from '../../models/SocialNetwork';
 import { MailingCustomService } from '../../services/custom/Mailing';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
+import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
-    selector: 'app-footer',
-    templateUrl: './footer.component.html',
-    styleUrls: ['./footer.component.css'],
-    providers: [SocialNetworkCustomService, MailingCustomService],
-    standalone: false
+  selector: 'app-footer',
+  templateUrl: './footer.component.html',
+  styleUrls: ['./footer.component.css'],
+  providers: [SocialNetworkCustomService, MailingCustomService],
+
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, RouterModule]
+
 })
 export class FooterComponent implements OnInit {
   constructor(
@@ -22,7 +27,7 @@ export class FooterComponent implements OnInit {
     private _sanitizer: DomSanitizer,
     private _mailingService: MailingCustomService,
     private _toasterService: ToastrService,
-    private _formBuilder: FormBuilder
+    @Inject(FormBuilder) private _formBuilder: FormBuilder
   ) { }
   mailingForm: FormGroup;
   public socialNetworks: SocialNetwork[];

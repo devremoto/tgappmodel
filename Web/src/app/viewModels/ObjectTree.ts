@@ -3,7 +3,7 @@ export interface ObjectTree {
   defaultValue: string;
   value: string;
   path: string;
-  obj: any;
+  obj: unknown;
   from: string;
   to: string;
   folder: string;

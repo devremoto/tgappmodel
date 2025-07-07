@@ -3,14 +3,17 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 
 import { Config } from '../../config';
 import { FileModel } from '../../models/FileModel';
+import { FormsModule } from '@angular/forms';
 
-declare let $: any;
+declare let $: Function;
 
 @Component({
-    selector: 'app-upload',
-    templateUrl: './upload.component.html',
-    styleUrls: ['./upload.component.css'],
-    standalone: false
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.css'],
+
+  imports: [FormsModule]
+
 })
 export class UploadComponent implements OnInit, AfterViewInit {
   _upload: UploadComponent;
@@ -30,7 +33,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   @Input() cssClass: string;
   @Input() cssIcon: string;
   @Input() label: string;
-  @Input() model: any;
+  @Input() model: unknown;
 
   @Output() modelChange: any = new EventEmitter();
   @Output() change: any = new EventEmitter();
@@ -47,7 +50,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
 
   //public uploader: FileUploader = new FileUploader({});
   public uploader: any = {}
-  config: any;
+  config: { siteUrl: string };
   constructor() {
     this.config = Config;
     this._upload = this;

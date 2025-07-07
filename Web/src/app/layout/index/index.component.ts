@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterEvent, NavigationStart, NavigationError, NavigationEnd } from '@angular/router';
+import { Router, NavigationStart, NavigationError, NavigationEnd, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageCustomService } from '../../services/custom/Language';
 import { ContactCustomService } from '../../services/custom/Contact';
 import { Contact } from '../../models/Contact';
-import { Observer } from 'rxjs';
-declare let $: any;
-declare let window: any;
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
+import { CommonModule } from '@angular/common';
+declare let $: Function;
+declare let window: unknown;
 @Component({
-    selector: 'app-index',
-    templateUrl: './index.component.html',
-    styleUrls: ['./index.component.css'],
-    standalone: false
+  selector: 'app-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.css'],
+  imports: [TranslateModule, FormsModule, RouterModule, HeaderComponent, FooterComponent, CommonModule]
+
 })
 export class IndexComponent implements OnInit {
   name: string;

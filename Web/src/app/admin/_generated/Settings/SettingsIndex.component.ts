@@ -9,15 +9,15 @@ import { SettingsService } from '../../../services/generated/SettingsService';
 import { Settings } from '../../../models/Settings';
 
 @Component({
-    selector: 'app-list-settings',
-    templateUrl: './SettingsIndex.component.html',
-    standalone: false
+  selector: 'app-list-settings',
+  templateUrl: './SettingsIndex.component.html',
+
 })
 export class SettingsIndexComponent implements OnInit, OnChanges {
   private _edit = false;
   paging: PagingModel<Settings>;
   screen = 'Settings';
-  appErrorMessage: any;
+  appErrorMessage: unknown;
   settings: Settings;
   settingsList: Settings[];
   @Input() autoLoad = true;

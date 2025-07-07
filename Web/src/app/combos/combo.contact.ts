@@ -1,22 +1,25 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ContactService } from '../services/generated/ContactService';
 import { Contact } from '../models/Contact';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-combo-contact',
+
+    imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="contact" class="{{cssClass}}" autofocus >
       <option *ngFor="let contact of contactList" [value]="contact.id">{{contact.name}}</option>
     </select>`,
-    standalone: false
+
 })
 export class ComboContactComponent implements OnInit {
-    appErrorMessage: any;
+    appErrorMessage: unknown;
     contact: Contact;
     contactList: Contact[];
 
     @Input() cssClass?: string;
-    @Input() model: any;
+    @Input() model: unknown;
     @Output() modelChange: any = new EventEmitter();
 
     constructor(private _service: ContactService) {
@@ -25,7 +28,7 @@ export class ComboContactComponent implements OnInit {
         });
     }
 
-    updateData(even:any) {
+    updateData(even: any) {
         this.model = event;
         this.modelChange.emit(event);
     }
@@ -39,9 +42,9 @@ export class ComboContactComponent implements OnInit {
         this._service.getAll().subscribe(
             result => {
                 this.contactList = result;
-                    if (data) {
-                        this.updateData(data.id);
-                    }
+                if (data) {
+                    this.updateData(data.id);
+                }
             },
             error => {
                 this.appErrorMessage = error;

@@ -8,7 +8,7 @@ export class MyNgbDateParserFormatter extends NgbDateParserFormatter {
   constructor() {
     super();
   }
-  format(date: NgbDateStruct, args?: any): string {
+  format(date: NgbDateStruct, args?: string): string {
     args = args || 'dd/MM/yyyy';
     if (date === null) {
       return '';

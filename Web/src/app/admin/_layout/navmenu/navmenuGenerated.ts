@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
     selector: 'app-menu-generated',
     styleUrls: ['./navmenuGenerated.css'],
     templateUrl: './navmenuGenerated.html',
-    standalone: false
+    
 })
 export class NavMenuAdminGeneratedComponent {}

@@ -1,9 +1,9 @@
 import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 
-declare let $: any;
+declare let $: Function;
 @Directive({
-    selector: '[appScrollTop]',
-    standalone: false
+  selector: '[appScrollTop]',
+
 })
 export class ScrollTopDirective implements AfterViewInit {
   @Input('appScrollTop') to?: string;

@@ -3,18 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { MercadoBitcoinService } from 'src/app/services/custom/mercado-biticon.service';
 
 @Component({
-    selector: 'app-bitcoin',
-    templateUrl: './bitcoin.component.html',
-    styleUrls: ['./bitcoin.component.css'],
-    standalone: false
+  selector: 'app-bitcoin',
+  templateUrl: './bitcoin.component.html',
+  styleUrls: ['./bitcoin.component.css'],
+
 })
 export class BitcoinComponent implements OnInit {
   trades: any[];
-  ticker: any;
-  orderbook: any;
+  ticker: unknown;
+  orderbook: unknown;
   now: string;
-  sells: any;
-  buys: any;
+  sells: unknown;
+  buys: unknown;
   settings = {
     columns: {
       tid: {

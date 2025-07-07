@@ -10,7 +10,7 @@ import { HttpService } from './HttpService';
 @Injectable({ providedIn: 'root' })
 export class BaseService<T> {
   public page: PagingModel<T> = new PagingModel<T>();
-  protected _controller: string;
+  protected _controller: string = '';
   private _emitter: Subject<any>;
 
   constructor(protected httpService: HttpService) {
@@ -110,7 +110,7 @@ export class BaseService<T> {
     return this.httpService.upload64(data, entity);
   }
 
-  upload(inputFiles: any[], entity: any): Observable<UploadModel> {
+  upload(inputFiles: any[], entity: any): Observable<UploadModel<T>> {
     let files: any[] = [];
     let fields: Array<FileModel> = new Array<FileModel>();
 
@@ -130,7 +130,7 @@ export class BaseService<T> {
     if (files && files.length > 0) {
       return this.httpService
         .upload(files, { entity: entity, files: fields })
-        .pipe(map<any, UploadModel>((response: any) => {
+        .pipe(map<any, UploadModel<T>>((response: any) => {
           const obj = response;
           if (obj) {
             for (const file of obj.files) {
@@ -153,8 +153,8 @@ export class BaseService<T> {
         }));
     }
 
-    return new Observable<UploadModel>(x => {
-      x.next(<UploadModel>{ entity: entity, files: fields });
+    return new Observable<UploadModel<T>>(x => {
+      x.next(<UploadModel<T>>{ entity: entity, files: fields });
     });
   }
 

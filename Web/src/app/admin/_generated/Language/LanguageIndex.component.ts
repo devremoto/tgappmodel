@@ -9,15 +9,15 @@ import { LanguageService } from '../../../services/generated/LanguageService';
 import { Language } from '../../../models/Language';
 
 @Component({
-    selector: 'app-list-language',
-    templateUrl: './LanguageIndex.component.html',
-    standalone: false
+  selector: 'app-list-language',
+  templateUrl: './LanguageIndex.component.html',
+
 })
 export class LanguageIndexComponent implements OnInit, OnChanges {
   private _edit = false;
   paging: PagingModel<Language>;
   screen = 'Language';
-  appErrorMessage: any;
+  appErrorMessage: unknown;
   language: Language;
   languageList: Language[];
   @Input() autoLoad = true;

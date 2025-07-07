@@ -1,22 +1,25 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SocialNetworkService } from '../services/generated/SocialNetworkService';
 import { SocialNetwork } from '../models/SocialNetwork';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-combo-social-network',
+
+    imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="socialNetwork" class="{{cssClass}}" autofocus >
       <option *ngFor="let socialNetwork of socialNetworkList" [value]="socialNetwork.id">{{socialNetwork.name}}</option>
     </select>`,
-    standalone: false
+
 })
 export class ComboSocialNetworkComponent implements OnInit {
-    appErrorMessage: any;
+    appErrorMessage: unknown;
     socialNetwork: SocialNetwork;
     socialNetworkList: SocialNetwork[];
 
     @Input() cssClass?: string;
-    @Input() model: any;
+    @Input() model: unknown;
     @Output() modelChange: any = new EventEmitter();
 
     constructor(private _service: SocialNetworkService) {
@@ -25,7 +28,7 @@ export class ComboSocialNetworkComponent implements OnInit {
         });
     }
 
-    updateData(even:any) {
+    updateData(even: any) {
         this.model = event;
         this.modelChange.emit(event);
     }
@@ -39,9 +42,9 @@ export class ComboSocialNetworkComponent implements OnInit {
         this._service.getAll().subscribe(
             result => {
                 this.socialNetworkList = result;
-                    if (data) {
-                        this.updateData(data.id);
-                    }
+                if (data) {
+                    this.updateData(data.id);
+                }
             },
             error => {
                 this.appErrorMessage = error;

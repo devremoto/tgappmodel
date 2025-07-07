@@ -4,12 +4,12 @@ import { Config } from '../../config';
 import { ImgService } from './ImgService';
 
 @Component({
-    template: `
+  template: `
     <img *ngIf="path" [src]="path" alt="{{ image }} " class="{{ cssClass }}" style="{{ style }}" />
   `,
-    selector: 'app-img-resize',
-    providers: [ImgService],
-    standalone: false
+  selector: 'app-img-resize',
+  providers: [ImgService],
+
 })
 export class ImgResizeComponent implements OnInit, OnChanges {
   public path: string;
@@ -22,7 +22,7 @@ export class ImgResizeComponent implements OnInit, OnChanges {
   @Input() public h: number;
   @Input() public inline = false;
 
-  private _config: any;
+  private _config: { apiAddress: string };
 
   constructor(private _service: ImgService) {
     this._config = Config;
@@ -54,7 +54,7 @@ export class ImgResizeComponent implements OnInit, OnChanges {
 
   getImagData() {
     this._service.controller = this.controller;
-    this._service.image(this.image, this.controller, this.w, this.h, this.inline).subscribe((result: any) => {
+    this._service.image(this.image, this.controller, this.w, this.h, this.inline).subscribe((result: string) => {
       this.path = result;
     });
   }

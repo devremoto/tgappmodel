@@ -9,15 +9,15 @@ import { SocialNetworkService } from '../../../services/generated/SocialNetworkS
 import { SocialNetwork } from '../../../models/SocialNetwork';
 
 @Component({
-    selector: 'app-list-social-network',
-    templateUrl: './SocialNetworkIndex.component.html',
-    standalone: false
+  selector: 'app-list-social-network',
+  templateUrl: './SocialNetworkIndex.component.html',
+
 })
 export class SocialNetworkIndexComponent implements OnInit, OnChanges {
   private _edit = false;
   paging: PagingModel<SocialNetwork>;
   screen = 'SocialNetwork';
-  appErrorMessage: any;
+  appErrorMessage: unknown;
   socialNetwork: SocialNetwork;
   socialNetworkList: SocialNetwork[];
   @Input() autoLoad = true;

@@ -17,14 +17,14 @@ export class UploadFileService extends BaseService<UploadFile> {
     override getOne(entity: UploadFile): Observable<UploadFile> {
         return this.http.get(`UploadFile/getOne/${entity.id}`)
             .pipe(
-                map<any, UploadFile>((response: any) => response)
+                map<any, UploadFile>((response: UploadFile) => response)
             )
     }
 
     remove(entity: UploadFile): Observable<UploadFile> {
         return this.removeById(`${entity.id}`)
             .pipe(
-                map<any, UploadFile>((response: any) => response)
+                map<any, UploadFile>((response: UploadFile) => response)
             )
     }
 

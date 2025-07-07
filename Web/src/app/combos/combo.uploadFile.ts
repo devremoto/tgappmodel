@@ -1,22 +1,26 @@
-﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, OnInit, Input, Output, EventEmitter, NgModule } from '@angular/core';
 import { UploadFileService } from '../services/generated/UploadFileService';
 import { UploadFile } from '../models/UploadFile';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
     selector: 'app-combo-upload-file',
+
+    imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="uploadFile" class="{{cssClass}}" autofocus >
       <option *ngFor="let uploadFile of uploadFileList" [value]="uploadFile.id">{{uploadFile.name}}</option>
     </select>`,
-    standalone: false
+
 })
 export class ComboUploadFileComponent implements OnInit {
-    appErrorMessage: any;
+    appErrorMessage: unknown;
     uploadFile: UploadFile;
     uploadFileList: UploadFile[];
 
     @Input() cssClass?: string;
-    @Input() model: any;
+    @Input() model: unknown;
     @Output() modelChange: any = new EventEmitter();
 
     constructor(private _service: UploadFileService) {

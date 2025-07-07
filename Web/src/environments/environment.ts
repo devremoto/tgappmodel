@@ -6,14 +6,14 @@ export const environment = {
   production: false,
   ApiName: 'api1',
   ImgFolder: '~/images',
-  Authority: 'https://sso.tugon.com.br',
+  Authority: 'https://localhost:44310',
   RequireHttpsMetadata: false,
   UseAuthority: true,
   HostServer: 'http://localhost',
   HostPort: 4200,
   ApiUrl: 'https://localhost:52053/api/',
   MapKey: '',
-  ClientId: ''
+  ClientId: 'tgappmodel'
 };
 
 /*

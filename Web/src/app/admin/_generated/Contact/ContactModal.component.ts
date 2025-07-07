@@ -1,15 +1,20 @@
-﻿import { Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+﻿import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { ContactService } from '../../../services/generated/ContactService';
 import { Contact } from '../../../models/Contact';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-declare let $: any;
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+declare let $: Function;
 
 @Component({
-    selector: 'app-modal-contact',
-    templateUrl: './ContactModal.component.html',
-    standalone: false
+  selector: 'app-modal-contact',
+  templateUrl: './ContactModal.component.html',
+
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class ContactModalComponent {
 

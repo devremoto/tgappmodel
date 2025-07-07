@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Input, OnInit, AfterViewInit } from '@angular/core';
-declare let ProgressBar: any;
-declare let $: any;
+declare let ProgressBar: unknown;
+declare let $: Function;
 
 @Directive({
-    selector: '[appProgressCircle]',
-    standalone: false
+  selector: '[appProgressCircle]',
+
 })
 export class ProgressCircleDirective implements OnInit, AfterViewInit {
   @Input('appProgressCircle') options: any = {
@@ -49,7 +49,7 @@ export class ProgressCircleDirective implements OnInit, AfterViewInit {
   animate() {
     const options = this.options;
     $(this.el.nativeElement).each((key: any, obj: any) => {
-      const bar = new ProgressBar.Circle(obj, options);
+      const bar = new (<any>ProgressBar).Circle(obj, options);
       bar.animate(options.value);
     });
   }

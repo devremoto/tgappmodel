@@ -1,14 +1,14 @@
-﻿import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+﻿import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../../services/generated/LanguageService';
 import { Language } from '../../../models/Language';
-declare let $: any;
+declare let $: Function;
 
 @Component({
-    selector: 'app-form-language',
-    templateUrl: './LanguageEdit.component.html',
-    standalone: false
+  selector: 'app-form-language',
+  templateUrl: './LanguageEdit.component.html',
+
 })
 export class LanguageEditComponent implements OnInit {
 
@@ -18,26 +18,26 @@ export class LanguageEditComponent implements OnInit {
     public translate: TranslateService,
     private _modalService: NgbModal
   ) {
-    }
+  }
 
-    @Output()
-    saveEvent?: EventEmitter<Language> = new EventEmitter();
+  @Output()
+  saveEvent?: EventEmitter<Language> = new EventEmitter();
 
-    @Input()
-    language: Language;
+  @Input()
+  language: Language;
 
-    @Input()
-    edit: boolean;
+  @Input()
+  edit: boolean;
 
-    ngOnInit() {
-      this.language = this.language || new Language();
-    }
+  ngOnInit() {
+    this.language = this.language || new Language();
+  }
 
-    save(language: Language) {
-      this._service.save(language, this.edit, $('input[type=file]'));
-    }
+  save(language: Language) {
+    this._service.save(language, this.edit, $('input[type=file]'));
+  }
 
-    public closeEdit() {
-    }
+  public closeEdit() {
+  }
 
 }

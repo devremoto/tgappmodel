@@ -1,22 +1,25 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { SettingsService } from '../services/generated/SettingsService';
 import { Settings } from '../models/Settings';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-combo-settings',
+
+    imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="settings" class="{{cssClass}}" autofocus >
       <option *ngFor="let settings of settingsList" [value]="settings.id">{{settings.id}}</option>
     </select>`,
-    standalone: false
+
 })
 export class ComboSettingsComponent implements OnInit {
-    appErrorMessage: any;
+    appErrorMessage: unknown;
     settings: Settings;
     settingsList: Settings[];
 
     @Input() cssClass?: string;
-    @Input() model: any;
+    @Input() model: unknown;
     @Output() modelChange: any = new EventEmitter();
 
     constructor(private _service: SettingsService) {

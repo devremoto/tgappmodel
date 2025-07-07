@@ -9,15 +9,15 @@ import { UploadFileService } from '../../../services/generated/UploadFileService
 import { UploadFile } from '../../../models/UploadFile';
 
 @Component({
-    selector: 'app-list-upload-file',
-    templateUrl: './UploadFileIndex.component.html',
-    standalone: false
+  selector: 'app-list-upload-file',
+  templateUrl: './UploadFileIndex.component.html',
+
 })
 export class UploadFileIndexComponent implements OnInit, OnChanges {
   private _edit = false;
   paging: PagingModel<UploadFile>;
   screen = 'UploadFile';
-  appErrorMessage: any;
+  appErrorMessage: unknown;
   uploadFile: UploadFile;
   uploadFileList: UploadFile[];
   @Input() autoLoad = true;

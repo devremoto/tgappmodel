@@ -1,14 +1,19 @@
-﻿import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+﻿import { Component, Input, OnInit, Output, EventEmitter, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AboutService } from '../../../services/generated/AboutService';
 import { About } from '../../../models/About';
-declare let $: any;
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+declare let $: Function;
 
 @Component({
-    selector: 'app-form-about',
-    templateUrl: './AboutEdit.component.html',
-    standalone: false
+  selector: 'app-form-about',
+
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
+  templateUrl: './AboutEdit.component.html',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AboutEditComponent implements OnInit {
 

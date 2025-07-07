@@ -5,7 +5,7 @@ import { Directive, HostListener } from '@angular/core';
 */
 @Directive({
     selector: '[appSidebarToggler]',
-    standalone: false
+    
 })
 export class SidebarToggleDirective {
   constructor() { }
@@ -19,7 +19,7 @@ export class SidebarToggleDirective {
 
 @Directive({
     selector: '[appSidebarMinimizer]',
-    standalone: false
+    
 })
 export class SidebarMinimizeDirective {
   constructor() { }
@@ -33,7 +33,7 @@ export class SidebarMinimizeDirective {
 
 @Directive({
     selector: '[appMobileSidebarToggler]',
-    standalone: false
+    
 })
 export class MobileSidebarToggleDirective {
   constructor() { }
@@ -55,7 +55,7 @@ export class MobileSidebarToggleDirective {
 */
 @Directive({
     selector: '[appSidebarClose]',
-    standalone: false
+    
 })
 export class SidebarOffCanvasCloseDirective {
   constructor() { }

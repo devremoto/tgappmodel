@@ -1,22 +1,25 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AboutService } from '../services/generated/AboutService';
 import { About } from '../models/About';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-combo-about',
+
+    imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="about" class="{{cssClass}}" autofocus >
       <option *ngFor="let about of aboutList" [value]="about.id">{{about.description}}</option>
     </select>`,
-    standalone: false
+
 })
 export class ComboAboutComponent implements OnInit {
-    appErrorMessage: any;
+    appErrorMessage: unknown;
     about: About;
     aboutList: About[];
 
     @Input() cssClass?: string;
-    @Input() model: any;
+    @Input() model: unknown;
     @Output() modelChange: any = new EventEmitter();
 
     constructor(private _service: AboutService) {

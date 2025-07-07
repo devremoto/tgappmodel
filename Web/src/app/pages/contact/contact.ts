@@ -1,25 +1,28 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Contact } from '../../models/Contact';
 import { SocialNetwork } from '../../models/SocialNetwork';
 import { ContactCustomService } from '../../services/custom/Contact';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-contact',
-    styles: [
-        `
+  selector: 'app-contact',
+  styles: [
+    `
       .sebm-google-map-container {
         height: 300px;
         width: 100%;
       }
     `
-    ],
-    templateUrl: './contact.html',
-    standalone: false
+  ],
+  templateUrl: './contact.html',
+
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule]
+
 })
 export class ContactComponent implements OnInit {
   errorMessage: string;
@@ -49,6 +52,7 @@ __proto__: Object
     latitude: -23.5323227,
     longitude: -46.7679107
   };
+  validationMessages: { [key: string]: { [key: string]: string } };
 
   constructor(
     private translate: TranslateService,
@@ -56,33 +60,35 @@ __proto__: Object
     private _toasterService: ToastrService,
     private _modalService: NgbModal,
     private _socialNetworkService: SocialNetworkCustomService,
-    private _formBuilder: FormBuilder
+    @Inject(FormBuilder) private _formBuilder: FormBuilder
   ) {
     this.load();
 
     this.translate.onLangChange.subscribe(() => {
       this.load();
     });
-  }
 
-  validationMessages: any = {
-    email: {
-      required: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.REQUIRED'),
-      pattern: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.PATTERN')
-    },
-    name: {
-      required: this.translate.instant('CONTACT.FORM.VALIDATE.NAME.REQUIRED')
-    },
-    subject: {
-      required: this.translate.instant('CONTACT.FORM.VALIDATE.SBJECT.REQUIRED')
-    },
-    phoneNumber: {
-      required: this.translate.instant('CONTACT.FORM.VALIDATE.PHONENUMBER.REQUIRED')
-    },
-    message: {
-      required: this.translate.instant('CONTACT.FORM.VALIDATE.MESSAGE.REQUIRED')
-    }
-  };
+    this.validationMessages = {
+      email: {
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.REQUIRED'),
+        pattern: this.translate.instant('CONTACT.FORM.VALIDATE.EMAIL.PATTERN')
+      },
+      name: {
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.NAME.REQUIRED')
+      },
+      subject: {
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.SUBJECT.REQUIRED')
+      },
+      phoneNumber: {
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.PHONENUMBER.REQUIRED')
+      },
+      message: {
+        required: this.translate.instant('CONTACT.FORM.VALIDATE.MESSAGE.REQUIRED')
+      }
+    };
+
+
+  }
 
   getPosition(): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -161,7 +167,7 @@ __proto__: Object
       for (const control in this.contactForm.controls) {
         if (control) {
           (this.contactForm!.controls![control].errors as Array<any>)!.map(error => {
-            messages.push(this.validationMessages[control][error]);
+            messages.push(this.validationMessages[control as keyof typeof this.validationMessages][error]);
           });
         }
       }

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../../auth/services/auth.service';
-import { Config } from '../../../config';
+import { Profile, ProfileStandardClaims, User } from 'oidc-client';
 
 @Component({
-    selector: 'app-admin-header',
-    templateUrl: './header.html',
-    styleUrls: ['./header.css'],
-    standalone: false
+  selector: 'app-admin-header',
+  templateUrl: './header.html',
+  styleUrls: ['./header.css'],
+
 })
 export class HeaderAdminComponent implements OnInit {
-  userData: any;
+  userData: User | Profile | ProfileStandardClaims | null | void;
   constructor(private _authService: AuthService) {
     // window.__theme = 'bs4';
   }

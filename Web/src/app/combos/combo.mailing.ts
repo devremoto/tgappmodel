@@ -1,22 +1,25 @@
 ﻿import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MailingService } from '../services/generated/MailingService';
 import { Mailing } from '../models/Mailing';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-combo-mailing',
+
+    imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="mailing" class="{{cssClass}}" autofocus >
       <option *ngFor="let mailing of mailingList" [value]="mailing.id">{{mailing.id}}</option>
     </select>`,
-    standalone: false
+
 })
 export class ComboMailingComponent implements OnInit {
-    appErrorMessage: any;
+    appErrorMessage: unknown;
     mailing: Mailing;
     mailingList: Mailing[];
 
     @Input() cssClass?: string;
-    @Input() model: any;
+    @Input() model: unknown;
     @Output() modelChange: any = new EventEmitter();
 
     constructor(private _service: MailingService) {

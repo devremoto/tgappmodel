@@ -1,5 +1,9 @@
 import { FileModel } from './FileModel';
-export class UploadModel {
-  public entity: any;
+export interface IUploadModel {
+  files: Array<FileModel>;
+}
+
+export class UploadModel<T> implements IUploadModel {
+  public entity: T;
   public files: Array<FileModel>;
 }

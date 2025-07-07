@@ -5,7 +5,7 @@ import { ActivatedRoute } from '../../../node_modules/@angular/router';
     selector: 'app-unauthorized',
     templateUrl: './unauthorized.component.html',
     styles: [],
-    standalone: false
+    
 })
 export class UnauthorizedComponent implements OnInit {
   private error: number;

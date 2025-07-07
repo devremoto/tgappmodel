@@ -33,8 +33,6 @@ import { SessionStorageService } from '../shared/util/session-storage.service';
     AccountService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
-  declarations: [LoginCallBackComponent, UnauthorizedComponent, LoginComponent],
-  exports: [LoginCallBackComponent]
 })
 export class AuthModule {
   constructor(public language: LanguageCustomService) {

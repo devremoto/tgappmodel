@@ -2,18 +2,22 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Config } from '../../config';
-import { Contact } from '../../models/Contact';
 import { SocialNetwork } from '../../models/SocialNetwork';
 import { LanguageCustomService } from '../../services/custom/Language';
 import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { LanguageSelectorComponent } from '../../components/language-selector/language-selector.component';
 
-declare let $: any;
+declare let $: Function;
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css'],
-    providers: [],
-    standalone: false
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
+  providers: [],
+
+  imports: [TranslateModule, CommonModule, LanguageSelectorComponent]
+
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   title = 'app';

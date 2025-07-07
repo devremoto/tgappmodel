@@ -1,6 +1,6 @@
 ARG port
 
-FROM microsoft/dotnet:2.2-sdk AS build
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app/src
 
 COPY ["Api/Api.csproj", "Api/"]
@@ -15,11 +15,11 @@ COPY . ./
 
 RUN dotnet publish "Api/Api.csproj" -c Release -o out
 
-FROM microsoft/dotnet:2.2-aspnetcore-runtime
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 
 COPY --from=build /app/src/Api/out ./
 COPY --from=build /app/src/Data ../Data
 
 EXPOSE 80
-ENTRYPOINT ["dotnet", "Api.dll", " "]
+ENTRYPOINT ["dotnet", "Api.dll"]
