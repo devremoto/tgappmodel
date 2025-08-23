@@ -10,8 +10,11 @@ COPY ["Application/Application.csproj", "Application/"]
 COPY ["CrossCutting/CrossCutting.csproj", "CrossCutting/"]
 COPY ["Infra/CrossCutting.Services.csproj", "Infra/"]
 COPY ["Data/Data.csproj", "Data/"]
-RUN dotnet restore "Api/Api.csproj"
+
+# Copy the rest of the source code
 COPY . ./
+
+RUN dotnet restore "Api/Api.csproj"
 
 RUN dotnet publish "Api/Api.csproj" -c Release -o out
 
@@ -19,7 +22,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 
 COPY --from=build /app/src/Api/out ./
-COPY --from=build /app/src/Data ../Data
+COPY --from=build /app/src/Data ./Data
 
 EXPOSE 80
 ENTRYPOINT ["dotnet", "Api.dll"]

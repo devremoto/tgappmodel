@@ -20,15 +20,18 @@
 
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
+import { LanguageCustomService } from './services/custom/Language';
 
 @Component({
   selector: 'body',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet],//, TranslateModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
   title = 'body';
+  constructor(public language: LanguageCustomService) {
+    language.init('/assets/i18n/pages/');
+  }
 }

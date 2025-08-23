@@ -84,6 +84,7 @@ export class FooterComponent implements OnInit {
       return;
     }
     this.loading = true;
+    this.mailing.email = this.mailingForm.value.email;
     this._mailingService.signUp(this.mailing).subscribe(
       _ => {
         this._toasterService.success(`email registered  ${this.mailing.email}`, 'Success');

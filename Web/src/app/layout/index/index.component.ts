@@ -9,13 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule } from '@angular/common';
+import { PagesRoutingModule } from '../../pages/pages-routing.module';
 declare let $: Function;
 declare let window: unknown;
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css'],
-  imports: [TranslateModule, FormsModule, RouterModule, HeaderComponent, FooterComponent, CommonModule]
+  imports: [TranslateModule, FormsModule, RouterModule, HeaderComponent, FooterComponent, CommonModule, PagesRoutingModule]
 
 })
 export class IndexComponent implements OnInit {
@@ -29,7 +30,7 @@ export class IndexComponent implements OnInit {
     private _contactService: ContactCustomService,
     router: Router
   ) {
-    translate.init();
+    translate.init("/assets/i18n/pages/");
     router.events.subscribe((event: any) => {
       if (event instanceof NavigationStart) {
       }

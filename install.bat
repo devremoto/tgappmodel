@@ -13,6 +13,7 @@ SET IDENTITY_PORT=5001
 SET IDENTITY_URL=%IDENTITY_SERVER%:%IDENTITY_PORT%
 SET USE_SSL=true
 SET CLIENT_ID="tgappmodel"
+SET COMPOSE_BAKE=true
 
 cd %~dp0
 docker-compose build --build-arg HOST_PORT=%HOST_PORT% --build-arg API_PORT=%API_PORT% --build-arg API_URL=%API_URL% --build-arg API_NAME=%API_NAME% --build-arg USE_SSL=%USE_SSL% --build-arg IDENTITY_SERVER=%IDENTITY_SERVER% --build-arg HOST_SERVER=%HOST_SERVER% --build-arg CLIENT_ID=%CLIENT_ID%

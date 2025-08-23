@@ -11,7 +11,7 @@ export const environment = {
   UseAuthority: true,
   HostServer: 'http://localhost',
   HostPort: 4200,
-  ApiUrl: 'https://localhost:52053/api/',
+  ApiUrl: 'https://localhost:8889/api/',
   MapKey: '',
   ClientId: 'tgappmodel'
 };

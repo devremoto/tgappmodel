@@ -4,13 +4,14 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { Language } from '../../models/Language';
 import { LanguageCustomService } from '../../services/custom/Language';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-language-selector',
   templateUrl: './language-selector.component.html',
   styleUrls: ['./language-selector.component.css'],
 
-  imports: [TranslateModule, CommonModule, RouterModule]
+  imports: [TranslateModule, CommonModule, RouterModule, NgbDropdownModule]
 })
 export class LanguageSelectorComponent implements OnInit {
   public status: { isopen: boolean } = { isopen: false };

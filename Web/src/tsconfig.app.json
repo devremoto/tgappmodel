@@ -4,5 +4,11 @@
     "outDir": "../out-tsc/app",
     "types": []
   },
-  "exclude": ["src/test.ts", "**/*.spec.ts"]
+  "include": [
+    "src/**/*.ts" // This pattern should include server.ts
+  ],
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts"
+  ]
 }

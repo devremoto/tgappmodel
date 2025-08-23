@@ -112,7 +112,7 @@ export class LanguageCustomService extends LanguageService {
     this.prefix = prefix;
     const key = `${prefix}${language.code}${sufix}`;
     const obj = this._sessionStorageService.getObjectCache<Object>(key);
-    if (!obj && !language.loaded) {
+    if (!obj) {
       this.http
         .get(`${this._config.siteUrl}${key}?${this._time}`, null, false)
         .subscribe(result => {
@@ -121,7 +121,10 @@ export class LanguageCustomService extends LanguageService {
           language.loaded = true;
         });
     } else {
-      this.translate.setTranslation(language.code!, obj!, true);
+      let timeOut = setTimeout(() => {
+        this.translate.setTranslation(language.code!, obj!, true);
+        clearTimeout(timeOut);
+      }, 50);
     }
   }
 }

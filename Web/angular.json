@@ -38,7 +38,8 @@
               "src/nginx.conf"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "src/assets/pages/js/plugins/bootstrap-progressbar/bootstrap-progressbar.min.js",
@@ -53,12 +54,7 @@
               "src/assets/lib/html-docx.js",
               "src/assets/lib/FileSaver.js",
               "src/assets/js/jsrsasign.js"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -66,7 +62,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "1500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",

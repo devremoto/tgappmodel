@@ -25,17 +25,17 @@ ENV AppModelConfiguration:ApiUrl=${ApiUrl}
 ENV AppModelConfiguration:ClientId=${ClientId}
 
 COPY package.json package-lock.json  /app/
-RUN cd /app && npm set progress=false && npm install
+RUN cd /app && ls && npm set progress=false && npm install
 
 COPY .  /app
-RUN cd /app && npm run build-prod
+RUN cd /app && ls && npm run build-prod
 
 
 FROM nginx:alpine
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=builder /app/wwwroot /usr/share/nginx/html
-COPY --from=builder /app/wwwroot/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/web2 /usr/share/nginx/html
+COPY --from=builder /app/web2/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

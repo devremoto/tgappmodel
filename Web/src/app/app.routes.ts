@@ -4,12 +4,12 @@ import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [{
     path: '',
-    component: HomeComponent,
-    children: [{
-        path: '',
-        component: HomeComponent
-    }, {
-        path: 'home',
-        component: HomeComponent
-    }]
-}];
+    component: IndexComponent,
+},
+{
+    path: 'pages',
+    loadChildren: () => import('./pages/pages-routing.module').then(m => m.PagesRoutingModule),
+},
+
+]
+

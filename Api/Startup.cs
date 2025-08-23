@@ -90,9 +90,12 @@ public class Startup
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            c.OAuthAppName(_settings.ApiName);
-            c.OAuthClientId(_settings.ClientId);
-            c.OAuthRealm(_settings.Authority);
+            if (_settings.UseAuthority)
+            {
+                c.OAuthAppName(_settings.ApiName);
+                c.OAuthClientId(_settings.ClientId);
+                c.OAuthRealm(_settings.Authority);
+            }
             c.OAuthAdditionalQueryStringParams(new Dictionary<string, string> { { "nonce", Guid.NewGuid().ToString() } });
         });
 
