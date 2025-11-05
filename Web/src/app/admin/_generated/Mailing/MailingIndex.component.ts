@@ -1,16 +1,18 @@
 ﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
-import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbModal, NgbModalRef, NgbModalOptions, NgbPaginationModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../components/dialog/dialog.service';
 import { MailingModalComponent } from './MailingModal.component';
 import { MailingService } from '../../../services/generated/MailingService';
 import { Mailing } from '../../../models/Mailing';
+import { InRoleDirective } from '../../../directives/inRoleDirective';
 
 @Component({
   selector: 'app-list-mailing',
   templateUrl: './MailingIndex.component.html',
+  imports: [TranslateModule, NgbTooltipModule, InRoleDirective, NgbPaginationModule],
 
 })
 export class MailingIndexComponent implements OnInit, OnChanges {

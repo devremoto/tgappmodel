@@ -1,6 +1,6 @@
 ﻿import { Component, CUSTOM_ELEMENTS_SCHEMA, Input, OnInit } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
-import { NgbModal, NgbModalRef, NgbModalOptions, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbModalOptions, NgbTooltipModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../components/dialog/dialog.service';
@@ -15,7 +15,7 @@ import { InRoleDirective } from '../../../directives/inRoleDirective';
   selector: 'app-list-about',
   templateUrl: './AboutIndex.component.html',
 
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, NgbTooltipModule, InRoleDirective],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, NgbTooltipModule, InRoleDirective, NgbPaginationModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })

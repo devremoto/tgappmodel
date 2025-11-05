@@ -12,15 +12,6 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options) : DbCo
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new AboutMap());
-        modelBuilder.ApplyConfiguration(new ContactMap());
-        modelBuilder.ApplyConfiguration(new LanguageMap());
-        modelBuilder.ApplyConfiguration(new MailingMap());
-        modelBuilder.ApplyConfiguration(new SettingsMap());
-        modelBuilder.ApplyConfiguration(new SocialNetworkMap());
-        modelBuilder.ApplyConfiguration(new UploadFileMap());
-
-
         if (_useMap)
             Map(modelBuilder);
 

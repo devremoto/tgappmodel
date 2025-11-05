@@ -1,16 +1,19 @@
 ﻿import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
-import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbModal, NgbModalRef, NgbModalOptions, NgbPaginationModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../components/dialog/dialog.service';
 import { UploadFileModalComponent } from './UploadFileModal.component';
 import { UploadFileService } from '../../../services/generated/UploadFileService';
 import { UploadFile } from '../../../models/UploadFile';
+import { InRoleDirective } from '../../../directives/inRoleDirective';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-list-upload-file',
   templateUrl: './UploadFileIndex.component.html',
+  imports: [TranslateModule, NgbTooltipModule, InRoleDirective, NgbPaginationModule, CommonModule],
 
 })
 export class UploadFileIndexComponent implements OnInit, OnChanges {

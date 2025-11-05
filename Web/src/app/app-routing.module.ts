@@ -6,11 +6,12 @@ import { LayoutModule } from './layout/layout.module';
 const routes: Routes = [
   { path: '', data: { title: 'Home' }, redirectTo: 'home', pathMatch: 'full' },
   { path: '', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthCanActivateGuard] },
-
+  { path: '', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) }
 ];
 
 @NgModule({
   imports: [
+    LayoutModule,
     RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled', useHash: false, anchorScrolling: 'enabled' })
   ],
   exports: [RouterModule]

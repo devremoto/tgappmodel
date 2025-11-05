@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Application.ViewModels;
 
+[Serializable]
 public partial class AboutViewModel
 {
     [Key]

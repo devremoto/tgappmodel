@@ -7,17 +7,19 @@ import { SessionStorageService } from '../../shared/util/session-storage.service
 import { LanguageService } from '../generated/LanguageService';
 import { HttpService } from '../services';
 import { map } from 'rxjs';
+import { Asset } from '../../viewModels/Asset';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageCustomService extends LanguageService {
+  assets: Asset[] = [];
   constructor(
-    override http: HttpService,
+    override _http: HttpService,
     public translate: TranslateService,
     private _sessionStorageService: SessionStorageService
   ) {
-    super(http);
+    super(_http);
     (this._config = Config), this.init();
     this._time = new Date().getTime();
     translate.onLangChange.subscribe((result: LangChangeEvent) => {
@@ -79,12 +81,15 @@ export class LanguageCustomService extends LanguageService {
     this.translate.use(language!.code!);
   }
 
-  getAssets(folder: string): any {
-    return this.http.get(`${this._config.siteUrl}/file/assets/`, { folder });
+  getAssets(folder: string): Asset[] {
+    this.assets = [];
+    this.loadAll(folder);
+    return this.assets;
+    // return this._http.get(`${this._config.siteUrl}/file/assets/`, { folder });
   }
 
   getTranslationFile(file: any): any {
-    return this.http.get(
+    return this._http.get(
       `${this._config.siteUrl}/assets/i18n/${file}?${new Date().getTime()}`
     );
   }
@@ -94,7 +99,7 @@ export class LanguageCustomService extends LanguageService {
   }
 
   saveAsset(list: any[]): any {
-    return this.http.post(`${this._config.siteUrl}/file/saveasset`, list);
+    return this._http.post(`${this._config.siteUrl}/file/saveasset`, list);
   }
 
   translation(text: string, from: string, to: string) {
@@ -113,7 +118,7 @@ export class LanguageCustomService extends LanguageService {
     const key = `${prefix}${language.code}${sufix}`;
     const obj = this._sessionStorageService.getObjectCache<Object>(key);
     if (!obj) {
-      this.http
+      this._http
         .get(`${this._config.siteUrl}${key}?${this._time}`, null, false)
         .subscribe(result => {
           this._sessionStorageService.setObjectCache<Object>(key, result!);
@@ -126,5 +131,15 @@ export class LanguageCustomService extends LanguageService {
         clearTimeout(timeOut);
       }, 50);
     }
+    const cached = this._sessionStorageService.getObjectCache<Object>(key);
+    const asset: Asset = {
+      content: JSON.stringify(cached),
+      folder: prefix,
+      isDir: false,
+      path: `${language.code}${sufix}`,
+
+    };
+    this.assets.push(asset);
+
   }
 }

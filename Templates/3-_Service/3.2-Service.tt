@@ -19,18 +19,11 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Services.Interfaces;
 
-namespace Domain.Services
-{
-    public partial class <#=classModel.Name#>Service : BaseService<<#=classModel.Name#>>, I<#=classModel.Name#>Service
-    {
-        I<#=classModel.Name#>Repository _repository;
-        public <#=classModel.Name#>Service(I<#=classModel.Name#>Repository repository)
-            : base(repository)
-        {
-            _repository = repository;
-        }
+namespace Domain.Services;
 
-    }
+public partial class <#=classModel.Name#>Service(I<#=classModel.Name#>Repository repository) : BaseService<<#=classModel.Name#>>(repository), I<#=classModel.Name#>Service
+{
+    readonly I<#=classModel.Name#>Repository _repository = repository;
 }
 <#
 manager.EndBlock();

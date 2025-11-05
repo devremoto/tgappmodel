@@ -1,8 +1,6 @@
 ﻿using System;
 
 namespace Domain.Entities;
-
-[Serializable]
 public class SocialNetwork
 {
     public Guid Id { get; set; }

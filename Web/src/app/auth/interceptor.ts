@@ -1,5 +1,5 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHandlerFn, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
 import { AuthService } from './services/auth.service';
@@ -57,4 +57,25 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return error;
   }
+}
+
+export function authInterceptorFunction(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
+  const authService = inject(AuthService);
+  const interceptor = new AuthInterceptor(authService);
+
+  const newReq = interceptor.setHeaders(req);
+  return next(newReq).pipe(
+    tap(
+      (event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+        }
+      },
+      (err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          return interceptor.handleRequest(err);
+        }
+        return null
+      }
+    )
+  );
 }

@@ -10,7 +10,9 @@ import { FormsModule } from '@angular/forms';
     imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="uploadFile" class="{{cssClass}}" autofocus >
-      <option *ngFor="let uploadFile of uploadFileList" [value]="uploadFile.id">{{uploadFile.name}}</option>
+      @for(uploadFile of uploadFileList; track uploadFile.id) {
+        <option [value]="uploadFile.id">{{uploadFile.name}}</option>
+      }
     </select>`,
 
 })

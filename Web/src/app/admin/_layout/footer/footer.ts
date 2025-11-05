@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-admin-footer',
-    templateUrl: './footer.html',
-    
+  selector: 'app-admin-footer',
+  templateUrl: './footer.html',
+
 })
-export class FooterAdminComponent {
+export default class FooterAdminComponent {
   year = new Date().getFullYear();
 }

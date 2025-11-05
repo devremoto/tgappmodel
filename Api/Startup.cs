@@ -12,8 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
+using NSwag.AspNetCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,43 +36,44 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddHttpContextAccessor()
-          .AddScoped<IWorkContext, WorkContext>()
-        .AddSingleton(_appModelConfiguration);
-        // .AddScoped<RequestMiddleware>();
-        services.AddServices(_configuration, _env, DbLoggerFactory);
-        services.AddControllers()
+        services
+            .AddHttpContextAccessor()
+            .AddScoped<IWorkContext, WorkContext>()
+            .AddSingleton(_appModelConfiguration)
+            .AddSingleton(_settings)
+            .AddTransient<IUploadHelper, UploadHelper>()
+            .AddServices(_configuration, _env, DbLoggerFactory)
+            .AddControllers()
             .AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.WriteIndented = true;
                 options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-            })
-        ;
-        services
-       .AddMvcCore(options => { })
-       .AddApiExplorer();
-        RegisterServices(services);
-        services.AddCors();
+            });
+
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        //app.UseMiddleware<RequestMiddleware>();
-        app.UseCors(builder => builder.WithOrigins(_settings.Cors.Origins).AllowAnyHeader().AllowAnyMethod());
-        app.UseDeveloperExceptionPage();
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
         }
-        app.UseDeveloperExceptionPage();
 
         app.UseHttpsRedirection();
 
+        app.UseStaticFiles();
+
         app.UseRouting();
 
+        // Use the named CORS policy registered in IoC. Must be between UseRouting and UseAuthentication/UseAuthorization
+        app.UseCors("CorsPolicy");
 
+        // Authentication/Authorization
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        // Apply migrations/seed data
         using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
         {
             var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
@@ -85,32 +85,24 @@ public class Startup
             }
         }
 
-        app.UseSwagger();
-
-        app.UseSwaggerUI(c =>
-        {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            if (_settings.UseAuthority)
-            {
-                c.OAuthAppName(_settings.ApiName);
-                c.OAuthClientId(_settings.ClientId);
-                c.OAuthRealm(_settings.Authority);
-            }
-            c.OAuthAdditionalQueryStringParams(new Dictionary<string, string> { { "nonce", Guid.NewGuid().ToString() } });
-        });
-
-
-        app.UseRouting();
-
-
         if (env.IsDevelopment())
         {
-            app.UseDeveloperExceptionPage();
+            app
+                .UseOpenApi()
+                .UseSwaggerUi(settings =>
+                    {
+                        settings.OAuth2Client = new OAuth2ClientSettings
+                        {
+                            ClientId = "swagger",
+                            AppName = _settings.ApiName,
+                            UsePkceWithAuthorizationCodeGrant = true,
+                            ClientSecret = string.Empty,
+                            ScopeSeparator = " ",
+                            Realm = _settings.Authority,
+                        };
+                    });
+                
         }
-
-        app.UseStaticFiles();
-        app.UseAuthentication();
-        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
@@ -118,9 +110,4 @@ public class Startup
         });
     }
 
-    private void RegisterServices(IServiceCollection services)
-    {
-        services.AddSingleton(_settings);
-        services.AddTransient<IUploadHelper, UploadHelper>();
-    }
 }

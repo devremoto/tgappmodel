@@ -9,7 +9,7 @@
 <#@ output extension=".txt"  #><#
 var manager = TemplateFileManager.Create(this);
 
-var projectName = "web";
+var projectName = "Web";
 if(classSet.Classes!=null && classSet.Classes.Count()>0)
 foreach(var classModel in classSet.Classes){
 
@@ -68,7 +68,7 @@ foreach(var classModel in classSet.Classes){
 				<a style="cursor:pointer" class="btn-setting" (click)="openEdit()" placement='left' ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.NEW' | translate }}" ><i class="fa fa-file"></i></a>
 				</div>
 				</div>
-				<div class="card-body collapse show" style='min-height:422px' id="collapseExample">
+				<div class="card-body collapse show card-index" id="collapseExample">
 				
 				
 				<table class="table table-responsive-sm table-hover">
@@ -76,13 +76,13 @@ foreach(var classModel in classSet.Classes){
 <# if(classModel.Fields!=null && classModel.Fields.Count()>0)
 foreach(var field in classModel.Fields){#>
 <# if(!field.IsClass  && field.Name.ToLower() == prop.ToLower()) {#>
-                        <th style="width:90%">
+                        <th class="index-th">
                             {{'<#=underscoreName#>.GRID.COLUMN.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
                         </th>   
 <#}}#>
-						<th style="width:10%">{{'<#=underscoreName#>.GRID.COLUMN.ACTIONS' | translate }}</th>                      
+						<th class="index-th-actions">{{'<#=underscoreName#>.GRID.COLUMN.ACTIONS' | translate }}</th>                      
                     </tr>
-                    <tr *ngFor="let <#=classSet.ToCamelCase(classModel.Name)#> of <#=classSet.ToCamelCase(classModel.Name)#>List; let index=index">
+                    <tr *ngFor="let <#=classSet.ToCamelCase(classModel.Name)#> of <#=classSet.ToCamelCase(classModel.Name)#>List; trackby <#=classSet.ToCamelCase(classModel.Name)#>.id; let index=index">
 <# 
 if(classModel.Fields!=null && classModel.Fields.Count()>0)
 foreach(var field in classModel.Fields){#>
@@ -100,29 +100,43 @@ foreach(var field in classModel.Fields){#>
 <#}}#>
                         <td>
                             <div class="panel-ctrls">
-                                <a class="button-icon" style="color:green;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.EDIT' | translate }}" (click)="openEdit(<#=classSet.ToCamelCase(classModel.Name)#>, true)">
+                                <a class="button-icon" style="color:green;cursor:pointer" [appInRole]="['admin']" [ngbTooltip]="'<#=underscoreName#>.GRID.BUTTON.EDIT' | translate" (click)="openEdit(<#=classSet.ToCamelCase(classModel.Name)#>, true)">
                                     <i class="fa fa-pencil"></i>
                                 </a>&nbsp;
-                                <a class="button-icon" style="color:red;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.REMOVE' | translate }}" (click)="remove(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
+                                <a class="button-icon" style="color:red;cursor:pointer" [appInRole]="['admin']" [ngbTooltip]="'<#=underscoreName#>.GRID.BUTTON.REMOVE' | translate" (click)="remove(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
                                     <i class="fa fa-trash-o"></i>
                                 </a>&nbsp;
-								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" ngbTooltip="{{'<#=underscoreName#>.GRID.BUTTON.DUPLICATE' | translate }}" (click)="duplicate(<#=classSet.ToCamelCase(classModel.Name)#>,index)">
+								<a class="button-icon" style="color:blue;cursor:pointer" [appInRole]="['admin']" [ngbTooltip]="'<#=underscoreName#>.GRID.BUTTON.DUPLICATE' | translate" (click)="duplicate(<#=classSet.ToCamelCase(classModel.Name)#>)">
                                     <i class="fa fa-copy"></i>
                                 </a>
                             </div>
                         </td>
                     </tr>
 
-
                 </table>
-				<ngb-pagination style="position:absolute;bottom:0" *ngIf="paging.totalCount > paging.size" [boundaryLinks]="true" [pageSize]="paging.size" [maxSize]="paging.maxSize" [collectionSize]="paging.totalCount" [(page)]="paging.number" class="pagination-sm" (pageChange)="pageChanged($event)" [rotate]="true"   previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></ngb-pagination>
+
+				<ngb-pagination 
+                    *ngIf="paging.totalCount > paging.size"
+                    [boundaryLinks]="true" 
+                    [pageSize]="paging.size" 
+                    [maxSize]="paging.maxSize" 
+                    [collectionSize]="paging.totalCount" 
+                    [(page)]="paging.number" 
+                    class="pagination-sm pagination-index" 
+                    (pageChange)="pageChanged()" 
+                    [rotate]="true"   
+                    previousText="&lsaquo;" 
+                    nextText="&rsaquo;" 
+                    firstText="&laquo;" 
+                    lastText="&raquo;"
+                >
+                </ngb-pagination>
 
 				</div>
 				</div>
 </div>
 </div>
 
-<toaster-container *ngIf="screen=='<#=classModel.Name#>'"></toaster-container>
 <#
 manager.EndBlock();
 #>
@@ -131,13 +145,13 @@ manager.EndBlock();
 //Index
 ///////////////////////////////////////////////////////
 manager.StartNewFile($"{webAppPath}admin/_generated/{classModel.Name}/{classModel.Name}Index.component.ts",webProject,"");
-
+manager.IsAutoIndentEnabled=true;
 #>
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { PagingModel } from '../../../models/PagingModel';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { ToasterService } from 'angular2-toaster';
+import { ToastrService } from 'ngx-toastr';
 import { DialogService } from '../../../components/dialog/dialog.service';
 import { <#=classModel.Name#>ModalComponent } from './<#=classModel.Name#>Modal.component';
 import { <#=classModel.Name#>Service } from '../../../services/generated/<#=classModel.Name#>Service';
@@ -151,7 +165,7 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges {
     private _edit = false;
     paging: PagingModel<<#=classModel.Name#>>;
     screen = '<#=classModel.Name#>';
-    appErrorMessage: any;
+    appErrorMessage: string | Error | null = null;
     <#=camelCaseName#>: <#=classModel.Name#>;
     <#=camelCaseName#>List: <#=classModel.Name#>[];
 <# foreach(var field in  fieldChildren){#>
@@ -162,12 +176,12 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges {
     @Input() <#=classSet.ToCamelCase(field.Name)#>Id: any;
 <#}#>
     private modalRef: NgbModalRef;
+    private _toasterService:ToastrService = inject(ToastrService);
 
     constructor(
       private _service: <#=classModel.Name#>Service,
       public translate: TranslateService,
       private _modalService: NgbModal,
-      private _toasterService: ToasterService,
       private _dialogService: DialogService) {
         this.paging = _service.page;
         this.paging.orderBy = '<#=classModel.Keys.Count() > 0 ? classModel.Keys[0].Name : "" #>';
@@ -176,7 +190,7 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges {
 
     ngOnInit() {
       this.load();
-      this._service.on('<#=classModel.Name#>-save').subscribe((data) => {
+      this._service.on('<#=classModel.Name#>-save').subscribe(() => {
         this.pageChanged();
         this.hideModal();
       });
@@ -188,6 +202,9 @@ export class <#=classModel.Name#>IndexComponent implements OnInit, OnChanges {
         this.getBy<#=fieldParent.Name#>IdPage(this.<#=classSet.ToCamelCase(fieldParent.Name)#>Id);
       }
 <#}#>
+      if (changes['autoLoad']) {
+        this.load();
+      }
     }
 
     hideModal() {
@@ -243,7 +260,7 @@ foreach(var key in classModel.Keys){
 //var inst = GetDefault(type);
 //var defaultValue = inst.ToString();
 #>
-      delete objToDup.<#=classSet.ToCamelCase(key.Name)#>;
+      delete (objToDup as Partial<<#=classModel.Name#>>).<#=classSet.ToCamelCase(key.Name)#>;
 <#}#>
       this.openEdit(objToDup, true);
     }
@@ -281,7 +298,7 @@ foreach(var key in classModel.Keys){
       });
     }<#}#>
 
-  public openEdit(entity?: <#=classModel.Name#>, edit: boolean = false) {
+  public openEdit(entity?: <#=classModel.Name#>, edit = false) {
     this._edit = edit;
     this.<#=camelCaseName#> = entity || new <#=classModel.Name#>();
 <#if(fieldParents.Count()>0){#>
@@ -313,11 +330,11 @@ foreach(var field in classModel.Fields.Where(x=>x.DataType.Contains("DateTime"))
               }
               this.getAll();
               const successMsg = this.translate.instant('<#=underscoreName#>.GRID.REMOVE.SUCCESS');
-              this._toasterService.pop('success', this.translate.instant('APP.TOASTER.TITLE.SUCCESS'), successMsg);
+              this._toasterService.success(successMsg, this.translate.instant('APP.TOASTER.TITLE.SUCCESS'));
             },
             error => {
               const errorMsg = this.translate.instant('<#=underscoreName#>.GRID.REMOVE.ERROR');
-              this._toasterService.pop('error', this.translate.instant('APP.TOASTER.TITLE.ERROR'), errorMsg);
+              this._toasterService.error(errorMsg, this.translate.instant('APP.TOASTER.TITLE.ERROR'));
               this.appErrorMessage = error;
             });
         }, 'warning');

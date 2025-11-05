@@ -19,16 +19,10 @@ using Data.EF;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Data.Repositories
+namespace Data.Repositories;
+
+public partial class <#=classModel.Name#>Repository(AppDbContext db) : BaseRepository<<#=classModel.Name#>>(db), I<#=classModel.Name#>Repository
 {
-    public partial class <#=classModel.Name#>Repository : BaseRepository<<#=classModel.Name#>>, I<#=classModel.Name#>Repository
-    {
-        public <#=classModel.Name#>Repository(AppDbContext db)
-            : base(db)
-        {
-            
-        }		
-    }
 }
 
 <#

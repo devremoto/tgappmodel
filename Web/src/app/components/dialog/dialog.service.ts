@@ -4,7 +4,7 @@ import { DialogComponent } from './dialog.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LanguageCustomService } from '../../services/custom/Language';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DialogService {
   callback: Function;
   modalRef: NgbModalRef;

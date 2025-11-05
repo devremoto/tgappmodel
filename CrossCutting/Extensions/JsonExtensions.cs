@@ -13,6 +13,15 @@ namespace CrossCutting.Extensions;
 
 public static class JsonExtensions
 {
+    private static readonly JsonSerializerOptions settings = new JsonSerializerOptions
+    {
+
+        WriteIndented = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        ReferenceHandler = ReferenceHandler.IgnoreCycles
+
+    };
 
     #region JSON
 
@@ -88,15 +97,7 @@ public static class JsonExtensions
         if (obj != null)
         {
 
-            var settings = new JsonSerializerOptions
-            {
-
-                WriteIndented = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
-
-            };
+            
             if (convertEnum)
             {
                 settings.Converters.Add(new JsonStringEnumConverter());
@@ -112,15 +113,7 @@ public static class JsonExtensions
         if (obj != null)
         {
 
-            var settings = new JsonSerializerOptions
-            {
-
-                WriteIndented = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
-
-            };
+            
             if (convertEnum)
             {
                 settings.Converters.Add(new JsonStringEnumConverter());
@@ -141,7 +134,11 @@ public static class JsonExtensions
     public static T JsonDeserialize<T>(this string obj)
     {
         if (!string.IsNullOrWhiteSpace(obj))
-            return (T)JsonSerializer.Deserialize<T>(obj);
+        {
+            
+            var result = (T)JsonSerializer.Deserialize<T>(obj, settings);
+            return result;
+        }
         return default(T);
     }
 

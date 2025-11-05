@@ -17,12 +17,11 @@ manager.StartNewFile("Services\\Interfaces\\_generated\\I"+classModel.Name+ "Ser
 #>
 using Domain.Entities;
 
-namespace Domain.Services.Interfaces
+namespace Domain.Services.Interfaces;
+
+public partial interface I<#=classModel.Name#>Service : IBaseService<<#=classModel.Name#>>
 {
-    public partial interface I<#=classModel.Name#>Service : IBaseService<<#=classModel.Name#>>
-    {
 		
-    }
 }
 
 <#

@@ -8,13 +8,15 @@ import { ObjectTree } from '../../../viewModels/ObjectTree';
 import { LanguageEditorFormComponent } from './language-editor-form.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { InRoleDirective } from '../../../directives/inRoleDirective';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-language-editor',
   templateUrl: './language-editor.component.html',
   styleUrls: ['./language-editor.component.css'],
 
-  imports: [LanguageEditorFormComponent, TranslateModule, InRoleDirective]
+  imports: [LanguageEditorFormComponent, TranslateModule, InRoleDirective, FormsModule, CommonModule]
 
 })
 export class LanguageEditorComponent implements OnInit {
@@ -28,7 +30,7 @@ export class LanguageEditorComponent implements OnInit {
   tree: ObjectTree[] = [];
   file: Asset = new Asset();
   assets: Asset[];
-  asset: Asset = { path: '' };
+  asset: Asset = { path: 'admin' };
   path: string[] = [];
   upFolder: Asset;
 
@@ -39,9 +41,10 @@ export class LanguageEditorComponent implements OnInit {
   }
 
   private async loadDefaultLanguage(asset: any) {
-    this._defaultLanguage = await this._languageService.getDefaultLanguage().toPromise() || new Language();
+    console.log(this._languageService.default)
+    this._defaultLanguage = this._languageService.default;
     return await this._languageService
-      .getTranslationFile(`${this.asset.folder}${this.asset.path}/${this._defaultLanguage.code}.json`)
+      .getTranslationFile(`${this._defaultLanguage.code}.json`)
       .toPromise();
   }
 
@@ -65,11 +68,12 @@ export class LanguageEditorComponent implements OnInit {
     this.json = {};
     this.file = new Asset();
     this.folderUp()
-    this._languageService.getAssets(`${this.asset.folder}${this.asset.path}`).subscribe((result: any) => {
-      this.assets = result;
-      this.files = this.assets.filter(x => !x.isDir);
-      this.folders = this.assets.filter(x => x.isDir);
-    });
+    console.log(this.asset)
+    this.assets = this._languageService.getAssets(``);
+    console.log(this.assets)
+    this.files = this.assets.filter(x => !x.isDir);
+    this.folders = this.assets.filter(x => x.isDir);
+
   }
 
   load(item: Asset) {
@@ -80,7 +84,7 @@ export class LanguageEditorComponent implements OnInit {
       isDir: false,
       content: JSON.stringify(this.jsonDefault, null, 5)
     };
-    this._languageService.getTranslationFile(`${item.folder}${item.path}`).subscribe((result: any) => {
+    this._languageService.getTranslationFile(`${item.path}`).subscribe((result: any) => {
       this.tree = [];
       this.path = [];
       this.json = result;

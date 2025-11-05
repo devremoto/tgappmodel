@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BaseService, HttpService } from '../services';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { Language } from '../../models/Language';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class LanguageService extends BaseService<Language> {
 
-    constructor(protected http: HttpService) {
-        super(http);
-        this._controller = 'Language';
+    constructor(protected _http: HttpService) {
+        super(_http);
+            this._controller = 'Language';
     }
 
     override getOne(entity: Language): Observable<Language> {
-        return this.http.get(`Language/getOne/${entity.id}`)
-            .pipe(map<any, Language>((response) => response));
+        return this._http.get<Language>(`Language/getOne/${entity.id}`)
+        .pipe(map<Language, Language>((response) => response));
     }
 
-    remove(entity: Language): Observable<Language> {
-        return this.removeById(`${entity.id}`)
-            .pipe(map<any, Language>((response) => response));
+    remove(entity: Language): Observable<void> {
+        return this.removeById(`${entity.id}`);
     }
 
 }

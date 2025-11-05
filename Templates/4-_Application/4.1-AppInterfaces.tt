@@ -14,16 +14,13 @@ CreateDirectory("..\\..\\..\\Application\\Interfaces\\_generated\\");
 foreach(var classModel in classSet.Classes){
 manager.StartNewFile("Interfaces\\_generated\\I"+classModel.Name+ "AppService.cs","Application","",null);
 #>
-using Application.ViewModels;
 using Domain.Entities;
-using System;
 
-namespace Application.Interfaces
+namespace Application.Interfaces;
+
+public partial interface I<#=classModel.Name#>AppService : IBaseAppService<<#=classModel.Name#>>
 {
-    public partial interface I<#=classModel.Name#>AppService : IBaseAppService<<#=classModel.Name#>>
-    {
-		<#=classModel.Name#> Save(<#=classModel.Name#> viewModel, bool edit = false);
-    }
+	<#=classModel.Name#> Save(<#=classModel.Name#> viewModel, bool edit = false);
 }
 
 <#

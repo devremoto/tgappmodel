@@ -60,10 +60,14 @@ export abstract class AuthService {
   }
 
   protected clearToken(): void {
-    this._localStorage.removeItem('token');
-    this._localStorage.removeItem('id_token');
-    this._sessionStorage.removeItem('userData');
-    this._sessionStorage.removeItem('user');
+    if (this._localStorage) {
+      this._localStorage.removeItem('token');
+      this._localStorage.removeItem('id_token');
+    }
+    if (this._sessionStorage) {
+      this._sessionStorage.removeItem('userData');
+      this._sessionStorage.removeItem('user');
+    }
     this.id_token = null;
     this.token = null;
   }
@@ -74,7 +78,7 @@ export abstract class AuthService {
   }
 
   protected getCallbackUrl() {
-    const url = this._sessionStorage.getItem('callback_url');
+    const url = this._sessionStorage ? this._sessionStorage.getItem('callback_url') : null;
     return url || '/admin';
   }
 

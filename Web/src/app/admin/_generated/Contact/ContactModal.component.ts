@@ -6,13 +6,14 @@ import { Contact } from '../../../models/Contact';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ContactEditComponent } from './ContactEdit.component';
 declare let $: Function;
 
 @Component({
   selector: 'app-modal-contact',
   templateUrl: './ContactModal.component.html',
 
-  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [TranslateModule, CommonModule, FormsModule, ReactiveFormsModule, ContactEditComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })

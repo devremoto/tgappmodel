@@ -4,6 +4,7 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { Config } from '../../config';
 import { FileModel } from '../../models/FileModel';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 declare let $: Function;
 
@@ -12,7 +13,7 @@ declare let $: Function;
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css'],
 
-  imports: [FormsModule]
+  imports: [FormsModule, CommonModule]
 
 })
 export class UploadComponent implements OnInit, AfterViewInit {

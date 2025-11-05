@@ -32,6 +32,7 @@ export class AppComponent {
 
   title = 'body';
   constructor(public language: LanguageCustomService) {
+    // , private _reducerService: ReducerService<Contact>) {
     language.init('/assets/i18n/pages/');
   }
 }

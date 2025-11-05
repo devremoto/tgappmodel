@@ -1,13 +1,16 @@
 ﻿import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SocialNetworkService } from '../../../services/generated/SocialNetworkService';
 import { SocialNetwork } from '../../../models/SocialNetwork';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 declare let $: Function;
 
 @Component({
   selector: 'app-form-social-network',
   templateUrl: './SocialNetworkEdit.component.html',
+  imports: [TranslateModule, CommonModule, FormsModule]
 
 })
 export class SocialNetworkEditComponent implements OnInit {

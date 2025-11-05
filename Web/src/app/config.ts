@@ -22,6 +22,7 @@ export interface IConfig {
   post_logout_redirect_uri: string;
   silent_redirect_uri: string;
   allowSilentRenew: boolean;
+  grant_type?: string;
 }
 
 export const Config: IConfig = <IConfig>{
@@ -37,9 +38,11 @@ export const Config: IConfig = <IConfig>{
   redirect_url: `${siteUrl}/callback`,
   jwks_url: `${authorityAddress}/.well-known/openid-configuration/jwks`,
   client_id: environment.ClientId,
-  response_type: 'id_token token',
-  scope: 'openid profile offline_access role sso api1',
+  response_type: 'id_token token', // code id_token token
+  scope: 'openid profile offline_access api1 role roles email',
   post_logout_redirect_uri: `${siteUrl}/callback`,
   silent_redirect_uri: `${siteUrl}/callback&renew=true`,
-  allowSilentRenew: true
+  allowSilentRenew: true,
+  grant_type: 'implicit'
+
 };

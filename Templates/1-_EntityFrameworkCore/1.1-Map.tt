@@ -60,5 +60,5 @@ var strKey = string.Join(", ", keys );
 <#
 manager.EndBlock(); 
 }
-manager.Process(false);
+manager.Process();
 #>

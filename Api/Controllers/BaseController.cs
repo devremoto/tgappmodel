@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers;
 
-
+[ApiController]
 public class BaseController<TKey, TService, T, TViewModel> : Controller
     where T : class
     where TViewModel : class

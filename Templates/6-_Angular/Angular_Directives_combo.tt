@@ -49,13 +49,26 @@ manager.StartNewFile($"{webAppPath}combos\\combo.{classSet.ToCamelCase(classMode
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { <#=classModel.Name#>Service } from '../services/generated/<#=classModel.Name#>Service';
 import { <#=classModel.Name#> } from '../models/<#=classModel.Name#>';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-combo-<#=classSet.ToDash(classModel.Name)#>',
-  template: `
-    <select [ngModel]="model" (ngModelChange)="updateData($event)" name="<#=camelCaseName#>" class="{{cssClass}}" autofocus >
-      <option *ngFor="let <#=camelCaseName#> of <#=camelCaseName#>List" [value]="<#=camelCaseName#>.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>">{{<#=camelCaseName#>.<#=prop#>}}</option>
-    </select>`
+    template: `
+    <select         
+        [ngModel]="model" 
+        (ngModelChange)="updateData($event)" 
+        name="<#=camelCaseName#>" 
+        [class]="cssClass" 
+        autofocus
+    >
+      <option 
+        *ngFor="let <#=camelCaseName#> of <#=camelCaseName#>List"
+        [value]="<#=camelCaseName#>.<#=classSet.ToCamelCase(classModel.Keys[0].Name) #>">{{<#=camelCaseName#>.<#=prop#>}}</option>
+    </select>
+    `,
+     selector: 'app-combo-<#=classSet.ToDash(classModel.Name)#>'
+   // standalone: true,
+   // imports: [CommonModule, FormsModule]
 })
 export class Combo<#=classModel.Name#>Component implements OnInit {
     appErrorMessage: any;
@@ -103,45 +116,9 @@ export class Combo<#=classModel.Name#>Component implements OnInit {
 <#}
 manager.EndBlock();
 #>
-<#
-manager.StartNewFile($"{webAppPath}combos\\combos.module.ts",webProject,"");
 
-
-#>
-
-import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { ComboComponent } from './combo.component';
-
-<#foreach(var classModel in classSet.Classes){#>
-import { Combo<#=classModel.Name#>Component } from './combo.<#=classSet.ToCamelCase(classModel.Name)#>';
-<#}#>
-
-@NgModule({
-    declarations: [
-        ComboComponent,
-<#foreach(var classModel in classSet.Classes){#>
-        Combo<#=classModel.Name#>Component,
-<#}#>
-    ],
-    imports: [
-        SharedModule,
-    ],
-    exports: [
-        ComboComponent,
-<#foreach(var classModel in classSet.Classes){#>
-        Combo<#=classModel.Name#>Component,
-<#}#>
-    ]
-
-
-})
-export class CombosModule {
-
-}
 
 
 <#
-manager.EndBlock();
 manager.Process(false);
 #>

@@ -5,7 +5,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="1-_EntityFrameworkCore\1.1-Map.tt" />
+    <None Remove="1-_EntityFrameworkCore\1.2-Context.tt" />
     <None Remove="app.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="6-_Angular\CustomServices.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CustomServices.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="{bee4bfec-6683-3e67-9167-3c0cbc68f40a}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>bee4bfec-6683-3e67-9167-3c0cbc68f40a</Guid>
+    </COMReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -18,15 +37,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1-_EntityFrameworkCore\1.2-Context.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>1.2-Context.tt</DependentUpon>
+    <Content Include="1-_EntityFrameworkCore\1.1-Map.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>1.1-Map.txt</LastGenOutput>
     </Content>
-    <Content Include="1-_EntityFrameworkCore\Map.txt">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>1.1-Map.tt</DependentUpon>
+    <Content Include="1-_EntityFrameworkCore\1.2-Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>1.2-Context.txt</LastGenOutput>
     </Content>
     <Content Include="2-_Repository\2.1-RepositoryInterfaces.txt">
       <AutoGen>True</AutoGen>
@@ -96,15 +113,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Angular_Directives_combo.tt</DependentUpon>
     </Content>
-    <Content Include="6-_Angular\AngularModule.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AngularModule.txt</LastGenOutput>
-    </Content>
-    <Content Include="6-_Angular\AngularModule.txt">
-      <DependentUpon>AngularModule.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Content>
     <Content Include="6-_Angular\CRUD_VIEWS_edit.txt">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -127,7 +135,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Angular_Directives_combo.txt</LastGenOutput>
     </Content>
-    <Content Include="6-_Angular\CustomServices.txt">
+    <Content Include="6-_Angular\CustomServices.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CustomServices.tt</DependentUpon>
@@ -194,14 +202,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>3.1-ServiceInterfaces.txt</LastGenOutput>
     </Content>
-    <Content Include="1-_EntityFrameworkCore\1.1-Map.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>1.1-Map.txt</LastGenOutput>
-    </Content>
-    <Content Include="1-_EntityFrameworkCore\1.2-Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>1.2-Context.txt</LastGenOutput>
-    </Content>
     <Content Include="5-_Webapi\custom_Controllers.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>custom_Controllers.txt</LastGenOutput>
@@ -223,6 +223,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrossCutting.IoC\CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\CrossCutting\CrossCutting.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infra\CrossCutting.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -304,6 +310,10 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>generated_Controllers.tt</DependentUpon>
+    </None>
+    <None Update="6-_Angular\AngularModule.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AngularModule.txt</LastGenOutput>
     </None>
     <None Update="6-_Angular\AngularModule.txt">
       <DesignTime>True</DesignTime>

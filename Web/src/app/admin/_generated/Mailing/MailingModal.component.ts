@@ -1,14 +1,16 @@
 ﻿import { Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MailingService } from '../../../services/generated/MailingService';
 import { Mailing } from '../../../models/Mailing';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { MailingEditComponent } from './MailingEdit.component';
 declare let $: Function;
 
 @Component({
   selector: 'app-modal-mailing',
   templateUrl: './MailingModal.component.html',
+  imports: [TranslateModule, MailingEditComponent],
 
 })
 export class MailingModalComponent {

@@ -6,9 +6,10 @@
 <#@ assembly name="System.Windows.Forms" #>
 <#@ assembly name="EnvDTE"#>
 <#@ assembly name="EnvDTE80" #>
-<#@ assembly name="Microsoft.VisualStudio.Shell.15.0"#>
-<#@ assembly name="Microsoft.VisualStudio.TextTemplating.15.0"#>
-<#@ assembly name="Microsoft.VisualStudio.Shell.Interop "#>
+<!-- Commented out Visual Studio private assemblies to avoid FileNotFound during transform outside VS -->
+<!--#@ assembly name="Microsoft.VisualStudio.Shell.15.0"#-->
+<!--#@ assembly name="Microsoft.VisualStudio.TextTemplating.15.0"#-->
+<!--#@ assembly name="Microsoft.VisualStudio.Shell.Interop "#-->
 <#@ import namespace="Microsoft.VisualStudio.Shell.Interop"#>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Data" #>
@@ -30,66 +31,38 @@
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#+ 
 /*
-   This software is supplied "AS IS". The authors disclaim all warranties, 
-   expressed or implied, including, without limitation, the warranties of 
-   merchantability and of fitness for any purpose. The authors assume no
-   liability for direct, indirect, incidental, special, exemplary, or
-   consequential damages, which may result from the use of this software,
-   even if advised of the possibility of such damage.
+ This software is supplied "AS IS". The authors disclaim all warranties, 
+ expressed or implied, including, without limitation, the warranties of 
+ merchantability and of fitness for any purpose. The authors assume no
+ liability for direct, indirect, incidental, special, exemplary, or
+ consequential damages, which may result from the use of this software,
+ even if advised of the possibility of such damage.
 
 The TemplateFileManager is based on EntityFrameworkTemplateFileManager (EFTFM) from MS.
-
-Differences to EFTFM
-Version 2.2.1
-- added Namespace to ParameterTemplate Engine in GetTemplateContent (better Compatibility with Solution2 (EnvDte80))
-- sample templates removed from nuget-package, use nuget package t4.samples instead
-- trailing spaces removed
-Version 2.1.3
-- Bugfix Exception when solution contains database-projects
-Version 2.1.2
-- Bugfix Exception when solution contains wix-projects, reported by jturner
-Version 2.1:
-- Replace Enum BuildAction with class for more flexibility
-Version 2:
-- StartHeader works with Parameter $filename$
-- StartNewFile has a new named parameter FileProperties
-  - Support for:
-   - BuildAction
-   - CustomTool
-   - user defined parameter for using in StartHeader-Block
-- Property IsAutoIndentEnabled for support Format Document (C#, VB) when set to true
-
-Version: 1.1
-Add method WriteLineToBuildPane, WriteToBuildPane
-
-Version 1:
-- StartNewFile with named parameters projectName and folderName for generating files to different locations.
-- Property CanOverrideExistingFile, to define whether existing files are can overwritten
-- Property Encoding Encode type for output files.
 */
-
-/// <summary>
-/// Writes a line to the build pane in visual studio and activates it
-/// </summary>
-/// <param name="message">Text to output - a \n is appended</param>
-void WriteLineToBuildPane (string message){
-       WriteLineToBuildPane(String.Format("{0}\n", message));
-}
 
 /// <summary>
 /// Writes a string to the build pane in visual studio and activates it
 /// </summary>
 /// <param name="message">Text to output</param>
 void WriteToBuildPane (string message){
-       IVsOutputWindow outWindow = (this.Host as IServiceProvider).GetService(
-typeof( SVsOutputWindow ) ) as IVsOutputWindow;
-       Guid generalPaneGuid =
-Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
-		// P.S. There's also the GUID_OutWindowDebugPane available.
-       IVsOutputWindowPane generalPane;
-       outWindow.GetPane( ref generalPaneGuid , out generalPane );
-       generalPane.OutputString( message  );
-       generalPane.Activate(); // Brings this pane into view
+ // Try to obtain the output window via the host service provider if available
+ IVsOutputWindow outWindow = null;
+ try {
+ var sp = (this.Host as IServiceProvider);
+ if (sp != null) outWindow = (IVsOutputWindow)sp.GetService(typeof(object));
+ } catch { }
+ // Use the known GUID for the Build Output pane to avoid depending on Microsoft.VisualStudio.VSConstants
+ Guid generalPaneGuid = new Guid("1bd8a850-02d1-11d1-bee7-00a0c913d1f8");
+ IVsOutputWindowPane generalPane = null;
+ try {
+ if (outWindow != null)
+ {
+ outWindow.GetPane(ref generalPaneGuid, out generalPane);
+ generalPane.OutputString(message);
+ generalPane.Activate();
+ }
+ } catch { }
 }
 
 /// <summary>
@@ -138,7 +111,8 @@ public class TemplateFileManager
         }
 				
         _textTransformation = DynamicTextTransformation2.Create(textTransformation);
-        _generationEnvironment = _textTransformation.GenerationEnvironment;
+		var genEnv = _textTransformation.GenerationEnvironment;
+		_generationEnvironment = genEnv ?? new StringBuilder();
 		
 		var hostServiceProvider = _textTransformation.Host.AsIServiceProvider();
         if (hostServiceProvider == null)
@@ -545,8 +519,14 @@ public class DynamicTextTransformation2
     private readonly MethodInfo _write;
     private readonly MethodInfo _writeLine;
     private readonly PropertyInfo _generationEnvironment;
+    private readonly FieldInfo _generationEnvironmentField;
     private readonly PropertyInfo _errors;
+    private readonly FieldInfo _errorsField;
     private readonly PropertyInfo _host;
+
+    // safe fallbacks
+    private readonly StringBuilder _fallbackGenerationEnvironment = new StringBuilder();
+    private readonly System.CodeDom.Compiler.CompilerErrorCollection _fallbackErrors = new System.CodeDom.Compiler.CompilerErrorCollection();
 
     /// <summary>
     /// Creates an instance of the DynamicTextTransformation class around the passed in
@@ -575,20 +555,77 @@ public class DynamicTextTransformation2
         Type type = _instance.GetType();
         _write = type.GetMethod("Write", new Type[] { typeof(string) });
         _writeLine = type.GetMethod("WriteLine", new Type[] { typeof(string) });
-        _generationEnvironment = type.GetProperty("GenerationEnvironment", BindingFlags.Instance | BindingFlags.NonPublic);
+        // Try to obtain GenerationEnvironment as property or common backing fields
+        _generationEnvironment = type.GetProperty("GenerationEnvironment", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        if (_generationEnvironment == null)
+        {
+            _generationEnvironmentField = type.GetField("GenerationEnvironment", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+			?? type.GetField("_generationEnvironment", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+			?? type.GetField("generationEnvironment", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        }
+        
         _host = type.GetProperty("Host");
-        _errors = type.GetProperty("Errors");
+        // Errors can be property or field
+        _errors = type.GetProperty("Errors", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        if (_errors == null)
+        {
+            _errorsField = type.GetField("Errors", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+			?? type.GetField("_errors", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+			?? type.GetField("errors", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        }
     }
 
     /// <summary>
     /// Gets the value of the wrapped TextTranformation instance's GenerationEnvironment property
+    /// with safe fallbacks to avoid null reference when host doesn't expose expected members.
     /// </summary>
-    public StringBuilder GenerationEnvironment { get { return (StringBuilder)_generationEnvironment.GetValue(_instance, null); } }
+    public StringBuilder GenerationEnvironment
+    {
+        get
+        {
+            try
+            {
+                if (_generationEnvironment != null)
+                {
+                    var val = _generationEnvironment.GetValue(_instance, null) as StringBuilder;
+                    if (val != null) return val;
+                }
+                if (_generationEnvironmentField != null)
+                {
+                    var val = _generationEnvironmentField.GetValue(_instance) as StringBuilder;
+                    if (val != null) return val;
+                }
+            }
+            catch { }
+            return _fallbackGenerationEnvironment;
+        }
+    }
 
     /// <summary>
     /// Gets the value of the wrapped TextTranformation instance's Errors property
+    /// with fallback.
     /// </summary>
-    public System.CodeDom.Compiler.CompilerErrorCollection Errors { get { return (System.CodeDom.Compiler.CompilerErrorCollection)_errors.GetValue(_instance, null); } }
+    public System.CodeDom.Compiler.CompilerErrorCollection Errors
+    {
+        get
+        {
+            try
+            {
+                if (_errors != null)
+                {
+                    var val = _errors.GetValue(_instance, null) as System.CodeDom.Compiler.CompilerErrorCollection;
+                    if (val != null) return val;
+                }
+                if (_errorsField != null)
+                {
+                    var val = _errorsField.GetValue(_instance) as System.CodeDom.Compiler.CompilerErrorCollection;
+                    if (val != null) return val;
+                }
+            }
+            catch { }
+            return _fallbackErrors;
+        }
+    }
 
     /// <summary>
     /// Calls the wrapped TextTranformation instance's Write method.
@@ -1147,4 +1184,5 @@ public sealed class FileProperties
 		}
 	}
 }
+
 #>

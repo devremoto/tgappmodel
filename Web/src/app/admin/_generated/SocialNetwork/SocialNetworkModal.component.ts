@@ -1,14 +1,16 @@
 ﻿import { Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { SocialNetworkService } from '../../../services/generated/SocialNetworkService';
 import { SocialNetwork } from '../../../models/SocialNetwork';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SocialNetworkEditComponent } from './SocialNetworkEdit.component';
 declare let $: Function;
 
 @Component({
   selector: 'app-modal-social-network',
   templateUrl: './SocialNetworkModal.component.html',
+  imports: [TranslateModule, SocialNetworkEditComponent]
 
 })
 export class SocialNetworkModalComponent {

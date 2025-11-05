@@ -1,4 +1,7 @@
-﻿
+﻿<!-- Commented out Visual Studio private assemblies to avoid FileNotFound during transform outside VS -->
+<!--#@ assembly name="Microsoft.VisualStudio.Shell.15.0"#-->
+<!--#@ assembly name="Microsoft.VisualStudio.TextTemplating.15.0"#-->
+<!--#@ assembly name="Microsoft.VisualStudio.Shell.Interop "#-->
 
 
 
@@ -13,28 +16,6 @@
 
 
 
-
-export { AboutEdit } from './About/Edit';
-export { AboutIndex } from './About/Index';
-export { ContactEdit } from './Contact/Edit';
-export { ContactIndex } from './Contact/Index';
-export { LanguageEdit } from './Language/Edit';
-export { LanguageIndex } from './Language/Index';
-export { MailingEdit } from './Mailing/Edit';
-export { MailingIndex } from './Mailing/Index';
-export { SettingsEdit } from './Settings/Edit';
-export { SettingsIndex } from './Settings/Index';
-export { SocialNetworkEdit } from './SocialNetwork/Edit';
-export { SocialNetworkIndex } from './SocialNetwork/Index';
-export { UploadFileEdit } from './UploadFile/Edit';
-export { UploadFileIndex } from './UploadFile/Index';
-export { AboutService } from './AboutService';
-export { ContactService } from './ContactService';
-export { LanguageService } from './LanguageService';
-export { MailingService } from './MailingService';
-export { SettingsService } from './SettingsService';
-export { SocialNetworkService } from './SocialNetworkService';
-export { UploadFileService } from './UploadFileService';
 
 
 

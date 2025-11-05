@@ -5,13 +5,14 @@ import { UploadFileService } from '../../../services/generated/UploadFileService
 import { UploadFile } from '../../../models/UploadFile';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UploadFileEditComponent } from './UploadFileEdit.component';
+import { CommonModule } from '@angular/common';
 declare let $: Function;
 
 @Component({
   selector: 'app-modal-upload-file',
   templateUrl: './UploadFileModal.component.html',
 
-  imports: [TranslateModule, UploadFileEditComponent]
+  imports: [TranslateModule, UploadFileEditComponent, CommonModule]
 
 })
 export class UploadFileModalComponent {

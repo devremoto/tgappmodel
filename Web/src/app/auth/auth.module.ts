@@ -15,12 +15,14 @@ import { LanguageCustomService } from '../services/custom/Language';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
 import { SessionStorageService } from '../shared/util/session-storage.service';
+import { LogoutComponent } from './login/logout.component';
 
 @NgModule({
   imports: [
     FormsModule,
     RouterModule.forChild([
       { path: 'login', component: LoginComponent },
+      { path: 'logout', component: LogoutComponent },
       { path: 'callback', component: LoginCallBackComponent },
       { path: 'unauthorized/:id', component: UnauthorizedComponent }
     ]),

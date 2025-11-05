@@ -19,7 +19,8 @@
               href="contato@tugon.com.br">contato&#64;tugon.com.br</a></p>
         </address>
       </div>
-      <div class="col-md-4" *ngIf="false">
+      @if(false){
+      <div class="col-md-4">
         <h4 class="footer-heading">LATEST NEWS</h4>
         <ul class="list-unstyled latest-news-footer">
           <li class="news-item">
@@ -40,14 +41,19 @@
           </li>
         </ul>
       </div>
+      }
       <div class="col-md-4">
         <h4 class="footer-heading">{{'FOOTER.SOCIAL_NETWORK.TITLE' |
           translate}}</h4>
         <ul class="list-inline social-icons social-icons-small">
-          <li *ngFor="let socialNetwork of socialNetworks"
+          @for(socialNetwork of socialNetworks;track socialNetwork.name) {
+          @if(socialNetwork.active){
+          <li
             [title]="socialNetwork.name"><a [target]="'_blank'"
-              [href]="socialNetwork.url" *ngIf="socialNetwork.active"><i
+              [href]="socialNetwork.url"><i
                 [ngClass]="socialNetwork.cssIcon"></i></a></li>
+          }
+          }
           <!--[href]="safeUrl(socialNetwork.url)"-->
 
         </ul>
@@ -61,9 +67,13 @@
               name="email"
               placeholder="{{'FOOTER.NEWSLETTER.PLACEHOLDER' | translate}}">
             <span class="input-group-btn">
+              @if(loading){
               <button class="btn btn-primary" (click)="signUp()"
-                [disabled]="loading"><i class="fa fa-spinner fa-spin"
-                  *ngIf="loading"></i><span>{{loading?('FOOTER.NEWSLETTER.SUBSCRIBE_LOADING'|translate):('FOOTER.NEWSLETTER.SUBSCRIBE'|translate)}}</span></button>
+                [disabled]="loading"><i
+                  class="fa fa-spinner fa-spin"></i>
+                <span>{{loading?('FOOTER.NEWSLETTER.SUBSCRIBE_LOADING'|translate):('FOOTER.NEWSLETTER.SUBSCRIBE'|translate)}}</span>
+              </button>
+              }
             </span>
           </div>
           <div class="alert"></div>

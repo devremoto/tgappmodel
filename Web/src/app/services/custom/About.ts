@@ -7,7 +7,7 @@ import { AboutService } from '../generated/AboutService';
 })
 export class AboutCustomService extends AboutService {
 
-  constructor(override http: HttpService) {
-    super(http);
+  constructor(override _http: HttpService) {
+    super(_http);
   }
 }

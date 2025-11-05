@@ -17,62 +17,23 @@ using Application.ViewModels;
 using Domain.Entities;
 using System.Collections.Generic;
 
-namespace Application.AutoMapper
-{
-    public class EntityToModel : Profile
-    {
-        public EntityToModel()
-        {
-<#foreach(var classModel in classSet.Classes){#>
-<# if(classModel.Fields.Any(x=>x.IsClass) && all){ 
-var fieldCount =classModel.Fields.Where(x=>x.IsClass).Count()-1;
-var i= 0;
-#>
-			CreateMap<<#=classModel.Name#>, <#=classModel.Name#>ViewModel>()
-<#foreach(var field in classModel.Fields.Where(x=>x.IsClass)){#>
-<# if(field.IsCollection){ #>
-				.ForMember(dest => dest.<#=field.Name#>, opt => opt.MapFrom(src => Mapper.Map<List<<#=field.DataType#>>, List<<#=field.DataType#>ViewModel>>(src.<#=field.Name#>)))<#= i==fieldCount ? ";":"" #>
-<#}else{#>
-				.ForMember(dest => dest.<#=field.Name#>, opt => opt.MapFrom(src => Mapper.Map<<#=field.DataType#>, <#=field.DataType#>ViewModel>(src.<#=field.Name#>)))<#= i==fieldCount ? ";":"" #>
-<#}#>
-<#
-	i++;
-	}
-#>
-            
-<#}else{#>
-			CreateMap<<#=classModel.Name#>, <#=classModel.Name#>ViewModel>();
-<#}#>
-<#}#>
-        }
-    }
-}
-<#
-manager.EndBlock();
-#><#manager.StartNewFile("AutoMapper\\ModelToEntity.cs","Application","",null);
-#>
-using AutoMapper;
-using Application.ViewModels;
-using Domain.Entities;
-using System.Collections.Generic;
+namespace Application.AutoMapper;
 
-namespace Application.AutoMapper
+public partial class ModelToViewModel : Profile
 {
-    public class ModelToEntity : Profile
+    public void Map()
     {
-        public ModelToEntity()
-        {
 <#foreach(var classModel in classSet.Classes){#>
 <# if(classModel.Fields.Any(x=>x.IsClass) && all){ 
 var fieldCount =classModel.Fields.Where(x=>x.IsClass).Count()-1;
 var i= 0;
 #>
-			CreateMap<<#=classModel.Name#>ViewModel, <#=classModel.Name#>>()
+		CreateMap<<#=classModel.Name#>, <#=classModel.Name#>ViewModel>().ReverseMap()
 <#foreach(var field in classModel.Fields.Where(x=>x.IsClass)){#>
 <# if(field.IsCollection){ #>
-				.ForMember(dest => dest.<#=field.Name#>, opt => opt.MapFrom(src => Mapper.Map<List<<#=field.DataType#>ViewModel>, List<<#=field.DataType#>>>(src.<#=field.Name#>)))<#= i==fieldCount ? ";":"" #>
+			.ForMember(dest => dest.<#=field.Name#>, opt => opt.MapFrom(src => Mapper.Map<List<<#=field.DataType#>>, List<<#=field.DataType#>ViewModel>>(src.<#=field.Name#>)))<#= i==fieldCount ? ";":"" #>
 <#}else{#>
-				.ForMember(dest => dest.<#=field.Name#>, opt => opt.MapFrom(src => Mapper.Map<<#=field.DataType#>ViewModel, <#=field.DataType#>>(src.<#=field.Name#>)))<#= i==fieldCount ? ";":"" #>
+			.ForMember(dest => dest.<#=field.Name#>, opt => opt.MapFrom(src => Mapper.Map<<#=field.DataType#>, <#=field.DataType#>ViewModel>(src.<#=field.Name#>)))<#= i==fieldCount ? ";":"" #>
 <#}#>
 <#
 	i++;
@@ -80,12 +41,12 @@ var i= 0;
 #>
             
 <#}else{#>
-			CreateMap<<#=classModel.Name#>ViewModel, <#=classModel.Name#>>();
+		CreateMap<<#=classModel.Name#>, <#=classModel.Name#>ViewModel>().ReverseMap();
 <#}#>
 <#}#>
-        }
     }
 }
+
 <#
 manager.EndBlock();
 #><#

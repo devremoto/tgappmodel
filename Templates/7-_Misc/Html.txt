@@ -1,4 +1,8 @@
 ﻿ 
+<!-- Commented out Visual Studio private assemblies to avoid FileNotFound during transform outside VS -->
+<!--#@ assembly name="Microsoft.VisualStudio.Shell.15.0"#-->
+<!--#@ assembly name="Microsoft.VisualStudio.TextTemplating.15.0"#-->
+<!--#@ assembly name="Microsoft.VisualStudio.Shell.Interop "#-->
 
 
 

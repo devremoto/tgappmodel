@@ -19,8 +19,9 @@
     <None Remove="Properties\PublishProfiles\Default Settings.pubxml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.6" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.8" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />

@@ -9,7 +9,9 @@ import { FormsModule } from '@angular/forms';
     imports: [FormsModule],
     template: `
     <select [ngModel]="model" (ngModelChange)="updateData($event)" name="contact" class="{{cssClass}}" autofocus >
-      <option *ngFor="let contact of contactList" [value]="contact.id">{{contact.name}}</option>
+      @for(contact of contactList; track contact.id) {
+        <option [value]="contact.id">{{contact.name}}</option>
+      }
     </select>`,
 
 })

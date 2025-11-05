@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BaseService, HttpService } from '../services';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { Settings } from '../../models/Settings';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class SettingsService extends BaseService<Settings> {
 
-    constructor(protected http: HttpService) {
-        super(http);
-        this._controller = 'Settings';
+    constructor(protected _http: HttpService) {
+        super(_http);
+            this._controller = 'Settings';
     }
 
     override getOne(entity: Settings): Observable<Settings> {
-        return this.http.get(`Settings/getOne/${entity.id}`)
-            .pipe(map<any, Settings>((response) => response));
+        return this._http.get<Settings>(`Settings/getOne/${entity.id}`)
+        .pipe(map<Settings, Settings>((response) => response));
     }
 
-    remove(entity: Settings): Observable<Settings> {
-        return this.removeById(`${entity.id}`)
-            .pipe(map<any, Settings>((response) => response));
+    remove(entity: Settings): Observable<void> {
+        return this.removeById(`${entity.id}`);
     }
 
 }

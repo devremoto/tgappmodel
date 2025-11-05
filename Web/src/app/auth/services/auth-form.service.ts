@@ -1,19 +1,19 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UserManager, UserSettings } from 'oidc-client';
-import { LoginModel } from 'src/app/models/LoginModel';
 
 import { SessionStorageService } from '../../shared/util/session-storage.service';
 import { AuthService } from './auth.service';
+import { LoginModel } from '../../models/LoginModel';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServiceForm extends AuthService implements OnInit {
-  override token: string;
-  override id_token: string;
-  override callbackUrl: string;
-  override userManager: UserManager;
-  override _localStorage: Storage;
-  override _sessionStorage: Storage;
+  declare token: string;
+  declare id_token: string;
+  declare callbackUrl: string;
+  declare userManager: UserManager;
+  declare _localStorage: Storage;
+  declare _sessionStorage: Storage;
   LoginModel: LoginModel;
   constructor(_router: Router, _storage: SessionStorageService) {
     super(_router, _storage);

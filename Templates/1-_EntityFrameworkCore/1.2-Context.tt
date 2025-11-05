@@ -8,7 +8,7 @@
 <#@ output extension=".txt"  #><#
 var manager = TemplateFileManager.Create(this);   
 
-CreateDirectory("..\\..\\..\\Data\\EF\\_generated");	
+// let manager create directories based on StartNewFile/projectName
 manager.StartNewFile("EF\\_generated\\AppDbContext.cs","Data",""); 
 #>
 using Data.EF.Mappings;
@@ -33,5 +33,5 @@ namespace Data.EF
 }
 <#
 manager.EndBlock();
-manager.Process(false);
+manager.Process();
 #>

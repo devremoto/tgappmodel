@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 
 import { AuthService } from '../../../auth/services/auth.service';
+import { NavMenuAdminGeneratedComponent } from "./navmenuGenerated";
+import { InRoleDirective } from '../../../directives/inRoleDirective';
 
 @Component({
-    selector: 'app-admin-nav-menu',
-    templateUrl: './navmenu.html',
-    styleUrls: ['./navmenu.css'],
-    
+  selector: 'app-admin-nav-menu',
+  templateUrl: './navmenu.html',
+  styleUrls: ['./navmenu.css'],
+  imports: [NavMenuAdminGeneratedComponent, InRoleDirective],
+
 })
 export class NavMenuAdminComponent {
   isLoggedIn: boolean;

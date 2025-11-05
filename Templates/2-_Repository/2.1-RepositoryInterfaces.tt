@@ -17,12 +17,11 @@ manager.StartNewFile("Interfaces\\_generated\\I"+classModel.Name+ "Repository.cs
 #>
 using Domain.Entities;
 
-namespace Domain.Interfaces
-{
-    public partial interface I<#=classModel.Name#>Repository : IBaseRepository<<#=classModel.Name#>>
-    {
+namespace Domain.Interfaces;
 
-    }
+public partial interface I<#=classModel.Name#>Repository : IBaseRepository<<#=classModel.Name#>>
+{
+
 }
 <#
 manager.EndBlock();

@@ -1,21 +1,33 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionStorageService } from '../../shared/util/session-storage.service';
-import { UserManager, User } from 'oidc-client';
+import { UserManager, User, WebStorageStateStore } from 'oidc-client';
 import { AuthService } from './auth.service';
+import { Config } from '../../config';
 
 @Injectable({ providedIn: 'root' })
 export class AuthServiceOidc extends AuthService {
-  override token: string;
-  override id_token: string;
-  override callbackUrl: string;
+  declare token: string;
+  declare id_token: string;
+  declare callbackUrl: string;
   override onLogin: EventEmitter<User> = new EventEmitter();
   override onLogout: EventEmitter<string> = new EventEmitter();
-  override userManager: UserManager;
-  override _localStorage: Storage;
+  declare userManager: UserManager;
+  declare _localStorage: Storage;
 
   constructor(_router: Router, _storage: SessionStorageService) {
     super(_router, _storage);
+    this.userManager = new UserManager({
+      authority: Config.authorityAddress,
+      client_id: Config.client_id,
+      redirect_uri: Config.redirect_url,
+      scope: Config.scope,
+      response_type: Config.response_type,
+      post_logout_redirect_uri: Config.post_logout_redirect_uri,
+      userStore: new WebStorageStateStore({ store: this._localStorage }),
+      automaticSilentRenew: Config.allowSilentRenew,
+      silent_redirect_uri: Config.silent_redirect_uri
+    });
   }
 
 
@@ -41,7 +53,14 @@ export class AuthServiceOidc extends AuthService {
   }
 
   public redirectLogin() {
-    this.userManager.signinRedirect();
+    //this.callBackLogin();
+    //this.userManager.signinRedirectCallback();
+    if (Config.useAuthorityServer) {
+      this.userManager.signinRedirect();
+    } else {
+      this._router.navigate(['/login']);
+    }
+
   }
 
   navigateTo(segment: string, params?: any) {
@@ -53,16 +72,21 @@ export class AuthServiceOidc extends AuthService {
   }
 
   callBackLogin() {
-    this.userManager.signinRedirectCallback().then(
-      user => {
-        this.user = user;
+    this.userManager.signinRedirectCallback()
+      .then(
+        user => {
+          this.user = user;
 
-        this.onLogin.emit(user);
-        const url = this.getCallbackUrl();
-        this._router.navigate([url]);
-      },
-      () => { }
-    );
+          this.onLogin.emit(user);
+          const url = this.getCallbackUrl();
+          this._router.navigate([url]);
+        },
+        (error) => {
+          console.error('Error during login callback:', error);
+        }
+      ).catch((error) => {
+        console.error('Error during login callback:', error);
+      });
     return;
   }
 

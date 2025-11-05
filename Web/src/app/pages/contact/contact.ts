@@ -130,12 +130,12 @@ __proto__: Object
 
   ngOnInit() {
     this.contact = new Contact();
-    this.getSocialNetworks();
+    //this.getSocialNetworks();
     this.buildForm();
   }
 
   private getSocialNetworks(): void {
-    this._socialNetworkService.getAll().subscribe(
+    this._socialNetworkService.getJson().subscribe(
       result => {
         this.socialNetworks = result;
       },

@@ -8,6 +8,7 @@ import { SocialNetworkCustomService } from '../../services/custom/SocialNetwork'
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { LanguageSelectorComponent } from '../../components/language-selector/language-selector.component';
+import { RouterModule } from '@angular/router';
 
 declare let $: Function;
 @Component({
@@ -16,7 +17,7 @@ declare let $: Function;
   styleUrls: ['./header.component.css'],
   providers: [],
 
-  imports: [TranslateModule, CommonModule, LanguageSelectorComponent]
+  imports: [TranslateModule, CommonModule, LanguageSelectorComponent, RouterModule]
 
 })
 export class HeaderComponent implements OnInit, AfterViewInit {

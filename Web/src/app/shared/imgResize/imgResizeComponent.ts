@@ -5,7 +5,7 @@ import { ImgService } from './ImgService';
 
 @Component({
   template: `
-    <img *ngIf="path" [src]="path" alt="{{ image }} " class="{{ cssClass }}" style="{{ style }}" />
+    @if(path){<img [src]="path" alt="{{ image }} " class="{{ cssClass }}" style="{{ style }}" />}
   `,
   selector: 'app-img-resize',
   providers: [ImgService],

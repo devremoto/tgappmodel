@@ -1,8 +1,9 @@
 ﻿<#@ template language="C#" hostSpecific="true" compilerOptions="optimize+" #>
+<#@ assembly name="System" #>
+<#@ assembly name="System.Runtime" #>
 <#@ assembly name="System.Core" #>
-<#@ assembly name="netstandard" #>
 <#@ assembly name="System.IO" #>
-<#@ assembly name="$(ProjectDir)..\Infra\bin\Debug\netstandard2.0\CrossCutting.Services.dll" #>
+<#@ assembly name="$(ProjectDir)..\Infra\bin\Debug\net8.0\CrossCutting.Services.dll" #>
 <#@ assembly name="System.Net.Http" #>
 <#@ assembly name="System.Runtime.Caching" #>
 <#@ import namespace="System" #>

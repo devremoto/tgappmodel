@@ -11,15 +11,15 @@ import { HttpService } from '../services';
   providedIn: 'root'
 })
 export class MailingCustomService extends MailingService {
-  constructor(override http: HttpService) {
-    super(http);
+  constructor(override _http: HttpService) {
+    super(_http);
   }
 
   sendEmail(mailing: Mailing): Observable<any> {
-    return this.http.post(this._controller + '/sendEmail/', mailing);
+    return this._http.post(this._controller + '/sendEmail/', mailing);
   }
 
   signUp(mailing: Mailing): Observable<any> {
-    return this.http.post(this._controller + '/signUp/', mailing);
+    return this._http.post(this._controller + '/signUp/', mailing);
   }
 }

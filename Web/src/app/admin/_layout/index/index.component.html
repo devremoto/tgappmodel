@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="https://npmcdn.com/angular2-toaster@5.0.0/toaster.css" />
+
+<link rel="stylesheet" type="text/css"
+  href="https://npmcdn.com/angular2-toaster@5.0.0/toaster.css" />
 
 <!-- Icons -->
 <link href="/assets/admin/css/font-awesome.min.css" rel="stylesheet">
@@ -14,8 +14,10 @@
     <nav class="sidebar-nav">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['dashboard']">
-            <i class="icon-speedometer"></i> {{"HOME.SIDE_BAR.DASHBOARD"|translate}}
+          <a class="nav-link" routerLinkActive="active"
+            [routerLink]="['dashboard']">
+            <i class="icon-speedometer"></i>
+            {{"HOME.SIDE_BAR.DASHBOARD"|translate}}
             <!--<span class="badge badge-info">{{"HOME.SIDE_BAR.NEW"|translate}}</span>-->
           </a>
         </li>
@@ -23,36 +25,43 @@
         <li class="nav-title">
           {{"HOME.SIDE_BAR.MENU.TITLE"|translate}}
         </li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
-          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle>
-            <i class="icon-settings"></i> {{"HOME.SIDE_BAR.MENU.SECTIONS.ADMIN.TITLE"|translate}}
+        <li class="nav-item nav-dropdown" routerLinkActive="open"
+          appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" appNavDropdownToggle>
+            <i class="icon-settings"></i>
+            {{"HOME.SIDE_BAR.MENU.SECTIONS.ADMIN.TITLE"|translate}}
           </a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/admin/contact']">
-                <i class="fa fa-users"></i> {{"HOME.SIDE_BAR.MENU.SECTIONS.ADMIN.CONTACT"|translate}}
+              <a class="nav-link" routerLinkActive="active"
+                [routerLink]="['/admin/contact']">
+                <i class="fa fa-users"></i>
+                {{"HOME.SIDE_BAR.MENU.SECTIONS.ADMIN.CONTACT"|translate}}
               </a>
             </li>
           </ul>
         </li>
         <li class="divider"></li>
-        <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown [appInRole]="['admin']">
-          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle>
-            <i class="fa fa-database"></i> {{"HOME.SIDE_BAR.MENU.SECTIONS.DATABASE.TITLE"|translate}}
+        <li class="nav-item nav-dropdown" routerLinkActive="open"
+          [appInRole]="['admin']"
+          appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" appNavDropdownToggle>
+            <i class="fa fa-database"></i>
+            {{"HOME.SIDE_BAR.MENU.SECTIONS.DATABASE.TITLE"|translate}}
           </a>
-
           <ul class="nav-dropdown-items">
             <app-menu-generated></app-menu-generated>
           </ul>
         </li>
-        <li class="divider"></li>
+        <li class="divider" [appInRole]="['admin']"></li>
       </ul>
     </nav>
   </div>
   <!-- Main content -->
   <main class="main">
     <!-- Breadcrumb -->
-    <ol class="breadcrumb" app-breadcrumbs [fixed]="true" style="border-radius: 0;">
+    <ol class="breadcrumb" app-breadcrumbs [fixed]="true"
+      style="border-radius: 0;">
       <!-- Breadcrumb Menu-->
       <li class="breadcrumb-menu d-md-down-none">
         <a class="btn" [routerLink]="['language-settings']">
@@ -62,10 +71,12 @@
           <i class="icon-speech"></i>
         </a>
         <a class="btn" [routerLink]="['dashboard']">
-          <i class="icon-graph"></i> &nbsp;{{"HOME.HEADER.BREAD_CRUMB.DASHBOARD"|translate}}
+          <i class="icon-graph"></i>
+          &nbsp;{{"HOME.HEADER.BREAD_CRUMB.DASHBOARD"|translate}}
         </a>
         <a class="btn" [routerLink]="['app-settings']">
-          <i class="icon-settings"></i> &nbsp;{{"HOME.HEADER.BREAD_CRUMB.SETTINGS"|translate}}
+          <i class="icon-settings"></i>
+          &nbsp;{{"HOME.HEADER.BREAD_CRUMB.SETTINGS"|translate}}
         </a>
       </li>
     </ol>
@@ -75,13 +86,15 @@
     <!-- /.conainer-fluid -->
   </main>
   <aside class="aside-menu">
-    <div ngbNav #nav="ngbNav"  class="nav-pills flex-column" orientation="vertical">
+    <div ngbNav #nav="ngbNav" class="nav-pills flex-column"
+      orientation="vertical">
       <ng-container ngbNavItem>
         <ng-template ngbTabTitle>
           <i class="icon-list"></i>
         </ng-template>
         <ng-template ngbTabContent>
-          <div class="callout m-0 py-2 text-muted text-center bg-faded text-uppercase">
+          <div
+            class="callout m-0 py-2 text-muted text-center bg-faded text-uppercase">
             <small>
               <b>Today</b>
             </small>
@@ -89,7 +102,8 @@
           <hr class="transparent mx-3 my-0">
           <div class="callout callout-warning m-0 py-3">
             <div class="avatar float-right">
-              <img src="./assets/admin/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <img src="./assets/admin/img/avatars/7.jpg" class="img-avatar"
+                alt="admin@bootstrapmaster.com">
             </div>
             <div>
               Meeting with
@@ -105,7 +119,8 @@
           <hr class="mx-3 my-0">
           <div class="callout callout-info m-0 py-3">
             <div class="avatar float-right">
-              <img src="assets/admin/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+              <img src="assets/admin/img/avatars/4.jpg" class="img-avatar"
+                alt="admin@bootstrapmaster.com">
             </div>
             <div>
               Skype with
@@ -119,7 +134,8 @@
             </small>
           </div>
           <hr class="transparent mx-3 my-0">
-          <div class="callout m-0 py-2 text-muted text-center bg-faded text-uppercase">
+          <div
+            class="callout m-0 py-2 text-muted text-center bg-faded text-uppercase">
             <small>
               <b>Tomorrow</b>
             </small>
@@ -138,19 +154,24 @@
             </small>
             <div class="avatars-stack mt-2">
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/2.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/3.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/4.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/5.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/6.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
             </div>
           </div>
@@ -179,32 +200,39 @@
             </small>
             <div class="avatars-stack mt-2">
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/2.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/3.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/3.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/4.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/4.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/5.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/5.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/6.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/7.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
               <div class="avatar avatar-xs">
-                <img src="assets/admin/img/avatars/8.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                <img src="assets/admin/img/avatars/8.jpg" class="img-avatar"
+                  alt="admin@bootstrapmaster.com">
               </div>
             </div>
           </div>
           <hr class="mx-3 my-0">
         </ng-template>
-        </ng-container>
-        <ng-container ngbNavItem>
+      </ng-container>
+      <ng-container ngbNavItem>
         <ng-template ngbTabTitle>
           <i class="icon-speech"></i>
         </ng-template>
@@ -213,7 +241,8 @@
             <div class="message">
               <div class="py-3 pb-5 mr-3 float-left">
                 <div class="avatar">
-                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar"
+                    alt="admin@bootstrapmaster.com">
                   <span class="avatar-status badge-success"></span>
                 </div>
               </div>
@@ -221,9 +250,11 @@
                 <small class="text-muted">Lukasz Holeczek</small>
                 <small class="text-muted float-right mt-1">1:52 PM</small>
               </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit
+                amet</div>
               <small class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor
                 incididunt...
               </small>
             </div>
@@ -231,7 +262,8 @@
             <div class="message">
               <div class="py-3 pb-5 mr-3 float-left">
                 <div class="avatar">
-                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar"
+                    alt="admin@bootstrapmaster.com">
                   <span class="avatar-status badge-success"></span>
                 </div>
               </div>
@@ -239,9 +271,11 @@
                 <small class="text-muted">Lukasz Holeczek</small>
                 <small class="text-muted float-right mt-1">1:52 PM</small>
               </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit
+                amet</div>
               <small class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor
                 incididunt...
               </small>
             </div>
@@ -249,7 +283,8 @@
             <div class="message">
               <div class="py-3 pb-5 mr-3 float-left">
                 <div class="avatar">
-                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar"
+                    alt="admin@bootstrapmaster.com">
                   <span class="avatar-status badge-success"></span>
                 </div>
               </div>
@@ -257,9 +292,11 @@
                 <small class="text-muted">Lukasz Holeczek</small>
                 <small class="text-muted float-right mt-1">1:52 PM</small>
               </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit
+                amet</div>
               <small class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor
                 incididunt...
               </small>
             </div>
@@ -267,7 +304,8 @@
             <div class="message">
               <div class="py-3 pb-5 mr-3 float-left">
                 <div class="avatar">
-                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar"
+                    alt="admin@bootstrapmaster.com">
                   <span class="avatar-status badge-success"></span>
                 </div>
               </div>
@@ -275,9 +313,11 @@
                 <small class="text-muted">Lukasz Holeczek</small>
                 <small class="text-muted float-right mt-1">1:52 PM</small>
               </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit
+                amet</div>
               <small class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor
                 incididunt...
               </small>
             </div>
@@ -285,7 +325,8 @@
             <div class="message">
               <div class="py-3 pb-5 mr-3 float-left">
                 <div class="avatar">
-                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar" alt="admin@bootstrapmaster.com">
+                  <img src="assets/admin/img/avatars/7.jpg" class="img-avatar"
+                    alt="admin@bootstrapmaster.com">
                   <span class="avatar-status badge-success"></span>
                 </div>
               </div>
@@ -293,9 +334,11 @@
                 <small class="text-muted">Lukasz Holeczek</small>
                 <small class="text-muted float-right mt-1">1:52 PM</small>
               </div>
-              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit amet</div>
+              <div class="text-truncate font-weight-bold">Lorem ipsum dolor sit
+                amet</div>
               <small class="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor
                 incididunt...
               </small>
             </div>
@@ -314,7 +357,8 @@
                 <small>
                   <b>Option 1</b>
                 </small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <label
+                  class="switch switch-text switch-pill switch-success switch-sm float-right">
                   <input type="checkbox" class="switch-input" checked>
                   <span class="switch-label" data-on="On" data-off="Off"></span>
                   <span class="switch-handle"></span>
@@ -322,7 +366,8 @@
               </div>
               <div>
                 <small class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod
                   tempor incididunt ut labore et dolore
                   magna aliqua.
                 </small>
@@ -333,7 +378,8 @@
                 <small>
                   <b>Option 2</b>
                 </small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <label
+                  class="switch switch-text switch-pill switch-success switch-sm float-right">
                   <input type="checkbox" class="switch-input">
                   <span class="switch-label" data-on="On" data-off="Off"></span>
                   <span class="switch-handle"></span>
@@ -341,7 +387,8 @@
               </div>
               <div>
                 <small class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod
                   tempor incididunt ut labore et dolore
                   magna aliqua.
                 </small>
@@ -352,7 +399,8 @@
                 <small>
                   <b>Option 3</b>
                 </small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <label
+                  class="switch switch-text switch-pill switch-success switch-sm float-right">
                   <input type="checkbox" class="switch-input">
                   <span class="switch-label" data-on="On" data-off="Off"></span>
                   <span class="switch-handle"></span>
@@ -364,7 +412,8 @@
                 <small>
                   <b>Option 4</b>
                 </small>
-                <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                <label
+                  class="switch switch-text switch-pill switch-success switch-sm float-right">
                   <input type="checkbox" class="switch-input" checked>
                   <span class="switch-label" data-on="On" data-off="Off"></span>
                   <span class="switch-handle"></span>
@@ -379,8 +428,9 @@
               </small>
             </div>
             <div class="progress progress-xs">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25"
-                   aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-info" role="progressbar"
+                style="width: 25%" aria-valuenow="25"
+                aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small class="text-muted">348 Processes. 1/4 Cores.</small>
             <div class="text-uppercase mb-1 mt-2">
@@ -389,8 +439,9 @@
               </small>
             </div>
             <div class="progress progress-xs">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70"
-                   aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-warning" role="progressbar"
+                style="width: 70%" aria-valuenow="70"
+                aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small class="text-muted">11444GB/16384MB</small>
             <div class="text-uppercase mb-1 mt-2">
@@ -399,8 +450,9 @@
               </small>
             </div>
             <div class="progress progress-xs">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 95%" aria-valuenow="95"
-                   aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-danger" role="progressbar"
+                style="width: 95%" aria-valuenow="95"
+                aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small class="text-muted">243GB/256GB</small>
             <div class="text-uppercase mb-1 mt-2">
@@ -409,8 +461,9 @@
               </small>
             </div>
             <div class="progress progress-xs">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 10%" aria-valuenow="10"
-                   aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar bg-success" role="progressbar"
+                style="width: 10%" aria-valuenow="10"
+                aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small class="text-muted">25GB/256GB</small>
           </div>

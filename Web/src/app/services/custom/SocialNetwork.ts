@@ -9,7 +9,7 @@ import { SocialNetworkService } from '../generated/SocialNetworkService';
 })
 export class SocialNetworkCustomService extends SocialNetworkService {
 
-  constructor(override http: HttpService) {
+  constructor(protected http: HttpService) {
     super(http);
   }
 }

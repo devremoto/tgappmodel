@@ -14,10 +14,14 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [ServicesModule, RouterModule, CommonModule, TranslateModule],
   template: `
     <ng-template ngFor let-breadcrumb [ngForOf]="breadcrumbs | async" let-last="last">
-      <li class="breadcrumb-item" *ngIf="breadcrumb.label.title && (breadcrumb.url.slice(-1) === '/' || last)" [ngClass]="{ active: last }">
-        <a *ngIf="!last" [routerLink]="breadcrumb.url">{{ breadcrumb.label.title | translate }}</a>
-        <span *ngIf="last" [routerLink]="breadcrumb.url">{{ breadcrumb.label.title | translate }}</span>
+      @if(breadcrumb.label.title && (breadcrumb.url.slice(-1) === '/' || last)) {
+      <li class="breadcrumb-item"  [ngClass]="{ active: last }">
+        @if(!last){<a [routerLink]="breadcrumb.url">{{ breadcrumb.label.title | translate }}</a>
+      }@else{
+        <span [routerLink]="breadcrumb.url">{{ breadcrumb.label.title | translate }}</span>
+      }
       </li>
+    }
       <ng-content></ng-content>
     </ng-template>
   `,

@@ -28,7 +28,7 @@ foreach(var classModel in classSet.Classes){#>
 	var cssColumn = 12/columnsQtd;
 #>
 
-					<div class="row">
+<div class="row">
 <# 
 if(classModel.Fields.Count()>0)
 foreach(var field in classModel.Fields.OrderByDescending(x=>x.DataType)){#>
@@ -36,79 +36,79 @@ foreach(var field in classModel.Fields.OrderByDescending(x=>x.DataType)){#>
 <#switch(field.HtmlType ){
 	case "checkbox":
 #>
-						<div class="form-group col-md-<#=cssColumn#>">
-							<label>
-								<input type="checkbox" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=classSet.ToCamelCase(field.Name)#>Id" autofocus />
-								{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
-							</label>
-						</div>
+	<div class="form-group col-md-<#=cssColumn#>">
+		<label>
+			<input type="checkbox" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=classSet.ToCamelCase(field.Name)#>Id" autofocus />
+			{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
+		</label>
+	</div>
 <#
 	break;
 	case "select":
 #>
-						<div class="form-group col-md-<#=cssColumn#>">
-							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
+	<div class="form-group col-md-<#=cssColumn#>">
+		<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}
 <#if(field.IsParent){#> 
-								<a style="cursor:pointer" (click)="open<#= field.DataType#>Modal()">
-									<i class="fa fa-file-o"></i>
-								</a><!-- <#= field.Parent!=null ? field.Parent.Name : "" #> -->
+			<a style="cursor:pointer" (click)="open<#= field.DataType#>Modal()">
+				<i class="fa fa-file-o"></i>
+			</a><!-- <#= field.Parent!=null ? field.Parent.Name : "" #> -->
 <#}#>
-							</label>
-							<app-combo-<#=classSet.ToDash(field.DataType)#> value-field="id" cssClass="form-control" load-on-start="false" [(model)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>Id" name="<#=classSet.ToCamelCase(field.Name)#>Id"></app-combo-<#=classSet.ToDash(field.DataType)#> >
-						</div>
+		</label>
+		<app-combo-<#=classSet.ToDash(field.DataType)#> value-field="id" cssClass="form-control" load-on-start="false" [(model)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>Id" name="<#=classSet.ToCamelCase(field.Name)#>Id"></app-combo-<#=classSet.ToDash(field.DataType)#> >
+	</div>
 <#
 	break;
 	case "file":
 #>
-						<div class=" form-group col-md-12">
-							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<app-upload [(model)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" [path]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" [width]="160" [height]="120" id="<#=classSet.ToCamelCase(field.Name)#>" [name]="'<#=classSet.ToCamelCase(field.Name)#>'" [label]="('APP.UPLOAD.BUTTON' | translate)" cssIcon="fa fa-upload"></app-upload>
+	<div class=" form-group col-md-12">
+		<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+		<app-upload [(model)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" [path]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" [width]="160" [height]="120" id="<#=classSet.ToCamelCase(field.Name)#>" [name]="'<#=classSet.ToCamelCase(field.Name)#>'" [label]="('APP.UPLOAD.BUTTON' | translate)" cssIcon="fa fa-upload"></app-upload>
 
-						</div>
+	</div>
 <#
 	break;
 	case "textarea":
 #>
-						<div class=" form-group col-md-12">
-							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<textarea class="form-control" rows=5 [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus></textarea>
-						</div>
+	<div class=" form-group col-md-12">
+		<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+		<textarea title="<#=camelCaseName#>" class="form-control" rows=5 [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus></textarea>
+	</div>
 <#
 	break;
 	case "password":
 #>
-						<div class="form-group col-md-<#=cssColumn#>">
-							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<input type="password" class="form-control" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
-						</div>
+	<div class="form-group col-md-<#=cssColumn#>">
+		<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+		<input type="password" class="form-control" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+	</div>
 <#
 	break;
 	case "date":
 #>
-						<div class="form-group col-md-<#=cssColumn#>">
-							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
-						</div>
+		<div class="form-group col-md-<#=cssColumn#>">
+			<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+			<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+		</div>
 <#
 	break;
 	case "datetime":
 #>
-						<div class="form-group col-md-<#=cssColumn#>">
-							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd HH:mm'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
-						</div>
+		<div class="form-group col-md-<#=cssColumn#>">
+			<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+			<input type="<#=field.HtmlType #>" class="form-control" [ngModel]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> | date:'yyyy-MM-dd HH:mm'" (onModelChange)="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#> = $event" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+		</div>
 <#
 	break;
 	default:
 #>
-						<div class="form-group col-md-12">
-							<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
-							<input type="<#=field.HtmlType #>" class="form-control" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
-						</div>
+		<div class="form-group col-md-12">
+			<label class="control-label">{{'<#=underscoreName#>.FORM.LABEL.<#= classSet.ToUnderscore(field.Name).ToUpper() #>' | translate }}</label>
+			<input title="<#=camelCaseName#>" type="<#=field.HtmlType #>" class="form-control" [(ngModel)]="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" name="<#=camelCaseName#>.<#=classSet.ToCamelCase(field.Name)#>" autofocus />
+		</div>
 <#
 	break;
 }}}#>
-					</div>
+</div>
 <#
 manager.EndBlock();
 #>
@@ -130,7 +130,7 @@ import { <#=child #> } from '../../../models/<#=child #>';
 import { <#=field #> } from '../../../models/<#=field #>';
 import { <#=field #>ModalComponent } from '../<#=field #>/<#=field #>Modal.component';
 <# } #>
-declare var $: any;
+declare const $: any;
 
 @Component({
   selector: 'app-form-<#=classSet.ToDash(classModel.Name)#>',
@@ -142,35 +142,39 @@ export class <#=classModel.Name#>EditComponent implements OnInit {
 	<#=classSet.ToCamelCase(field.DataType)#>: <#=field.DataType#>;
 <#}#>
 
-  constructor(
-    private _service: <#=classModel.Name#>Service,
-    public translate: TranslateService,
-    private _modalService: NgbModal
-  ) {
+	constructor(
+		private _service: <#=classModel.Name#>Service,
+		public translate: TranslateService,
+		private _modalService: NgbModal
+	) {
 <# foreach(var field in  fieldChildren){#>
-      this.<#=classSet.ToCamelCase(field.DataType)#> = new <#=field.DataType#>();
+		this.<#=classSet.ToCamelCase(field.DataType)#> = new <#=field.DataType#>();
 <#}#>
-    }
+	}
 
-    @Output()
-    saveEvent?: EventEmitter<<#=classModel.Name#>> = new EventEmitter();
+	@Output()
+	saveEvent?: EventEmitter<<#=classModel.Name#>> = new EventEmitter();
 
-    @Input()
-    <#=camelCaseName#>: <#=classModel.Name#>;
+	@Input()
+	<#=camelCaseName#>: <#=classModel.Name#>;
 
-    @Input()
-    edit: boolean;
+	@Output()
+	<#=camelCaseName#>Change: EventEmitter<<#=classModel.Name#>> = new EventEmitter();
 
-    ngOnInit() {
-      this.<#=camelCaseName#> = this.<#=camelCaseName#> || new <#=classModel.Name#>();
-    }
+	@Input()
+	edit: boolean;
 
-    save(<#=camelCaseName#>: <#=classModel.Name#>) {
-      this._service.save(<#=camelCaseName#>, this.edit, $('input[type=file]'));
-    }
+	ngOnInit() {
+		this.<#=camelCaseName#> = this.<#=camelCaseName#> || new <#=classModel.Name#>();
+	}
 
-    public closeEdit() {
-    }
+	save(<#=camelCaseName#>: <#=classModel.Name#>) {
+		this._service.save(<#=camelCaseName#>, this.edit, $('input[type=file]'));
+	}
+
+	public closeEdit() {
+		console.log('closeEdit')
+	}
 
 <# foreach(var field in classModel.Fields.Where(x=>x.HtmlType=="select").Select(x=>x.DataType).Distinct()){#>
 	open<#= field #>Modal() {

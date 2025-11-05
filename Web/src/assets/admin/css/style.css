@@ -7525,7 +7525,7 @@ button.close {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1050;
+    z-index: 9999;
     display: none;
     overflow: hidden;
     outline: 0;
@@ -14535,7 +14535,6 @@ base-chart.chart {
         padding: 0.5rem 1rem;
         margin-right: 0;
         background-color: #fff;
-        background-image: url("../img/logo.png");
         background-repeat: no-repeat;
         background-position: center center;
         background-size: 70px auto;

@@ -1,14 +1,16 @@
 ﻿import { Component, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { LanguageService } from '../../../services/generated/LanguageService';
 import { Language } from '../../../models/Language';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { LanguageEditComponent } from "./LanguageEdit.component";
 declare let $: Function;
 
 @Component({
   selector: 'app-modal-language',
   templateUrl: './LanguageModal.component.html',
+  imports: [LanguageEditComponent,TranslateModule],
 
 })
 export class LanguageModalComponent {

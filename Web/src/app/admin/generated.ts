@@ -108,15 +108,15 @@ import { UploadFileIndexComponent } from './_generated/UploadFile/UploadFileInde
       },
     ])
   ],
-  //   entryComponents: [
-  //       AboutModalComponent,
-  //       ContactModalComponent,
-  //       LanguageModalComponent,
-  //       MailingModalComponent,
-  //       SettingsModalComponent,
-  //       SocialNetworkModalComponent,
-  //       UploadFileModalComponent,
-  // ]
+  // //   entryComponents: [
+  // //       AboutModalComponent,
+  // //       ContactModalComponent,
+  // //       LanguageModalComponent,
+  // //       MailingModalComponent,
+  // //       SettingsModalComponent,
+  // //       SocialNetworkModalComponent,
+  // //       UploadFileModalComponent,
+  // // ]
 })
 export class GeneratedAdminModule {
   constructor(private _languageService: LanguageCustomService) {

@@ -1,14 +1,17 @@
 ﻿import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { SettingsService } from '../../../services/generated/SettingsService';
 import { Settings } from '../../../models/Settings';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 declare let $: Function;
 
 @Component({
   selector: 'app-form-settings',
   templateUrl: './SettingsEdit.component.html',
-  standalone: true
+  standalone: true,
+  imports: [TranslateModule, CommonModule, FormsModule]
 
 })
 export class SettingsEditComponent implements OnInit {

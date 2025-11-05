@@ -103,20 +103,20 @@ public partial class BaseAppService<T>(IBaseService<T> service, IUnitOfWork uow)
     public List<T> GetJson(int hours = 24)
     {
         var dir = JsonFolder();
-        var file = Path.Combine(dir, "db.json");
-        var exists = File.Exists(file);
+        var filePath = Path.Combine(dir, "db.json");
+        var exists = File.Exists(filePath);
         var expired = false;
         if (exists)
         {
-            var info = new FileInfo(file);
-            expired = (info.LastWriteTime.ToUniversalTime() <= DateTime.UtcNow.AddHours(hours));
+            var info = new FileInfo(filePath);
+            expired = (DateTime.UtcNow >= info.LastWriteTime.ToUniversalTime().AddHours(hours));
         }
 
         if (!exists || expired)
         {
             SaveJson<T>();
         }
-        var result = File.ReadAllText(file);
+        var result = File.ReadAllText(filePath);
         return result.JsonDeserialize<List<T>>();
     }
 }

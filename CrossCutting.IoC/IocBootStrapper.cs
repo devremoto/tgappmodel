@@ -13,18 +13,25 @@ using Domain.Interfaces;
 using Domain.Services;
 using Domain.Services.Interfaces;
 using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using NSwag;
+using NSwag.Generation.Processors.Contexts;
+using NSwag.Generation.Processors;
+using NSwag.Generation.Processors.Security;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Reflection;
+using static IdentityModel.OidcConstants;
+using System.Linq;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CrossCutting.IoC;
 
@@ -36,21 +43,23 @@ public static class IocBootStrapper
     private static ServiceProvider _provider;
 
 
-    public static void AddServices(this IServiceCollection services, IConfiguration configuration, IHostEnvironment env, ILoggerFactory loggerFactory)
+    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration, IHostEnvironment env, ILoggerFactory loggerFactory)
     {
         services
 
         .AddConfiguration(configuration, env)
         .AddMapper()
         .AddAuthService()
-        .AddLogConfiguration()
+        .AddLogConfiguration(configuration)
         .AddSmtpConfiguration(configuration)
         .AddDatabase<AppDbContext>(loggerFactory)
         .AddBingConfiguration(configuration)
-        .AddCors()
+        .RegisterCors()
         .AddServices()
         .AddCrudServices()
         .AddSwagger();
+
+        return services;
 
     }
     private static IServiceCollection AddCrudServices(this IServiceCollection services)
@@ -64,7 +73,7 @@ public static class IocBootStrapper
         #endregion CrudServices
         return services;
     }
-    private static IServiceCollection AddCors(this IServiceCollection services)
+    private static IServiceCollection RegisterCors(this IServiceCollection services)
     {
 
         services.AddCors(options =>
@@ -92,13 +101,12 @@ public static class IocBootStrapper
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
             .AddEnvironmentVariables();
-        _configuration = builder.Build();
 
-
-
-        configuration = _configuration;
+        if(configuration is null || configuration.GetChildren().Count()<=0) {
+            configuration = builder.Build();
+        }
         services.AddOptions();
-        _settings = _configuration.GetSection(AppSettings.SECTION).Get<AppSettings>();
+        _settings = configuration.GetSection(AppSettings.SECTION).Get<AppSettings>();
         _settings.ImageFolder = Path.Combine(env.ContentRootPath, "images");
         if (!Directory.Exists(_settings.ImageFolder))
         {
@@ -108,11 +116,12 @@ public static class IocBootStrapper
         return services;
     }
 
-    private static IServiceCollection AddLogConfiguration(this IServiceCollection services)
+    private static IServiceCollection AddLogConfiguration(this IServiceCollection services, IConfiguration configuration
+        )
     {
         services.AddLogging(loggingBuilder =>
         {
-            var logSection = _configuration.GetSection("Logging");
+            var logSection = configuration.GetSection("Logging");
             loggingBuilder
             .AddConfiguration(logSection)
             .AddFile("Logs/myapp-{Date}.txt")
@@ -123,8 +132,8 @@ public static class IocBootStrapper
     }
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddScoped<HttpClient>();
-        services.AddScoped<IZipCode, ZipCodeBr>();
+        services.AddScoped<HttpClient>()
+            .AddScoped<IZipCode, ZipCodeBr>();
         return services;
     }
 
@@ -284,7 +293,7 @@ where T : class, new()
     public static IServiceCollection AddBingConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         //services.SetConfiguration<BingTranslateConfiguration>();
-        var bingTranslateConfiguration = GetConfiguration<BingTranslateConfiguration>();
+        var bingTranslateConfiguration = configuration.GetConfiguration<BingTranslateConfiguration>();
         services
             .AddSingleton(bingTranslateConfiguration)
             .AddTransient<ITranslateService, BingTranslateService>();
@@ -307,22 +316,26 @@ where T : class, new()
 
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        services.AddSwaggerGen(c =>
+        services.AddEndpointsApiExplorer();
+        services.AddOpenApiDocument(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Type = SecuritySchemeType.OAuth2,
-                Scheme = "Bearer",
+            c.Title = _settings.ApiName;
+            c.Version = "v1";
 
-                OpenIdConnectUrl = new Uri($"{_settings.Authority}/.well-known/openid-configuration/jwks"),
+            c.AddSecurity("OAuth2", new OpenApiSecurityScheme
+            {
+
+                Type = OpenApiSecuritySchemeType.OAuth2,
+                In = OpenApiSecurityApiKeyLocation.Header,
+
                 Flows = new OpenApiOAuthFlows
                 {
-                    Implicit = new OpenApiOAuthFlow
-                    {
-                        AuthorizationUrl = new Uri($"{_settings.Authority}/connect/authorize?response_type=token id_token"),
-                        TokenUrl = new Uri($"{_settings.Authority}/connect/token"),
 
+                    AuthorizationCode = new OpenApiOAuthFlow
+                    {
+
+                        AuthorizationUrl = $"{_settings.Authority}/connect/authorize",
+                        TokenUrl = $"{_settings.Authority}/connect/token",           // Token endpoint
                         Scopes = new Dictionary<string, string>
                         {
                             {_settings.ApiName , _settings.ApiName },
@@ -330,31 +343,13 @@ where T : class, new()
                             {"profile", "profile" },
                             {"offline_access", "offline_access" },
                             {"role", "role" },
-                            {"sso", "sso" }
+                            {"email", "email" }
                         }
                     }
                 }
             }
             );
-
-            c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer",
-                        },
-                        Scheme = "oauth2",
-                        Name = "Bearer",
-                        In = ParameterLocation.Header,
-
-                    },
-                    new List<string>()
-                }
-            });
+            c.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("OAuth2"));
         });
         return services;
     }
@@ -366,12 +361,12 @@ where T : class, new()
             options.AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser());
         });
 
-        services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-        .AddIdentityServerAuthentication(options =>
+        services.AddAuthentication()
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
         {
             options.Authority = _settings.Authority;
             options.RequireHttpsMetadata = _settings.RequireHttpsMetadata;
-            options.ApiName = _settings.ApiName;
+            options.Audience = _settings.ApiName;
         });
         return services;
     }

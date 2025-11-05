@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { ActivatedRoute, RouterModule } from '../../../node_modules/@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-unauthorized',
-    templateUrl: './unauthorized.component.html',
-    styles: [],
-    
+  selector: 'app-unauthorized',
+  templateUrl: './unauthorized.component.html',
+  styles: [],
+  imports: [CommonModule, RouterModule]
 })
 export class UnauthorizedComponent implements OnInit {
   private error: number;

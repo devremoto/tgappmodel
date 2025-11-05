@@ -89,7 +89,7 @@
       </div>
       <button id="submit-button" [disabled]="loading"
         (click)="sendEmail(contact)" class="btn btn-primary">
-        <i class="fa fa-spin fa-spinner" *ngIf="loading"></i>
+        @if(loading){<i class="fa fa-spin fa-spinner"></i>}
         <span>{{ (loading?'FOOTER.CONTACT.FORM.BUTTONS.SENDING' :
           'FOOTER.CONTACT.FORM.BUTTONS.SEND') | translate}}</span>
       </button>

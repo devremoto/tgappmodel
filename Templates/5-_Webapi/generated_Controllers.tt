@@ -22,104 +22,93 @@ foreach(var classModel in classSet.Classes){#>
 	var spacedName = classSet.ToSpacedName(classModel.Name);
 	var parents = classModel.Fields.Where(x=>x.IsParent);
 #>
-using Api.Models;
-using Application.AutoMapper;
 using Application.Interfaces;
 using Application.ViewModels;
-using AutoMapper;
-using CrossCutting.Extensions;
 using Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
-namespace Api.Controllers
-{
-    public partial class <#= classModel.Name #>Controller    
-    {
-        
-		private readonly I<#= classModel.Name #>AppService _service;
+namespace Api.Controllers;
+
+public partial class <#= classModel.Name #>Controller    
+{        
+    private readonly I<#= classModel.Name #>AppService _service;
 <# foreach(var parent in parents.Select(x=>x.DataType).Distinct()){#>
-		private readonly I<#= parent #>AppService _<#=classSet.ToCamelCase(parent)#>AppService;
+    private readonly I<#= parent #>AppService _<#=classSet.ToCamelCase(parent)#>AppService;
 <#}#>
-
-
 
 <# foreach(var parent in parents){
 	var parentKey = classSet.Classes.Where(x=>x.Name==parent.DataType).Select(x=>x.Fields.Where(z=>z.Name=="Id").FirstOrDefault()).FirstOrDefault();
 	if(parentKey!=null){
 #>
-		[Route("getBy<#=parent.Name#>Id/{id}")]
-        [HttpGet]
-		[AllowAnonymous]
-        public async Task<IActionResult> GetBy<#=parent.Name#>Id(<#=parentKey.DataType#> id)
+	[Route("getBy<#=parent.Name#>Id/{id}")]
+    [HttpGet]
+	[AllowAnonymous]
+    public async Task<IActionResult> GetBy<#=parent.Name#>Id(<#=parentKey.DataType#> id)
+    {
+		try{
+			var model = await Task.FromResult(_service.Find(x=>x.<#=parent.Name#>.Id == id));
+			return Ok(model);
+		}
+        catch(Exception e)
         {
-			try{
-				var model = await Task.FromResult(_service.Find(x=>x.<#=parent.Name#>.Id == id));
-				return Ok(model);
-			}
-            catch(Exception e)
-            {
-                return BadRequest($"Error while retrieving <#= spacedName #> {e.Message}");
-            }
+            return BadRequest($"Error while retrieving <#= spacedName #> {e.Message}");
         }
+    }
 
-		[Route("getBy<#=parent.Name#>Id/{id}/{pageNumber}/{pageSize}/{orderBy?}/{orderDirection?}")]
-        [HttpGet]
-		[AllowAnonymous]
-        public async Task<IActionResult> GetBy<#=parent.Name#>Id(<#=parentKey.DataType#> id,int pageSize, int pageNumber, string orderBy, string orderDirection)
+	[Route("getBy<#=parent.Name#>Id/{id}/{pageNumber}/{pageSize}/{orderBy?}/{orderDirection?}")]
+    [HttpGet]
+	[AllowAnonymous]
+    public async Task<IActionResult> GetBy<#=parent.Name#>Id(<#=parentKey.DataType#> id,int pageSize, int pageNumber, string orderBy, string orderDirection)
+    {
+		try{
+			var model = await Task.FromResult(_service.Find(x=>x.<#=parent.Name#>.Id == id).Paging(pageNumber, pageSize, orderBy, orderDirection));
+			return Ok(model);
+		}
+        catch(Exception e)
         {
-			try{
-				var model = await Task.FromResult(_service.Find(x=>x.<#=parent.Name#>.Id == id).Paging(pageNumber, pageSize, orderBy, orderDirection));
-				return Ok(model);
-			}
-            catch(Exception e)
-            {
-                return BadRequest($"Error while getting all <#= spacedName #> {e.Message}");
-            }
+            return BadRequest($"Error while getting all <#= spacedName #> {e.Message}");
         }
+    }
 <#}}#>
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] <#= classModel.Name #>ViewModel model)
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] <#= classModel.Name #>ViewModel model)
+    {
+        try
         {
-            try
-            {
-				var entity = _mapper.Map<<#= classModel.Name #>>(model);
-				var result = await Task.FromResult(_service.Save(entity, false));
-                return Created("",_mapper.Map<<#= classModel.Name #>ViewModel>(result));
-            }
-            catch(Exception e)
-            {
-                return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
-            }
+			var entity = _mapper.Map<<#= classModel.Name #>>(model);
+			var result = await Task.FromResult(_service.Save(entity, false));
+            return Created("",_mapper.Map<<#= classModel.Name #>ViewModel>(result));
         }
-
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] <#= classModel.Name #>ViewModel model)
+        catch(Exception e)
         {
-            try
-            {
-				var entity = _mapper.Map<<#= classModel.Name #>>(model);
-				var result = await Task.FromResult(_service.Save(entity, true));
-                return Ok(_mapper.Map<<#= classModel.Name #>ViewModel>(result));
-            }
-            catch(Exception e)
-            {
-                return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
-            }
+            return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
         }
-
-		protected override void Dispose(bool disposing)
-		{
-			_service.Dispose();
-			base.Dispose(disposing);
-		}
-
     }
+
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] <#= classModel.Name #>ViewModel model)
+    {
+        try
+        {
+			var entity = _mapper.Map<<#= classModel.Name #>>(model);
+			var result = await Task.FromResult(_service.Save(entity, true));
+            return Ok(_mapper.Map<<#= classModel.Name #>ViewModel>(result));
+        }
+        catch(Exception e)
+        {
+            return BadRequest($"Error while saving <#= spacedName #> {e.Message}");
+        }
+    }
+
+	protected override void Dispose(bool disposing)
+	{
+		_service.Dispose();
+		base.Dispose(disposing);
+	}
+
 }
 
 <#

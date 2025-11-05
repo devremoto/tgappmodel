@@ -1,13 +1,17 @@
 ﻿import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { LanguageService } from '../../../services/generated/LanguageService';
 import { Language } from '../../../models/Language';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { UploadComponent } from '../../../directives/upload/upload.component';
 declare let $: Function;
 
 @Component({
   selector: 'app-form-language',
   templateUrl: './LanguageEdit.component.html',
+  imports: [TranslateModule, CommonModule, FormsModule, UploadComponent]
 
 })
 export class LanguageEditComponent implements OnInit {

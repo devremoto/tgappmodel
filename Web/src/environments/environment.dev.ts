@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   ApiName: process.env["ApiName"],
   ImgFolder: process.env["ImgFolder"],
   Authority: process.env["Authority"],
